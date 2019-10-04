@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">RETURN</string>
+
+    <string name="common_year">년</string>
+    <string name="common_month">월</string>
+    <string name="common_day">일</string>
+    <string name="common_confirm">확인</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_all_view">(전문)</string>
+
+    <string name="user_agent">Android</string>
+
+    <string name="alert_network_disable">네트워크가 연결되지 않았습니다.</string>
+    <string name="alert_ok">확인</string>
+    <string name="alert_cancel">취소</string>
+    <string name="alert_donotsee">그만보기</string>
+    <string name="alert_security">보안유지를 위해 초기화면으로 이동합니다.</string>
+    <string name="alert_network_error">정보 조회 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.</string>
+    <string name="alert_already_main">여기가 메인입니다.</string>
+    <string name="alert_permission_denied">[설정] > [권한]에서 해당 권한을 허용할 수 있습니다.</string>
+    <string name="alert_permission_request_RPS">전화 접근권한 안내\n\n사용자 식별을 위해 전화(휴대기기ID) 권한을 허용해주세요.\n\n권한 허용을 하지 않으면 서비스를 이용하실 수 없습니다.</string>
+    <string name="alert_permission_request_WES">저장소 접근권한 안내\n\n사진 저장을 위해 저장소 권한을 허용해주세요.\n\n권한 허용을 하지 않으면 서비스를 이용하실 수 없습니다.</string>
+    <string name="alert_permission_request_CAMERA">사진 및 동영상 촬영 안내\n\n바코드 스캔을 위해 사진 및 동영상 촬영 권한을 허용해주세요.\n\n권한 허용을 하지 않으면 서비스를 이용하실 수 없습니다.</string>
+    <string name="alert_checkDevice">안전한 서비스 이용 및 고객님의 정보보호를 위해 루팅된 단말기에서는 서비스 이용이 제한됩니다.</string>
+    <string name="alert_first_no_uuid">사용자 인증 처리 중 장애가 발생하였습니다. 잠시 후 다시 시도해주세요.</string>
+    <string name="alert_second_no_uuid">사용자 구분을 위한 단말 기본정보를 획득하는데 지속적으로 실패했습니다.\n인증을 위한 이메일을 등록해주세요.</string>
+    <string name="alert_networkRequestError">요청을 수행하는 중에 오류가 발생하였습니다.</string>
+    <string name="alert_networkRequestSuccess">정상적으로 요청을 수행하였습니다.</string>
+    <string name="alert_not_select_year">태어난 해를 선택해주세요.</string>
+    <string name="alert_not_agree_terms">이용약관에 동의해주세요.</string>
+    <string name="alert_not_agree_privacy">개인정보보호정책에 동의해주세요.</string>
+    <string name="alert_not_agree_gps">위치정보이용약관에 동의해주세요.</string>
+
+    <string name="confirm_exit">종료하시겠습니까?</string>
+    <string name="confirm_logout">로그아웃하시겠습니까?</string>
+
+    <string name="bottom_btn_1">btn</string>
+    <string name="bottom_btn_2">btn</string>
+    <string name="bottom_btn_3">btn</string>
+    <string name="bottom_btn_4">btn</string>
+
+    <string name="default_notification_channel_id" translatable="false">default_notification_channel</string>
+    <string name="default_notification_channel_name" translatable="true">post</string>
+
+    <string name="button_sex_male" translatable="true">남성</string>
+    <string name="button_sex_female" translatable="true">여성</string>
+    <string name="button_picker_year" translatable="true">태어난 해</string>
+    <string name="button_start" translatable="true">시작하기</string>
+
+    <string name="text_tutorial_one_subject" translatable="true">RETURN!</string>
+    <string name="text_tutorial_one_content" translatable="true">너와 나, 하나되어 돌아오다.</string>
+    <string name="text_tutorial_two_subject" translatable="true">Boom-erang!</string>
+    <string name="text_tutorial_two_content" translatable="true">진심은 길을 잃지 않고,\n사랑은 돌아오는거야!.</string>
+    <string name="text_tutorial_three_subject" translatable="true">Boom!</string>
+    <string name="text_tutorial_three_content" translatable="true">친구, 인기, 관심을 수집하지 마세요.\n단지 [Boom!] 하세요.</string>
+    <string name="text_tutorial_input_subject" translatable="true">Join us!</string>
+    <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
+    <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
+    <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>
+
+    <string name="text_terms_title_header" translatable="true">text_terms_title_</string>
+    <string name="text_terms_title_T" translatable="true">이용약관</string>
+    <string name="text_terms_title_P" translatable="true">개인정보보호정책</string>
+    <string name="text_terms_title_G" translatable="true">위치정보이용약관</string>
+
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mhd.boomerang.activity.TutorialActivity"
+    android:background="@drawable/tutorial_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@color/almost_mauve"
+        android:layout_weight="7">
+        <ImageView
+            android:id="@+id/iv_tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="50dp"
+            android:src="@drawable/intro"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@color/black_overlay"
+        android:layout_weight="3"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_tutorial_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            fontPath="fonts/DidactGothic-Regular.ttf"
+            android:textSize="@dimen/font_30"
+            android:textColor="@color/almost_mauve"
+            android:text="@string/text_tutorial_one_subject"
+            tools:text="@string/text_tutorial_one_subject"/>
+        <TextView
+            android:id="@+id/tv_tutorial_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            fontPath="fonts/DidactGothic-Regular.ttf"
+            android:textSize="@dimen/font_20"
+            android:textColor="@color/almost_mauve"
+            android:text="@string/text_tutorial_one_content"
+            tools:text="@string/text_tutorial_one_content"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

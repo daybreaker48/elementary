@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "631123811927",
+    "firebase_url": "https://return-fcm.firebaseio.com",
+    "project_id": "return-fcm",
+    "storage_bucket": "return-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631123811927:android:89c0ef3f7e705729",
+        "android_client_info": {
+          "package_name": "com.mhd.boomerang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631123811927-58unsh99kt8hh059h6omudcg5hmgmm98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDofdXN7g1rP1z8SuCTgKnTh84ZaBhzvh0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

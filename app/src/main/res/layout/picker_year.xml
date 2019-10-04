@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:baselineAligned="false"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_picker_year"
+            android:gravity="center"
+            android:minHeight="42dp"
+            android:textSize="@dimen/font_20"
+            android:textColor="@color/ultra_violet" />
+
+        <NumberPicker
+            android:id="@+id/np_year_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bt_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/common_confirm"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="303dp"
+            android:textSize="@dimen/font_20"
+            android:textColor="@color/ultra_violet" />
+
+    </LinearLayout>
+
+</RelativeLayout>

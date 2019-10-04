@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <FrameLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_navigation">
+        <!-- start navigation area -->
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/length_25"
+            layout="@layout/terms_title"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/webView_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.mhd.boomerang.webview.view.BaseWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <!--bottom 메뉴 구성-->
+    <!--<FrameLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        &lt;!&ndash; start bottom menu area &ndash;&gt;
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            layout="@layout/common_bottom"/>
+    </FrameLayout>-->
+
+</LinearLayout>

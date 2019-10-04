@@ -1,0 +1,33 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    
+    <style name="FullScreenTheme" parent="AppTheme">
+        <!-- windowTranslucentNavigation : statusbar, softkey 두가지 모두의 투명처리 여부 결정 -->
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!-- windowTranslucentStatus : statusbar 의 투명처리 여부 결정 -->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="TransparentProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>
