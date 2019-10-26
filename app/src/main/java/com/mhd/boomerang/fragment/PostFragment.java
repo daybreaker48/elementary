@@ -48,6 +48,7 @@ public class PostFragment extends BaseFragment {
 
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+
         ScrollView scrollView = (ScrollView) root.findViewById(R.id.svEditor);
         btnSave = (Button) root.findViewById(R.id.btn_save_post);
         editor = (com.github.irshulx.Editor) root.findViewById(R.id.editor);
