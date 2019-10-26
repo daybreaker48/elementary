@@ -4,7 +4,6 @@
     <string name="url_restapi_fcmtoken">/api/MHDRT1438.jsp</string><!-- FCM Token 등록 -->
     <string name="url_restapi_terms">/api/MHDRT1350.jsp?flag=%1$s</string><!-- 약관 보여주기 -->
     <string name="url_restapi_regist_member">/api/MHDRT1313.jsp</string><!-- 회원가입 -->
-
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 
 </resources>
