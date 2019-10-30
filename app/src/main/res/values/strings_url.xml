@@ -1,9 +1,14 @@
 <resources>
 
+    <string name="restapi_introcheck">MHDRT1156</string><!-- 서비스 접속 check -->
     <string name="url_restapi_introcheck">/api/MHDRT1156.jsp</string><!-- 서비스 접속 check -->
+    <string name="restapi_fcmtoken">MHDRT1438</string><!-- FCM Token 등록 -->
     <string name="url_restapi_fcmtoken">/api/MHDRT1438.jsp</string><!-- FCM Token 등록 -->
+    <string name="restapi_terms">MHDRT1350</string><!-- 약관 보여주기 -->
     <string name="url_restapi_terms">/api/MHDRT1350.jsp?flag=%1$s</string><!-- 약관 보여주기 -->
+    <string name="restapi_regist_member">MHDRT1313</string><!-- 회원가입 -->
     <string name="url_restapi_regist_member">/api/MHDRT1313.jsp</string><!-- 회원가입 -->
+    <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 
 </resources>

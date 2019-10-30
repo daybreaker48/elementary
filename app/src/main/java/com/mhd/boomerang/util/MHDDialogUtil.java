@@ -44,15 +44,15 @@ public class MHDDialogUtil {
 	public static void sAlert(Context context, String msg, DialogInterface.OnClickListener pListener){
 		sAlert(context, R.string.alert_ok, -1, msg, pListener, null);
 	}
-	
+
 	public static void sAlert(Context context, int msg, DialogInterface.OnClickListener pListener, DialogInterface.OnClickListener nListener){
 		sAlert(context, R.string.alert_ok, R.string.alert_cancel, context.getString(msg), pListener, nListener);
 	}
-	
+
 	public static void sAlert(Context context, String msg, DialogInterface.OnClickListener pListener, DialogInterface.OnClickListener nListener){
 		sAlert(context, R.string.alert_ok, R.string.alert_cancel, msg, pListener, nListener);
 	}
-	
+
 	public static void sAlert(Context context, int msgId, DialogInterface.OnClickListener pListener, DialogInterface.OnClickListener cListener, DialogInterface.OnClickListener nListener){
 		sAlert(context, R.string.alert_ok, R.string.alert_donotsee, R.string.alert_cancel, context.getString(msgId), pListener, cListener, nListener);
 	}

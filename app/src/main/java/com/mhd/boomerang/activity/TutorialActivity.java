@@ -108,6 +108,7 @@ public class TutorialActivity extends BaseActivity {
                 finish();
             }else{
                 MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
+
                 // 기존 사용자인 경우.
                 // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
                 Gson gson = new Gson();

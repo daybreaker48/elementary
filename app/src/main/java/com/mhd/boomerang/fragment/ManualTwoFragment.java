@@ -27,4 +27,12 @@ public class ManualTwoFragment extends BaseFragment {
         mSubject.setText(R.string.text_tutorial_two_subject);
         mContent.setText(R.string.text_tutorial_two_content);
     }
+
+    @Override
+    public void batchFunction(String api) {
+//        if(api.equals(getString(R.string.api_editor_clear))) {
+//            // editor 내용 초기화.
+//            editor.clearAllContents();
+//        }
+    }
 }

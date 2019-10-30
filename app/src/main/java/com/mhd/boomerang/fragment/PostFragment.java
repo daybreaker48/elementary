@@ -1,5 +1,7 @@
 package com.mhd.boomerang.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.mhd.boomerang.MainActivity;
 import com.mhd.boomerang.R;
 import com.mhd.boomerang.activity.TutorialActivity;
 import com.mhd.boomerang.common.MHDApplication;
+import com.mhd.boomerang.common.vo.UserVo;
 import com.mhd.boomerang.network.MHDNetworkInvoker;
 import com.mhd.boomerang.util.MHDDialogUtil;
 import com.mhd.boomerang.util.MHDLog;
@@ -54,7 +57,15 @@ public class PostFragment extends BaseFragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savePost();
+                MHDDialogUtil.sAlert(mContext, R.string.confirm_post, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        savePost();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { }
+                });
             }
         });
 
@@ -88,13 +99,8 @@ public class PostFragment extends BaseFragment {
             // Map 방식 0
             Map<String, String> params = new HashMap<String, String>();
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
-            params.put("UUPN", Util.getInstance().getPhoneNumber(mContext));
-            params.put("UUOS", Integer.toString(Build.VERSION.SDK_INT));
-            params.put("UUDEVICE", Build.MODEL);
-            //params.put("UUTOKEN", MHDApplication.getInstance().getMHDSvcManager().getFcmToken());
-            params.put("UUAPP", MHDApplication.getInstance().getAppVersion());
             params.put("UUPOST", editor.getContentAsHTML());
-            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_member, params, ((MainActivity)getActivity()).responseListener);
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_post, params, ((MainActivity)getActivity()).responseListener);
 
 //            new Handler().postDelayed(new Runnable() {
 //                @Override
@@ -111,5 +117,14 @@ public class PostFragment extends BaseFragment {
             MHDLog.printException(e);
         }
         //Main 이동
+    }
+
+
+    @Override
+    public void batchFunction(String api) {
+        if(api.equals(getString(R.string.api_editor_clear))) {
+            // editor 내용 초기화.
+            editor.clearAllContents();
+        }
     }
 }

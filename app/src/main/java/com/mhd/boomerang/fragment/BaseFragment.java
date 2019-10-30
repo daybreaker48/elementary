@@ -28,4 +28,6 @@ public abstract class BaseFragment extends Fragment {
     public abstract int getLayoutResId();
 
     public abstract void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+
+    public abstract void batchFunction(String api);
 }

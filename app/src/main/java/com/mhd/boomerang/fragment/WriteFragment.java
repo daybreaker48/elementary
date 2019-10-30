@@ -15,6 +15,9 @@ import com.mhd.boomerang.view.CustomViewPager;
 
 public class WriteFragment extends BaseFragment {
 
+    private CustomViewPager viewPager;
+    private WritePagerAdapter adapter;
+
     public static WriteFragment create() {
         return new WriteFragment();
     }
@@ -30,8 +33,8 @@ public class WriteFragment extends BaseFragment {
         final View background = root.findViewById(R.id.am_background_view_horizontal);
 
         // viewpager
-        CustomViewPager viewPager = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
-        WritePagerAdapter adapter = new WritePagerAdapter(this.getChildFragmentManager());
+        viewPager = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
+        adapter = new WritePagerAdapter(this.getChildFragmentManager());
         viewPager.setAdapter(adapter);
 
         // read 좌우 메뉴 제어
@@ -67,5 +70,13 @@ public class WriteFragment extends BaseFragment {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    @Override
+    public void batchFunction(String api) {
+        // child fragment index 2 인 postfragment 내 함수 재호출
+        BaseFragment fragment = adapter.getItem(1);
+        adapter.get
+        fragment.batchFunction(api);
     }
 }

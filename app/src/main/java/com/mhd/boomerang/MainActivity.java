@@ -8,13 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.boomerang.activity.BaseActivity;
+import com.mhd.boomerang.activity.TutorialActivity;
 import com.mhd.boomerang.adapter.MainPagerAdapter;
 import com.mhd.boomerang.common.MHDApplication;
+import com.mhd.boomerang.common.vo.UserVo;
 import com.mhd.boomerang.constant.MHDConstants;
+import com.mhd.boomerang.fragment.BaseFragment;
+import com.mhd.boomerang.fragment.PostFragment;
+import com.mhd.boomerang.util.MHDDialogUtil;
+import com.mhd.boomerang.util.MHDLog;
 import com.mhd.boomerang.view.GlobalTabsView;
 import com.mhd.boomerang.view.VerticalViewPager;
 
 public class MainActivity extends BaseActivity {
+
+    private VerticalViewPager viewPager;
+    private MainPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +38,8 @@ public class MainActivity extends BaseActivity {
         final View background = findViewById(R.id.am_background_view);
 
         // viewpager
-        VerticalViewPager viewPager = (VerticalViewPager) findViewById(R.id.am_view_pager);
-        MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager());
+        viewPager = (VerticalViewPager) findViewById(R.id.am_view_pager);
+        adapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         // viewpager 위에서 돌아가는 메뉴.
@@ -85,5 +94,43 @@ public class MainActivity extends BaseActivity {
             }
         }
         super.onNewIntent(intent);
+    }
+
+    /**
+     * volley listner 의 success response 처리.
+     * 필요한 곳에서 override 해서 구현.
+     * 대부분의 Fragment 처리를 여기서?
+     */
+    @Override
+    protected boolean networkResponseProcess(String result) {
+        boolean resultFlag = super.networkResponseProcess(result);
+        MHDLog.d(TAG, "networkResponseProcess resultFlag >>> " + resultFlag);
+
+        if(!resultFlag) return resultFlag;
+
+        // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
+
+        if("M".equals(nvResultCode)){
+            // Just show nvMsg
+            MHDDialogUtil.sAlert(mContext, nvMsg);
+            return true;
+        }else if("S".equals(nvResultCode)){
+            if(nvApi.equals(getApplicationContext().getString(R.string.restapi_regist_post))){
+                // regist post
+                MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
+
+                // 현재 입력된 내용을 초기화.
+                // fragment index 0 인 WriteFragment 내 함수 호출.
+                BaseFragment fragment = adapter.getItem(0);
+                fragment.batchFunction(getString(R.string.api_editor_clear));
+
+                // 목록 화면으로 이동.
+                viewPager.setCurrentItem(1);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_regist_post))){
+
+            }
+        }
+
+        return true;
     }
 }

@@ -206,7 +206,7 @@ public class MHDSvcManager {
 	 * 로그인 세션 작업 여부 등과 같이 대부분(혹은 일부)의 activity( 화면 ) 단에서 check가 필요한 것들
 	 */
 	public boolean isLoginTaskRunning() {
-		boolean isLogin = MHDApplication.getInstance().getMHDSvcManager().getLoginVo() != null;
+		boolean isLogin = MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null;
 		return isLogin;
 	}
 	/**

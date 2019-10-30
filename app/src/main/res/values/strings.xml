@@ -34,6 +34,7 @@
 
     <string name="confirm_exit">종료하시겠습니까?</string>
     <string name="confirm_logout">로그아웃하시겠습니까?</string>
+    <string name="confirm_post">작성하신 포스트를 저장하시겠습니까?</string>
 
     <string name="bottom_btn_1">btn</string>
     <string name="bottom_btn_2">btn</string>
@@ -66,5 +67,9 @@
 
     <string name="button_close_post" translatable="true">닫기</string>
     <string name="button_save_post" translatable="true">저장</string>
+
+
+
+    <string name="api_editor_clear" translatable="true">api_editor_clear</string>
 
 </resources>

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.mhd.boomerang.fragment.BaseFragment;
 import com.mhd.boomerang.fragment.MainFragment;
 import com.mhd.boomerang.fragment.ReadFragment;
 import com.mhd.boomerang.fragment.WriteFragment;
@@ -17,7 +18,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter{
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public BaseFragment getItem(int position) {
         switch(position) {
             case 0:
                 return WriteFragment.create();

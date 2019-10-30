@@ -236,7 +236,7 @@ public class MHDNetworkInvoker {
             });
             return;
         }
-        // 사용자 인증 api가 아닌데(결국 인증이 되어있는 경우에만 접근해야하는 api 인데) LoginVo가 비어있다면 다시 로그인 처리를 해야한다.
+        // 사용자 인증 api가 아니고(인증이 되어있는 경우에만 접근해야하는 api 이고) && LoginVo가 비어있다면(비로그인 상태) 다시 로그인 처리를 해야한다.
         if( ((ifID != R.string.url_restapi_introcheck) && (ifID != R.string.url_restapi_regist_member)) && !MHDApplication.getInstance().getMHDSvcManager().isLoginTaskRunning() ) {
             // 서비스내에서 login vo가 null 일때
             MHDDialogUtil.sAlert(context, R.string.alert_security, new DialogInterface.OnClickListener() {

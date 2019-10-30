@@ -237,4 +237,12 @@ public class MemberInputFragment extends BaseFragment {
         }
         //Main 이동
     }
+
+    @Override
+    public void batchFunction(String api) {
+//        if(api.equals(getString(R.string.api_editor_clear))) {
+//            // editor 내용 초기화.
+//            editor.clearAllContents();
+//        }
+    }
 }

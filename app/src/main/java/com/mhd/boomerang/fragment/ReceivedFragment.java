@@ -30,4 +30,12 @@ public class ReceivedFragment extends BaseFragment {
         mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
         mTitle.setLayoutParams(mLayoutParams);
     }
+
+    @Override
+    public void batchFunction(String api) {
+//        if(api.equals(getString(R.string.api_editor_clear))) {
+//            // editor 내용 초기화.
+//            editor.clearAllContents();
+//        }
+    }
 }

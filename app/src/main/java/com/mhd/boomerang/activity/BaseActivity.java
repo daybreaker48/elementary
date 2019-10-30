@@ -97,10 +97,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * network variables
      * */
-    String nvResultCode = "";
-    String nvApi = "";
-    int nvCnt = 0;
-    String nvMsg = "";
+    public String nvResultCode = "";
+    public String nvApi = "";
+    public int nvCnt = 0;
+    public String nvMsg = "";
 
     /**
      * onCreate

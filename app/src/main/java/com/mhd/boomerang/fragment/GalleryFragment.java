@@ -23,4 +23,12 @@ public class GalleryFragment extends BaseFragment {
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
     }
+
+    @Override
+    public void batchFunction(String api) {
+//        if(api.equals(getString(R.string.api_editor_clear))) {
+//            // editor 내용 초기화.
+//            editor.clearAllContents();
+//        }
+    }
 }
