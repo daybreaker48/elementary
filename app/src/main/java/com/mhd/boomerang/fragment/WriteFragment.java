@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import com.mhd.boomerang.R;
 import com.mhd.boomerang.adapter.WritePagerAdapter;
 import com.mhd.boomerang.common.MHDApplication;
+import com.mhd.boomerang.util.MHDLog;
 import com.mhd.boomerang.view.CustomViewPager;
 
 
 public class WriteFragment extends BaseFragment {
 
-    private CustomViewPager viewPager;
-    private WritePagerAdapter adapter;
+    public CustomViewPager viewPagerTop;
+    public WritePagerAdapter adapterTop;
 
     public static WriteFragment create() {
         return new WriteFragment();
@@ -33,22 +34,24 @@ public class WriteFragment extends BaseFragment {
         final View background = root.findViewById(R.id.am_background_view_horizontal);
 
         // viewpager
-        viewPager = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
-        adapter = new WritePagerAdapter(this.getChildFragmentManager());
-        viewPager.setAdapter(adapter);
+        viewPagerTop = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
+        adapterTop = new WritePagerAdapter(this.getChildFragmentManager());
+        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + adapterTop.getText());
+        viewPagerTop.setAdapter(adapterTop);
+        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + adapterTop.getCount());
 
         // read 좌우 메뉴 제어
-        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithWriteViewPager(viewPager);
+        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithWriteViewPager(viewPagerTop);
 
         // UI 에 필요한 컬러코드 값
         final int colorBlue = ContextCompat.getColor(root.getContext(), R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(root.getContext(), R.color.light_purple);
 
         // viewpager 에서 특정위치 view 초기 지정.
-        viewPager.setCurrentItem(1);
+        viewPagerTop.setCurrentItem(1);
 
         // viewpager 이동에 따른 컬러, 투명도 변경 애니메이션 처리.
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPagerTop.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if(position == 0) {
@@ -75,8 +78,11 @@ public class WriteFragment extends BaseFragment {
     @Override
     public void batchFunction(String api) {
         // child fragment index 2 인 postfragment 내 함수 재호출
-        BaseFragment fragment = adapter.getItem(1);
-        adapter.get
-        fragment.batchFunction(api);
+//        BaseFragment fragment = adapter.getItem(1);
+//        PostFragment tf = (PostFragment) getChildFragmentManager().findFragmentById(R.id.);
+//        tf.testFunction();
+        int test = adapterTop.getText();
+//        fragment.batchFunction(api);
+        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + test);
     }
 }

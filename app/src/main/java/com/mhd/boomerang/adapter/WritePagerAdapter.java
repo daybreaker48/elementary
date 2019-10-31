@@ -3,6 +3,7 @@ package com.mhd.boomerang.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.mhd.boomerang.fragment.BaseFragment;
 import com.mhd.boomerang.fragment.PostFragment;
@@ -10,7 +11,7 @@ import com.mhd.boomerang.fragment.GalleryFragment;
 import com.mhd.boomerang.fragment.CameraFragment;
 
 
-public class WritePagerAdapter extends FragmentPagerAdapter{
+public class WritePagerAdapter extends FragmentStatePagerAdapter {
 
 
     public WritePagerAdapter(FragmentManager fm) {
@@ -49,4 +50,6 @@ public class WritePagerAdapter extends FragmentPagerAdapter{
     public int getCount() {
         return 3;
     }
+
+    public int getText() { return 1; }
 }
