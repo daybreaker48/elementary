@@ -3,6 +3,7 @@ package com.mhd.boomerang.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.mhd.boomerang.fragment.BaseFragment;
 import com.mhd.boomerang.fragment.MainFragment;
@@ -10,7 +11,7 @@ import com.mhd.boomerang.fragment.ReadFragment;
 import com.mhd.boomerang.fragment.WriteFragment;
 
 
-public class MainPagerAdapter extends FragmentPagerAdapter{
+public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
 
     public MainPagerAdapter(FragmentManager fm) {

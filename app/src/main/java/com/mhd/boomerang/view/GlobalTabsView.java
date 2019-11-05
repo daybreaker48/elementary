@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -20,6 +22,7 @@ import com.mhd.boomerang.R;
 import com.mhd.boomerang.adapter.StatPagerAdapter;
 import com.mhd.boomerang.adapter.WritePagerAdapter;
 import com.mhd.boomerang.common.MHDApplication;
+import com.mhd.boomerang.fragment.PostFragment;
 import com.mhd.boomerang.util.MHDLog;
 import com.mhd.boomerang.util.Util;
 
@@ -50,6 +53,7 @@ public class GlobalTabsView extends FrameLayout {
 
     private ViewPager verticalViewPager;
     private ViewPager writeViewPager, statViewPager, readViewPager;
+    private FragmentStatePagerAdapter writeFragmentPagerAdapter, statFragmentPagerAdapter, readFragmentPagerAdapter;
 
 
     public GlobalTabsView(@NonNull Context context) {

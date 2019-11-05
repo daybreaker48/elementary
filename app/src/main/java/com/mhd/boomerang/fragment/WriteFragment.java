@@ -36,7 +36,6 @@ public class WriteFragment extends BaseFragment {
         // viewpager
         viewPagerTop = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
         adapterTop = new WritePagerAdapter(this.getChildFragmentManager());
-        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + adapterTop.getText());
         viewPagerTop.setAdapter(adapterTop);
         MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + adapterTop.getCount());
 
@@ -77,12 +76,9 @@ public class WriteFragment extends BaseFragment {
 
     @Override
     public void batchFunction(String api) {
-        // child fragment index 2 인 postfragment 내 함수 재호출
-//        BaseFragment fragment = adapter.getItem(1);
-//        PostFragment tf = (PostFragment) getChildFragmentManager().findFragmentById(R.id.);
-//        tf.testFunction();
-        int test = adapterTop.getText();
-//        fragment.batchFunction(api);
-        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + test);
+//        if(api.equals(getString(R.string.api_editor_clear))) {
+//            // editor 내용 초기화.
+//            editor.clearAllContents();
+//        }
     }
 }

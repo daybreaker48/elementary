@@ -50,6 +50,4 @@ public class WritePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;
     }
-
-    public int getText() { return 1; }
 }

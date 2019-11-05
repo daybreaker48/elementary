@@ -75,7 +75,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawerlayout;
     private LinearLayout ll_menu_1, ll_menu_2, ll_menu_3, ll_menu_4, ll_menu_5;
     /**
-     * network Listener
+     * Activity network Listener
      * */
     public ResponseListener responseListener;
     /**
@@ -139,7 +139,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         // 외부라이브러리 Main Thread 단 프로세스 호출.
         mExternalLibraryManager.onActivityCreateProcess();
 
-        // volley 통신 ResponseListner 등록
+        // Activity volley 통신 ResponseListner 등록
         // 리턴하는 데이터에서 request 정보를 담아와서 처리 분기한다.
         responseListener = new ResponseListener() {
             @Override

@@ -15,6 +15,7 @@ import com.mhd.boomerang.common.vo.UserVo;
 import com.mhd.boomerang.constant.MHDConstants;
 import com.mhd.boomerang.fragment.BaseFragment;
 import com.mhd.boomerang.fragment.PostFragment;
+import com.mhd.boomerang.fragment.WriteFragment;
 import com.mhd.boomerang.util.MHDDialogUtil;
 import com.mhd.boomerang.util.MHDLog;
 import com.mhd.boomerang.view.GlobalTabsView;
@@ -22,8 +23,8 @@ import com.mhd.boomerang.view.VerticalViewPager;
 
 public class MainActivity extends BaseActivity {
 
-    private VerticalViewPager viewPager;
-    private MainPagerAdapter adapter;
+    public VerticalViewPager viewPager;
+    public MainPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,13 +120,6 @@ public class MainActivity extends BaseActivity {
                 // regist post
                 MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
-                // 현재 입력된 내용을 초기화.
-                // fragment index 0 인 WriteFragment 내 함수 호출.
-                BaseFragment fragment = adapter.getItem(0);
-                fragment.batchFunction(getString(R.string.api_editor_clear));
-
-                // 목록 화면으로 이동.
-                viewPager.setCurrentItem(1);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_regist_post))){
 
             }
