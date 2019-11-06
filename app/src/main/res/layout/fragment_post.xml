@@ -31,7 +31,7 @@
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
-            android:text="POST"/>
+            android:text="@string/title_post"/>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_save_post"
             android:layout_width="60dp"

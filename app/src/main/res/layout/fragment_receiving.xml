@@ -31,32 +31,68 @@
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
-            android:text="POST"/>
+            android:text="@string/title_receiving"/>
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_save_post"
+            android:id="@+id/btn_menu_right"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
             android:textSize="@dimen/font_17"
-            android:text="@string/button_save_post"/>
+            android:text="@string/button_menu_right"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/vst_top_title"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="top"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18dp"
-        android:layout_marginLeft="20dp"
-        android:text="RECEIVING"/>
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/vst_top_title"
-        android:background="@drawable/card_background"/>
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_below="@id/ll_top_post">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recv_receiving"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+
+
+        <!--<ScrollView-->
+            <!--android:id="@+id/svEditor"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:scrollbars="vertical"-->
+            <!--android:layout_marginBottom="40dp"-->
+            <!--&gt;-->
+            <!--<com.github.irshulx.Editor-->
+                <!--android:id="@+id/editor"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:render_type="Editor"-->
+                <!--app:placeholder="Start writing here..."-->
+                <!--android:paddingTop="10dp"-->
+                <!--android:paddingLeft="20dp"-->
+                <!--android:paddingRight="20dp"-->
+                <!--android:layout_marginBottom="40dp"-->
+                <!--android:paddingBottom="100dp">-->
+            <!--</com.github.irshulx.Editor>-->
+        <!--</ScrollView>-->
+
+        <!--<HorizontalScrollView android:id="@+id/tools"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#e6e6e6"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:scrollbars="none">-->
+
+            <!--<include layout="@layout/editor_toolbar_linearlayout_horizontal" />-->
+
+        <!--</HorizontalScrollView>-->
+
+    </RelativeLayout>
 
 </RelativeLayout>

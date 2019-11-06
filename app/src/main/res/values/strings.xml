@@ -65,11 +65,13 @@
     <string name="text_terms_title_P" translatable="true">개인정보보호정책</string>
     <string name="text_terms_title_G" translatable="true">위치정보이용약관</string>
 
+    <string name="button_menu_right" translatable="true">Menu</string>
     <string name="button_close_post" translatable="true">닫기</string>
     <string name="button_save_post" translatable="true">저장</string>
     <string name="button_move_stat_left" translatable="true">Stat</string>
 
-
+    <string name="title_post" translatable="true">POST</string>
+    <string name="title_receiving" translatable="true">RECEIVING</string>
 
     <string name="api_editor_clear" translatable="true">api_editor_clear</string>
 
