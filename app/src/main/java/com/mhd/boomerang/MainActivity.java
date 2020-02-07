@@ -61,12 +61,12 @@ public class MainActivity extends BaseActivity {
                 if(position == 0) {
                     background.setBackgroundColor(colorBlue);
                     background.setAlpha(1 - positionOffset);
-//                    MHDLog.e("dagian = 0", 1 - positionOffset);
+                    MHDLog.e("dagian = 0", 1 - positionOffset);
                 }
                 else if(position == 1) {
                     background.setBackgroundColor(colorPurple);
                     background.setAlpha(positionOffset);
-//                    MHDLog.e("dagian = 1", positionOffset);
+                    MHDLog.e("dagian = 1", positionOffset);
                 }
             }
 

@@ -4,6 +4,10 @@
     <!-- menu -->
     <dimen name="top_navigation">80dp</dimen>
 
+    <!--RecyclerView holder image-->
+    <dimen name="holder_image">70dp</dimen>
+    <dimen name="holder_image_margin">5dp</dimen>
+
     <!-- Font size -->
     <dimen name="font_9">9sp</dimen>
     <dimen name="font_10">10sp</dimen>
