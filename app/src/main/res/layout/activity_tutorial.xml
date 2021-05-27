@@ -5,7 +5,7 @@
     android:id="@+id/common_match_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.boomerang.activity.TutorialActivity"
+    tools:context="com.mhd.elemantary.activity.TutorialActivity"
     android:background="@drawable/intro">
 
     <View
@@ -15,7 +15,7 @@
         android:background="@color/main_background"
         android:alpha=".0"/>
 
-    <com.mhd.boomerang.view.CustomViewPager
+    <com.mhd.elemantary.view.CustomViewPager
         android:id="@+id/am_tutorial_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"/>-->
 
-    <com.mhd.boomerang.common.CircleIndicator
+    <com.mhd.elemantary.common.CircleIndicator
         android:id="@+id/circle_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

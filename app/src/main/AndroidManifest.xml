@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mhd.boomerang">
+    package="com.mhd.elemantary">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".common.MHDApplication"
+        android:name="com.mhd.elemantary.common.MHDApplication"
         android:allowBackup="true"
         android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,7 +37,7 @@
         <!-- [END fcm_default_channel] -->
 
         <provider
-            android:authorities="com.mhd.boomerang"
+            android:authorities="com.mhd.elemantary"
             android:name="android.support.v4.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -47,16 +47,16 @@
         </provider>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.mhd.elemantary.MainActivity"
             android:theme="@style/FullScreenTheme">
         </activity>
         <activity
-            android:name=".activity.TutorialActivity"
+            android:name="com.mhd.elemantary.activity.TutorialActivity"
             android:theme="@style/FullScreenTheme">
         </activity>
 
         <activity
-            android:name=".activity.StartActivity"
+            android:name="com.mhd.elemantary.activity.StartActivity"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,25 +65,25 @@
         </activity>
 
         <activity
-            android:name=".webview.activity.HybridWebActivity"
+            android:name="com.mhd.elemantary.webview.activity.HybridWebActivity"
             android:theme="@style/FullScreenTheme">
         </activity>
         <activity
-            android:name=".webview.activity.HybridWebGuestActivity"
+            android:name="com.mhd.elemantary.webview.activity.HybridWebGuestActivity"
             android:theme="@style/FullScreenTheme">
         </activity>
 
-        <service android:name=".service.FCMService">
+        <service android:name="com.mhd.elemantary.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name=".service.FCMInstanceIDService">
+        <service android:name="com.mhd.elemantary.service.FCMInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANT_ID_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name=".service.FCMJobService">
+        <service android:name="com.mhd.elemantary.service.FCMJobService">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>

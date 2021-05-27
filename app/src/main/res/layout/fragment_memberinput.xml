@@ -5,7 +5,7 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.boomerang.activity.TutorialActivity"
+    tools:context="com.mhd.elemantary.activity.TutorialActivity"
     android:orientation="vertical">
 
     <LinearLayout

@@ -5,7 +5,7 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.boomerang.activity.TutorialActivity"
+    tools:context="com.mhd.elemantary.activity.TutorialActivity"
     android:background="@drawable/tutorial_background"
     android:orientation="vertical">
 

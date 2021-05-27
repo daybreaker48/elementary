@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/top_navigation"
         android:background="@drawable/intro"/>
 
-    <com.mhd.boomerang.view.CustomViewPager
+    <com.mhd.elemantary.view.CustomViewPager
         android:id="@+id/am_write_view_pager_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

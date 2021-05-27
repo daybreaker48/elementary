@@ -5,7 +5,7 @@
     android:id="@+id/common_match_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.boomerang.MainActivity"
+    tools:context="com.mhd.elemantary.MainActivity"
     android:background="@color/main_background">
 
     <View
@@ -20,12 +20,12 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"/>-->
 
-    <com.mhd.boomerang.view.VerticalViewPager
+    <com.mhd.elemantary.view.VerticalViewPager
         android:id="@+id/am_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.mhd.boomerang.view.GlobalTabsView
+    <com.mhd.elemantary.view.GlobalTabsView
         android:id="@+id/am_snap_tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
