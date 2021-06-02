@@ -12,6 +12,7 @@
         android:layout_marginTop="@dimen/top_navigation"
         android:background="@drawable/card_background"/>
 
+    <!--가로 Pager-->
     <com.mhd.elemantary.view.CustomViewPager
         android:id="@+id/am_main_view_pager_horizontal"
         android:layout_width="match_parent"

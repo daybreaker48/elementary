@@ -77,7 +77,7 @@
     <string name="title_todo" translatable="true">할일</string>
     <string name="title_schedule" translatable="true">스케쥴</string>
     <string name="title_selfdo" translatable="true">스스로해요</string>
-    <string name="title_stats" translatable="true">통계</string>
+    <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
 
     <string name="api_editor_clear" translatable="true">api_editor_clear</string>

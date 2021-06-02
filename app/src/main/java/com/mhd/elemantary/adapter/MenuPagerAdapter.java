@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.mhd.elemantary.fragment.ScheduleFragment;
+import com.mhd.elemantary.fragment.SettingFragment;
+import com.mhd.elemantary.fragment.SumFragment;
 import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.fragment.SelfFragment;
 
@@ -26,9 +28,9 @@ public class MenuPagerAdapter extends FragmentPagerAdapter{
             case 2:
                 return SelfFragment.create();
             case 3:
-                return ScheduleFragment.create();
+                return SumFragment.create();
             case 4:
-                return SelfFragment.create();
+                return SettingFragment.create();
         }
 
         return null;

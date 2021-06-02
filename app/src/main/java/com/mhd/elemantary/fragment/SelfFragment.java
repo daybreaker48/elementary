@@ -2,33 +2,28 @@ package com.mhd.elemantary.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.adapter.ReCyclerAdapter;
-import com.mhd.elemantary.util.Util;
 
 
-public class ReceivingFragment extends BaseFragment {
+public class SelfFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public static ReceivingFragment create() {
-        return new ReceivingFragment();
+    public static SelfFragment create() {
+        return new SelfFragment();
     }
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_receiving;
+        return R.layout.fragment_self;
     }
 
     @Override
