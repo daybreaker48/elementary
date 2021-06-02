@@ -34,11 +34,11 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch(position) {
             case 0:
-                return "Write";
+                return "할일";
             case 1:
-                return "Stat";
+                return "스케쥴";
             case 2:
-                return "Read";
+                return "스스로해요";
         }
 
         return super.getPageTitle(position);

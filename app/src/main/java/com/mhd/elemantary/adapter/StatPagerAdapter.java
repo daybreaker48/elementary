@@ -25,6 +25,10 @@ public class StatPagerAdapter extends FragmentPagerAdapter{
                 return StatsFragment.create();
             case 2:
                 return ReceivingFragment.create();
+            case 3:
+                return StatsFragment.create();
+            case 4:
+                return ReceivingFragment.create();
         }
 
         return null;
@@ -34,11 +38,15 @@ public class StatPagerAdapter extends FragmentPagerAdapter{
     public CharSequence getPageTitle(int position) {
         switch(position) {
             case 0:
-                return "Past";
+                return "할일";
             case 1:
-                return "View";
+                return "스케쥴";
             case 2:
-                return "Next";
+                return "스스로해요";
+            case 3:
+                return "통계";
+            case 4:
+                return "설정";
         }
 
         return super.getPageTitle(position);
@@ -46,6 +54,6 @@ public class StatPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 }

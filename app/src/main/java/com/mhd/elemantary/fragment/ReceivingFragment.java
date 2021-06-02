@@ -2,13 +2,18 @@ package com.mhd.elemantary.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.adapter.ReCyclerAdapter;
+import com.mhd.elemantary.util.Util;
 
 
 public class ReceivingFragment extends BaseFragment {
@@ -28,9 +33,9 @@ public class ReceivingFragment extends BaseFragment {
 
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        //Statusbar 아래로 내리기
+        //Statusbar 아래로 내리기
 //        final TextView mTitle = (TextView) root.findViewById(R.id.vst_top_title);
-//        RelativeLayout.LayoutParams mLayoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
+//        LinearLayout.LayoutParams mLayoutParams = (LinearLayout.LayoutParams) mTitle.getLayoutParams();
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
 

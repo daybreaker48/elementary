@@ -14,7 +14,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:layout_marginLeft="20dp"
-        android:text="STATS"/>
+        android:text="@string/title_schedule"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"

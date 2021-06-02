@@ -14,24 +14,25 @@
         android:layout_height="50dp"
         android:background="@color/blue"
         android:orientation="horizontal">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_move_stat_left"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:background="@android:color/transparent"
-            android:textSize="@dimen/font_17"
-            android:text="@string/button_move_stat_left"/>
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_move_stat_left"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:textSize="@dimen/font_17"-->
+            <!--android:text="@string/button_move_stat_left"/>-->
         <TextView
             android:id="@+id/vst_top_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="top"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
-            android:text="@string/title_receiving"/>
+            android:layout_marginLeft="20dp"
+            android:text="@string/title_todo"/>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_menu_right"
             android:layout_width="60dp"

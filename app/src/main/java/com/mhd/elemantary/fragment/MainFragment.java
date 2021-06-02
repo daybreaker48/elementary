@@ -42,7 +42,7 @@ public class MainFragment extends BaseFragment {
         final int colorPurple = ContextCompat.getColor(root.getContext(), R.color.light_purple);
 
         // viewpager 에서 특정위치 view 초기 지정.
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(2);
 
         // viewpager 이동에 따른 컬러, 투명도 변경 애니메이션 처리.
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
