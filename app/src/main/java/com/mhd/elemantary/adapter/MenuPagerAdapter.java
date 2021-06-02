@@ -4,15 +4,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.mhd.elemantary.fragment.StatsFragment;
-import com.mhd.elemantary.fragment.ReceivedFragment;
-import com.mhd.elemantary.fragment.ReceivingFragment;
+import com.mhd.elemantary.fragment.ScheduleFragment;
+import com.mhd.elemantary.fragment.TodoFragment;
+import com.mhd.elemantary.fragment.SelfFragment;
 
 
-public class StatPagerAdapter extends FragmentPagerAdapter{
+public class MenuPagerAdapter extends FragmentPagerAdapter{
 
 
-    public StatPagerAdapter(FragmentManager fm) {
+    public MenuPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -20,15 +20,15 @@ public class StatPagerAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return ReceivedFragment.create();
+                return TodoFragment.create();
             case 1:
-                return StatsFragment.create();
+                return ScheduleFragment.create();
             case 2:
-                return ReceivingFragment.create();
+                return SelfFragment.create();
             case 3:
-                return StatsFragment.create();
+                return ScheduleFragment.create();
             case 4:
-                return ReceivingFragment.create();
+                return SelfFragment.create();
         }
 
         return null;

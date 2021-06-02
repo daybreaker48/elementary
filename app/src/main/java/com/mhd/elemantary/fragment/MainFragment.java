@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.adapter.StatPagerAdapter;
+import com.mhd.elemantary.adapter.MenuPagerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.view.CustomViewPager;
 
@@ -31,7 +31,7 @@ public class MainFragment extends BaseFragment {
 
         // viewpager
         CustomViewPager viewPager = (CustomViewPager) root.findViewById(R.id.am_main_view_pager_horizontal);
-        StatPagerAdapter adapter = new StatPagerAdapter(this.getChildFragmentManager());
+        MenuPagerAdapter adapter = new MenuPagerAdapter(this.getChildFragmentManager());
         viewPager.setAdapter(adapter);
 
         // stat 좌우 메뉴 제어
