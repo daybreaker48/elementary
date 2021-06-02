@@ -197,6 +197,8 @@ public class GlobalTabsView extends FrameLayout {
         FrameLayout.LayoutParams mLayoutParams = (FrameLayout.LayoutParams) mCenterImage.getLayoutParams();
         mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(getContext());
         mCenterImage.setLayoutParams(mLayoutParams);
+
+        mCenterImage.setVisibility(View.INVISIBLE);
     }
 
     private void moveAndScaleCenter(float fractionFromCenter) {
