@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RETURN</string>
+    <string name="app_name">슬기로운 초등생활</string>
 
     <string name="common_year">년</string>
     <string name="common_month">월</string>
@@ -49,13 +49,13 @@
     <string name="button_picker_year" translatable="true">태어난 해</string>
     <string name="button_start" translatable="true">시작하기</string>
 
-    <string name="text_tutorial_one_subject" translatable="true">RETURN!</string>
-    <string name="text_tutorial_one_content" translatable="true">너와 나, 하나되어 돌아오다.</string>
-    <string name="text_tutorial_two_subject" translatable="true">Boom-erang!</string>
-    <string name="text_tutorial_two_content" translatable="true">진심은 길을 잃지 않고,\n사랑은 돌아오는거야!.</string>
-    <string name="text_tutorial_three_subject" translatable="true">Boom!</string>
-    <string name="text_tutorial_three_content" translatable="true">친구, 인기, 관심을 수집하지 마세요.\n단지 [Boom!] 하세요.</string>
-    <string name="text_tutorial_input_subject" translatable="true">Join us!</string>
+    <string name="text_tutorial_one_subject" translatable="true">슬기로운 초등생활</string>
+    <string name="text_tutorial_one_content" translatable="true">이렇게 사용하세요</string>
+    <string name="text_tutorial_two_subject" translatable="true">할 일</string>
+    <string name="text_tutorial_two_content" translatable="true">자녀들의 할 일을 리스트로 관리하세요</string>
+    <string name="text_tutorial_three_subject" translatable="true">스케쥴</string>
+    <string name="text_tutorial_three_content" translatable="true">자녀들의 요일별 스케쥴을 한눈에!</string>
+    <string name="text_tutorial_input_subject" translatable="true">손쉬운 가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
     <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
     <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>

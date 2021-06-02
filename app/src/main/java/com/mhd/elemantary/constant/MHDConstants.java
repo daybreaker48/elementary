@@ -86,7 +86,7 @@ public class MHDConstants {
 	 * */
 	public class CommonCode {
 		public static final String NEED_FIELD = "need_field";
-		public static final String BADGE_COUNT_CLASS_NAME = "com.mhd.boomerang.MainActivity";
+		public static final String BADGE_COUNT_CLASS_NAME = "com.mhd.elementary.MainActivity";
 	}
 	/**
 	 * startActivityForResult

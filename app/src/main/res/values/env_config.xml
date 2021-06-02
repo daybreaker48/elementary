@@ -6,22 +6,22 @@
     <string name="PROTOCOL_ALPHA">http</string>
     <string name="DOMAIN_ALPHA">ec2-54-180-150-99.ap-northeast-2.compute.amazonaws.com</string>
     <string name="PORT_ALPHA">8080</string>
-    <string name="PATH_ALPHA">/ELE</string>
+    <string name="PATH_ALPHA">/ele</string>
 
     <string name="PROTOCOL_BETA">http</string>
     <string name="DOMAIN_BETA">ec2-54-180-150-99.ap-northeast-2.compute.amazonaws.com</string>
     <string name="PORT_BETA">8080</string>
-    <string name="PATH_BETA">/ELE</string>
+    <string name="PATH_BETA">/ele</string>
 
     <string name="PROTOCOL_OMEGA">http</string>
     <string name="DOMAIN_OMEGA">ec2-54-180-150-99.ap-northeast-2.compute.amazonaws.com</string>
     <string name="PORT_OMEGA">8080</string>
-    <string name="PATH_OMEGA">/ELE</string>
+    <string name="PATH_OMEGA">/ele</string>
 
     <string name="PROTOCOL_RELEASE">https</string>
     <string name="DOMAIN_RELEASE">ec2-54-180-150-99.ap-northeast-2.compute.amazonaws.com</string>
     <string name="PORT_RELEASE">8080</string>
-    <string name="PATH_RELEASE">/ELE</string>
+    <string name="PATH_RELEASE">/ele</string>
 
     <string name="SERVICE_ALPHA">ALPHA</string>
     <string name="SERVICE_BETA">BETA</string>

@@ -702,7 +702,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                     // getUriFile의 두번째 인자는 Manifest provider의 authorites와 일치해야 한다.
                     // photoURI는 file://로 시작, FileProvider(Content Provider 하위)는 content:// 로 시작
                     // 누가 부터는 file://로 시작되는 Uri의 갑슬 다른 앱과 주고받기(Content Provider)가 불가능하다.
-                    photoUri = FileProvider.getUriForFile(mContext, "com.mhd.boomerang", photoFile);
+                    photoUri = FileProvider.getUriForFile(mContext, "com.mhd.elementary", photoFile);
 
                     MHDLog.i(TAG, "photoFIle >>>>>> " + photoFile.toString());
                     MHDLog.i(TAG, "photoUri >>>>>> " + photoUri.toString());
