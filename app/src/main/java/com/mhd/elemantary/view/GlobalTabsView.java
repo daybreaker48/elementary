@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
 
 
@@ -26,9 +27,11 @@ public class GlobalTabsView extends FrameLayout {
     private final String TAG = getClass().getName();
 
     private ImageView mCenterImage;
-    private ImageView mStartImage;
-    private ImageView mEndImage;
-    private ImageView mBottomImage;
+    private ImageView mFirstImage;
+    private ImageView mSecondImage;
+    private ImageView mThirdImage;
+    private ImageView mFourthImage;
+    private ImageView mFifthImage;
 
     private View mIndicator;
 
@@ -46,7 +49,7 @@ public class GlobalTabsView extends FrameLayout {
     private int vvpItem = 0;
 
     private ViewPager verticalViewPager;
-    private ViewPager writeViewPager, statViewPager, readViewPager;
+    private ViewPager writeViewPager, menuViewPager, readViewPager;
     private FragmentStatePagerAdapter writeFragmentPagerAdapter, statFragmentPagerAdapter, readFragmentPagerAdapter;
 
 
@@ -70,14 +73,14 @@ public class GlobalTabsView extends FrameLayout {
         verticalViewPager = viewPager;
 
 
-//        mStartImage.setOnClickListener(new OnClickListener() {
+//        mFirstImage.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                if(viewPager.getCurrentItem() != 0)
 //                    viewPager.setCurrentItem(0);
 //            }
 //        });
-//        mEndImage.setOnClickListener(new OnClickListener() {00//            @Override
+//        mSecondImage.setOnClickListener(new OnClickListener() {00//            @Override
 //            public void onClick(View v) {
 //                if(viewPager.getCurrentItem() != 2)
 //                    viewPager.setCurrentItem(2);
@@ -94,7 +97,7 @@ public class GlobalTabsView extends FrameLayout {
                 }
             }
         });
-        mBottomImage.setOnClickListener(new OnClickListener() {
+        mThirdImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(viewPager.getCurrentItem() != 2)
@@ -118,10 +121,10 @@ public class GlobalTabsView extends FrameLayout {
 //        });
     }
 
-    public void setUpWithStatViewPager(final ViewPager viewPager) {
-        viewPager.addOnPageChangeListener(mStatPageChangeListener);
-        statViewPager = viewPager;
-        sideMenuSetOnClickListener(statViewPager);
+    public void setUpWithMenuViewPager(final ViewPager viewPager) {
+        viewPager.addOnPageChangeListener(mMenuPageChangeListener);
+        menuViewPager = viewPager;
+        sideMenuSetOnClickListener(menuViewPager);
 
 //        mCenterImage.setOnClickListener(new OnClickListener() {
 //            @Override
@@ -150,18 +153,39 @@ public class GlobalTabsView extends FrameLayout {
     }
 
     private void sideMenuSetOnClickListener(final ViewPager viewPager) {
-        mStartImage.setOnClickListener(new OnClickListener() {
+        mFirstImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 0)
                     viewPager.setCurrentItem(0);
             }
         });
-        mEndImage.setOnClickListener(new OnClickListener() {
+        mSecondImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPager.getCurrentItem() != 1)
+                    viewPager.setCurrentItem(1);
+            }
+        });
+        mThirdImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 2)
                     viewPager.setCurrentItem(2);
+            }
+        });
+        mFourthImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPager.getCurrentItem() != 3)
+                    viewPager.setCurrentItem(3);
+            }
+        });
+        mFifthImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPager.getCurrentItem() != 4)
+                    viewPager.setCurrentItem(4);
             }
         });
     }
@@ -170,9 +194,11 @@ public class GlobalTabsView extends FrameLayout {
         LayoutInflater.from(getContext()).inflate(R.layout.view_global_tabs, this, true);
 
         mCenterImage = (ImageView) findViewById(R.id.vst_center_image);
-        mStartImage = (ImageView) findViewById(R.id.vst_start_image);
-        mEndImage = (ImageView) findViewById(R.id.vst_end_image);
-        mBottomImage = (ImageView) findViewById(R.id.vst_bottom_image);
+        mFirstImage = (ImageView) findViewById(R.id.vst_main_first_image);
+        mSecondImage = (ImageView) findViewById(R.id.vst_main_second_image);
+        mThirdImage = (ImageView) findViewById(R.id.vst_main_third_image);
+        mFourthImage = (ImageView) findViewById(R.id.vst_main_fourth_image);
+        mFifthImage = (ImageView) findViewById(R.id.vst_main_fifth_image);
 
         mIndicator = findViewById(R.id.vst_indicator);
         mIndicator.setAlpha(0);
@@ -184,13 +210,13 @@ public class GlobalTabsView extends FrameLayout {
 
         mIndicatorTranslationX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
 
-        mBottomImage.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mThirdImage.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mEndViewTranslationX = (int) ((mBottomImage.getX() - mStartImage.getX()) - mIndicatorTranslationX);
-                mBottomImage.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mEndViewTranslationX = (int) ((mThirdImage.getX() - mFirstImage.getX()) - mIndicatorTranslationX);
+                mThirdImage.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                mCenterTranslationY = (int) mBottomImage.getY() - 200;
+                mCenterTranslationY = (int) mThirdImage.getY() - 200;
             }
         });
 
@@ -198,7 +224,7 @@ public class GlobalTabsView extends FrameLayout {
         mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(getContext());
         mCenterImage.setLayoutParams(mLayoutParams);
 
-        mCenterImage.setVisibility(View.INVISIBLE);
+        mCenterImage.setVisibility(View.GONE);
     }
 
     private void moveAndScaleCenter(float fractionFromCenter) {
@@ -212,15 +238,15 @@ public class GlobalTabsView extends FrameLayout {
         int tralation = (int) (fractionFromCenter * mCenterTranslationY);
 
         mCenterImage.setTranslationY(tralation);
-        mBottomImage.setTranslationY(tralation);
+        mThirdImage.setTranslationY(tralation);
 
 //        mCenterImage.setAlpha(Math.abs(1 - (fractionFromCenter*2)));
-        //mBottomImage.setAlpha(1 - fractionFromCenter);
+        //mThirdImage.setAlpha(1 - fractionFromCenter);
     }
 
     private void moveViews(float fractionFromCenter) {
-        mStartImage.setTranslationX(fractionFromCenter * mEndViewTranslationX);
-        mEndImage.setTranslationX(-fractionFromCenter * mEndViewTranslationX);
+        mFirstImage.setTranslationX(fractionFromCenter * mEndViewTranslationX);
+        mSecondImage.setTranslationX(-fractionFromCenter * mEndViewTranslationX);
 
         mIndicator.setAlpha(fractionFromCenter);
         mIndicator.setScaleX(fractionFromCenter);
@@ -232,9 +258,9 @@ public class GlobalTabsView extends FrameLayout {
         int color = (int) mArgEvaluator.evaluate(fractionFromCenter, mCenterColor, mSideColor);
 
 //        mCenterImage.setColorFilter(color);
-        mBottomImage.setColorFilter(color);
-//        mStartImage.setColorFilter(color);
-//        mEndImage.setColorFilter(color);
+        mThirdImage.setColorFilter(color);
+//        mFirstImage.setColorFilter(color);
+//        mSecondImage.setColorFilter(color);
 
         // 작성이미지는 작성화면이 아닐때만 보이고, 작성화면에서는 보이지 않는다.
         // 이미지의 background 는 setImageAlpha 의 영향을 받지 않는다.
@@ -249,10 +275,10 @@ public class GlobalTabsView extends FrameLayout {
         int color = (int) mArgEvaluator.evaluate(fractionFromCenter, mCenterColor, mSideColor);
 
 //        mCenterImage.setColorFilter(color);
-//        mBottomImage.setColorFilter(color);
-        mStartImage.setColorFilter(color);
-        mEndImage.setColorFilter(color);
-        mBottomImage.setAlpha(1 - fractionFromCenter);
+//        mThirdImage.setColorFilter(color);
+        mFirstImage.setColorFilter(color);
+        mSecondImage.setColorFilter(color);
+        mThirdImage.setAlpha(1 - fractionFromCenter);
 
         // 작성이미지는 작성화면이 아닐때만 보이고, 작성화면에서는 보이지 않는다.
         // 이미지의 background 는 setImageAlpha 의 영향을 받지 않는다.
@@ -331,25 +357,27 @@ public class GlobalTabsView extends FrameLayout {
             //verticalPager Item에 따라 좌우메뉴의 형태와 기능을 다르게 처리.
             if(verticalViewPager.getCurrentItem() == 0){
                 //Write
-                mStartImage.setImageResource(R.drawable.gallery);
-                mEndImage.setImageResource(R.drawable.camera);
-                mBottomImage.setImageResource(R.drawable.read);
+                mFirstImage.setImageResource(R.drawable.gallery);
+                mSecondImage.setImageResource(R.drawable.camera);
+                mThirdImage.setImageResource(R.drawable.read);
 
                 sideMenuSetOnClickListener(writeViewPager);
             }
             else if(verticalViewPager.getCurrentItem() == 1){
                 //Stat
-                mStartImage.setImageResource(R.drawable.returned);
-                mEndImage.setImageResource(R.drawable.returning);
-                mBottomImage.setImageResource(R.drawable.read);
+                mFirstImage.setImageResource(R.drawable.todo);
+                mSecondImage.setImageResource(R.drawable.schedule);
+                mThirdImage.setImageResource(R.drawable.self);
+                mFourthImage.setImageResource(R.drawable.summary);
+                mThirdImage.setImageResource(R.drawable.setting);
 
-                sideMenuSetOnClickListener(statViewPager);
+                sideMenuSetOnClickListener(menuViewPager);
             }
             else{
                 //Read
-                mStartImage.setImageResource(R.drawable.pass);
-                mEndImage.setImageResource(R.drawable.good);
-                mBottomImage.setImageResource(R.drawable.bad);
+                mFirstImage.setImageResource(R.drawable.pass);
+                mSecondImage.setImageResource(R.drawable.good);
+                mThirdImage.setImageResource(R.drawable.bad);
 
                 sideMenuSetOnClickListener(readViewPager);
             }
@@ -397,11 +425,11 @@ public class GlobalTabsView extends FrameLayout {
     /**
      * Stat horizontal pager listener
      */
-    private ViewPager.OnPageChangeListener mStatPageChangeListener = new ViewPager.OnPageChangeListener(){
+    private ViewPager.OnPageChangeListener mMenuPageChangeListener = new ViewPager.OnPageChangeListener(){
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//            MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
-//            MHDLog.d("dagian", "verticalViewPager.getCurrentItem() >>>>>>>>>>>>>> " + verticalViewPager.getCurrentItem());
+            MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
+            MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
             if(position == 0) {
                 setLRColor(1 - positionOffset);

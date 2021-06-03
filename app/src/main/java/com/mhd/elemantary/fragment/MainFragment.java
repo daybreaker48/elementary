@@ -35,14 +35,14 @@ public class MainFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
 
         // stat 좌우 메뉴 제어
-        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithStatViewPager(viewPager);
+        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithMenuViewPager(viewPager);
 
         // UI 에 필요한 컬러코드 값
         final int colorBlue = ContextCompat.getColor(root.getContext(), R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(root.getContext(), R.color.light_purple);
 
         // viewpager 에서 특정위치 view 초기 지정.
-        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(0);
 
         // viewpager 이동에 따른 컬러, 투명도 변경 애니메이션 처리.
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
