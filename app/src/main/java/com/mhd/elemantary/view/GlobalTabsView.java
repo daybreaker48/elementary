@@ -276,8 +276,10 @@ public class GlobalTabsView extends FrameLayout {
 
 //        mCenterImage.setColorFilter(color);
 //        mThirdImage.setColorFilter(color);
-        mFirstImage.setColorFilter(color);
-        mSecondImage.setColorFilter(color);
+//        mFirstImage.setColorFilter(color);
+//        mSecondImage.setColorFilter(color);
+        mFirstImage.setAlpha(1 - fractionFromCenter);
+        mSecondImage.setAlpha(1 - fractionFromCenter);
         mThirdImage.setAlpha(1 - fractionFromCenter);
 
         // 작성이미지는 작성화면이 아닐때만 보이고, 작성화면에서는 보이지 않는다.
@@ -433,7 +435,7 @@ public class GlobalTabsView extends FrameLayout {
 
             if(position == 0) {
                 setLRColor(1 - positionOffset);
-                moveViews(1 - positionOffset);
+//                moveViews(1 - positionOffset);
 
                 //moveAndScaleCenter(1 - positionOffset);
 
@@ -444,7 +446,7 @@ public class GlobalTabsView extends FrameLayout {
             }
             else if(position == 1) {
                 setLRColor(positionOffset);
-                moveViews(positionOffset);
+//                moveViews(positionOffset);
 
                 //moveAndScaleCenter(positionOffset);
                 mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
