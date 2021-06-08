@@ -281,6 +281,50 @@ public class GlobalTabsView extends FrameLayout {
         mFirstImage.setAlpha(1 - fractionFromCenter);
         mSecondImage.setAlpha(1 - fractionFromCenter);
         mThirdImage.setAlpha(1 - fractionFromCenter);
+        mFourthImage.setAlpha(1 - fractionFromCenter);
+        mFifthImage.setAlpha(1 - fractionFromCenter);
+
+        // 작성이미지는 작성화면이 아닐때만 보이고, 작성화면에서는 보이지 않는다.
+        // 이미지의 background 는 setImageAlpha 의 영향을 받지 않는다.
+        // 이미지의 background 는 setAlpha 의 영향은 받는다.
+//        mCenterImage.setImageAlpha((int)((1-fractionFromCenter)*255));
+//        mCenterImage.setAlpha(1 - fractionFromCenter);
+    }
+    /**
+     * Left/Right Menu control 2(one of menu)
+     */
+    private void setLRColorOne(float fractionFromCenter, int position) {
+        int color = (int) mArgEvaluator.evaluate(1-fractionFromCenter, mCenterColor, mSideColor);
+
+//        mCenterImage.setColorFilter(color);
+//        mThirdImage.setColorFilter(color);
+//        mFirstImage.setColorFilter(color);
+//        mSecondImage.setColorFilter(color);
+        if(fractionFromCenter > 0) {
+            switch (position) {
+                case 0:
+                    mFirstImage.setAlpha(1 - fractionFromCenter);
+                    mThirdImage.setAlpha(1 - fractionFromCenter);
+                    mFourthImage.setAlpha(1 - fractionFromCenter);
+                    mFifthImage.setAlpha(1 - fractionFromCenter);
+                case 1:
+                    mSecondImage.setAlpha(fractionFromCenter);
+                    mThirdImage.setAlpha(1 - fractionFromCenter);
+                    mFourthImage.setAlpha(1 - fractionFromCenter);
+                    mFifthImage.setAlpha(1 - fractionFromCenter);
+                case 2:
+                    mThirdImage.setAlpha(fractionFromCenter);
+                case 3:
+                    mFourthImage.setAlpha(fractionFromCenter);
+                case 4:
+                    mFifthImage.setAlpha(fractionFromCenter);
+            }
+        }
+//        mFirstImage.setAlpha(1 - fractionFromCenter);
+//        mSecondImage.setAlpha(1 - fractionFromCenter);
+//        mThirdImage.setAlpha(1 - fractionFromCenter);
+//        mFourthImage.setAlpha(1 - fractionFromCenter);
+//        mFifthImage.setAlpha(1 - fractionFromCenter);
 
         // 작성이미지는 작성화면이 아닐때만 보이고, 작성화면에서는 보이지 않는다.
         // 이미지의 background 는 setImageAlpha 의 영향을 받지 않는다.
@@ -431,10 +475,15 @@ public class GlobalTabsView extends FrameLayout {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
+            MHDLog.d("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
+            MHDLog.d("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
             MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
             if(position == 0) {
-                setLRColor(1 - positionOffset);
+//                setLRColor(1 - positionOffset);
+//                setLRColor(positionOffset);
+                setLRColorOne(positionOffset, position);
+                //Math.abs((1 - positionOffset)/3))
 //                moveViews(1 - positionOffset);
 
                 //moveAndScaleCenter(1 - positionOffset);
@@ -445,8 +494,9 @@ public class GlobalTabsView extends FrameLayout {
                 //mCenterImage.setImageAlpha((int) (1 - positionOffset));
             }
             else if(position == 1) {
-                setLRColor(positionOffset);
+//                setLRColor(positionOffset);
 //                moveViews(positionOffset);
+                setLRColorOne(positionOffset, position);
 
                 //moveAndScaleCenter(positionOffset);
                 mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
