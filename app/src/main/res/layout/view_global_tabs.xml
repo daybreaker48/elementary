@@ -13,8 +13,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center|top"
         android:padding="8dp"
-        android:background="@drawable/small_circle"
-        android:src="@drawable/write_24dp"/>
+        android:background="@drawable/small_circle"/>
+        <!--android:src="@drawable/write_24dp"-->
+
 
     <LinearLayout
         android:id="@+id/ll_global_tabs"
@@ -71,7 +72,7 @@
         android:layout_width="48dp"
         android:layout_height="4dp"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/indicator_background"/>
 
 </FrameLayout>

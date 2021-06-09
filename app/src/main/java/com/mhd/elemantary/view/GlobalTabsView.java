@@ -13,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -47,6 +48,9 @@ public class GlobalTabsView extends FrameLayout {
     private int secondOffset = 0;
     private int checkDirection = 0;
     private int vvpItem = 0;
+
+    boolean isStart = true;
+    boolean wDirection = false; // left
 
     private ViewPager verticalViewPager;
     private ViewPager writeViewPager, menuViewPager, readViewPager;
@@ -201,22 +205,34 @@ public class GlobalTabsView extends FrameLayout {
         mFifthImage = (ImageView) findViewById(R.id.vst_main_fifth_image);
 
         mIndicator = findViewById(R.id.vst_indicator);
-        mIndicator.setAlpha(0);
+        mIndicator.setAlpha(1);
+        AlphaAnimation alpha = new AlphaAnimation(0.3f, 0.3f);
+        alpha.setDuration(0);
+        alpha.setFillAfter(true);
+        mSecondImage.startAnimation(alpha);
+        mThirdImage.startAnimation(alpha);
+        mFourthImage.startAnimation(alpha);
+        mFifthImage.startAnimation(alpha);
+//        mSecondImage.getDrawable().setAlpha(120);
+//        mSecondImage.getDrawable().setAlpha(120);
+//        mThirdImage.getDrawable().setAlpha(120);
+//        mFourthImage.getDrawable().setAlpha(120);
+//        mFifthImage.getDrawable().setAlpha(120);
 
         mCenterColor = ContextCompat.getColor(getContext(), R.color.white);
         mSideColor = ContextCompat.getColor(getContext(), R.color.dark_grey);
 
         mArgEvaluator = new ArgbEvaluator();
 
-        mIndicatorTranslationX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources().getDisplayMetrics());
+        mIndicatorTranslationX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 164, getResources().getDisplayMetrics());
 
-        mThirdImage.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mCenterImage.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                mEndViewTranslationX = (int) ((mThirdImage.getX() - mFirstImage.getX()) - mIndicatorTranslationX);
-                mThirdImage.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                mEndViewTranslationX = (int) ((mCenterImage.getX() - mFirstImage.getX()) - mIndicatorTranslationX);
+                mCenterImage.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-                mCenterTranslationY = (int) mThirdImage.getY() - 200;
+                mCenterTranslationY = (int) mCenterImage.getY() - 200;
             }
         });
 
@@ -225,6 +241,8 @@ public class GlobalTabsView extends FrameLayout {
         mCenterImage.setLayoutParams(mLayoutParams);
 
         mCenterImage.setVisibility(View.GONE);
+
+        MHDApplication.getInstance().getMHDSvcManager().setIsFirstStart(false);
     }
 
     private void moveAndScaleCenter(float fractionFromCenter) {
@@ -250,6 +268,33 @@ public class GlobalTabsView extends FrameLayout {
 
         mIndicator.setAlpha(fractionFromCenter);
         mIndicator.setScaleX(fractionFromCenter);
+    }
+    private void moveViewsFiveMenu(float fractionFromCenter, int position, int startPosition) {
+//        mIndicator.setAlpha(fractionFromCenter);
+//        mIndicator.setScaleX(fractionFromCenter);
+        if(fractionFromCenter > 0) {
+            switch (position) {
+                case 0: // 0↔1
+                    mIndicator.setTranslationX((fractionFromCenter - 1) * mIndicatorTranslationX);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 1: // 1↔2, 0→1 에 도착했을 때.
+                    mIndicator.setTranslationX(fractionFromCenter * mIndicatorTranslationX);
+//                    mFourthImage.setAlpha(1 - fractionFromCenter);
+//                    mFifthImage.setAlpha(1 - fractionFromCenter);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 2: // 2↔3, 1→2 에 도착했을 때.
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 3: // 3↔4, 2→3 에 도착했을 때.
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 4: // 4↔5, 3→4 에 도착했을 때.
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+            }
+        }
     }
     /**
      * Center Menu control
@@ -293,31 +338,60 @@ public class GlobalTabsView extends FrameLayout {
     /**
      * Left/Right Menu control 2(one of menu)
      */
-    private void setLRColorOne(float fractionFromCenter, int position) {
+    private void setLRColorOne(float fractionFromCenter, int position, int startPosition) {
         int color = (int) mArgEvaluator.evaluate(1-fractionFromCenter, mCenterColor, mSideColor);
 
 //        mCenterImage.setColorFilter(color);
-//        mThirdImage.setColorFilter(color);
 //        mFirstImage.setColorFilter(color);
 //        mSecondImage.setColorFilter(color);
+//        mThirdImage.setColorFilter(color);
+//        mFourthImage.setColorFilter(color);
+//        mFifthImage.setColorFilter(color);
+
+        // menuViewPager.getCurrentItem() 은 현재의 position, 시작 position 을 보여준다.
+        // positionOffset 이 점점 증가하면 오른쪽 이동, 감소하면 왼쪽 이동.
+        // 드래그, 스크롤이 시작되는 순간에는 position + positionOffset = MenuViewPager.getCurrentItem()  이다.
+        // position + fractionFromCenter = 1 ===> position 0에서 1로
+        // setAlpha = 1 이면 선명. 0 이면 투명.
+//        float selectedMenu = 1/3 + (1 - fractionFromCenter);
+//        float previousMenu = 1/3 + (fractionFromCenter*3)/3;
+        float selectedMenu = (1 - fractionFromCenter) + 0.3f;
+        float previousMenu = 0.3f + fractionFromCenter;
+//        if (wDirection) {
+//            selectedMenu = 1 - fractionFromCenter;
+//            previousMenu = fractionFromCenter/3;
+//        }
+        MHDLog.d("dagian", "selectedMenu >>>>>>>>>>>>>> " + selectedMenu + "/" + previousMenu);
+        MHDLog.d("dagian", "isStart >>>>>>>>>>>>>> " + isStart);
+        MHDLog.d("dagian", "wDirection >>>>>>>>>>>>>> " + wDirection);
         if(fractionFromCenter > 0) {
             switch (position) {
-                case 0:
-                    mFirstImage.setAlpha(1 - fractionFromCenter);
-                    mThirdImage.setAlpha(1 - fractionFromCenter);
-                    mFourthImage.setAlpha(1 - fractionFromCenter);
-                    mFifthImage.setAlpha(1 - fractionFromCenter);
-                case 1:
-                    mSecondImage.setAlpha(fractionFromCenter);
-                    mThirdImage.setAlpha(1 - fractionFromCenter);
-                    mFourthImage.setAlpha(1 - fractionFromCenter);
-                    mFifthImage.setAlpha(1 - fractionFromCenter);
-                case 2:
-                    mThirdImage.setAlpha(fractionFromCenter);
-                case 3:
-                    mFourthImage.setAlpha(fractionFromCenter);
-                case 4:
-                    mFifthImage.setAlpha(fractionFromCenter);
+                case 0: // 0↔1
+                    mFirstImage.setAlpha(selectedMenu);
+                    mSecondImage.setAlpha(previousMenu);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 1: // 1↔2, 0→1 에 도착했을 때.
+                    mSecondImage.setAlpha(selectedMenu);
+                    mThirdImage.setAlpha(previousMenu);
+//                    mFourthImage.setAlpha(1 - fractionFromCenter);
+//                    mFifthImage.setAlpha(1 - fractionFromCenter);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 2: // 2↔3, 1→2 에 도착했을 때.
+                    mThirdImage.setAlpha(selectedMenu);
+                    mFourthImage.setAlpha(previousMenu);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 3: // 3↔4, 2→3 에 도착했을 때.
+                    mFourthImage.setAlpha(selectedMenu);
+                    mFifthImage.setAlpha(previousMenu);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
+                case 4: // 4↔5, 3→4 에 도착했을 때.
+                    mFifthImage.setAlpha(selectedMenu);
+                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+                    break;
             }
         }
 //        mFirstImage.setAlpha(1 - fractionFromCenter);
@@ -415,7 +489,7 @@ public class GlobalTabsView extends FrameLayout {
                 mSecondImage.setImageResource(R.drawable.schedule);
                 mThirdImage.setImageResource(R.drawable.self);
                 mFourthImage.setImageResource(R.drawable.summary);
-                mThirdImage.setImageResource(R.drawable.setting);
+                mFifthImage.setImageResource(R.drawable.setting);
 
                 sideMenuSetOnClickListener(menuViewPager);
             }
@@ -438,24 +512,25 @@ public class GlobalTabsView extends FrameLayout {
 //            MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
 //            MHDLog.d("dagian", "verticalViewPager.getCurrentItem() >>>>>>>>>>>>>> " + verticalViewPager.getCurrentItem());
 
-            if(position == 0) {
-                setLRColor(1 - positionOffset);
-                moveViews(1 - positionOffset);
-
-                //moveAndScaleCenter(1 - positionOffset);
-
-                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
-
-                //write 이미지를 투명처리한다.
-                //mCenterImage.setImageAlpha((int) (1 - positionOffset));
-            }
-            else if(position == 1) {
-                setLRColor(positionOffset);
-                moveViews(positionOffset);
-
-                //moveAndScaleCenter(positionOffset);
-                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
-            }
+//            if(position == 0) {
+//                setLRColor(1 - positionOffset);
+//                moveViews(1 - positionOffset);
+//
+//                //moveAndScaleCenter(1 - positionOffset);
+//
+//                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
+//
+//                //write 이미지를 투명처리한다.
+//                //mCenterImage.setImageAlpha((int) (1 - positionOffset));
+//            }
+//            else if(position == 1) {
+//                setLRColor(positionOffset);
+//                moveViews(positionOffset);
+//
+//                //moveAndScaleCenter(positionOffset);
+//                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
+//            }
+            setLRColorOne(positionOffset, position, writeViewPager.getCurrentItem());
         }
 
         @Override
@@ -479,16 +554,19 @@ public class GlobalTabsView extends FrameLayout {
             MHDLog.d("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
             MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
+            if (position == menuViewPager.getCurrentItem() && isStart) {
+                wDirection = true; // right
+                isStart = false;
+            }
+            setLRColorOne(positionOffset, position, menuViewPager.getCurrentItem());
+            moveViewsFiveMenu(positionOffset, position, menuViewPager.getCurrentItem());
             if(position == 0) {
 //                setLRColor(1 - positionOffset);
-//                setLRColor(positionOffset);
-                setLRColorOne(positionOffset, position);
-                //Math.abs((1 - positionOffset)/3))
 //                moveViews(1 - positionOffset);
 
                 //moveAndScaleCenter(1 - positionOffset);
 
-                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
+//                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
 
                 //write 이미지를 투명처리한다.
                 //mCenterImage.setImageAlpha((int) (1 - positionOffset));
@@ -496,10 +574,9 @@ public class GlobalTabsView extends FrameLayout {
             else if(position == 1) {
 //                setLRColor(positionOffset);
 //                moveViews(positionOffset);
-                setLRColorOne(positionOffset, position);
 
                 //moveAndScaleCenter(positionOffset);
-                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
+//                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
             }
         }
 
@@ -522,24 +599,25 @@ public class GlobalTabsView extends FrameLayout {
 //            MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
 //            MHDLog.d("dagian", "verticalViewPager.getCurrentItem() >>>>>>>>>>>>>> " + verticalViewPager.getCurrentItem());
 
-            if(position == 0) {
-                setLRColor(1 - positionOffset);
-                moveViews(1 - positionOffset);
-
-                //moveAndScaleCenter(1 - positionOffset);
-
-                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
-
-                //write 이미지를 투명처리한다.
-                //mCenterImage.setImageAlpha((int) (1 - positionOffset));
-            }
-            else if(position == 1) {
-                setLRColor(positionOffset);
-                moveViews(positionOffset);
-
-                //moveAndScaleCenter(positionOffset);
-                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
-            }
+//            if(position == 0) {
+//                setLRColor(1 - positionOffset);
+//                moveViews(1 - positionOffset);
+//
+//                //moveAndScaleCenter(1 - positionOffset);
+//
+//                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
+//
+//                //write 이미지를 투명처리한다.
+//                //mCenterImage.setImageAlpha((int) (1 - positionOffset));
+//            }
+//            else if(position == 1) {
+//                setLRColor(positionOffset);
+//                moveViews(positionOffset);
+//
+//                //moveAndScaleCenter(positionOffset);
+//                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
+//            }
+            setLRColorOne(positionOffset, position, readViewPager.getCurrentItem());
         }
 
         @Override

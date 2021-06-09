@@ -37,7 +37,6 @@ public class WriteFragment extends BaseFragment {
         viewPagerTop = (CustomViewPager) root.findViewById(R.id.am_write_view_pager_horizontal);
         adapterTop = new WritePagerAdapter(this.getChildFragmentManager());
         viewPagerTop.setAdapter(adapterTop);
-        MHDLog.d("dagian", "test >>>>>>>>>>>>>> " + adapterTop.getCount());
 
         // read 좌우 메뉴 제어
         MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithWriteViewPager(viewPagerTop);
