@@ -278,29 +278,8 @@ public class GlobalTabsView extends FrameLayout {
 //        mIndicator.setScaleX(fractionFromCenter);
         if(currentposition == 99) currentposition = position;
         if(currentposition == position) {
-            switch (position) {
-                case 0: // 0↔1
-                    mIndicator.setTranslationX((fractionFromCenter - 1 + position - 1) * mIndicatorTranslationX);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
-                    break;
-                case 1: // 1↔2, 0→1 에 도착했을 때.
-                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
-//                    mFourthImage.setAlpha(1 - fractionFromCenter);
-//                    mFifthImage.setAlpha(1 - fractionFromCenter);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
-                    break;
-                case 2: // 2↔3, 1→2 에 도착했을 때.
-                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
-                    break;
-                case 3: // 3↔4, 2→3 에 도착했을 때.
-                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
-                    break;
-                case 4: // 4↔5, 3→4 에 도착했을 때.
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
-                    break;
-            }
+            mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
+            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
         } else {
             currentposition = position;
         }
