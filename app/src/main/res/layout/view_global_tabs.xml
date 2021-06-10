@@ -15,7 +15,20 @@
         android:padding="8dp"
         android:background="@drawable/small_circle"/>
         <!--android:src="@drawable/write_24dp"-->
-
+    <ImageView
+        android:id="@+id/vst_left_menu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left|top"
+        android:padding="8dp"
+        android:background="@drawable/small_circle"/>
+    <ImageView
+        android:id="@+id/vst_right_menu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right|top"
+        android:padding="8dp"
+        android:background="@drawable/small_circle"/>
 
     <LinearLayout
         android:id="@+id/ll_global_tabs"
