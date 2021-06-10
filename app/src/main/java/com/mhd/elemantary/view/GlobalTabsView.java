@@ -48,6 +48,7 @@ public class GlobalTabsView extends FrameLayout {
     private int secondOffset = 0;
     private int checkDirection = 0;
     private int vvpItem = 0;
+    private int currentposition = 99;
 
     boolean isStart = true;
     boolean wDirection = false; // left
@@ -206,6 +207,7 @@ public class GlobalTabsView extends FrameLayout {
 
         mIndicator = findViewById(R.id.vst_indicator);
         mIndicator.setAlpha(1);
+        mIndicator.setTranslationX((-2) * mIndicatorTranslationX);
         AlphaAnimation alpha = new AlphaAnimation(0.3f, 0.3f);
         alpha.setDuration(0);
         alpha.setFillAfter(true);
@@ -224,7 +226,8 @@ public class GlobalTabsView extends FrameLayout {
 
         mArgEvaluator = new ArgbEvaluator();
 
-        mIndicatorTranslationX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 164, getResources().getDisplayMetrics());
+        // 메뉴 하나당 82
+        mIndicatorTranslationX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 82, getResources().getDisplayMetrics());
 
         mCenterImage.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -238,6 +241,7 @@ public class GlobalTabsView extends FrameLayout {
 
         FrameLayout.LayoutParams mLayoutParams = (FrameLayout.LayoutParams) mCenterImage.getLayoutParams();
         mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(getContext());
+        
         mCenterImage.setLayoutParams(mLayoutParams);
 
         mCenterImage.setVisibility(View.GONE);
@@ -272,28 +276,33 @@ public class GlobalTabsView extends FrameLayout {
     private void moveViewsFiveMenu(float fractionFromCenter, int position, int startPosition) {
 //        mIndicator.setAlpha(fractionFromCenter);
 //        mIndicator.setScaleX(fractionFromCenter);
-        if(fractionFromCenter > 0) {
+        if(currentposition == 99) currentposition = position;
+        if(currentposition == position) {
             switch (position) {
                 case 0: // 0↔1
-                    mIndicator.setTranslationX((fractionFromCenter - 1) * mIndicatorTranslationX);
+                    mIndicator.setTranslationX((fractionFromCenter - 1 + position - 1) * mIndicatorTranslationX);
                     MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 1: // 1↔2, 0→1 에 도착했을 때.
-                    mIndicator.setTranslationX(fractionFromCenter * mIndicatorTranslationX);
+                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
 //                    mFourthImage.setAlpha(1 - fractionFromCenter);
 //                    mFifthImage.setAlpha(1 - fractionFromCenter);
                     MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 2: // 2↔3, 1→2 에 도착했을 때.
+                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
                     MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 3: // 3↔4, 2→3 에 도착했을 때.
+                    mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
                     MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 4: // 4↔5, 3→4 에 도착했을 때.
                     MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
             }
+        } else {
+            currentposition = position;
         }
     }
     /**
@@ -369,28 +378,23 @@ public class GlobalTabsView extends FrameLayout {
                 case 0: // 0↔1
                     mFirstImage.setAlpha(selectedMenu);
                     mSecondImage.setAlpha(previousMenu);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 1: // 1↔2, 0→1 에 도착했을 때.
                     mSecondImage.setAlpha(selectedMenu);
                     mThirdImage.setAlpha(previousMenu);
 //                    mFourthImage.setAlpha(1 - fractionFromCenter);
 //                    mFifthImage.setAlpha(1 - fractionFromCenter);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 2: // 2↔3, 1→2 에 도착했을 때.
                     mThirdImage.setAlpha(selectedMenu);
                     mFourthImage.setAlpha(previousMenu);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 3: // 3↔4, 2→3 에 도착했을 때.
                     mFourthImage.setAlpha(selectedMenu);
                     mFifthImage.setAlpha(previousMenu);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
                 case 4: // 4↔5, 3→4 에 도착했을 때.
                     mFifthImage.setAlpha(selectedMenu);
-                    MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
                     break;
             }
         }
