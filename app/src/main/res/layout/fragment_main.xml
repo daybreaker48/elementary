@@ -9,8 +9,7 @@
         android:id="@+id/am_background_view_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/top_navigation"
-        android:background="@drawable/card_background"/>
+        android:background="@color/zxing_transparent"/>
 
     <!--가로 Pager-->
     <com.mhd.elemantary.view.CustomViewPager

@@ -50,11 +50,11 @@ public class MainFragment extends BaseFragment {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if(position == 0) {
 //                    background.setBackgroundColor(colorBlue);
-                    background.setAlpha(1 - positionOffset);
+//                    background.setAlpha(1 - positionOffset);
                 }
                 else if(position == 1) {
 //                    background.setBackgroundColor(colorPurple);
-                    background.setAlpha(positionOffset);
+//                    background.setAlpha(positionOffset);
                 }
             }
 
