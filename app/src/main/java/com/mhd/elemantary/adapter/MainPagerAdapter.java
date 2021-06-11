@@ -20,11 +20,13 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public BaseFragment getItem(int position) {
         switch(position) {
             case 0:
-                return WriteFragment.create();
-            case 1:
                 return MainFragment.create();
-            case 2:
-                return ReadFragment.create();
+//            case 0:
+//                return WriteFragment.create();
+//            case 1:
+//                return MainFragment.create();
+//            case 2:
+//                return ReadFragment.create();
         }
 
         return null;
@@ -35,10 +37,10 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
         switch(position) {
             case 0:
                 return "할일";
-            case 1:
-                return "스케쥴";
-            case 2:
-                return "스스로해요";
+//            case 1:
+//                return "스케쥴";
+//            case 2:
+//                return "스스로해요";
         }
 
         return super.getPageTitle(position);
@@ -46,6 +48,6 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 1;
     }
 }

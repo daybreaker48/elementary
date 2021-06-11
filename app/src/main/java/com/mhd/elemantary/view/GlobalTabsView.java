@@ -33,6 +33,7 @@ public class GlobalTabsView extends FrameLayout {
     private ImageView mThirdImage;
     private ImageView mFourthImage;
     private ImageView mFifthImage;
+    private ImageView mTopRightImage;
 
     private View mIndicator;
 
@@ -91,24 +92,26 @@ public class GlobalTabsView extends FrameLayout {
 //                    viewPager.setCurrentItem(2);
 //            }
 //        });
-        mCenterImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(vvpItem == 0){
-                    viewPager.setCurrentItem(1);
-                }
-                else {
-                    viewPager.setCurrentItem(0);
-                }
-            }
-        });
-        mThirdImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewPager.getCurrentItem() != 2)
-                    viewPager.setCurrentItem(2);
-            }
-        });
+
+        // vertical viewpager를 하나로 만들기 위해 주석처리
+//        mCenterImage.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(vvpItem == 0){
+//                    viewPager.setCurrentItem(1);
+//                }
+//                else {
+//                    viewPager.setCurrentItem(0);
+//                }
+//            }
+//        });
+//        mThirdImage.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(viewPager.getCurrentItem() != 2)
+//                    viewPager.setCurrentItem(2);
+//            }
+//        });
     }
 
     public void setUpWithWriteViewPager(final ViewPager viewPager) {
@@ -204,6 +207,7 @@ public class GlobalTabsView extends FrameLayout {
         mThirdImage = (ImageView) findViewById(R.id.vst_main_third_image);
         mFourthImage = (ImageView) findViewById(R.id.vst_main_fourth_image);
         mFifthImage = (ImageView) findViewById(R.id.vst_main_fifth_image);
+        mTopRightImage = (ImageView) findViewById(R.id.vst_right_image);
 
         mIndicator = findViewById(R.id.vst_indicator);
         mIndicator.setAlpha(1);
@@ -374,6 +378,26 @@ public class GlobalTabsView extends FrameLayout {
                     break;
                 case 4: // 4↔5, 3→4 에 도착했을 때.
                     mFifthImage.setAlpha(selectedMenu);
+                    break;
+            }
+        } else {
+            switch (position) {
+                case 0: // 0↔1
+                    mTopRightImage.setVisibility(View.VISIBLE);
+                    break;
+                case 1: // 1↔2, 0→1 에 도착했을 때.
+                    mTopRightImage.setVisibility(View.VISIBLE);
+//                    mFourthImage.setAlpha(1 - fractionFromCenter);
+//                    mFifthImage.setAlpha(1 - fractionFromCenter);
+                    break;
+                case 2: // 2↔3, 1→2 에 도착했을 때.
+                    mTopRightImage.setVisibility(View.VISIBLE);
+                    break;
+                case 3: // 3↔4, 2→3 에 도착했을 때.
+                    mTopRightImage.setVisibility(View.INVISIBLE);
+                    break;
+                case 4: // 4↔5, 3→4 에 도착했을 때.
+                    mTopRightImage.setVisibility(View.INVISIBLE);
                     break;
             }
         }

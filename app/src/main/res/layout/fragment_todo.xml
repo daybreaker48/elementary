@@ -11,18 +11,18 @@
     <LinearLayout
         android:id="@+id/ll_top_receiving"
         android:layout_width="match_parent"
-    android:layout_height="50dp"
+        android:layout_height="50dp"
         android:background="@color/white_t75"
         android:orientation="horizontal">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_move_stat_left"
-            android:layout_width="65dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:background="@android:color/transparent"
-            android:textSize="@dimen/font_18"
-            android:text="@string/button_1"/>
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_move_stat_left"-->
+            <!--android:layout_width="65dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="left"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:textSize="@dimen/font_18"-->
+            <!--android:text="@string/button_1"/>-->
         <TextView
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"
@@ -33,15 +33,15 @@
             android:textColor="@color/black"
             android:textSize="@dimen/font_18"
             android:text="@string/title_todo"/>
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_menu_right"
-            android:layout_width="65dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:background="@android:color/transparent"
-            android:textSize="@dimen/font_18"
-            android:text="@string/button_2"/>
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_menu_right"-->
+            <!--android:layout_width="65dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:textSize="@dimen/font_18"-->
+            <!--android:text="@string/button_2"/>-->
     </LinearLayout>
     <!--<TextView-->
         <!--android:id="@+id/vst_top_title"-->
@@ -53,10 +53,10 @@
         <!--android:textSize="18dp"-->
         <!--android:layout_marginLeft="20dp"-->
         <!--android:text="@string/title_todo"/>-->
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/vst_top_title"-->
-<!--        android:background="@drawable/card_background"/>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@+id/vst_top_title"-->
+        <!--android:background="@drawable/card_background"/>-->
 
 </android.support.design.widget.CoordinatorLayout>
