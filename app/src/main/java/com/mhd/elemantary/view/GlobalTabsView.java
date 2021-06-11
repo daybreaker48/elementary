@@ -92,24 +92,26 @@ public class GlobalTabsView extends FrameLayout {
 //                    viewPager.setCurrentItem(2);
 //            }
 //        });
-        mCenterImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(vvpItem == 0){
-                    viewPager.setCurrentItem(1);
-                }
-                else {
-                    viewPager.setCurrentItem(0);
-                }
-            }
-        });
-        mThirdImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewPager.getCurrentItem() != 2)
-                    viewPager.setCurrentItem(2);
-            }
-        });
+
+        // vertical viewpager를 하나로 만들기 위해 주석처리
+//        mCenterImage.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(vvpItem == 0){
+//                    viewPager.setCurrentItem(1);
+//                }
+//                else {
+//                    viewPager.setCurrentItem(0);
+//                }
+//            }
+//        });
+//        mThirdImage.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(viewPager.getCurrentItem() != 2)
+//                    viewPager.setCurrentItem(2);
+//            }
+//        });
     }
 
     public void setUpWithWriteViewPager(final ViewPager viewPager) {

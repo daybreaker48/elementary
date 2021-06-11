@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithVerticalViewPager(viewPager);
 
         // viewpager 에서 특정위치 view 초기 지정.
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
 
         // UI 에 필요한 컬러코드 값
         final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
@@ -53,13 +53,13 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if(position == 0) {
-                    background.setBackgroundColor(colorBlue);
-                    background.setAlpha(1 - positionOffset);
+//                    background.setBackgroundColor(colorBlue);
+//                    background.setAlpha(1 - positionOffset);
                     MHDLog.e("dagian = 0", 1 - positionOffset);
                 }
                 else if(position == 1) {
-                    background.setBackgroundColor(colorPurple);
-                    background.setAlpha(positionOffset);
+//                    background.setBackgroundColor(colorPurple);
+//                    background.setAlpha(positionOffset);
                     MHDLog.e("dagian = 1", positionOffset);
                 }
             }
