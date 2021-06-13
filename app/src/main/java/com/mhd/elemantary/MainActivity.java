@@ -1,24 +1,25 @@
 package com.mhd.elemantary;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
-import com.mhd.elemantary.adapter.MainPagerAdapter;
+import com.mhd.elemantary.adapter.MenuPagerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.view.GlobalTabsView;
-import com.mhd.elemantary.view.VerticalViewPager;
 
 public class MainActivity extends BaseActivity {
 
-    public VerticalViewPager viewPager;
-    public MainPagerAdapter adapter;
+    public ViewPager2 viewPager2;
+    public MenuPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,25 +34,21 @@ public class MainActivity extends BaseActivity {
         final View background = findViewById(R.id.am_background_view);
 
         // viewpager
-        viewPager = (VerticalViewPager) findViewById(R.id.am_view_pager);
-        adapter = new MainPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-
-        // viewpager 위에서 돌아가는 메뉴.
-        MHDApplication.getInstance().getMHDSvcManager().setGlobalTabsView((GlobalTabsView) findViewById(R.id.am_snap_tabs));
-        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithVerticalViewPager(viewPager);
-
-        // viewpager 에서 특정위치 view 초기 지정.
-        viewPager.setCurrentItem(0);
+        viewPager2 = findViewById(R.id.am_view_pager);
+        adapter = new MenuPagerAdapter(this);
+        viewPager2.setAdapter(adapter);
 
         // UI 에 필요한 컬러코드 값
         final int colorBlue = ContextCompat.getColor(this, R.color.light_blue);
         final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
 
         // viewpager 이동에 따른 컬러, 투명도 변경 애니메이션 처리.
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position,
+                                       float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
                 if(position == 0) {
 //                    background.setBackgroundColor(colorBlue);
 //                    background.setAlpha(1 - positionOffset);
@@ -63,17 +60,15 @@ public class MainActivity extends BaseActivity {
                     MHDLog.e("dagian = 1", positionOffset);
                 }
             }
+        };
+        viewPager2.registerOnPageChangeCallback(callback);
 
-            @Override
-            public void onPageSelected(int position) {
+        // viewpager 위에서 돌아가는 메뉴.
+        MHDApplication.getInstance().getMHDSvcManager().setGlobalTabsView((GlobalTabsView) findViewById(R.id.am_snap_tabs));
+        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithMenuViewPager(viewPager2);
 
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        // viewpager 에서 특정위치 view 초기 지정.
+        viewPager2.setCurrentItem(0);
     }
     /**
      * onNewIntent

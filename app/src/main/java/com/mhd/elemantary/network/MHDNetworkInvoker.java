@@ -414,7 +414,7 @@ public class MHDNetworkInvoker {
         postRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)); // 20 secs
 
         queue.add(postRequest);
-        CustomLoading.showLoading(context);
+//        CustomLoading.showLoading(context);
     }
 
     public void cancelRequest(Context context){

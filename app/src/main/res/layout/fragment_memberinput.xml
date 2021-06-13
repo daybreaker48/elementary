@@ -45,7 +45,7 @@
                 android:allowUndo="false"
                 android:text="@string/button_sex_female"/>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_year"
             android:layout_width="240dp"
             android:layout_height="60dp"
@@ -128,7 +128,7 @@
         android:gravity="center"
         android:background="@color/black_overlay"
         android:layout_weight="3">
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_start"
             android:layout_width="240dp"
             android:layout_height="60dp"

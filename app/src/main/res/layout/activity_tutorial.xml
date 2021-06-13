@@ -15,7 +15,7 @@
         android:background="@color/main_background"
         android:alpha=".0"/>
 
-    <com.mhd.elemantary.view.CustomViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/am_tutorial_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

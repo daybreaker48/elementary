@@ -2,9 +2,14 @@ package com.mhd.elemantary.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+
+import androidx.annotation.Px;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.gson.Gson;
 import com.mhd.elemantary.R;
@@ -12,9 +17,9 @@ import com.mhd.elemantary.adapter.TutorialPagerAdapter;
 import com.mhd.elemantary.common.CircleIndicator;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.UserVo;
+import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
-import com.mhd.elemantary.view.CustomViewPager;
 
 public class TutorialActivity extends BaseActivity {
 
@@ -30,15 +35,15 @@ public class TutorialActivity extends BaseActivity {
         final View background = findViewById(R.id.am_tutorial_background_view);
 
         // viewpager
-        CustomViewPager viewPager = (CustomViewPager) findViewById(R.id.am_tutorial_view_pager);
-        TutorialPagerAdapter adapter = new TutorialPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+        ViewPager2 viewPager2 = findViewById(R.id.am_tutorial_view_pager);
+        TutorialPagerAdapter adapter = new TutorialPagerAdapter(this);
+        viewPager2.setAdapter(adapter);
 
 //        LineIndicator lineIndicator = (LineIndicator) findViewById(R.id.line_indicator);
 //        lineIndicator.setupWithViewPager(viewPager);
 
         CircleIndicator circleIndicator = (CircleIndicator) findViewById(R.id.circle_indicator);
-        circleIndicator.setupWithViewPager(viewPager);
+        circleIndicator.setupWithViewPager(viewPager2);
 
         // viewpager 위에서 돌아가는 메뉴.
 //        MHDApplication.getInstance().getMHDSvcManager().setGlobalTabsView((GlobalTabsView) findViewById(R.id.am_snap_tabs));
@@ -52,9 +57,12 @@ public class TutorialActivity extends BaseActivity {
         final int colorPurple = ContextCompat.getColor(this, R.color.light_purple);
 
         // viewpager 이동에 따른 컬러, 투명도 변경 애니메이션 처리.
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position,
+                                       float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
                 if(position == 0) {
                     background.setBackgroundColor(colorBlue);
 //                    background.setAlpha(1 - positionOffset);
@@ -66,17 +74,8 @@ public class TutorialActivity extends BaseActivity {
 //                    MHDLog.e("dagian = 1", positionOffset);
                 }
             }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        };
+        viewPager2.registerOnPageChangeCallback(callback);
     }
 
     @Override

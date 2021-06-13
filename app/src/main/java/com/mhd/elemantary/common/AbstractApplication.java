@@ -1,7 +1,7 @@
 package com.mhd.elemantary.common;
 
 import android.content.pm.PackageInfo;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.mhd.elemantary.util.MHDLog;
 

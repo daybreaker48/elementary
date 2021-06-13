@@ -2,12 +2,14 @@ package com.mhd.elemantary.view;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -55,7 +57,8 @@ public class GlobalTabsView extends FrameLayout {
     boolean wDirection = false; // left
 
     private ViewPager verticalViewPager;
-    private ViewPager writeViewPager, menuViewPager, readViewPager;
+    private ViewPager writeViewPager, readViewPager;
+    private ViewPager2 menuViewPager;
     private FragmentStatePagerAdapter writeFragmentPagerAdapter, statFragmentPagerAdapter, readFragmentPagerAdapter;
 
 
@@ -129,9 +132,47 @@ public class GlobalTabsView extends FrameLayout {
 //        });
     }
 
-    public void setUpWithMenuViewPager(final ViewPager viewPager) {
-        viewPager.addOnPageChangeListener(mMenuPageChangeListener);
+    public void setUpWithMenuViewPager(final ViewPager2 viewPager) {
+        ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position,
+                                       float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
+                MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
+                MHDLog.d("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
+                MHDLog.d("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
+                MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
+
+                if (position == menuViewPager.getCurrentItem() && isStart) {
+                    wDirection = true; // right
+                    isStart = false;
+                }
+                setLRColorOne(positionOffset, position, menuViewPager.getCurrentItem());
+                moveViewsFiveMenu(positionOffset, position, menuViewPager.getCurrentItem());
+                if(position == 0) {
+//                setLRColor(1 - positionOffset);
+//                moveViews(1 - positionOffset);
+
+                    //moveAndScaleCenter(1 - positionOffset);
+
+//                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
+
+                    //write 이미지를 투명처리한다.
+                    //mCenterImage.setImageAlpha((int) (1 - positionOffset));
+                }
+                else if(position == 1) {
+//                setLRColor(positionOffset);
+//                moveViews(positionOffset);
+
+                    //moveAndScaleCenter(positionOffset);
+//                mIndicator.setTranslationX(positionOffset * mIndicatorTranslationX);
+                }
+            }
+        };
+
         menuViewPager = viewPager;
+        menuViewPager.registerOnPageChangeCallback(callback);
         sideMenuSetOnClickListener(menuViewPager);
 
 //        mCenterImage.setOnClickListener(new OnClickListener() {
@@ -160,7 +201,7 @@ public class GlobalTabsView extends FrameLayout {
 //        });
     }
 
-    private void sideMenuSetOnClickListener(final ViewPager viewPager) {
+    private void sideMenuSetOnClickListener(final ViewPager2 viewPager) {
         mFirstImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -488,7 +529,8 @@ public class GlobalTabsView extends FrameLayout {
                 mSecondImage.setImageResource(R.drawable.camera);
                 mThirdImage.setImageResource(R.drawable.read);
 
-                sideMenuSetOnClickListener(writeViewPager);
+                // viewpager2로 컨버전 하면서 발생하는 오류떄문에 일단 주석
+//                sideMenuSetOnClickListener(writeViewPager);
             }
             else if(verticalViewPager.getCurrentItem() == 1){
                 //Stat
@@ -506,7 +548,8 @@ public class GlobalTabsView extends FrameLayout {
                 mSecondImage.setImageResource(R.drawable.good);
                 mThirdImage.setImageResource(R.drawable.bad);
 
-                sideMenuSetOnClickListener(readViewPager);
+                // viewpager2로 컨버전 하면서 발생하는 오류떄문에 일단 주석
+//                sideMenuSetOnClickListener(readViewPager);
             }
         }
     };

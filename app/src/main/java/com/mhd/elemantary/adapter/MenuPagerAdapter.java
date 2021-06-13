@@ -1,8 +1,11 @@
 package com.mhd.elemantary.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.mhd.elemantary.fragment.ScheduleFragment;
 import com.mhd.elemantary.fragment.SettingFragment;
@@ -10,16 +13,19 @@ import com.mhd.elemantary.fragment.SumFragment;
 import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.fragment.SelfFragment;
 
+import org.jetbrains.annotations.NotNull;
 
-public class MenuPagerAdapter extends FragmentPagerAdapter{
 
+public class MenuPagerAdapter extends FragmentStateAdapter{
 
-    public MenuPagerAdapter(FragmentManager fm) {
-        super(fm);
+    public MenuPagerAdapter(FragmentActivity fa) {
+        super(fa);
     }
 
+    @NonNull
+    @NotNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch(position) {
             case 0:
                 return TodoFragment.create();
@@ -32,30 +38,11 @@ public class MenuPagerAdapter extends FragmentPagerAdapter{
             case 4:
                 return SettingFragment.create();
         }
-
         return null;
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        switch(position) {
-            case 0:
-                return "할일";
-            case 1:
-                return "스케쥴";
-            case 2:
-                return "스스로해요";
-            case 3:
-                return "통계";
-            case 4:
-                return "설정";
-        }
-
-        return super.getPageTitle(position);
-    }
-
-    @Override
-    public int getCount() {
+    public int getItemCount() {
         return 5;
     }
 }

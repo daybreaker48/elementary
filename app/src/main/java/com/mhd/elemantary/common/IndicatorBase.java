@@ -3,8 +3,8 @@ package com.mhd.elemantary.common;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.viewpager2.widget.ViewPager2;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,26 +84,17 @@ public abstract class IndicatorBase extends View {
 
     protected abstract IndicatorType getType();
 
-    public void setupWithViewPager(ViewPager pager) {
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+    public void setupWithViewPager(ViewPager2 pager) {
+        ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                super.onPageSelected(position);
                 selectPosition = position;
                 invalidate();
             }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        itemCount = pager.getAdapter().getCount();
-
+        };
+        pager.registerOnPageChangeCallback(callback);
+        itemCount = pager.getAdapter().getItemCount();
 
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         switch (type) {

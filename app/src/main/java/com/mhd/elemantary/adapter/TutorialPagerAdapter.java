@@ -1,26 +1,29 @@
 package com.mhd.elemantary.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.mhd.elemantary.fragment.ManualThreeFragment;
 import com.mhd.elemantary.fragment.ManualTwoFragment;
 import com.mhd.elemantary.fragment.ManualOneFragment;
 import com.mhd.elemantary.fragment.MemberInputFragment;
 
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class TutorialPagerAdapter extends FragmentPagerAdapter{
+
+public class TutorialPagerAdapter extends FragmentStateAdapter {
 
     private final int ITEM_COUNT = 4;
 
-    public TutorialPagerAdapter(FragmentManager fm) {
-        super(fm);
+    public TutorialPagerAdapter(@NonNull FragmentActivity fa) {
+        super(fa);
     }
 
     @Override
-    public Fragment getItem(int position) {
-        switch(position) {
+    public androidx.fragment.app.Fragment createFragment(int i) {
+        switch(i) {
             case 0:
                 return ManualOneFragment.create();
             case 1:
@@ -29,29 +32,13 @@ public class TutorialPagerAdapter extends FragmentPagerAdapter{
                 return ManualThreeFragment.create();
             case 3:
                 return MemberInputFragment.create();
+            default:
+                return ManualOneFragment.create();
         }
-
-        return null;
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
-        switch(position) {
-            case 0:
-                return "Manual";
-            case 1:
-                return "Manual";
-            case 2:
-                return "Manual";
-            case 3:
-                return "Info";
-        }
-
-        return super.getPageTitle(position);
-    }
-
-    @Override
-    public int getCount() {
+    public int getItemCount() {
         return ITEM_COUNT;
     }
 }

@@ -12,11 +12,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.customview.widget.ViewDragHelper;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -51,7 +51,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+//import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 
 /**
@@ -836,7 +838,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
 }
