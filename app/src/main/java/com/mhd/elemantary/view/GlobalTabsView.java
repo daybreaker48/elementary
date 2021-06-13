@@ -610,11 +610,11 @@ public class GlobalTabsView extends FrameLayout {
             }
             setLRColorOne(positionOffset, position, menuViewPager.getCurrentItem());
             moveViewsFiveMenu(positionOffset, position, menuViewPager.getCurrentItem());
-            if(position == 0) {
-//                setLRColor(1 - positionOffset);
+            if(position == 0) {//                setLRColor(1 - positionOffset);
 //                moveViews(1 - positionOffset);
 
-                //moveAndScaleCenter(1 - positionOffset);
+                //
+moveAndScaleCenter(1 - positionOffset);
 
 //                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
 
