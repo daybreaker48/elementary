@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -19,10 +20,14 @@ import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.activity.RegistAllActivity;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
+
+import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 
 public class GlobalTabsView extends FrameLayout {
@@ -35,7 +40,7 @@ public class GlobalTabsView extends FrameLayout {
     private ImageView mThirdImage;
     private ImageView mFourthImage;
     private ImageView mFifthImage;
-    private ImageView mTopRightImage;
+    private ImageView mTopLeftImage, mTopRightImage;
 
     private View mIndicator;
 
@@ -132,7 +137,7 @@ public class GlobalTabsView extends FrameLayout {
 //        });
     }
 
-    public void setUpWithMenuViewPager(final ViewPager2 viewPager) {
+    public void setUpWithMenuViewPager(final ViewPager2 viewPager, final Context mContext) {
         ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position,
@@ -184,6 +189,34 @@ public class GlobalTabsView extends FrameLayout {
 //                    viewPager.setCurrentItem(1);
 //            }
 //        });
+
+        mTopLeftImage.setOnClickListener(new OnClickListener() {//            @Override
+            public void onClick(View v) {
+//                if(menuViewPager.getCurrentItem() == 0) { // 할일
+//                    Intent intent = new Intent(mContext, TutorialActivity.class);
+//                    mContext.startActivity(intent);
+//                } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
+//                    viewPager.setCurrentItem(2);
+//                } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
+//                    viewPager.setCurrentItem(2);
+//                }
+            }
+        });
+        mTopRightImage.setOnClickListener(new OnClickListener() {//            @Override
+            public void onClick(View v) {
+                // 할일, 스케쥴, 스스로해요 등록하기.
+                if(menuViewPager.getCurrentItem() == 0) { // 할일
+                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    startActivityForResult((MainActivity)mContext, intent, 101, null);
+                } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
+                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    mContext.startActivity(intent);
+                } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
+                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    mContext.startActivity(intent);
+                }
+            }
+        });
     }
 
     public void setUpWithReadViewPager(final ViewPager viewPager) {
@@ -248,6 +281,7 @@ public class GlobalTabsView extends FrameLayout {
         mThirdImage = (ImageView) findViewById(R.id.vst_main_third_image);
         mFourthImage = (ImageView) findViewById(R.id.vst_main_fourth_image);
         mFifthImage = (ImageView) findViewById(R.id.vst_main_fifth_image);
+        mTopLeftImage = (ImageView) findViewById(R.id.vst_left_image);
         mTopRightImage = (ImageView) findViewById(R.id.vst_right_image);
 
         mIndicator = findViewById(R.id.vst_indicator);
