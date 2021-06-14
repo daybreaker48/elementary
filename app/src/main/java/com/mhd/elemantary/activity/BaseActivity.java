@@ -442,6 +442,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         // 메인 & 그 외 특정 화면에서는 종료처리(팝업을 띄운다)
         if (this instanceof StartActivity || this instanceof TutorialActivity || this instanceof MainActivity) {
             exitApplication();
+        } else if (this instanceof RegistAllActivity) {
+            super.onBackPressed();
         } else {
             if (drawerlayout.isDrawerOpen(Gravity.END)) {
                 drawerlayout.closeDrawer(Gravity.END);

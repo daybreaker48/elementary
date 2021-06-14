@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
 
         // viewpager 위에서 돌아가는 메뉴.
         MHDApplication.getInstance().getMHDSvcManager().setGlobalTabsView((GlobalTabsView) findViewById(R.id.am_snap_tabs));
-        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithMenuViewPager(viewPager2);
+        MHDApplication.getInstance().getMHDSvcManager().getGlobalTabsView().setUpWithMenuViewPager(viewPager2, MainActivity.this);
 
         // viewpager 에서 특정위치 view 초기 지정.
         viewPager2.setCurrentItem(0);
