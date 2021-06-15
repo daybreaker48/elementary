@@ -24,5 +24,7 @@
     <color name="almost_mauve">#eae0df</color>
 
     <color name="main_background">#E09B40</color>
+
     <color name="main_background2">#9FA67A</color>
+    <color name="transparent">#00000000</color>
 </resources>

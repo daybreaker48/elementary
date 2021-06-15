@@ -206,6 +206,7 @@ public class GlobalTabsView extends FrameLayout {
             public void onClick(View v) {
                 // 할일, 스케쥴, 스스로해요 등록하기.
                 if(menuViewPager.getCurrentItem() == 0) { // 할일
+                    // fragment의 함수 호출?
                     Intent intent = new Intent(mContext, RegistAllActivity.class);
                     startActivityForResult((MainActivity)mContext, intent, 101, null);
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
