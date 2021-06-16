@@ -80,6 +80,22 @@
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
 
+    <string name="empty_space" translatable="true"> </string>
+    <string name="subtitle_subject" translatable="true">과 목</string>
+    <string name="subtitle_subject_detail" translatable="true">세부항목</string>
+    <string name="subtitle_textbook" translatable="true">교 재</string>
+    <string name="subtitle_textbook_subject" translatable="true">교재제목</string>
+    <string name="subtitle_dailyprogress" translatable="true">하루분량</string>
+
+    <string name="content_dailyprogress" translatable="true">오늘</string>
+    <string name="content_sun" translatable="true">일</string>
+    <string name="content_mon" translatable="true">월</string>
+    <string name="content_tues" translatable="true">화</string>
+    <string name="content_wed" translatable="true">수</string>
+    <string name="content_thur" translatable="true">목</string>
+    <string name="content_fri" translatable="true">금</string>
+    <string name="content_sat" translatable="true">토</string>
+
     <string name="api_editor_clear" translatable="true">api_editor_clear</string>
 
 </resources>

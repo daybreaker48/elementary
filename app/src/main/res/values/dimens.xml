@@ -246,6 +246,12 @@
     <dimen name="length_600">600dp</dimen>
 
 
+    <dimen name="screen_padding">10dp</dimen>
+    <dimen name="line_padding">4dp</dimen>
+    <dimen name="screen_title_margintop">50dp</dimen>
+    <dimen name="subtitle_width">80dp</dimen>
+
+
 
     <integer name="int_25">25</integer>
     <integer name="int_16">16</integer>
