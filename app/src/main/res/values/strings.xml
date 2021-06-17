@@ -67,6 +67,7 @@
 
     <string name="button_menu_right" translatable="true">Menu</string>
     <string name="button_close_post" translatable="true">닫기</string>
+    <string name="button_cancel_post" translatable="true">취소</string>
     <string name="button_save_post" translatable="true">저장</string>
     <string name="button_move_stat_left" translatable="true">Stat</string>
     <string name="button_1" translatable="true">btn_1</string>

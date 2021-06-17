@@ -247,7 +247,7 @@
 
 
     <dimen name="screen_padding">10dp</dimen>
-    <dimen name="line_padding">4dp</dimen>
+    <dimen name="line_padding">5dp</dimen>
     <dimen name="screen_title_margintop">50dp</dimen>
     <dimen name="subtitle_width">80dp</dimen>
 

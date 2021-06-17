@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.util.MHDLog;
-import com.mhd.elemantary.util.Util;
 
 import java.util.Arrays;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-public class RegistAllActivity extends BaseActivity {
+public class OptionDailyProgress extends BaseActivity {
 
     TextView tv_selectday;
     LinearLayout ll_daily_progress;
@@ -27,7 +26,7 @@ public class RegistAllActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_regist);
-        mContext = RegistAllActivity.this;
+        mContext = OptionDailyProgress.this;
 
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));

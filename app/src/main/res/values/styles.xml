@@ -9,6 +9,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:fitsSystemWindows">true</item> <!-- 상태바와 겹치지 않게 한다 -->
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustResize</item>
     </style>
     
     <style name="FullScreenTheme" parent="AppTheme">

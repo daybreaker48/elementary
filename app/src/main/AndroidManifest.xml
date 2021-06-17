@@ -61,6 +61,10 @@
             android:name="com.mhd.elemantary.activity.RegistAllActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.OptionDailyProgress"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
 
         <activity
             android:name="com.mhd.elemantary.activity.StartActivity"
