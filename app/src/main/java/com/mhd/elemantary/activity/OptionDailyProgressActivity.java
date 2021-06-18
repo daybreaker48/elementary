@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-public class OptionDailyProgress extends BaseActivity {
+public class OptionDailyProgressActivity extends BaseActivity {
 
     TextView tv_selectday;
     LinearLayout ll_daily_progress;
@@ -25,8 +25,8 @@ public class OptionDailyProgress extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(R.layout.activity_regist);
-        mContext = OptionDailyProgress.this;
+        initialize(R.layout.activity_regist_todo_option);
+        mContext = OptionDailyProgressActivity.this;
 
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
@@ -123,7 +123,7 @@ public class OptionDailyProgress extends BaseActivity {
         });
     }
     public void startDailyPregressActivity() {
-        Intent i = new Intent(mContext, OptionDailyProgress.class);
+        Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);
     }

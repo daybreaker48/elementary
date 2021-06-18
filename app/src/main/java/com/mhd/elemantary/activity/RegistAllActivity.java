@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.util.MHDLog;
-import com.mhd.elemantary.util.Util;
 
 import java.util.Arrays;
 
@@ -22,6 +21,7 @@ public class RegistAllActivity extends BaseActivity {
     TextView tv_selectday;
     LinearLayout ll_daily_progress;
     private String[] day_array = new String[7];
+    String sendDay = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,8 @@ public class RegistAllActivity extends BaseActivity {
         AppCompatButton btn_thur = (AppCompatButton) findViewById(R.id.btn_thur);
         AppCompatButton btn_fri = (AppCompatButton) findViewById(R.id.btn_fri);
         AppCompatButton btn_sat = (AppCompatButton) findViewById(R.id.btn_sat);
+        AppCompatButton btn_todo_cancel = (AppCompatButton) findViewById(R.id.btn_todo_cancel);
+        AppCompatButton btn_todo_save = (AppCompatButton) findViewById(R.id.btn_todo_save);
 
         btn_sun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,9 +124,21 @@ public class RegistAllActivity extends BaseActivity {
             @Override
             public void onClick(View v) { startDailyPregressActivity(); }
         });
+        btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { finish(); }
+        });
+        btn_todo_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 입력 값 서버로 전송.
+            }
+        });
     }
     public void startDailyPregressActivity() {
-        Intent i = new Intent(mContext, OptionDailyProgress.class);
+        // 할일 요일 정보를 보내야 한다. 오늘/매주 어떤 요일
+        MHDLog.d(TAG, "sendDay: " + sendDay);
+        Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);
     }
@@ -185,9 +199,12 @@ public class RegistAllActivity extends BaseActivity {
                 displayStrings = (displayStrings == null || displayStrings.isEmpty()) ? days : displayStrings + ", " + days;
             }
         }
-        if(displayStrings.isEmpty())
+        if(displayStrings.isEmpty()) {
             tv_selectday.setText(getString(R.string.content_dailyprogress));
-        else
+            sendDay = getString(R.string.content_dailyprogress);
+        }else {
             tv_selectday.setText("매주 " + displayStrings);
+            sendDay = displayStrings;
+        }
     }
 }
