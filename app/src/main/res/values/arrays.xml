@@ -5,6 +5,7 @@
         <item>수학</item>
         <item>영어</item>
         <item>과학</item>
+        <item>기타</item>
     </string-array>
     <string-array name="todo_subject_item_0_array">
         <item>없음</item>
@@ -14,6 +15,7 @@
         <item>글쓰기</item>
         <item>일기쓰기</item>
         <item>토론</item>
+        <item>기타</item>
     </string-array>
     <string-array name="todo_subject_item_1_array">
         <item>없음</item>
@@ -21,6 +23,7 @@
         <item>사고력</item>
         <item>연산</item>
         <item>서술형</item>
+        <item>기타</item>
     </string-array>
     <string-array name="todo_subject_item_2_array">
         <item>없음</item>
@@ -31,14 +34,17 @@
         <item>단어</item>
         <item>문법</item>
         <item>쓰기</item>
+        <item>기타</item>
     </string-array>
     <string-array name="todo_subject_item_3_array">
         <item>없음</item>
+        <item>기타</item>
     </string-array>
     <string-array name="todo_textbook_array">
         <item>없음</item>
         <item>교원</item>
         <item>구몬</item>
         <item>밀크티</item>
+        <item>기타</item>
     </string-array>
 </resources>
