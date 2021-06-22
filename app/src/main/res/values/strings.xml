@@ -80,12 +80,15 @@
     <string name="title_selfdo" translatable="true">스스로해요</string>
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
+    <string name="title_todo_regist" translatable="true">할일 등록</string>
+    <string name="title_todo_regist_textbook" translatable="true">학습지</string>
+    <string name="title_todo_regist_daily" translatable="true">하루분량</string>
 
     <string name="empty_space" translatable="true"> </string>
     <string name="subtitle_subject" translatable="true">과 목</string>
     <string name="subtitle_subject_detail" translatable="true">세부항목</string>
-    <string name="subtitle_textbook" translatable="true">교 재</string>
-    <string name="subtitle_textbook_subject" translatable="true">교재제목</string>
+    <string name="subtitle_textbook" translatable="true">학습지</string>
+    <string name="subtitle_textbook_subject" translatable="true">학습지제목</string>
     <string name="subtitle_dailyprogress" translatable="true">하루분량</string>
 
     <string name="subtitle_daily_radio_1" translatable="true">하루분량</string>
@@ -100,6 +103,12 @@
     <string name="content_thur" translatable="true">목</string>
     <string name="content_fri" translatable="true">금</string>
     <string name="content_sat" translatable="true">토</string>
+
+    <string name="cell_todo_1" translatable="true">순서</string>
+    <string name="cell_todo_2" translatable="true">과목</string>
+    <string name="cell_todo_3" translatable="true">학습지</string>
+    <string name="cell_todo_4" translatable="true">하루분량</string>
+    <string name="cell_todo_5" translatable="true">완료</string>
 
     <string name="api_editor_clear" translatable="true">api_editor_clear</string>
 

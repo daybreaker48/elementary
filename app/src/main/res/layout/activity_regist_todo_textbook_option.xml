@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/transparent"
     android:orientation="vertical"
-    tools:context=".activity.OptionDailyProgressActivity">
+    tools:context=".activity.OptionDailyTextbookActivity">
 
     <include
         android:id="@+id/include"
@@ -21,6 +21,13 @@
         android:background="@color/white"
         android:padding="@dimen/screen_padding"
         android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_textbook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+        </androidx.recyclerview.widget.RecyclerView>
 
         <RadioGroup
             android:id="@+id/rg_daily_progress"

@@ -18,8 +18,8 @@ import androidx.appcompat.widget.AppCompatButton;
 
 public class RegistAllActivity extends BaseActivity {
 
-    TextView tv_selectday;
-    LinearLayout ll_daily_progress;
+    TextView tv_selectday, vst_top_title;
+    LinearLayout ll_daily_progress, ll_daily_textbook;
     private String[] day_array = new String[7];
     String sendDay = "";
 
@@ -29,9 +29,12 @@ public class RegistAllActivity extends BaseActivity {
         initialize(R.layout.activity_regist);
         mContext = RegistAllActivity.this;
 
+        vst_top_title = (TextView) findViewById(R.id.vst_top_title);
+        vst_top_title.setText(R.string.title_todo_regist);
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         ll_daily_progress = (LinearLayout) findViewById(R.id.ll_daily_progress);
+        ll_daily_textbook = (LinearLayout) findViewById(R.id.ll_daily_textbook);
 
         Spinner spi_todo_subject = (Spinner) findViewById(R.id.spi_todo_subject);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.todo_subject_array, R.layout.default_spinner_item);
@@ -41,10 +44,6 @@ public class RegistAllActivity extends BaseActivity {
         ArrayAdapter<CharSequence> adapter_detail = ArrayAdapter.createFromResource(this, R.array.todo_subject_item_0_array, R.layout.default_spinner_item);
         adapter_detail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spi_todo_subject_detail.setAdapter(adapter_detail);
-        Spinner spi_todo_textbook = (Spinner) findViewById(R.id.spi_todo_textbook);
-        ArrayAdapter<CharSequence> adapter_textbook = ArrayAdapter.createFromResource(this, R.array.todo_textbook_array, R.layout.default_spinner_item);
-        adapter_textbook.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spi_todo_textbook.setAdapter(adapter_textbook);
 
         // 과목선택에 따라서 detail 항목을 변경해줘야 한다.
         spi_todo_subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -124,6 +123,11 @@ public class RegistAllActivity extends BaseActivity {
             @Override
             public void onClick(View v) { startDailyPregressActivity(); }
         });
+        ll_daily_textbook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { startDailyTextbookActivity(); }
+        });
+
         btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish(); }
@@ -132,6 +136,7 @@ public class RegistAllActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 입력 값 서버로 전송.
+                finish();
             }
         });
     }
@@ -139,6 +144,13 @@ public class RegistAllActivity extends BaseActivity {
         // 할일 요일 정보를 보내야 한다. 오늘/매주 어떤 요일
         MHDLog.d(TAG, "sendDay: " + sendDay);
         Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(i);
+    }
+    public void startDailyTextbookActivity() {
+        // 교재 선택 창을 띄운다.
+        MHDLog.d(TAG, "sendDay: " + sendDay);
+        Intent i = new Intent(mContext, OptionDailyTextbookActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);
     }

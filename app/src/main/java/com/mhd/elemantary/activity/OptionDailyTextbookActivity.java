@@ -1,26 +1,22 @@
 package com.mhd.elemantary.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.util.MHDLog;
-
-import java.util.Arrays;
+import com.mhd.elemantary.adapter.ReCyclerAdapter;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class OptionDailyProgressActivity extends BaseActivity {
+public class OptionDailyTextbookActivity extends BaseActivity {
 
     TextView tv_selectday, vst_top_title;
     LinearLayout ll_daily_progress;
@@ -29,14 +25,30 @@ public class OptionDailyProgressActivity extends BaseActivity {
     RadioButton rb_daily_progress_1, rb_daily_progress_2, rb_daily_progress_3;
     EditText et_daily_radio_1, et_daily_radio_2, et_daily_radio_3;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(R.layout.activity_regist_todo_option);
-        mContext = OptionDailyProgressActivity.this;
+        initialize(R.layout.activity_regist_todo_textbook_option);
+        mContext = OptionDailyTextbookActivity.this;
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
-        vst_top_title.setText(R.string.title_todo_regist_daily);
+        vst_top_title.setText(R.string.title_todo_regist_textbook);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recv_textbook);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+
+        String[] textSet = {"111", "222", "333", "444", "111", "222", "333", "444", "111", "222", "333", "444"};
+        int[] imgSet = {R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list, R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list, R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list};
+
+        adapter = new ReCyclerAdapter(textSet, imgSet);
+        recyclerView.setAdapter(adapter);
 
         rg_daily_progress = (RadioGroup) findViewById(R.id.rg_daily_progress);
         rb_daily_progress_1 = (RadioButton) findViewById(R.id.rb_daily_progress_1);
