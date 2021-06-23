@@ -10,7 +10,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.adapter.ReCyclerAdapter;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,12 +42,6 @@ public class OptionDailyTextbookActivity extends BaseActivity {
 
         layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
-
-        String[] textSet = {"111", "222", "333", "444", "111", "222", "333", "444", "111", "222", "333", "444"};
-        int[] imgSet = {R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list, R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list, R.drawable.icon_link, R.drawable.ico_ofw_logout, R.drawable.icon_bullet_list, R.drawable.icon_numbered_list};
-
-        adapter = new ReCyclerAdapter(textSet, imgSet);
-        recyclerView.setAdapter(adapter);
 
         rg_daily_progress = (RadioGroup) findViewById(R.id.rg_daily_progress);
         rb_daily_progress_1 = (RadioButton) findViewById(R.id.rb_daily_progress_1);

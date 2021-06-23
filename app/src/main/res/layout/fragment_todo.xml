@@ -44,48 +44,12 @@
             <!--android:text="@string/button_2"/>-->
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/tl_todo"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recv_receiving"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*">
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
-                android:text="@string/cell_todo_1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
-                android:text="@string/cell_todo_2"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
-                android:text="@string/cell_todo_3"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
-                android:text="@string/cell_todo_4"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
-                android:text="@string/cell_todo_5"/>
-        </TableRow>
-    </TableLayout>
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
