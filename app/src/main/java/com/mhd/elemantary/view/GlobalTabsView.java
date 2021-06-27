@@ -22,7 +22,9 @@ import android.widget.ImageView;
 
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.activity.RegistAllActivity;
+import com.mhd.elemantary.activity.RegistScheduleActivity;
+import com.mhd.elemantary.activity.RegistSelfActivity;
+import com.mhd.elemantary.activity.RegistTodoActivity;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
@@ -207,13 +209,13 @@ public class GlobalTabsView extends FrameLayout {
                 // 할일, 스케쥴, 스스로해요 등록하기.
                 if(menuViewPager.getCurrentItem() == 0) { // 할일
                     // fragment의 함수 호출?
-                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    Intent intent = new Intent(mContext, RegistTodoActivity.class);
                     startActivityForResult((MainActivity)mContext, intent, 101, null);
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
-                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    Intent intent = new Intent(mContext, RegistScheduleActivity.class);
                     mContext.startActivity(intent);
                 } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
-                    Intent intent = new Intent(mContext, RegistAllActivity.class);
+                    Intent intent = new Intent(mContext, RegistSelfActivity.class);
                     mContext.startActivity(intent);
                 }
             }

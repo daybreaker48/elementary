@@ -81,6 +81,8 @@
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
     <string name="title_todo_regist" translatable="true">할일 등록</string>
+    <string name="title_schedule_regist" translatable="true">스케쥴 등록</string>
+    <string name="title_self_regist" translatable="true">스스로해요 등록</string>
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
     <string name="title_todo_regist_daily" translatable="true">하루분량</string>
 
@@ -90,6 +92,9 @@
     <string name="subtitle_textbook" translatable="true">학습지</string>
     <string name="subtitle_textbook_subject" translatable="true">학습지제목</string>
     <string name="subtitle_dailyprogress" translatable="true">하루분량</string>
+    <string name="subtitle_schedule_time" translatable="true">시 간</string>
+    <string name="subtitle_schedule_color" translatable="true">색 상</string>
+    <string name="subtitle_schedule_alarm" translatable="true">알 림</string>
 
     <string name="subtitle_daily_radio_1" translatable="true">하루분량</string>
     <string name="subtitle_daily_radio_2" translatable="true">총 페이지/하루분량</string>

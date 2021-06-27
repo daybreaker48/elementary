@@ -58,7 +58,15 @@
             android:theme="@style/FullScreenTheme">
         </activity>
         <activity
-            android:name="com.mhd.elemantary.activity.RegistAllActivity"
+            android:name="com.mhd.elemantary.activity.RegistTodoActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.RegistScheduleActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.RegistSelfActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
         <activity

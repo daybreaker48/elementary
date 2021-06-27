@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 import androidx.appcompat.widget.AppCompatButton;
 
-public class RegistAllActivity extends BaseActivity {
+public class RegistTodoActivity extends BaseActivity {
 
     TextView tv_selectday, vst_top_title;
     LinearLayout ll_daily_progress, ll_daily_textbook;
@@ -26,8 +26,8 @@ public class RegistAllActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialize(R.layout.activity_regist);
-        mContext = RegistAllActivity.this;
+        initialize(R.layout.activity_todo_regist);
+        mContext = RegistTodoActivity.this;
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist);
