@@ -196,8 +196,8 @@ public class StartActivity extends BaseActivity {
             return true;
         }else if("S".equals(nvResultCode)){
             if(nvCnt == 0){
-                // 신규 사용자인 경우.
-                // 튜토리얼 화면을 띄운다.
+                // tb_user 테이블에 사용자가 없는 경우. 회원이 아닌 경우.
+                // 튜토리얼은 앱 최초 실행때만 보여주는 것이 맞으나, 일단은 가입하지 않은 경우는 튜토리얼을 계속 보여주는거로. 나중에 수정할 수도 있다.
                 // 슬라이드 형식 말고 자연스럽게 나타나게.
                 Intent i = new Intent(mContext, TutorialActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -207,8 +207,9 @@ public class StartActivity extends BaseActivity {
             }else{
                 MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
-                // 기존 사용자인 경우.
-                // vo 및 각종 변수에 저장하고 메인으로 넘긴다.
+                // 회원인 경우.
+                // 로그인 화면을 띄운다. 튜토리얼 마지막 화면으로 바로 이동시킨다.
+                // 자동로그인이라면, vo 및 각종 변수에 저장하고 메인으로 넘긴다.
                 Gson gson = new Gson();
                 UserVo userVo;
                 userVo = gson.fromJson(nvMsg, UserVo.class);

@@ -33,12 +33,11 @@ import java.util.Map;
 
 public class MemberInputFragment extends BaseFragment {
 
-    private Button btnYear, btnStart;
-    private RadioButton btnMale, btnFemale;
+    private Button btnStart;
     private CheckBox btnCheckTerms, btnCheckPrivacy, btnCheckGps;
+    private int selectedYear = 0;
     private TextView btnTerms, btnPrivacy, btnGps;
 
-    private int selectedYear = 0;
     private String selectedSex = "M";
 
     public static MemberInputFragment create() {
@@ -52,10 +51,7 @@ public class MemberInputFragment extends BaseFragment {
 
     @Override
     public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        btnYear = (Button) root.findViewById(R.id.btn_year);
         btnStart = (Button) root.findViewById(R.id.btn_start);
-        btnMale = (RadioButton) root.findViewById(R.id.btn_male);
-        btnFemale = (RadioButton) root.findViewById(R.id.btn_female);
         btnCheckTerms = (CheckBox) root.findViewById(R.id.checkTerms);
         btnCheckPrivacy = (CheckBox) root.findViewById(R.id.checkPrivacy);
         btnCheckGps = (CheckBox) root.findViewById(R.id.checkGps);
@@ -63,28 +59,10 @@ public class MemberInputFragment extends BaseFragment {
         btnPrivacy = (TextView) root.findViewById(R.id.tv_privacy_all_view);
         btnGps = (TextView) root.findViewById(R.id.tv_gps_all_view);
 
-        btnYear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPicker();
-            }
-        });
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 joinService();
-            }
-        });
-        btnMale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleSex(true);
-            }
-        });
-        btnFemale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleSex(false);
             }
         });
         btnTerms.setOnClickListener(new View.OnClickListener() {
@@ -105,18 +83,6 @@ public class MemberInputFragment extends BaseFragment {
                 showTerms("G");
             }
         });
-    }
-
-    private void toggleSex(boolean male){
-        if(male){
-            btnMale.setChecked(true);
-            btnFemale.setChecked(false);
-            selectedSex = "M";
-        }else{
-            btnMale.setChecked(false);
-            btnFemale.setChecked(true);
-            selectedSex = "F";
-        }
     }
 
     private void showPicker(){

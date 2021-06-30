@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:background="@color/almost_mauve"
+        android:background="@color/white"
         android:layout_weight="7"
         android:orientation="vertical">
         <TextView
@@ -24,33 +24,76 @@
             fontPath="fonts/DidactGothic-Regular.ttf"
             android:textSize="@dimen/font_36"
             android:textColor="@color/black"
-            android:text="@string/text_tutorial_input_subject"
-            tools:text="@string/text_tutorial_input_subject"/>
+            android:text="@string/text_tutorial_login_title"
+            tools:text="@string/text_tutorial_login_title"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
-            <RadioButton
-                android:id="@+id/btn_male"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:textSize="20sp"
-                android:checked="true"
-                android:text="@string/button_sex_male"/>
-            <RadioButton
-                android:id="@+id/btn_female"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:textSize="20sp"
-                android:allowUndo="false"
-                android:text="@string/button_sex_female"/>
+            android:background="@color/white"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_login_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/font_20"
+                android:textColor="@color/black_overlay"
+                android:hint="이메일 입력"
+                android:inputType="textPersonName"
+                android:background="@null"
+                android:textColorHint="@color/gray" />
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_year"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            android:text="@string/button_picker_year"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_login_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/font_20"
+                android:textColor="@color/black_overlay"
+                android:hint="비밀번호 입력"
+                android:inputType="textPersonName"
+                android:background="@null"
+                android:textColorHint="@color/gray" />
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_find_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_14"
+                android:layout_marginLeft="10dp"
+                android:text="@string/text_tutorial_find_pwd"/>
+
+            <TextView
+                android:id="@+id/tv_join"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_14"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_tutorial_join"/>
+        </FrameLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

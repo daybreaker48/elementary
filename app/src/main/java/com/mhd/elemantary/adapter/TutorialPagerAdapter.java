@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.mhd.elemantary.fragment.ManualFourFragment;
 import com.mhd.elemantary.fragment.ManualThreeFragment;
 import com.mhd.elemantary.fragment.ManualTwoFragment;
 import com.mhd.elemantary.fragment.ManualOneFragment;
@@ -31,7 +32,7 @@ public class TutorialPagerAdapter extends FragmentStateAdapter {
             case 2:
                 return ManualThreeFragment.create();
             case 3:
-                return MemberInputFragment.create();
+                return ManualFourFragment.create();
             default:
                 return ManualOneFragment.create();
         }

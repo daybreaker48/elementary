@@ -55,7 +55,12 @@
     <string name="text_tutorial_two_content" translatable="true">자녀들의 할 일을 리스트로 관리하세요</string>
     <string name="text_tutorial_three_subject" translatable="true">스케쥴</string>
     <string name="text_tutorial_three_content" translatable="true">자녀들의 요일별 스케쥴을 한눈에!</string>
-    <string name="text_tutorial_input_subject" translatable="true">손쉬운 가입</string>
+    <string name="text_tutorial_four_subject" translatable="true">통계</string>
+    <string name="text_tutorial_four_content" translatable="true">학업 성취율을 한눈에!</string>
+    <string name="text_tutorial_join_title" translatable="true">손쉬운 가입</string>
+    <string name="text_tutorial_login_title" translatable="true">로그인</string>
+    <string name="text_tutorial_find_pwd" translatable="true">비밀번호 찾기</string>
+    <string name="text_tutorial_join" translatable="true">회원가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
     <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
     <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>
