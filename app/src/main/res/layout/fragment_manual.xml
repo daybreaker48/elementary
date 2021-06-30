@@ -50,6 +50,13 @@
             android:textColor="@color/almost_mauve"
             android:text="@string/text_tutorial_one_content"
             tools:text="@string/text_tutorial_one_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_start"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="@string/button_start"/>
     </LinearLayout>
 
 

@@ -77,6 +77,10 @@
             android:name="com.mhd.elemantary.activity.OptionDailyTextbookActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
 
         <activity
             android:name="com.mhd.elemantary.activity.StartActivity"
