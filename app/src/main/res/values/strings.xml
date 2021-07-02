@@ -58,7 +58,10 @@
     <string name="text_tutorial_four_subject" translatable="true">통계</string>
     <string name="text_tutorial_four_content" translatable="true">학업 성취율을 한눈에!</string>
     <string name="text_tutorial_join_title" translatable="true">손쉬운 가입</string>
+    <string name="text_join_email" translatable="true">이메일로 회원가입</string>
     <string name="text_tutorial_login_title" translatable="true">로그인</string>
+    <string name="text_google_login" translatable="true">Google로 시작</string>
+    <string name="text_kakao_login" translatable="true">Kakao로 시작</string>
     <string name="text_tutorial_find_pwd" translatable="true">비밀번호 찾기</string>
     <string name="text_tutorial_join" translatable="true">회원가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>

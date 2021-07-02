@@ -5,7 +5,7 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.elemantary.activity.TutorialActivity"
+    tools:context="com.mhd.elemantary.activity.LoginActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -94,89 +94,34 @@
                 android:text="@string/text_tutorial_join"/>
         </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:id="@+id/checkTerms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_terms_anchor" />
-                <TextView
-                    android:id="@+id/tv_terms_all_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
-                    android:textColor="@color/black"
-                    android:text="@string/common_all_view"
-                    tools:text="@string/common_all_view"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:id="@+id/checkPrivacy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_privacy_anchor" />
-                <TextView
-                    android:id="@+id/tv_privacy_all_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
-                    android:textColor="@color/black"
-                    android:text="@string/common_all_view"
-                    tools:text="@string/common_all_view"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:id="@+id/checkGps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_gps_anchor" />
-                <TextView
-                    android:id="@+id/tv_gps_all_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
-                    android:textColor="@color/black"
-                    android:text="@string/common_all_view"
-                    tools:text="@string/common_all_view"/>
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-        android:background="@color/black_overlay"
-        android:layout_weight="3">
+        android:background="@color/white"
+        android:layout_weight="3"
+        android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_google"
             android:layout_width="240dp"
             android:layout_height="60dp"
             android:textSize="20sp"
-            android:text="@string/button_start"/>
+            android:background="@color/red"
+            android:text="@string/text_google_login"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_kakao"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:background="@color/yellow"
+            android:text="@string/text_kakao_login"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:text="@string/text_tutorial_login_title"/>
     </LinearLayout>
 
 </LinearLayout>

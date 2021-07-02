@@ -439,9 +439,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         // 메인 & 그 외 특정 화면에서는 종료처리(팝업을 띄운다)
-        if (this instanceof StartActivity || this instanceof TutorialActivity || this instanceof MainActivity) {
+        if (this instanceof StartActivity || this instanceof TutorialActivity || this instanceof MainActivity || this instanceof LoginActivity) {
             exitApplication();
-        } else if (this instanceof RegistTodoActivity || this instanceof OptionDailyProgressActivity || this instanceof OptionDailyTextbookActivity) {
+        } else if (this instanceof RegistTodoActivity || this instanceof OptionDailyProgressActivity || this instanceof OptionDailyTextbookActivity
+                || this instanceof LoginActivity || this instanceof JoinActivity) {
             super.onBackPressed();
         } else {
             if (drawerlayout.isDrawerOpen(Gravity.END)) {

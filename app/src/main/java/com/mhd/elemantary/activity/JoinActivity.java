@@ -1,4 +1,4 @@
-package com.mhd.elemantary.fragment;
+package com.mhd.elemantary.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -6,18 +6,14 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.activity.TutorialActivity;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
@@ -30,41 +26,25 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+public class JoinActivity extends BaseActivity {
 
-public class MemberInputFragment extends BaseFragment {
-
-    private Button btnStart;
     private CheckBox btnCheckTerms, btnCheckPrivacy, btnCheckGps;
     private int selectedYear = 0;
     private TextView btnTerms, btnPrivacy, btnGps;
-
     private String selectedSex = "M";
 
-    public static MemberInputFragment create() {
-        return new MemberInputFragment();
-    }
-
     @Override
-    public int getLayoutResId() {
-        return R.layout.fragment_memberinput;
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initialize(R.layout.activity_join);
 
-    @Override
-    public void inOnCreateView(View root, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        btnStart = (Button) root.findViewById(R.id.btn_start);
-        btnCheckTerms = (CheckBox) root.findViewById(R.id.checkTerms);
-        btnCheckPrivacy = (CheckBox) root.findViewById(R.id.checkPrivacy);
-        btnCheckGps = (CheckBox) root.findViewById(R.id.checkGps);
-        btnTerms = (TextView) root.findViewById(R.id.tv_terms_all_view);
-        btnPrivacy = (TextView) root.findViewById(R.id.tv_privacy_all_view);
-        btnGps = (TextView) root.findViewById(R.id.tv_gps_all_view);
+        btnCheckTerms = (CheckBox) findViewById(R.id.checkTerms);
+        btnCheckPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);
+        btnCheckGps = (CheckBox) findViewById(R.id.checkGps);
+        btnTerms = (TextView) findViewById(R.id.tv_terms_all_view);
+        btnPrivacy = (TextView) findViewById(R.id.tv_privacy_all_view);
+        btnGps = (TextView) findViewById(R.id.tv_gps_all_view);
 
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joinService();
-            }
-        });
         btnTerms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +69,7 @@ public class MemberInputFragment extends BaseFragment {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
 
-        final Dialog yearDialog = new Dialog(getActivity());
+        final Dialog yearDialog = new Dialog(mContext);
         yearDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         yearDialog.setContentView(R.layout.picker_year);
 
@@ -108,15 +88,15 @@ public class MemberInputFragment extends BaseFragment {
             }
         });
 
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedYear = numberPicker.getValue();
-                btnYear.setText(String.valueOf(selectedYear + " 년"));
-
-                yearDialog.dismiss();
-            }
-        });
+//        confirmBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                selectedYear = numberPicker.getValue();
+//                btnYear.setText(String.valueOf(selectedYear + " 년"));
+//
+//                yearDialog.dismiss();
+//            }
+//        });
         yearDialog.show();
     }
 
@@ -178,7 +158,7 @@ public class MemberInputFragment extends BaseFragment {
             params.put("UUAPP", MHDApplication.getInstance().getAppVersion());
             params.put("UUSEX", selectedSex);
             params.put("UUYEAR", Integer.toString(selectedYear));
-            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_member, params, ((TutorialActivity)getActivity()).responseListener);
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_member, params, responseListener);
 
 //            new Handler().postDelayed(new Runnable() {
 //                @Override
@@ -195,13 +175,5 @@ public class MemberInputFragment extends BaseFragment {
             MHDLog.printException(e);
         }
         //Main 이동
-    }
-
-    @Override
-    public void batchFunction(String api) {
-//        if(api.equals(getString(R.string.api_editor_clear))) {
-//            // editor 내용 초기화.
-//            editor.clearAllContents();
-//        }
     }
 }

@@ -1,7 +1,6 @@
 package com.mhd.elemantary.adapter;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,7 +8,6 @@ import com.mhd.elemantary.fragment.ManualFourFragment;
 import com.mhd.elemantary.fragment.ManualThreeFragment;
 import com.mhd.elemantary.fragment.ManualTwoFragment;
 import com.mhd.elemantary.fragment.ManualOneFragment;
-import com.mhd.elemantary.fragment.MemberInputFragment;
 
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
