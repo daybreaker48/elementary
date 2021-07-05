@@ -166,7 +166,7 @@
         android:background="@color/white"
         android:layout_weight="3">
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_join"
             android:layout_width="240dp"
             android:layout_height="60dp"
             android:textSize="20sp"
