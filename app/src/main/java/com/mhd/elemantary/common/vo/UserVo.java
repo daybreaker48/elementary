@@ -12,8 +12,8 @@ public class UserVo {
 	public String uuDevice;
 	public String uuToken;
 	public String uuAppVer;
-	public String uuBirth;
-	public String uuSex;
+//	public String uuBirth;
+//	public String uuSex;
 	//public UserTurnInfVo utiv = null;
 
 	public String getUuID() {
@@ -64,21 +64,21 @@ public class UserVo {
 		this.uuAppVer = uuAppVer;
 	}
 
-	public String getUuBirth() {
-		return uuBirth;
-	}
-
-	public void setUuBirth(String uuBirth) {
-		this.uuBirth = uuBirth;
-	}
-
-	public String getUuSex() {
-		return uuSex;
-	}
-
-	public void setUuSex(String uuSex) {
-		this.uuSex = uuSex;
-	}
+//	public String getUuBirth() {
+//		return uuBirth;
+//	}
+//
+//	public void setUuBirth(String uuBirth) {
+//		this.uuBirth = uuBirth;
+//	}
+//
+//	public String getUuSex() {
+//		return uuSex;
+//	}
+//
+//	public void setUuSex(String uuSex) {
+//		this.uuSex = uuSex;
+//	}
 
 //	public UserTurnInfVo getUtiv() {
 //		return utiv;
