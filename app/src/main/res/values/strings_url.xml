@@ -8,6 +8,8 @@
     <string name="url_restapi_terms">/api/MHDRT1350.jsp?flag=%1$s</string><!-- 약관 보여주기 -->
     <string name="restapi_regist_member">MHDRT1313</string><!-- 회원가입 -->
     <string name="url_restapi_regist_member">/api/MHDRT1313.jsp</string><!-- 회원가입 -->
+    <string name="restapi_login_member">MHDRT1542</string><!-- 로그인 -->
+    <string name="url_restapi_login_member">/api/MHDRT1542.jsp</string><!-- 로그인 -->
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 

@@ -208,18 +208,21 @@ public class StartActivity extends BaseActivity {
                 MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
                 // 회원인 경우.
-                // 로그인 화면을 띄운다. 튜토리얼 마지막 화면으로 바로 이동시킨다.
+                // 로그인 화면을 띄운다.
+                Intent intent = new Intent(mContext, LoginActivity.class);
+                mContext.startActivity(intent);
+                finish();
                 // 자동로그인이라면, vo 및 각종 변수에 저장하고 메인으로 넘긴다.
-                Gson gson = new Gson();
-                UserVo userVo;
-                userVo = gson.fromJson(nvMsg, UserVo.class);
-                MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
-                MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
-
-                if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
-                    // MainActivity 로 이동
-                    goMain();
-                }
+//                Gson gson = new Gson();
+//                UserVo userVo;
+//                userVo = gson.fromJson(nvMsg, UserVo.class);
+//                MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
+//                MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+//
+//                if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
+//                    // MainActivity 로 이동
+//                    goMain();
+//                }
             }
         }
 

@@ -11,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
         android:background="@color/white"
         android:layout_weight="7"
+        android:paddingTop="30dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_tutorial_subject"
@@ -82,7 +82,6 @@
                 android:textSize="@dimen/font_14"
                 android:layout_marginLeft="10dp"
                 android:text="@string/text_tutorial_find_pwd"/>
-
             <TextView
                 android:id="@+id/tv_join"
                 android:layout_width="wrap_content"
