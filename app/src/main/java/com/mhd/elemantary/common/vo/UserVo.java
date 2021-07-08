@@ -7,14 +7,10 @@ package com.mhd.elemantary.common.vo;
 public class UserVo {
 
 	public String uuID;
-	public String uuPN;
-	public String uuOs;
-	public String uuDevice;
 	public String uuToken;
 	public String uuAppVer;
-//	public String uuBirth;
-//	public String uuSex;
-	//public UserTurnInfVo utiv = null;
+	public String uuMail;
+	public String uuLogin;
 
 	public String getUuID() {
 		return uuID;
@@ -22,30 +18,6 @@ public class UserVo {
 
 	public void setUuID(String uuID) {
 		this.uuID = uuID;
-	}
-
-	public String getUuPN() {
-		return uuPN;
-	}
-
-	public void setUuPN(String uuPN) {
-		this.uuPN = uuPN;
-	}
-
-	public String getUuOs() {
-		return uuOs;
-	}
-
-	public void setUuOs(String uuOs) {
-		this.uuOs = uuOs;
-	}
-
-	public String getUuDevice() {
-		return uuDevice;
-	}
-
-	public void setUuDevice(String uuDevice) {
-		this.uuDevice = uuDevice;
 	}
 
 	public String getUuToken() {
@@ -64,28 +36,20 @@ public class UserVo {
 		this.uuAppVer = uuAppVer;
 	}
 
-//	public String getUuBirth() {
-//		return uuBirth;
-//	}
-//
-//	public void setUuBirth(String uuBirth) {
-//		this.uuBirth = uuBirth;
-//	}
-//
-//	public String getUuSex() {
-//		return uuSex;
-//	}
-//
-//	public void setUuSex(String uuSex) {
-//		this.uuSex = uuSex;
-//	}
+	public String getUuMail() {
+		return uuMail;
+	}
 
-//	public UserTurnInfVo getUtiv() {
-//		return utiv;
-//	}
-//
-//	public void setUtiv(UserTurnInfVo utiv) {
-//		this.utiv = utiv;
-//	}
+	public void setUuMail(String uuMail) {
+		this.uuMail = uuMail;
+	}
+
+	public String getUuLogin() {
+		return uuLogin;
+	}
+
+	public void setUuLogin(String uuLogin) {
+		this.uuLogin = uuLogin;
+	}
 
 }

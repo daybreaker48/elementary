@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
@@ -78,6 +80,7 @@ public class LoginActivity extends BaseActivity {
 //                    .append("}");
             // Map 방식 0
             Map<String, String> params = new HashMap<String, String>();
+            params.put("UUAPP", MHDApplication.getInstance().getAppVersion());
             params.put("UUMAIL", et_login_id.getText().toString());
             params.put("UUPWD", et_login_pwd.getText().toString());
             params.put("UULOGIN", "E");
@@ -116,27 +119,19 @@ public class LoginActivity extends BaseActivity {
             // 로그인 성공. user vo 를 구성하고
             MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
-            MHDDialogUtil.sAlert(mContext, R.string.alert_join_success, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(mContext, LoginActivity.class);
-                    mContext.startActivity(intent);
-                    finish();
-                }
-            });
             // 가입되었다는 메세지 띄우고 로그인 창으로 이동.
-            // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.
-//            // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
-//            Gson gson = new Gson();
-//            UserVo userVo;
-//            userVo = gson.fromJson(nvMsg, UserVo.class);
-//            MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
-//            MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
-//
-//            if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
-//                // MainActivity 로 이동
-//                goMain();
-//            }
+            // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.(이건 나중에)
+            // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
+            Gson gson = new Gson();
+            UserVo userVo;
+            userVo = gson.fromJson(nvMsg, UserVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+
+            if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
+                // MainActivity 로 이동
+                goMain();
+            }
 //            // 학생을 등록하겠느냐는 컨펌창을 띄우고 확인 -> 등록창, 취소 -> 메인
 //            MHDDialogUtil.sAlert(this, R.string.alert_join_success, new DialogInterface.OnClickListener() {
 //                @Override
