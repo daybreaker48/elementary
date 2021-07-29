@@ -1,6 +1,7 @@
 package com.mhd.elemantary.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,11 +9,21 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.SubjectVo;
+import com.mhd.elemantary.common.vo.UserVo;
+import com.mhd.elemantary.network.MHDNetworkInvoker;
+import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
+import com.mhd.elemantary.util.Util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -35,6 +46,8 @@ public class RegistTodoActivity extends BaseActivity {
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         ll_daily_progress = (LinearLayout) findViewById(R.id.ll_daily_progress);
         ll_daily_textbook = (LinearLayout) findViewById(R.id.ll_daily_textbook);
+
+        checkSubject();
 
         Spinner spi_todo_subject = (Spinner) findViewById(R.id.spi_todo_subject);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.todo_subject_array, R.layout.default_spinner_item);
@@ -218,5 +231,97 @@ public class RegistTodoActivity extends BaseActivity {
             tv_selectday.setText("매주 " + displayStrings);
             sendDay = displayStrings;
         }
+    }
+
+    /**
+     * check subject
+     */
+    public void checkSubject(){
+        try {
+            // 획득한 uuid 로 서버조회 후 처리.
+
+            // call service intro check
+//                // String 방식
+//                StringBuilder fullParams = new StringBuilder("{");
+//                fullParams.append("\"UUID\":\""+userVo.getUuID()+"\"")
+//                        .append(",\"UUPN\":\""+userVo.getUuPN()+"\"")
+//                        .append(",\"UUOS\":\""+userVo.getUuOs()+"\"")
+//                        .append(",\"UUDEVICE\":\""+userVo.getUuDevice()+"\"")
+//                        .append(",\"UUTOKEN\":\""+userVo.getUuToken()+"\"")
+//                        .append(",\"UUAPP\":\""+userVo.getUuAppVer()+"\"")
+//                      v  .append("}");
+            // Map 방식 0
+            Map<String, String> params = new HashMap<String, String>();
+            //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+            params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(RegistTodoActivity.this, R.string.url_restapi_check_subject, params, responseListener);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            MHDLog.printException(e);
+        }
+    }
+
+    @Override
+    protected boolean networkResponseProcess(String result) {
+        boolean resultFlag = super.networkResponseProcess(result);
+        MHDLog.d(TAG, "networkResponseProcess resultFlag >>> " + resultFlag);
+
+        if(!resultFlag) return resultFlag;
+
+        // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
+
+        if("M".equals(nvResultCode)){
+            // Just show nvMsg
+            MHDDialogUtil.sAlert(mContext, nvMsg);
+            return true;
+        }else if("S".equals(nvResultCode)){
+            if(nvCnt == 0){
+                // 정보가 없으면 비정상
+                // 우선 toast를 띄울 것.
+                Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
+            }else{
+                // 과목정보를 받아옴.
+                // 현재는 DB 에 있는것만. 나중에는 사용자가 입력한 것도 가져오도록.
+                MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
+
+                Gson gson = new Gson();
+                SubjectVo subjectVo;
+                subjectVo = gson.fromJson(nvMsg, SubjectVo.class);
+                MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(null);
+                MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(subjectVo);
+            }
+        }
+
+//        try {
+//            if("S".equals(resultCode)){  // Success
+//                // 기존 사용자라면.
+//                // 서버 저장. 단말 기본 정보 : VO 방식
+//                // 이것은 로그인이 되었을때만 넣는게 맞다.
+//                Gson gson = new Gson();
+//                UserVo userVo;
+//                userVo = gson.fromJson(jsonDataObject.toString(), UserVo.class);
+//                MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
+//                MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+//
+//                if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
+//                    // MainActivity 로 이동
+//                    goMain();
+//                }
+//            }else{  // maybe -1
+//                // 신규 사용자라면.
+//
+//                // 튜토리얼 화면을 띄운다.
+//                // 슬라이드 형식 말고 자연스럽게 나타나게.
+//                Intent i = new Intent(mContext, TutorialActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                startActivity(i);
+//                overridePendingTransition(0, 0);
+//                finish();
+//            }
+//        } catch (Exception e) {
+//            MHDLog.printException(e);
+//        }
+        return true;
     }
 }
