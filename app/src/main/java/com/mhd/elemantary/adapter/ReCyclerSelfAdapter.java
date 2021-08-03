@@ -25,7 +25,6 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.self_list_holder_view, parent, false);
         RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(holderView);
-        MHDLog.d("dagian", "viewholder create");
         return recyclerViewHolder;
     }
 

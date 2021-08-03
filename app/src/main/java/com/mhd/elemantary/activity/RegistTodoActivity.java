@@ -181,8 +181,6 @@ public class RegistTodoActivity extends BaseActivity {
             }else{
                 // 과목정보를 받아옴.
                 // 현재는 DB 에 있는것만. 나중에는 사용자가 입력한 것도 가져오도록.
-                MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
-
                 Gson gson = new Gson();
                 subjectVo = gson.fromJson(nvJsonDataString, SubjectVo.class);
                 MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(null);
