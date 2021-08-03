@@ -282,7 +282,7 @@ public class MHDSvcManager {
 	public UserVo getUserVo() {
 		return userVo;
 	}
-	/**
+	/*
 	 * set User info vo
 	 */
 	public void setUserVo(UserVo userVo) {

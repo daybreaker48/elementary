@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
+            android:visibility="gone"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="@dimen/subtitle_width"

@@ -98,6 +98,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * network variables
      * */
+    public String nvJsonDataString;
     public String nvResultCode = "";
     public String nvApi = "";
     public int nvCnt = 0;
@@ -181,6 +182,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             nvResultCode = nvJsonObject.getString("result");
             String nvData = nvJsonObject.getString("data");
             JSONObject nvJsonDataObject = new JSONObject(nvData);
+            nvJsonDataString = nvJsonDataObject.toString().trim();
 
             nvApi = nvJsonDataObject.getString("api");
             nvMsg = nvJsonDataObject.getString("msg");

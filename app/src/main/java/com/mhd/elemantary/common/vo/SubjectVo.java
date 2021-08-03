@@ -19,7 +19,7 @@ public class SubjectVo {
 	/**
     * data. msg
     */
-	public ArrayList<SubjectData> list = new ArrayList<SubjectData>();
+	public ArrayList<SubjectData> msg = new ArrayList<SubjectData>();
     /**
      * Paging Banner Data Class
      */
@@ -79,12 +79,12 @@ public class SubjectVo {
 		this.cnt = cnt;
 	}
 
-	public ArrayList<SubjectData> getList() {
-		return list;
+	public ArrayList<SubjectData> getMsg() {
+		return msg;
 	}
 
-	public void setList(ArrayList<SubjectData> list) {
-		this.list = list;
+	public void setMsg(ArrayList<SubjectData> msg) {
+		this.msg = msg;
 	}
 }
 
