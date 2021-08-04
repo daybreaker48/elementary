@@ -102,7 +102,8 @@
     <string name="subtitle_subject" translatable="true">과 목</string>
     <string name="subtitle_subject_detail" translatable="true">세부항목</string>
     <string name="subtitle_textbook" translatable="true">학습지</string>
-    <string name="subtitle_textbook_subject" translatable="true">학습지제목</string>
+    <string name="subtitle_textbook_subject" translatable="true">교재제목</string>
+    <string name="subtitle_textbook_publish" translatable="true">춮판사</string>
     <string name="subtitle_dailyprogress" translatable="true">하루분량</string>
     <string name="subtitle_schedule_time" translatable="true">시 간</string>
     <string name="subtitle_schedule_color" translatable="true">색 상</string>
