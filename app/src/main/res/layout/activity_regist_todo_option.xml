@@ -52,7 +52,7 @@
                     android:textColor="@color/black_overlay"
                     android:hint="하루 고정 page 수"
                     android:inputType="number"
-                    android:background="@null"
+                    android:background="@drawable/edit_border"
                     android:textColorHint="@color/gray" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:textColor="@color/black"
                     android:background="@color/white"
                     android:textSize="@dimen/font_20"
-                    android:text="p"/>
+                    android:text=" p"/>
             </LinearLayout>
             <RadioButton
                 android:id="@+id/rb_daily_progress_2"
@@ -87,7 +87,7 @@
                     android:textColor="@color/black_overlay"
                     android:hint="총 페이지 및 하루 고정 page 수"
                     android:inputType="number"
-                    android:background="@null"
+                    android:background="@drawable/edit_border"
                     android:textColorHint="@color/gray" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                 android:textColor="@color/black_overlay"
                 android:hint="목표일 지정한 총 페이지 및 하루 고정 page 수"
                 android:inputType="number"
-                android:background="@null"
+                android:background="@drawable/edit_border"
                 android:visibility="gone"
                 android:textColorHint="@color/gray" />
         </RadioGroup>
