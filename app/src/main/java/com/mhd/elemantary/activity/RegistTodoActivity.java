@@ -16,6 +16,7 @@ import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.common.vo.UserVo;
+import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -55,7 +56,7 @@ public class RegistTodoActivity extends BaseActivity {
         MHDLog.d(TAG, "sendDay: " + sendDay);
         Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(i);
+        startActivityForResult(i, MHDConstants.StartActivityForResult.REQUEST_IMAGE_GROP);
     }
     public void startDailyTextbookActivity() {
         // 교재 선택 창을 띄운다.

@@ -95,5 +95,6 @@ public class MHDConstants {
 		public static final int REQUEST_TAKE_PHOTO = 10001;
 		public static final int REQUEST_TAKE_GALLERY = 10002;
 		public static final int REQUEST_IMAGE_GROP = 10003;
+		public static final int REQUEST_TODO_OPTION = 10004;
 	}
 }
