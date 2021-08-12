@@ -27,6 +27,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
 
 public class RegistTodoActivity extends BaseActivity {
@@ -54,10 +58,24 @@ public class RegistTodoActivity extends BaseActivity {
     public void startDailyPregressActivity() {
         // 할일 요일 정보를 보내야 한다. 오늘/매주 어떤 요일
         MHDLog.d(TAG, "sendDay: " + sendDay);
-        Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivityForResult(i, MHDConstants.StartActivityForResult.REQUEST_IMAGE_GROP);
+        Intent intent = new Intent(mContext, OptionDailyProgressActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("sendDay", sendDay);
+        startActivityResult.launch(intent);
     }
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == MHDConstants.StartActivityForResult.REQUEST_TODO_OPTION){
+
+                    }
+                }
+            }
+        );
+
+
     public void startDailyTextbookActivity() {
         // 교재 선택 창을 띄운다.
         MHDLog.d(TAG, "sendDay: " + sendDay);

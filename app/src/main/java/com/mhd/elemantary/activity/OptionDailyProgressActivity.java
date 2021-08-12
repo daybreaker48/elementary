@@ -28,6 +28,7 @@ public class OptionDailyProgressActivity extends BaseActivity {
     TextView tv_selectday, vst_top_title;
     LinearLayout ll_daily_progress;
     private String[] day_array = new String[7];
+    String sendDay;
     RadioGroup rg_daily_progress;
     RadioButton rb_daily_progress_1, rb_daily_progress_2, rb_daily_progress_3;
     LinearLayout ll_daily_radio_1, ll_daily_radio_2, ll_daily_radio_3;
@@ -40,6 +41,11 @@ public class OptionDailyProgressActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_regist_todo_option);
         mContext = OptionDailyProgressActivity.this;
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        sendDay = (extras == null) ? "" : extras.getString("sendDay");
+
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist_daily);
