@@ -45,7 +45,7 @@ public class RegistTodoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_todo_regist);
         mContext = RegistTodoActivity.this;
-
+        sendDay = getString(R.string.content_dailyprogress);
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist);
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
@@ -57,7 +57,7 @@ public class RegistTodoActivity extends BaseActivity {
     }
     public void startDailyPregressActivity() {
         // 할일 요일 정보를 보내야 한다. 오늘/매주 어떤 요일
-        MHDLog.d(TAG, "sendDay: " + sendDay);
+        MHDLog.d(TAG, "pre sendDay: " + sendDay);
         Intent intent = new Intent(mContext, OptionDailyProgressActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("sendDay", sendDay);
@@ -78,7 +78,6 @@ public class RegistTodoActivity extends BaseActivity {
 
     public void startDailyTextbookActivity() {
         // 교재 선택 창을 띄운다.
-        MHDLog.d(TAG, "sendDay: " + sendDay);
         Intent i = new Intent(mContext, OptionDailyTextbookActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);

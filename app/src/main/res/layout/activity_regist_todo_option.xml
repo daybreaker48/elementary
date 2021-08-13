@@ -48,11 +48,11 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="0dp"
                     android:paddingBottom="0dp"
-                    android:paddingLeft="10dp"
                     android:textSize="@dimen/font_18"
                     android:textColor="@color/black_overlay"
                     android:hint="하루 고정 page 수"
                     android:inputType="number"
+                    android:gravity="center"
                     android:background="@drawable/edit_border"
                     android:textColorHint="@color/gray" />
                 <TextView
@@ -89,11 +89,11 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:paddingLeft="10dp"
                         android:textSize="@dimen/font_18"
                         android:textColor="@color/black_overlay"
                         android:hint="총 페이지 수"
                         android:inputType="number"
+                        android:gravity="center"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray" />
                     <TextView
@@ -111,15 +111,16 @@
                     android:background="@color/white"
                     android:orientation="horizontal">
                     <EditText
+                        android:id="@+id/et_daily_radio_3"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:paddingLeft="10dp"
                         android:textSize="@dimen/font_18"
                         android:textColor="@color/black_overlay"
                         android:hint="하루 고정 page 수"
                         android:inputType="number"
+                        android:gravity="center"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray" />
                     <TextView
@@ -173,15 +174,16 @@
                     android:background="@color/white"
                     android:orientation="horizontal">
                     <EditText
+                        android:id="@+id/et_daily_radio_4"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:paddingLeft="10dp"
                         android:textSize="@dimen/font_18"
                         android:textColor="@color/black_overlay"
                         android:hint="총 페이지 수"
                         android:inputType="number"
+                        android:gravity="center"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray" />
                     <TextView
@@ -199,15 +201,17 @@
                     android:background="@color/white"
                     android:orientation="horizontal">
                     <EditText
+                        android:id="@+id/et_daily_radio_5"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:paddingTop="0dp"
                         android:paddingBottom="0dp"
-                        android:paddingLeft="10dp"
                         android:textSize="@dimen/font_18"
                         android:textColor="@color/black_overlay"
                         android:hint="하루 고정 page 수"
                         android:inputType="number"
+                        android:gravity="center"
+                        android:enabled="false"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray" />
                     <TextView
