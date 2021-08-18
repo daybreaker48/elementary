@@ -104,7 +104,7 @@
     <string name="subtitle_textbook" translatable="true">학습지</string>
     <string name="subtitle_textbook_subject" translatable="true">교재제목</string>
     <string name="subtitle_textbook_publish" translatable="true">춮판사</string>
-    <string name="subtitle_dailyprogress" translatable="true">하루분량</string>
+    <string name="subtitle_dailyprogress" translatable="true">오늘 완료합니다.</string>
     <string name="subtitle_schedule_time" translatable="true">시 간</string>
     <string name="subtitle_schedule_color" translatable="true">색 상</string>
     <string name="subtitle_schedule_alarm" translatable="true">알 림</string>
@@ -113,7 +113,7 @@
     <string name="subtitle_daily_radio_2" translatable="true">총 페이지/하루분량</string>
     <string name="subtitle_daily_radio_3" translatable="true">목표일/총 페이지/하루분량</string>
 
-    <string name="content_dailyprogress" translatable="true">오늘</string>
+    <string name="content_dailyprogress" translatable="true">오늘 완료합니다.</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>
     <string name="content_tues" translatable="true">화</string>

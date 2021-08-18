@@ -232,17 +232,22 @@ public class OptionDailyProgressActivity extends BaseActivity implements TextVie
                     // 오늘부터 목표일 까지의 날 수 계산(나중에는 시작일, 주말제외 옵셥을 넣어야 함)
                     long diffSec = (targetDate.getTimeInMillis() - baseDate.getTimeInMillis()) / 1000;
                     long diffDay = diffSec / (24*60*60);
-                    int diffDayInt = (int)diffDay;
+                    int diffDayInt = (int)diffDay + 1;
                     int totoal_1_int = Integer.parseInt(total_1);
                     // 날수와 총페이지수로 하루분량을 계산해서 edittext에 표시.
-                    MHDLog.d(TAG, " diffDay: " + diffDay);
+                    MHDLog.d(TAG, " diffDay: " + diffDayInt); // 날수
+                    MHDLog.d(TAG, " totoal_1_int: " + totoal_1_int); // 총페이지
                     if(diffDayInt > totoal_1_int){
                         Toast.makeText(mContext, "목표일까지 날짜 수가 총페이지 수보다 큽니다", Toast.LENGTH_SHORT).show();
                         et_daily_radio_4.setFocusableInTouchMode(true);
                         et_daily_radio_4.requestFocus();
                         break;
                     }
-
+                    // 몫과 나머지를 구한다. 몫이 하루 고정 페이지수이고, 나머지가 마지막 날 고정페이지수에 더해야 하는 것이다.
+                    int plusPage = totoal_1_int % diffDayInt;
+                    int dayPage = totoal_1_int / diffDayInt;
+                    MHDLog.d(TAG, " plusPage: " + plusPage); // 남는페이지
+                    MHDLog.d(TAG, " dayPage: " + dayPage); // 하루고정페이지
                     break;
             }
         }

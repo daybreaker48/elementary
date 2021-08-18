@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:textColor="@color/blue"
                 android:textSize="@dimen/font_18"
                 android:text="@string/content_dailyprogress"/>
         </LinearLayout>
@@ -276,35 +276,272 @@
             android:padding="@dimen/line_padding"
             android:orientation="horizontal">
         </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_daily_progress"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/white"-->
+            <!--android:padding="@dimen/line_padding"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/blue"-->
+                <!--android:background="@color/white"-->
+                <!--android:textSize="@dimen/font_18"-->
+                <!--android:text="@string/subtitle_dailyprogress"/>-->
+            <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/et_daily_progress"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingTop="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingBottom="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingLeft="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/font_20"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/black_overlay"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:hint="얼마만큼?"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:inputType="textPersonName"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@null"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColorHint="@color/gray" />&ndash;&gt;-->
+        <!--</LinearLayout>-->
+
         <LinearLayout
-            android:id="@+id/ll_daily_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="@dimen/subtitle_width"
+            android:padding="@dimen/screen_padding"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg_daily_progress"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:textSize="@dimen/font_20"
-                android:text="@string/subtitle_dailyprogress"/>
-            <!--<EditText-->
-                <!--android:id="@+id/et_daily_progress"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingTop="0dp"-->
-                <!--android:paddingBottom="0dp"-->
-                <!--android:paddingLeft="10dp"-->
-                <!--android:textSize="@dimen/font_20"-->
-                <!--android:textColor="@color/black_overlay"-->
-                <!--android:hint="얼마만큼?"-->
-                <!--android:inputType="textPersonName"-->
-                <!--android:background="@null"-->
-                <!--android:textColorHint="@color/gray" />-->
+                android:checkedButton="@id/rb_daily_progress_1"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/ll_rb_daily_progress_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rb_daily_progress_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/subtitle_daily_radio_1"
+                        android:textSize="@dimen/font_20"
+                        android:selectAllOnFocus="true"
+                        android:layout_marginEnd="10dp"/>
+                    <LinearLayout
+                        android:id="@+id/ll_daily_radio_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+                        <EditText
+                            android:id="@+id/et_daily_radio_1"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="0dp"
+                            android:paddingBottom="0dp"
+                            android:textSize="@dimen/font_18"
+                            android:textColor="@color/black_overlay"
+                            android:hint="하루 고정 page 수"
+                            android:inputType="number"
+                            android:gravity="center"
+                            android:background="@drawable/edit_border"
+                            android:textColorHint="@color/gray" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:background="@color/white"
+                            android:textSize="@dimen/font_20"
+                            android:text=" p"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_rb_daily_progress_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rb_daily_progress_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/subtitle_daily_radio_2"
+                        android:textSize="@dimen/font_20"
+                        android:layout_marginEnd="10dp" />
+                    <LinearLayout
+                        android:id="@+id/ll_daily_radio_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/et_daily_radio_2"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+                                android:textSize="@dimen/font_18"
+                                android:textColor="@color/black_overlay"
+                                android:hint="총 페이지 수"
+                                android:inputType="number"
+                                android:gravity="center"
+                                android:background="@drawable/edit_border"
+                                android:textColorHint="@color/gray" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:background="@color/white"
+                                android:textSize="@dimen/font_20"
+                                android:text=" p"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/et_daily_radio_3"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+                                android:textSize="@dimen/font_18"
+                                android:textColor="@color/black_overlay"
+                                android:hint="하루 고정 page 수"
+                                android:inputType="number"
+                                android:gravity="center"
+                                android:background="@drawable/edit_border"
+                                android:textColorHint="@color/gray" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:background="@color/white"
+                                android:textSize="@dimen/font_20"
+                                android:text=" p"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_rb_daily_progress_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rb_daily_progress_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/subtitle_daily_radio_3"
+                        android:textSize="@dimen/font_20"
+                        android:layout_marginEnd="10dp" />
+                    <LinearLayout
+                        android:id="@+id/ll_daily_radio_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btn_todo_goal"
+                                android:layout_width="200dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/edit_border"
+                                android:text="목표일"
+                                android:textSize="@dimen/font_18" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:background="@color/white"
+                                android:textSize="@dimen/font_20"
+                                android:text=" 까지"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/et_daily_radio_4"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+                                android:textSize="@dimen/font_18"
+                                android:textColor="@color/black_overlay"
+                                android:hint="총 페이지 수"
+                                android:inputType="number"
+                                android:gravity="center"
+                                android:background="@drawable/edit_border"
+                                android:textColorHint="@color/gray" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:background="@color/white"
+                                android:textSize="@dimen/font_20"
+                                android:text=" p"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:orientation="horizontal">
+                            <EditText
+                                android:id="@+id/et_daily_radio_5"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="0dp"
+                                android:paddingBottom="0dp"
+                                android:textSize="@dimen/font_18"
+                                android:textColor="@color/black_overlay"
+                                android:hint="하루 고정 page 수"
+                                android:inputType="number"
+                                android:gravity="center"
+                                android:enabled="false"
+                                android:background="@drawable/edit_border"
+                                android:textColorHint="@color/gray" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:background="@color/white"
+                                android:textSize="@dimen/font_20"
+                                android:text=" p"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
