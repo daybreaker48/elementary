@@ -50,11 +50,10 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     private String[] day_array = new String[7];
     String sendDay = "";
 
-    int currentRadio = 1;
+    String currentRadio = "";
     RadioGroup rg_daily_progress;
     RadioButton rb_daily_progress_1, rb_daily_progress_2, rb_daily_progress_3;
-    LinearLayout ll_daily_radio_1, ll_daily_radio_2, ll_daily_radio_3;
-    LinearLayout ll_rb_daily_progress_1, ll_rb_daily_progress_2, ll_rb_daily_progress_3;
+    LinearLayout ll_daily_radio_1, ll_daily_radio_2, ll_daily_radio_3, ll_rg_daily_progress;
     EditText et_daily_radio_1, et_daily_radio_2, et_daily_radio_3, et_daily_radio_4, et_daily_radio_5;
     AppCompatButton btn_todo_goal;
     private DatePickerDialog.OnDateSetListener callbackMethod;
@@ -65,13 +64,13 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_todo_regist);
         mContext = RegistTodoActivity.this;
-        sendDay = getString(R.string.content_dailyprogress);
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist);
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         ll_daily_progress = (LinearLayout) findViewById(R.id.ll_daily_progress);
         ll_daily_textbook = (LinearLayout) findViewById(R.id.ll_daily_textbook);
+        ll_rg_daily_progress = (LinearLayout) findViewById(R.id.ll_rg_daily_progress);
 
         rg_daily_progress = (RadioGroup) findViewById(R.id.rg_daily_progress);
         rb_daily_progress_1 = (RadioButton) findViewById(R.id.rb_daily_progress_1);
@@ -80,9 +79,6 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         ll_daily_radio_1 = (LinearLayout) findViewById(R.id.ll_daily_radio_1);
         ll_daily_radio_2 = (LinearLayout) findViewById(R.id.ll_daily_radio_2);
         ll_daily_radio_3 = (LinearLayout) findViewById(R.id.ll_daily_radio_3);
-        ll_rb_daily_progress_1 = (LinearLayout) findViewById(R.id.ll_rb_daily_progress_1);
-        ll_rb_daily_progress_2 = (LinearLayout) findViewById(R.id.ll_rb_daily_progress_2);
-        ll_rb_daily_progress_3 = (LinearLayout) findViewById(R.id.ll_rb_daily_progress_3);
         et_daily_radio_1 = (EditText) findViewById(R.id.et_daily_radio_1);
         et_daily_radio_2 = (EditText) findViewById(R.id.et_daily_radio_2);
         et_daily_radio_3 = (EditText) findViewById(R.id.et_daily_radio_3);
@@ -102,9 +98,8 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         btn_todo_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 입력 값 아래 화면으로 전달하고 요일에 따른 페이지 등을 계산해서 입력.
-                // 그 후에 저장하면 모두 동시에 서버로 전송.
-                finish();
+                // currentRadio(F, P, G)에 따라 필수입력값 체크, 문제가 없다면 서버 전송.
+                saveProcess();
             }
         });
         btn_todo_goal= (AppCompatButton) findViewById(R.id.btn_todo_goal);
@@ -151,7 +146,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_daily_progress_1:
-                        currentRadio = 1;
+                        currentRadio = "F";
                         ll_daily_radio_1.setVisibility(View.VISIBLE);
                         ll_daily_radio_2.setVisibility(View.GONE);
                         ll_daily_radio_3.setVisibility(View.GONE);
@@ -166,7 +161,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                         });
                         break;
                     case R.id.rb_daily_progress_2:
-                        currentRadio = 2;
+                        currentRadio = "P";
                         ll_daily_radio_1.setVisibility(View.GONE);
                         ll_daily_radio_2.setVisibility(View.VISIBLE);
                         ll_daily_radio_3.setVisibility(View.GONE);
@@ -181,7 +176,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                         });
                         break;
                     case R.id.rb_daily_progress_3:
-                        currentRadio = 3;
+                        currentRadio = "G";
                         InputMethodManager manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                         manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         ll_daily_radio_1.setVisibility(View.GONE);
@@ -289,17 +284,13 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         }
         if(displayStrings.isEmpty()) {
             tv_selectday.setText(getString(R.string.content_dailyprogress));
-            sendDay = getString(R.string.content_dailyprogress);
-            rb_daily_progress_1.setChecked(true);
-            ll_rb_daily_progress_1.setVisibility(View.GONE);
-            ll_rb_daily_progress_2.setVisibility(View.GONE);
-            ll_rb_daily_progress_3.setVisibility(View.GONE);
-        }else {
-            tv_selectday.setText("매주 " + displayStrings + " 진행합니다.");
-            sendDay = displayStrings;
-            ll_rb_daily_progress_1.setVisibility(View.VISIBLE);
-            ll_rb_daily_progress_2.setVisibility(View.VISIBLE);
-            ll_rb_daily_progress_3.setVisibility(View.VISIBLE);
+            sendDay = "";
+            currentRadio = "";
+            ll_rg_daily_progress.setVisibility(View.GONE);
+        }else{
+            tv_selectday.setText("매주 " + displayStrings);
+            // currentRadio
+            ll_rg_daily_progress.setVisibility(View.VISIBLE);
         }
     }
 
@@ -434,8 +425,6 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         AppCompatButton btn_thur = (AppCompatButton) findViewById(R.id.btn_thur);
         AppCompatButton btn_fri = (AppCompatButton) findViewById(R.id.btn_fri);
         AppCompatButton btn_sat = (AppCompatButton) findViewById(R.id.btn_sat);
-        AppCompatButton btn_todo_cancel = (AppCompatButton) findViewById(R.id.btn_todo_cancel);
-        AppCompatButton btn_todo_save = (AppCompatButton) findViewById(R.id.btn_todo_save);
 
         btn_sun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,18 +462,6 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 //            @Override
 //            public void onClick(View v) { startDailyTextbookActivity(); }
 //        });
-
-        btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { finish(); }
-        });
-        btn_todo_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 입력 값 서버로 전송.
-                finish();
-            }
-        });
 
 //        try {
 //            if("S".equals(resultCode)){  // Success
@@ -588,5 +565,18 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             }
         }
         return false;
+    }
+
+    private void saveProcess() {
+        if("".equals(currentRadio)){
+            // 학습 날짜 정보가 없다.
+            Toast.makeText(mContext, getString(R.string.content_dailyprogress), Toast.LENGTH_SHORT).show();
+        } else if("F".equals(currentRadio)){
+
+        } else if("P".equals(currentRadio)){
+
+        } else if("G".equals(currentRadio)){
+
+        }
     }
 }
