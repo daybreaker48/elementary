@@ -2,13 +2,11 @@ package com.mhd.elemantary.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,12 +21,10 @@ import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.SubjectVo;
-import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
-import com.mhd.elemantary.util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +45,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     LinearLayout ll_daily_progress, ll_daily_textbook;
     private String[] day_array = new String[7];
     String sendDay = "";
+    String Ptotal, Gtotal, Foneday, Poneday, Goneday = "";
 
     String currentRadio = "";
     RadioGroup rg_daily_progress;
@@ -497,37 +494,49 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-        if(i == EditorInfo.IME_ACTION_DONE) {
+        if(i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT) {
             switch (textView.getId()) {
                 case R.id.et_daily_radio_1:
-                    // 하루 분량. 여기서는 이동할 곳도, 계산할 것도 없다.
+                    // 하루 분량. 총페이지를 모르기 때문에 여기서는 이동할 곳도, 계산할 것도 없다.
+                    // 정해진 요일마다 기한없이 해당 내용을 표시해주면 되는 것.
+                    // currentRadio ="F"라면 edittext 1 값을 저장.
+                    Foneday = (et_daily_radio_1.getText() == null) ? "" : et_daily_radio_1.getText().toString();
+                    if("".equals(Foneday)){
+                        Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        et_daily_radio_1.setFocusableInTouchMode(true);
+                        et_daily_radio_1.requestFocus();
+                        return true;
+                    }
                     break;
                 case R.id.et_daily_radio_2:
                     // 총페이지 다음 edittext로 이동
+                    Ptotal = (et_daily_radio_2.getText() == null) ? "" : et_daily_radio_2.getText().toString();
+                    if("".equals(Ptotal)){
+                        Toast.makeText(mContext, "총페이지를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        et_daily_radio_2.setFocusableInTouchMode(true);
+                        et_daily_radio_2.requestFocus();
+                        return true;
+                    }
                     et_daily_radio_3.setFocusableInTouchMode(true);
                     et_daily_radio_3.requestFocus();
                     break;
                 case R.id.et_daily_radio_3:
                     // 하루분량, 값이 비어있는지, 총페이지보다 크지 않은지 체크. 종료예정일 계산
-                    String total = (et_daily_radio_2.getText() == null) ? "" : et_daily_radio_2.getText().toString();
-                    if("".equals(total)){
-                        Toast.makeText(mContext, "총페이지를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        et_daily_radio_2.setFocusableInTouchMode(true);
-                        et_daily_radio_2.requestFocus();
-                        break;
-                    }
-                    String oneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
-                    if("".equals(oneday)){
+                    // currentRadio ="P"라면 edittext 2,3 값을 저장.
+                    Poneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
+                    if("".equals(Poneday)){
                         Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
                         et_daily_radio_3.setFocusableInTouchMode(true);
                         et_daily_radio_3.requestFocus();
                         break;
                     }
-                    if(Integer.parseInt(total) < Integer.parseInt(oneday)) {
+                    if(Integer.parseInt(Ptotal) < Integer.parseInt(Poneday)) {
                         Toast.makeText(mContext, "총페이지보다 하루분량이 작아야 합니다.", Toast.LENGTH_SHORT).show();
                         et_daily_radio_3.setFocusableInTouchMode(true);
                         et_daily_radio_3.requestFocus();
+                        break;
                     }
+                    // 여기까지 문제없으면 종료예정일을 계산해서 아래 표시할 것.
                     break;
                 case R.id.et_daily_radio_4:
                     // 하루 할당량 계산. 목표일 설정 체크
@@ -535,8 +544,8 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                         Toast.makeText(mContext, "목표일을 설정해주세요.", Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    String total_1 = (et_daily_radio_4.getText() == null) ? "" : et_daily_radio_4.getText().toString();
-                    if("".equals(total_1)){
+                    Gtotal = (et_daily_radio_4.getText() == null) ? "" : et_daily_radio_4.getText().toString();
+                    if("".equals(Gtotal)){
                         Toast.makeText(mContext, "총페이지를 입력해주세요.", Toast.LENGTH_SHORT).show();
                         et_daily_radio_4.setFocusableInTouchMode(true);
                         et_daily_radio_4.requestFocus();
@@ -546,7 +555,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     long diffSec = (targetDate.getTimeInMillis() - baseDate.getTimeInMillis()) / 1000;
                     long diffDay = diffSec / (24*60*60);
                     int diffDayInt = (int)diffDay + 1;
-                    int totoal_1_int = Integer.parseInt(total_1);
+                    int totoal_1_int = Integer.parseInt(Gtotal);
                     // 날수와 총페이지수로 하루분량을 계산해서 edittext에 표시.
                     MHDLog.d(TAG, " diffDay: " + diffDayInt); // 날수
                     MHDLog.d(TAG, " totoal_1_int: " + totoal_1_int); // 총페이지

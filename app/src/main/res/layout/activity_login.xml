@@ -64,7 +64,7 @@
                 android:textSize="@dimen/font_20"
                 android:textColor="@color/black_overlay"
                 android:hint="비밀번호 입력"
-                android:text="1234"
+                android:text="1111"
                 android:inputType="textPersonName"
                 android:background="@null"
                 android:textColorHint="@color/gray" />
