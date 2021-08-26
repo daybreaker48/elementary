@@ -286,7 +286,6 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             ll_rg_daily_progress.setVisibility(View.GONE);
         }else{
             tv_selectday.setText("매주 " + displayStrings);
-            // currentRadio
             ll_rg_daily_progress.setVisibility(View.VISIBLE);
         }
     }
@@ -537,6 +536,15 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                         break;
                     }
                     // 여기까지 문제없으면 종료예정일을 계산해서 아래 표시할 것.
+                    // 총 몇일의 학습일이 필요한지 계산. 나머지는 분배보다는 마지막 하루로 계산.
+                    // 시작일을 설정하는 기능도 필요할거 같긴하지만 이건 나중에 구현. 등록 당일은 제외
+                    // 종료일을 DB에 넣고 종료일에 오기 전에는 정해진 요일에 표시하는 방식.
+                    // 중간에 그냥 건너뛰는 날, 건너뛰어야 하는 날을 어떻게 처리하지.
+                    long dayCount = Integer.parseInt(Ptotal) / Integer.parseInt(Poneday);
+                    long dayRest = Integer.parseInt(Ptotal) % Integer.parseInt(Poneday);
+                    int dayTotal = (int)dayCount + (int)dayRest; // 소요 day 수
+                    Calendar cal = Calendar.getInstance();
+                    int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
                     break;
                 case R.id.et_daily_radio_4:
                     // 하루 할당량 계산. 목표일 설정 체크
