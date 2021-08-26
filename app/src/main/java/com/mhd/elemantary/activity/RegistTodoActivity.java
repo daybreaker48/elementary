@@ -55,6 +55,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     AppCompatButton btn_todo_goal;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     Calendar baseDate, targetDate = null;
+    String displayStrings = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,7 +274,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 break;
         }
 
-        String displayStrings = "";
+        displayStrings = "";
         for (String days : day_array) {
             if(days != null && !days.isEmpty()) {
                 displayStrings = (displayStrings == null || displayStrings.isEmpty()) ? days : displayStrings + ", " + days;
