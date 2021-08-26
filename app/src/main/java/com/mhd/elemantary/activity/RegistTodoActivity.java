@@ -55,7 +55,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     AppCompatButton btn_todo_goal;
     private DatePickerDialog.OnDateSetListener callbackMethod;
     Calendar baseDate, targetDate = null;
-    String displayStrings = "";
+    String displayStrings, innerStrings = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -275,9 +275,17 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         }
 
         displayStrings = "";
+        innerStrings = "";
         for (String days : day_array) {
             if(days != null && !days.isEmpty()) {
                 displayStrings = (displayStrings == null || displayStrings.isEmpty()) ? days : displayStrings + ", " + days;
+                if("일".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "1" : innerStrings + "1";
+                if("월".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "2" : innerStrings + "2";
+                if("화".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "3" : innerStrings + "3";
+                if("수".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "4" : innerStrings + "4";
+                if("목".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "5" : innerStrings + "5";
+                if("금".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "6" : innerStrings + "6";
+                if("토".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "7" : innerStrings + "7";
             }
         }
         if(displayStrings.isEmpty()) {
@@ -546,6 +554,10 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     int dayTotal = (int)dayCount + (int)dayRest; // 소요 day 수
                     Calendar cal = Calendar.getInstance();
                     int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
+                    weekd = weekd == 7 ? 1 : weekd+1; // 시작요일(이번주 계산에만 사용)
+
+                    int lengthWeek = innerStrings.length(); // 한주 동안의 학습일 수`
+
                     break;
                 case R.id.et_daily_radio_4:
                     // 하루 할당량 계산. 목표일 설정 체크
