@@ -425,6 +425,16 @@
                             android:textSize="@dimen/font_20"
                             android:text=" p"/>
                     </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_rb_daily_progress_2_finishday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:textColor="@color/black"
+                        android:background="@color/white"
+                        android:textSize="@dimen/font_20"
+                        android:text=""/>
                 </LinearLayout>
                 <RadioButton
                     android:id="@+id/rb_daily_progress_3"
@@ -432,6 +442,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/subtitle_daily_radio_3"
                     android:textSize="@dimen/font_20"
+                    android:visibility="gone"
                     android:layout_marginEnd="10dp" />
                 <LinearLayout
                     android:id="@+id/ll_daily_radio_3"
