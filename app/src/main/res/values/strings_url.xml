@@ -12,6 +12,8 @@
     <string name="url_restapi_login_member">/api/MHDRT1542.jsp</string><!-- 로그인 -->
     <string name="restapi_check_subject">MHDRT1256</string><!-- 과목 체크 -->
     <string name="url_restapi_check_subject">/api/MHDRT1256.jsp</string><!-- 과목 체크 -->
+    <string name="restapi_regist_todo">MHDRT1440</string><!-- 할일 등록 -->
+    <string name="url_restapi_regist_todo">/api/MHDRT1440.jsp</string><!-- 할일 등록 -->
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 

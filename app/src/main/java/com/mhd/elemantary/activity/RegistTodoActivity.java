@@ -51,7 +51,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     String sendDay = "";
     String Ptotal, Gtotal, Foneday, Poneday, Goneday = "";
 
-    String currentRadio = "";
+    String currentRadio = "F";
     RadioGroup rg_daily_progress;
     RadioButton rb_daily_progress_1, rb_daily_progress_2, rb_daily_progress_3;
     LinearLayout ll_daily_radio_1, ll_daily_radio_2, ll_daily_radio_3, ll_rg_daily_progress;
@@ -66,6 +66,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_todo_regist);
         mContext = RegistTodoActivity.this;
+
         tv_rb_daily_progress_2_finishday = (TextView) findViewById(R.id.tv_rb_daily_progress_2_finishday);
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist);
@@ -293,10 +294,9 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 if("토".equals(days)) innerStrings = (innerStrings == null || innerStrings.isEmpty()) ? "7" : innerStrings + "7";
             }
         }
-        if(displayStrings.isEmpty()) {
+        if(innerStrings.isEmpty()) {
             tv_selectday.setText(getString(R.string.content_dailyprogress));
             sendDay = "";
-            currentRadio = "";
             ll_rg_daily_progress.setVisibility(View.GONE);
         }else{
             tv_selectday.setText("매주 " + displayStrings);
@@ -348,24 +348,24 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             MHDDialogUtil.sAlert(mContext, nvMsg);
             return true;
         }else if("S".equals(nvResultCode)){
-            if(nvCnt == 0){
-                // 정보가 없으면 비정상
-                // 우선 toast를 띄울 것.
-                Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
-            }else{
-                // 과목정보를 받아옴.
-                // 현재는 DB 에 있는것만. 나중에는 사용자가 입력한 것도 가져오도록.
-                Gson gson = new Gson();
-                subjectVo = gson.fromJson(nvJsonDataString, SubjectVo.class);
-                MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(null);
-                MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(subjectVo);
-            }
-        }
+            if(nvApi.equals(R.string.restapi_check_subject)) {
+                if (nvCnt == 0) {
+                    // 정보가 없으면 비정상
+                    // 우선 toast를 띄울 것.
+                    Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
+                } else {
+                    // 과목정보를 받아옴.
+                    // 현재는 DB 에 있는것만. 나중에는 사용자가 입력한 것도 가져오도록.
+                    Gson gson = new Gson();
+                    subjectVo = gson.fromJson(nvJsonDataString, SubjectVo.class);
+                    MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(null);
+                    MHDApplication.getInstance().getMHDSvcManager().setSubjectVo(subjectVo);
+                }
 
-        String prevSubject = "";
-        ArrayList subjectArrayList = new ArrayList<>();
-        ArrayList detailArrayList = new ArrayList<>();
-        // 과목명만 group by로 추출할 때 사용
+                String prevSubject = "";
+                ArrayList subjectArrayList = new ArrayList<>();
+                ArrayList detailArrayList = new ArrayList<>();
+                // 과목명만 group by로 추출할 때 사용
 //        for(int i=0; i<nvCnt; i++){
 //            if(i>0 && prevSubject.equals(subjectVo.getMsg().get(i).getSubject()))
 //                continue;
@@ -374,25 +374,25 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 //                prevSubject = subjectVo.getMsg().get(i).getSubject();
 //            }
 //        }
-        // 과목 - 상세 형식으로 추출할 때 사용
-        for(int i=0; i<nvCnt; i++){
-            subjectArrayList.add(subjectVo.getMsg().get(i).getSubject() + " - " + subjectVo.getMsg().get(i).getDetail());
-        }
+                // 과목 - 상세 형식으로 추출할 때 사용
+                for(int i=0; i<nvCnt; i++){
+                    subjectArrayList.add(subjectVo.getMsg().get(i).getSubject() + " - " + subjectVo.getMsg().get(i).getDetail());
+                }
 
-        Spinner spi_todo_subject = (Spinner) findViewById(R.id.spi_todo_subject);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.default_spinner_item, subjectArrayList);
+                Spinner spi_todo_subject = (Spinner) findViewById(R.id.spi_todo_subject);
+                ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.default_spinner_item, subjectArrayList);
 
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.todo_subject_array, R.layout.default_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spi_todo_subject.setAdapter(adapter);
-        // 일단 세부항목을 과목과 통합시켰다. 그래서 hidden.
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spi_todo_subject.setAdapter(adapter);
+                // 일단 세부항목을 과목과 통합시켰다. 그래서 hidden.
 //        final Spinner spi_todo_subject_detail = (Spinner) findViewById(R.id.spi_todo_subject_detail);
 //        ArrayAdapter<CharSequence> adapter_detail = ArrayAdapter.createFromResource(this, R.array.todo_subject_item_0_array, R.layout.default_spinner_item);
 //        adapter_detail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spi_todo_subject_detail.setAdapter(adapter_detail);
 
-        // 과목선택에 따라서 detail 항목을 변경해줘야 한다.
-        // 일단 세부항목을 과목과 통합시켰다. 그래서 hidden.
+                // 과목선택에 따라서 detail 항목을 변경해줘야 한다.
+                // 일단 세부항목을 과목과 통합시켰다. 그래서 hidden.
 //        spi_todo_subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -428,42 +428,42 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 //            }
 //        });
 
-        AppCompatButton btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
-        AppCompatButton btn_mon = (AppCompatButton) findViewById(R.id.btn_mon);
-        AppCompatButton btn_tues = (AppCompatButton) findViewById(R.id.btn_tues);
-        AppCompatButton btn_wed = (AppCompatButton) findViewById(R.id.btn_wed);
-        AppCompatButton btn_thur = (AppCompatButton) findViewById(R.id.btn_thur);
-        AppCompatButton btn_fri = (AppCompatButton) findViewById(R.id.btn_fri);
-        AppCompatButton btn_sat = (AppCompatButton) findViewById(R.id.btn_sat);
+                AppCompatButton btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
+                AppCompatButton btn_mon = (AppCompatButton) findViewById(R.id.btn_mon);
+                AppCompatButton btn_tues = (AppCompatButton) findViewById(R.id.btn_tues);
+                AppCompatButton btn_wed = (AppCompatButton) findViewById(R.id.btn_wed);
+                AppCompatButton btn_thur = (AppCompatButton) findViewById(R.id.btn_thur);
+                AppCompatButton btn_fri = (AppCompatButton) findViewById(R.id.btn_fri);
+                AppCompatButton btn_sat = (AppCompatButton) findViewById(R.id.btn_sat);
 
-        btn_sun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(0); }
-        });
-        btn_mon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(1); }
-        });
-        btn_tues.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(2); }
-        });
-        btn_wed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(3); }
-        });
-        btn_thur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(4); }
-        });
-        btn_fri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(5); }
-        });
-        btn_sat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { selectDay(6); }
-        });
+                btn_sun.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(0); }
+                });
+                btn_mon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(1); }
+                });
+                btn_tues.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(2); }
+                });
+                btn_wed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(3); }
+                });
+                btn_thur.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(4); }
+                });
+                btn_fri.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(5); }
+                });
+                btn_sat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { selectDay(6); }
+                });
 //        ll_daily_progress.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) { startDailyPregressActivity(); }
@@ -502,6 +502,12 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 //        } catch (Exception e) {
 //            MHDLog.printException(e);
 //        }
+                return true;
+            }else if(nvApi.equals(R.string.restapi_regist_todo)){
+
+            }
+        }
+
         return true;
     }
 
@@ -667,6 +673,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 
                     break;
                 case R.id.et_daily_radio_4:
+                    // 이 항목은 업데이트 버전에서 다룬다.(update version)
                     // 하루 할당량 계산. 목표일 설정 체크
                     if(targetDate == null){
                         Toast.makeText(mContext, "목표일을 설정해주세요.", Toast.LENGTH_SHORT).show();
@@ -705,15 +712,117 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     }
 
     private void saveProcess() {
-        if("".equals(currentRadio)){
+        if("".equals(innerStrings)){
             // 학습 날짜 정보가 없다.
             Toast.makeText(mContext, getString(R.string.content_dailyprogress), Toast.LENGTH_SHORT).show();
         } else if("F".equals(currentRadio)){
+            // 하루분량 값만 있으면 된다.
+            Foneday = (et_daily_radio_1.getText() == null) ? "" : et_daily_radio_1.getText().toString();
+            if("".equals(Foneday)){
+                Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                et_daily_radio_1.setFocusableInTouchMode(true);
+                et_daily_radio_1.requestFocus();
+            }else{
+                // 서버로 전송
+                spi.getSelectedItem().toString()
+                try {
+                    // call service intro check
+                    // String 방식
+//            StringBuilder fullParams = new StringBuilder("{");
+//            fullParams.append("\"UUID\":\""+userVo.getUuID()+"\"")
+//                    .append(",\"UUPN\":\""+userVo.getUuPN()+"\"")
+//                    .append(",\"UUOS\":\""+userVo.getUuOs()+"\"")
+//                    .append(",\"UUDEVICE\":\""+userVo.getUuDevice()+"\"")
+//                    .append(",\"UUTOKEN\":\""+userVo.getUuToken()+"\"")
+//                    .append(",\"UUAPP\":\""+userVo.getUuAppVer()+"\"")
+//                    .append("}");
+                    // Map 방식 0
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+                    params.put("TBSUBJECT", "");
+                    params.put("TBDETAIL", "");
+                    params.put("TBPUBLISHER", "");
+                    params.put("TBTITLE", "");
+                    params.put("TDOPTION", "");
+                    params.put("TDSUN", "");
+                    params.put("TDMON", "");
+                    params.put("TDTUE", "");
+                    params.put("TDWED", "");
+                    params.put("TDTHU", "");
+                    params.put("TDFRI", "");
+                    params.put("TDSAT", "");
+                    params.put("TDONEDAY", "");
+                    params.put("TDTOTAL", "");
+                    params.put("TDGOAL", "");
+                    MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.restapi_regist_todo, params, responseListener);
 
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Intent intent = new Intent(mContext, MainActivity.class);
+//                    intent.putExtra("field", "value");
+//                    startActivity(intent);
+//                    overridePendingTransition(0, 0);
+//                    finish();
+//                }
+//            }, 500);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    MHDLog.printException(e);
+                }
+            }
         } else if("P".equals(currentRadio)){
+            // 총페이지, 하루분량, 종료일 을 넘겨야 한다.
 
         } else if("G".equals(currentRadio)){
+            // (update version)
 
         }
+    }
+
+    @Override
+    protected boolean networkResponseProcess(String result) {
+        boolean resultFlag = super.networkResponseProcess(result);
+        MHDLog.d(TAG, "networkResponseProcess resultFlag >>> " + resultFlag);
+
+        if(!resultFlag) return resultFlag;
+
+        // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
+
+        if("M".equals(nvResultCode)){
+            // Just show nvMsg
+            MHDDialogUtil.sAlert(mContext, nvMsg);
+        }else if("S".equals(nvResultCode)){
+            // 로그인 성공. user vo 를 구성하고
+            MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
+
+            // 가입되었다는 메세지 띄우고 로그인 창으로 이동.
+            // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.(이건 나중에)
+            // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
+            Gson gson = new Gson();
+            UserVo userVo;
+            userVo = gson.fromJson(nvMsg, UserVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+
+            if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
+                // MainActivity 로 이동
+                goMain();
+            }
+//            // 학생을 등록하겠느냐는 컨펌창을 띄우고 확인 -> 등록창, 취소 -> 메인
+//            MHDDialogUtil.sAlert(this, R.string.alert_join_success, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    // 학생 등록창으로 이동.
+//                }
+//            }, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    // 메인으로 이동. 아무 내용 안나올 것.
+//                }
+//            });
+        }
+
+        return true;
     }
 }
