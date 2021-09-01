@@ -505,6 +505,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 return true;
             }else if(nvApi.equals(R.string.restapi_regist_todo)){
 
+                return true;
             }
         }
 
@@ -724,105 +725,41 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 et_daily_radio_1.requestFocus();
             }else{
                 // 서버로 전송
-                spi.getSelectedItem().toString()
-                try {
-                    // call service intro check
-                    // String 방식
-//            StringBuilder fullParams = new StringBuilder("{");
-//            fullParams.append("\"UUID\":\""+userVo.getUuID()+"\"")
-//                    .append(",\"UUPN\":\""+userVo.getUuPN()+"\"")
-//                    .append(",\"UUOS\":\""+userVo.getUuOs()+"\"")
-//                    .append(",\"UUDEVICE\":\""+userVo.getUuDevice()+"\"")
-//                    .append(",\"UUTOKEN\":\""+userVo.getUuToken()+"\"")
-//                    .append(",\"UUAPP\":\""+userVo.getUuAppVer()+"\"")
-//                    .append("}");
-                    // Map 방식 0
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
-                    params.put("TBSUBJECT", "");
-                    params.put("TBDETAIL", "");
-                    params.put("TBPUBLISHER", "");
-                    params.put("TBTITLE", "");
-                    params.put("TDOPTION", "");
-                    params.put("TDSUN", "");
-                    params.put("TDMON", "");
-                    params.put("TDTUE", "");
-                    params.put("TDWED", "");
-                    params.put("TDTHU", "");
-                    params.put("TDFRI", "");
-                    params.put("TDSAT", "");
-                    params.put("TDONEDAY", "");
-                    params.put("TDTOTAL", "");
-                    params.put("TDGOAL", "");
-                    MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.restapi_regist_todo, params, responseListener);
-
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Intent intent = new Intent(mContext, MainActivity.class);
-//                    intent.putExtra("field", "value");
-//                    startActivity(intent);
-//                    overridePendingTransition(0, 0);
-//                    finish();
-//                }
-//            }, 500);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    MHDLog.printException(e);
-                }
+                sendTodoData(Foneday, "", "");
             }
         } else if("P".equals(currentRadio)){
             // 총페이지, 하루분량, 종료일 을 넘겨야 한다.
-
+                sendTodoData(Foneday, "", "");
         } else if("G".equals(currentRadio)){
             // (update version)
 
         }
     }
 
-    @Override
-    protected boolean networkResponseProcess(String result) {
-        boolean resultFlag = super.networkResponseProcess(result);
-        MHDLog.d(TAG, "networkResponseProcess resultFlag >>> " + resultFlag);
-
-        if(!resultFlag) return resultFlag;
-
-        // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
-
-        if("M".equals(nvResultCode)){
-            // Just show nvMsg
-            MHDDialogUtil.sAlert(mContext, nvMsg);
-        }else if("S".equals(nvResultCode)){
-            // 로그인 성공. user vo 를 구성하고
-            MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
-
-            // 가입되었다는 메세지 띄우고 로그인 창으로 이동.
-            // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.(이건 나중에)
-            // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
-            Gson gson = new Gson();
-            UserVo userVo;
-            userVo = gson.fromJson(nvMsg, UserVo.class);
-            MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
-            MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
-
-            if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
-                // MainActivity 로 이동
-                goMain();
-            }
-//            // 학생을 등록하겠느냐는 컨펌창을 띄우고 확인 -> 등록창, 취소 -> 메인
-//            MHDDialogUtil.sAlert(this, R.string.alert_join_success, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // 학생 등록창으로 이동.
-//                }
-//            }, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // 메인으로 이동. 아무 내용 안나올 것.
-//                }
-//            });
+    private void sendTodoData(String oneday, String total, String goal){
+        try {
+            // Map 방식 0
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("TBSUBJECT", "");
+            params.put("TBDETAIL", "");
+            params.put("TBPUBLISHER", "");
+            params.put("TBTITLE", "");
+            params.put("TDOPTION", "");
+            params.put("TDSUN", "");
+            params.put("TDMON", "");
+            params.put("TDTUE", "");
+            params.put("TDWED", "");
+            params.put("TDTHU", "");
+            params.put("TDFRI", "");
+            params.put("TDSAT", "");
+            params.put("TDONEDAY", "");
+            params.put("TDTOTAL", "");
+            params.put("TDGOAL", "");
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.restapi_regist_todo, params, responseListener);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            MHDLog.printException(e);
         }
-
-        return true;
     }
 }
