@@ -113,6 +113,8 @@
     <string name="subtitle_daily_radio_2" translatable="true">총 페이지/하루분량</string>
     <string name="subtitle_daily_radio_3" translatable="true">목표일/총 페이지/하루분량</string>
 
+    <string name="content_todo_publisher" translatable="true">출판사를 입력해주세요.</string>
+    <string name="content_todo_title" translatable="true">제목을 입력해주세요.</string>
     <string name="content_dailyprogress" translatable="true">학습할 요일을 선택해주세요.</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>
