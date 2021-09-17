@@ -12,6 +12,7 @@ import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.LoginVo;
 import com.mhd.elemantary.common.vo.PagingBannerVo;
 import com.mhd.elemantary.common.vo.SubjectVo;
+import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.util.MHDLog;
@@ -64,6 +65,10 @@ public class MHDSvcManager {
 	 * 과목 정보 vo
 	 */
 	private SubjectVo subjectVo;
+    /**
+     * 할일 정보 vo
+     */
+    private TodoVo todoVo;
 	/**
 	 * 새로 들어온 푸시 여부(알림함 운영에 필요할 수 있다)
 	 */
@@ -300,6 +305,18 @@ public class MHDSvcManager {
 	public void setSubjectVo(SubjectVo subjectVo) {
 		this.subjectVo = subjectVo;
 	}
+    /**
+     * get todo Info
+     */
+    public TodoVo getTodoVo() {
+        return todoVo;
+    }
+    /**
+     * set todo Info
+     */
+    public void setTodoVo(TodoVo todoVo) {
+        this.todoVo = todoVo;
+    }
 	/**
 	 * get new push boolean
 	 */

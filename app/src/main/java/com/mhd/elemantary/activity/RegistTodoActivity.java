@@ -763,170 +763,318 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 //                Toast.makeText(mContext, "not app", Toast.LENGTH_SHORT).show();
 //            }
 //        }
-        String spinnerData = spi_todo_subject.getSelectedItem().toString();
-        String[] splitText = spinnerData.split("-");
-        String tmpSubject = splitText[0].trim();
-        String tmpDetail = splitText[1].trim();
-        String tmpPublisher = et_textbook_publish.getText().toString();
-        String tmpTitle = et_textbook_subject.getText().toString();
+        if(checkP()) {
+            String spinnerData = spi_todo_subject.getSelectedItem().toString();
+            String[] splitText = spinnerData.split("-");
+            String tmpSubject = splitText[0].trim();
+            String tmpDetail = splitText[1].trim();
+            String tmpPublisher = et_textbook_publish.getText().toString();
+            String tmpTitle = et_textbook_subject.getText().toString();
 
-        if(tmpPublisher == null || "".equals(tmpPublisher)){
-            // 학습 날짜 정보가 없다.
-            Toast.makeText(mContext, getString(R.string.content_todo_publisher), Toast.LENGTH_SHORT).show();
-        }else if(tmpTitle == null || "".equals(tmpTitle)){
-            // 학습 날짜 정보가 없다.
-            Toast.makeText(mContext, getString(R.string.content_todo_title), Toast.LENGTH_SHORT).show();
-        }else if("".equals(innerStrings)){
-            // 학습 날짜 정보가 없다.
-            Toast.makeText(mContext, getString(R.string.content_dailyprogress), Toast.LENGTH_SHORT).show();
-        }else if("F".equals(currentRadio)){
-            // 하루분량 값만 있으면 된다.
-            Foneday = (et_daily_radio_1.getText() == null) ? "" : et_daily_radio_1.getText().toString();
-            if("".equals(Foneday)){
-                Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                et_daily_radio_1.setFocusableInTouchMode(true);
-                et_daily_radio_1.requestFocus();
-            }else{
-                sendTodoData(Foneday, "0", "2100-12-31", tmpSubject, tmpDetail, tmpPublisher, tmpTitle, "F");
-            }
-        } else if("P".equals(currentRadio)){
-            // 총페이지, 하루분량, 종료일 을 넘겨야 한다.
-            Poneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
-            if("".equals(Poneday) || Poneday == null) {
-                Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                et_daily_radio_3.setFocusableInTouchMode(true);
-                et_daily_radio_3.requestFocus();
-            }else if(Integer.parseInt(Ptotal) < Integer.parseInt(Poneday)) {
-                Toast.makeText(mContext, "총페이지보다 하루분량이 작아야 합니다.", Toast.LENGTH_SHORT).show();
-                et_daily_radio_3.setFocusableInTouchMode(true);
-                et_daily_radio_3.requestFocus();
-            }else {
-                // 여기까지 문제없으면 종료예정일을 계산해서 아래 표시할 것.
-                // 총 몇일의 학습일이 필요한지 계산. 나머지는 분배보다는 마지막 하루로 계산.
-                // 시작일을 설정하는 기능도 필요할거 같긴하지만 이건 나중에 구현. 등록 당일은 제외
-                // 종료일을 DB에 넣고 종료일에 오기 전에는 정해진 요일에 표시하는 방식.
-                // 중간에 그냥 건너뛰는 날, 건너뛰어야 하는 날을 어떻게 처리하지.
-                long dayCount = Integer.parseInt(Ptotal) / Integer.parseInt(Poneday);
-                long dayRest = Integer.parseInt(Ptotal) % Integer.parseInt(Poneday);
-                dayRest = dayRest > 0 ? 1 : 0;
-                int dayTotal = (int) dayCount + (int) dayRest; // 소요 day 수, 나머지(dayRest)가 0이면 그냥 0인거니...
-                Calendar cal = Calendar.getInstance();
-                int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
-                weekd = weekd == 7 ? 1 : weekd + 1; // 시작요일(오늘 제외한 다음 날. 이번주 계산에만 사용).
-                int lengthWeek = innerStrings.length(); // 한주 동안의 학습일 수
-                int spendWeek, extraDays = 0;
-                if (weekd == 1) {
-                    // 이 값이 1이면 한주의 끝. 토요일에 등록한다는 것.
-                    // weekd = 1이면 이번주는 한주의 처음부터 시작하면 되는 것.
-                    spendWeek = dayTotal / lengthWeek;
-                    extraDays = dayTotal % lengthWeek;
-
-                    if (extraDays == 0) {
-                        // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
-                        String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
-                        // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
-                        cal.setTime(new Date());
-                        cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                        //                            System.out.println("current: " + df.format(cal.getTime()));
-                        //                            cal.add(Calendar.MONTH, 2);
-                        cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
-                        // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
-                        cal.add(Calendar.DATE, (spendWeek - 1) * 7);
-                        // 이 날짜가 종료일이다.
-                        tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
-                        pGoal = df.format(cal.getTime());
-                        tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
-                    } else {
-                        // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
-                        String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
-                        // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
-                        cal.setTime(new Date());
-                        cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                        //                            System.out.println("current: " + df.format(cal.getTime()));
-                        //                            cal.add(Calendar.MONTH, 2);
-                        cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
-                        // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
-                        cal.add(Calendar.DATE, (spendWeek - 1) * 7);
-                        // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
-                        String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
-                        // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
-                        // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
-                        cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
-                        // 거기에 1주일을 더 하고
-                        cal.add(Calendar.DATE, 7);
-                        // 이 날짜가 종료일이다.
-                        tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
-                        pGoal = df.format(cal.getTime());
-                        tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
-                    }
+            if (tmpPublisher == null || "".equals(tmpPublisher)) {
+                // 학습 날짜 정보가 없다.
+                Toast.makeText(mContext, getString(R.string.content_todo_publisher), Toast.LENGTH_SHORT).show();
+            } else if (tmpTitle == null || "".equals(tmpTitle)) {
+                // 학습 날짜 정보가 없다.
+                Toast.makeText(mContext, getString(R.string.content_todo_title), Toast.LENGTH_SHORT).show();
+            } else if ("".equals(innerStrings)) {
+                // 학습 날짜 정보가 없다.
+                Toast.makeText(mContext, getString(R.string.content_dailyprogress), Toast.LENGTH_SHORT).show();
+            } else if ("F".equals(currentRadio)) {
+                // 하루분량 값만 있으면 된다.
+                Foneday = (et_daily_radio_1.getText() == null) ? "" : et_daily_radio_1.getText().toString();
+                if ("".equals(Foneday)) {
+                    Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    et_daily_radio_1.setFocusableInTouchMode(true);
+                    et_daily_radio_1.requestFocus();
                 } else {
-                    // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
-                    // 이번 주 남은 학습일(currentWeekRestDays)을 구해서 그 학습일 수 만큼을 뺀 상태에서 weekd = 1 일때의 프로세스를 타는 것.
-                    // 이 얘기는 곧. dayTotal 의 값이 dayTotal - currentWeekRestDays 가 된다는 것.
-                    String[] strArray = innerStrings.split("");
-                    int curWeekCount = 0;
-                    for (String s : strArray) {
-                        if (Integer.parseInt(s) >= weekd) curWeekCount++;
-                    }
-                    // curWeekCount > 0 이라면 이번주에 학습일 요일이 있다는 것.
-                    // 그런데 이번주 그 남은 학습일이 전체 소요일보다 작거나 같을수도 있겠구나.
-                    //                        if(curWeekCount >= dayTotal)
-                    dayTotal = dayTotal - curWeekCount;
-                    //========================================================================================
-                    // 여기부터는 weekd = 1인 것과 동일한 프로세스
-                    spendWeek = dayTotal / lengthWeek;
-                    extraDays = dayTotal % lengthWeek;
-
-                    if (extraDays == 0) {
-                        // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
-                        String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
-                        // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
-                        cal.setTime(new Date());
-                        cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                        //                            System.out.println("current: " + df.format(cal.getTime()));
-                        //                            cal.add(Calendar.MONTH, 2);
-                        cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
-                        // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
-                        cal.add(Calendar.DATE, (spendWeek - 1) * 7);
-                        // 이 날짜가 종료일이다.
-                        tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
-                        pGoal = df.format(cal.getTime());
-                        tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
-                    } else {
-                        // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
-                        String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
-                        // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
-                        cal.setTime(new Date());
-                        cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                        //                            System.out.println("current: " + df.format(cal.getTime()));
-                        //                            cal.add(Calendar.MONTH, 2);
-                        cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
-                        // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
-                        cal.add(Calendar.DATE, (spendWeek - 1) * 7);
-                        // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
-                        String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
-                        // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
-                        // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
-                        cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
-                        // 거기에 1주일을 더 하고
-                        cal.add(Calendar.DATE, 7);
-                        // 이 날짜가 종료일이다.
-                        tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
-                        pGoal = df.format(cal.getTime());
-                        tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
-                    }
+                    sendTodoData(Foneday, "0", "2100-12-31", tmpSubject, tmpDetail, tmpPublisher, tmpTitle, "F");
                 }
+            } else if ("P".equals(currentRadio)) {
+                // 총페이지, 하루분량, 종료일 을 넘겨야 한다.
+                Poneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
+                if ("".equals(Poneday) || Poneday == null) {
+                    Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    et_daily_radio_3.setFocusableInTouchMode(true);
+                    et_daily_radio_3.requestFocus();
+                } else if (Integer.parseInt(Ptotal) < Integer.parseInt(Poneday)) {
+                    Toast.makeText(mContext, "총페이지보다 하루분량이 작아야 합니다.", Toast.LENGTH_SHORT).show();
+                    et_daily_radio_3.setFocusableInTouchMode(true);
+                    et_daily_radio_3.requestFocus();
+                } else {
+                    // 여기까지 문제없으면 종료예정일을 계산해서 아래 표시할 것.
+                    // 총 몇일의 학습일이 필요한지 계산. 나머지는 분배보다는 마지막 하루로 계산.
+                    // 시작일을 설정하는 기능도 필요할거 같긴하지만 이건 나중에 구현. 등록 당일은 제외
+                    // 종료일을 DB에 넣고 종료일에 오기 전에는 정해진 요일에 표시하는 방식.
+                    // 중간에 그냥 건너뛰는 날, 건너뛰어야 하는 날을 어떻게 처리하지.
+                    long dayCount = Integer.parseInt(Ptotal) / Integer.parseInt(Poneday);
+                    long dayRest = Integer.parseInt(Ptotal) % Integer.parseInt(Poneday);
+                    dayRest = dayRest > 0 ? 1 : 0;
+                    int dayTotal = (int) dayCount + (int) dayRest; // 소요 day 수, 나머지(dayRest)가 0이면 그냥 0인거니...
+                    Calendar cal = Calendar.getInstance();
+                    int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
+                    weekd = weekd == 7 ? 1 : weekd + 1; // 시작요일(오늘 제외한 다음 날. 이번주 계산에만 사용).
+                    int lengthWeek = innerStrings.length(); // 한주 동안의 학습일 수
+                    int spendWeek, extraDays = 0;
+                    if (weekd == 1) {
+                        // 이 값이 1이면 한주의 끝. 토요일에 등록한다는 것.
+                        // weekd = 1이면 이번주는 한주의 처음부터 시작하면 되는 것.
+                        spendWeek = dayTotal / lengthWeek;
+                        extraDays = dayTotal % lengthWeek;
 
-                sendTodoData(Poneday, Ptotal, pGoal, tmpSubject, tmpDetail, tmpPublisher, tmpTitle, "P");
+                        if (extraDays == 0) {
+                            // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
+                            String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
+                            // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                            cal.setTime(new Date());
+                            cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                            //                            System.out.println("current: " + df.format(cal.getTime()));
+                            //                            cal.add(Calendar.MONTH, 2);
+                            cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                            // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                            cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                            // 이 날짜가 종료일이다.
+                            tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                            pGoal = df.format(cal.getTime());
+                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                        } else {
+                            // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
+                            String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
+                            // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                            cal.setTime(new Date());
+                            cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                            //                            System.out.println("current: " + df.format(cal.getTime()));
+                            //                            cal.add(Calendar.MONTH, 2);
+                            cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                            // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                            cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                            // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
+                            String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
+                            // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
+                            // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
+                            cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
+                            // 거기에 1주일을 더 하고
+                            cal.add(Calendar.DATE, 7);
+                            // 이 날짜가 종료일이다.
+                            tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                            pGoal = df.format(cal.getTime());
+                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                        }
+                    } else {
+                        // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
+                        // 이번 주 남은 학습일(currentWeekRestDays)을 구해서 그 학습일 수 만큼을 뺀 상태에서 weekd = 1 일때의 프로세스를 타는 것.
+                        // 이 얘기는 곧. dayTotal 의 값이 dayTotal - currentWeekRestDays 가 된다는 것.
+                        String[] strArray = innerStrings.split("");
+                        int curWeekCount = 0;
+                        for (String s : strArray) {
+                            if (Integer.parseInt(s) >= weekd) curWeekCount++;
+                        }
+                        // curWeekCount > 0 이라면 이번주에 학습일 요일이 있다는 것.
+                        // 그런데 이번주 그 남은 학습일이 전체 소요일보다 작거나 같을수도 있겠구나.
+                        //                        if(curWeekCount >= dayTotal)
+                        dayTotal = dayTotal - curWeekCount;
+                        //========================================================================================
+                        // 여기부터는 weekd = 1인 것과 동일한 프로세스
+                        spendWeek = dayTotal / lengthWeek;
+                        extraDays = dayTotal % lengthWeek;
+
+                        if (extraDays == 0) {
+                            // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
+                            String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
+                            // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                            cal.setTime(new Date());
+                            cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                            //                            System.out.println("current: " + df.format(cal.getTime()));
+                            //                            cal.add(Calendar.MONTH, 2);
+                            cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                            // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                            cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                            // 이 날짜가 종료일이다.
+                            tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                            pGoal = df.format(cal.getTime());
+                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                        } else {
+                            // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
+                            String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
+                            // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                            cal.setTime(new Date());
+                            cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
+                            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                            //                            System.out.println("current: " + df.format(cal.getTime()));
+                            //                            cal.add(Calendar.MONTH, 2);
+                            cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                            // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                            cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                            // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
+                            String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
+                            // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
+                            // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
+                            cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
+                            // 거기에 1주일을 더 하고
+                            cal.add(Calendar.DATE, 7);
+                            // 이 날짜가 종료일이다.
+                            tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                            pGoal = df.format(cal.getTime());
+                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                        }
+                    }
+
+                    sendTodoData(Poneday, Ptotal, pGoal, tmpSubject, tmpDetail, tmpPublisher, tmpTitle, "P");
+                }
+            } else if ("G".equals(currentRadio)) {
+                // (update version)
+
             }
-        } else if("G".equals(currentRadio)){
-            // (update version)
-
         }
+    }
+
+    private boolean checkP(){
+        // 총페이지 다음 edittext로 이동
+        Ptotal = (et_daily_radio_2.getText() == null) ? "" : et_daily_radio_2.getText().toString();
+        if ("".equals(Ptotal) || Ptotal == null) {
+            Toast.makeText(mContext, "총페이지를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            et_daily_radio_2.setFocusableInTouchMode(true);
+            et_daily_radio_2.requestFocus();
+            return false;
+        }
+        // 하루분량, 값이 비어있는지, 총페이지보다 크지 않은지 체크. 종료예정일 계산
+        // currentRadio ="P"라면 edittext 2,3 값을 저장.
+        Poneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
+        if ("".equals(Poneday) || Poneday == null) {
+            Toast.makeText(mContext, "하루분량을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            et_daily_radio_3.setFocusableInTouchMode(true);
+            et_daily_radio_3.requestFocus();
+            return false;
+        }
+        if (!"".equals(Ptotal) && Ptotal != null && Integer.parseInt(Ptotal) < Integer.parseInt(Poneday)) {
+            Toast.makeText(mContext, "총페이지보다 하루분량이 작아야 합니다.", Toast.LENGTH_SHORT).show();
+            et_daily_radio_3.setFocusableInTouchMode(true);
+            et_daily_radio_3.requestFocus();
+            return false;
+        }
+        // 여기까지 문제없으면 종료예정일을 계산해서 아래 표시할 것.
+        // 총 몇일의 학습일이 필요한지 계산. 나머지는 분배보다는 마지막 하루로 계산.
+        // 시작일을 설정하는 기능도 필요할거 같긴하지만 이건 나중에 구현. 등록 당일은 제외
+        // 종료일을 DB에 넣고 종료일에 오기 전에는 정해진 요일에 표시하는 방식.
+        // 중간에 그냥 건너뛰는 날, 건너뛰어야 하는 날을 어떻게 처리하지.
+        long dayCount = Integer.parseInt(Ptotal) / Integer.parseInt(Poneday);
+        long dayRest = Integer.parseInt(Ptotal) % Integer.parseInt(Poneday);
+        dayRest = dayRest > 0 ? 1 : 0;
+        int dayTotal = (int) dayCount + (int) dayRest; // 소요 day 수, 나머지(dayRest)가 0이면 그냥 0인거니...
+        Calendar cal = Calendar.getInstance();
+        int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
+        weekd = weekd == 7 ? 1 : weekd + 1; // 시작요일(오늘 제외한 다음 날. 이번주 계산에만 사용).
+        int lengthWeek = innerStrings.length(); // 한주 동안의 학습일 수
+        int spendWeek, extraDays = 0;
+        if (weekd == 1) {
+            // 이 값이 1이면 한주의 끝. 토요일에 등록한다는 것.
+            // weekd = 1이면 이번주는 한주의 처음부터 시작하면 되는 것.
+            spendWeek = dayTotal / lengthWeek;
+            extraDays = dayTotal % lengthWeek;
+
+            if (extraDays == 0) {
+                // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
+                String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
+                // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                cal.setTime(new Date());
+                cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                //                            System.out.println("current: " + df.format(cal.getTime()));
+                //                            cal.add(Calendar.MONTH, 2);
+                cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                // 이 날짜가 종료일이다.
+                tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                pGoal = df.format(cal.getTime());
+                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+            } else {
+                // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
+                String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
+                // 다음주(등록일이 토요일이니) 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                cal.setTime(new Date());
+                cal.add(Calendar.DATE, 1); // 다음주의 시작이(일요일) 된다.
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                //                            System.out.println("current: " + df.format(cal.getTime()));
+                //                            cal.add(Calendar.MONTH, 2);
+                cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
+                String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
+                // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
+                // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
+                cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
+                // 거기에 1주일을 더 하고
+                cal.add(Calendar.DATE, 7);
+                // 이 날짜가 종료일이다.
+                tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                pGoal = df.format(cal.getTime());
+                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+            }
+        } else {
+            // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
+            // 이번 주 남은 학습일(currentWeekRestDays)을 구해서 그 학습일 수 만큼을 뺀 상태에서 weekd = 1 일때의 프로세스를 타는 것.
+            // 이 얘기는 곧. dayTotal 의 값이 dayTotal - currentWeekRestDays 가 된다는 것.
+            String[] strArray = innerStrings.split("");
+            int curWeekCount = 0;
+            for (String s : strArray) {
+                if (Integer.parseInt(s) >= weekd) curWeekCount++;
+            }
+            // curWeekCount > 0 이라면 이번주에 학습일 요일이 있다는 것.
+            // 그런데 이번주 그 남은 학습일이 전체 소요일보다 작거나 같을수도 있겠구나.
+            //                        if(curWeekCount >= dayTotal)
+            dayTotal = dayTotal - curWeekCount;
+            //========================================================================================
+            // 여기부터는 weekd = 1인 것과 동일한 프로세스
+            spendWeek = dayTotal / lengthWeek;
+            extraDays = dayTotal % lengthWeek;
+
+            if (extraDays == 0) {
+                // extraDays = 0 이면 주 단위로 딱 떨어지는 것.
+                String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후의 이 요일이 종료일이다.
+                // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                cal.setTime(new Date());
+                cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                //                            System.out.println("current: " + df.format(cal.getTime()));
+                //                            cal.add(Calendar.MONTH, 2);
+                cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                // 이 날짜가 종료일이다.
+                tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                pGoal = df.format(cal.getTime());
+                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+            } else {
+                // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
+                String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
+                // 이번주 마지막 학습요일의 날짜를 구한다. 등록하는 날짜에서 요일코드만큼 더한 날짜와 같다.
+                cal.setTime(new Date());
+                cal.add(Calendar.DATE, 9 - weekd); // 다음주의 시작이(일요일) 된다.
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                //                            System.out.println("current: " + df.format(cal.getTime()));
+                //                            cal.add(Calendar.MONTH, 2);
+                cal.add(Calendar.DATE, Integer.parseInt(lastDays) - 1);
+                // 여기서 spendWeek주 후 날짜를 구한다.  spendWeek*7
+                cal.add(Calendar.DATE, (spendWeek - 1) * 7);
+                // 여기서 extraDays 값의 index-1에 해당하는 요일 코드를 갸져온다.
+                String lastDaysCode = innerStrings.substring(extraDays - 1, extraDays);
+                // 다음 주에 위에서 구한 요일코드에 해당하는 날짜를 가져오면 된다.
+                // 그러기 위해서 우선 이번 주의 해당 요일코드에 해당하는 날짜를 구하고
+                cal.set(Calendar.DAY_OF_WEEK, Integer.parseInt(lastDaysCode));
+                // 거기에 1주일을 더 하고
+                cal.add(Calendar.DATE, 7);
+                // 이 날짜가 종료일이다.
+                tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
+                pGoal = df.format(cal.getTime());
+                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+            }
+        }
+        return true;
     }
 
     private void sendTodoData(String oneday, String total, String goal, String subject, String detail, String publisher, String title, String option){

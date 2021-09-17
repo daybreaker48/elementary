@@ -2,6 +2,8 @@ package com.mhd.elemantary;
 
 import android.content.Intent;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -12,6 +14,7 @@ import com.mhd.elemantary.activity.BaseActivity;
 import com.mhd.elemantary.adapter.MenuPagerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.constant.MHDConstants;
+import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.view.GlobalTabsView;
@@ -109,11 +112,20 @@ public class MainActivity extends BaseActivity {
                 // regist post
                 MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
-            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_regist_post))){
-
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_todo))){
+                // TodoFragment 화면 구성.
+//                callFragmentMethod(0);
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess(nvResultCode, nvJsonDataString, nvApi, nvMsg, nvCnt);
             }
         }
 
         return true;
+    }
+
+    private Fragment findFragmentByPosition(int position){
+        return getSupportFragmentManager().findFragmentByTag("f"+position);
+    }
+    private void callFragmentMethod(int position){
+        ((TodoFragment)findFragmentByPosition(position)).getData();
     }
 }
