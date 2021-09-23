@@ -19,11 +19,11 @@ public class TodoVo {
 	/**
     * data. msg
     */
-	public ArrayList<TodoData> msg = new ArrayList<TodoData>();
+	public ArrayList<TodoListData> msg = new ArrayList<TodoListData>();
     /**
      * Paging Banner Data Class
      */
-	public class TodoData {
+	public class TodoListData {
 		public String subject; 		// 과목명
         public String detail; 		// 세부항목
 		public String publish; 		// 출판사
@@ -196,11 +196,11 @@ public class TodoVo {
 		this.cnt = cnt;
 	}
 
-	public ArrayList<TodoData> getMsg() {
+	public ArrayList<TodoListData> getMsg() {
 		return msg;
 	}
 
-	public void setMsg(ArrayList<TodoData> msg) {
+	public void setMsg(ArrayList<TodoListData> msg) {
 		this.msg = msg;
 	}
 }

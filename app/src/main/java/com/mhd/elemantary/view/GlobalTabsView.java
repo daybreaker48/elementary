@@ -2,6 +2,11 @@ package com.mhd.elemantary.view;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -208,8 +213,10 @@ public class GlobalTabsView extends FrameLayout {
             public void onClick(View v) {
                 // 할일, 스케쥴, 스스로해요 등록하기.
                 if(menuViewPager.getCurrentItem() == 0) { // 할일
-                    // fragment의 함수 호출?
+                    // MainActivity 내에 있는 function 호출.
+                    (MainActivity)mContext.startTodoRegist();
                     Intent intent = new Intent(mContext, RegistTodoActivity.class);
+                    startActivityResult.launch(intent);
                     startActivityForResult((MainActivity)mContext, intent, 101, null);
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
                     Intent intent = new Intent(mContext, RegistScheduleActivity.class);
@@ -717,4 +724,15 @@ moveAndScaleCenter(1 - positionOffset);
 
         }
     };
+
+    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Log.d(TAG, "MainActivity로 돌아왔다. ");
+                    }
+                }
+            });
+
 }

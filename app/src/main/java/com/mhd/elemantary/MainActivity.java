@@ -115,17 +115,22 @@ public class MainActivity extends BaseActivity {
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_todo))){
                 // TodoFragment 화면 구성.
 //                callFragmentMethod(0);
-                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess(nvResultCode, nvJsonDataString, nvApi, nvMsg, nvCnt);
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
             }
         }
 
         return true;
     }
 
-    private Fragment findFragmentByPosition(int position){
-        return getSupportFragmentManager().findFragmentByTag("f"+position);
-    }
-    private void callFragmentMethod(int position){
-        ((TodoFragment)findFragmentByPosition(position)).getData();
+//    // viewpager내에 있는 fragment를 찾아서 그 안에 있는 function의 호출 처리 법
+//    private Fragment findFragmentByPosition(int position){
+//        return getSupportFragmentManager().findFragmentByTag("f"+position);
+//    }
+//    private void callFragmentMethod(int position){
+//        ((TodoFragment)findFragmentByPosition(position)).getData();
+//    }
+
+    public void startTodoRegist(){
+
     }
 }

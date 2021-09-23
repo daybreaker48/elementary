@@ -25,6 +25,7 @@ import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.constant.MHDConstants;
+import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -574,6 +575,13 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     et_daily_radio_3.requestFocus();
                     break;
                 case R.id.et_daily_radio_3:
+                    Ptotal = (et_daily_radio_2.getText() == null) ? "" : et_daily_radio_2.getText().toString();
+                    if("".equals(Ptotal) || Ptotal == null){
+                        Toast.makeText(mContext, "총페이지를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                        et_daily_radio_2.setFocusableInTouchMode(true);
+                        et_daily_radio_2.requestFocus();
+                        return true;
+                    }
                     // 하루분량, 값이 비어있는지, 총페이지보다 크지 않은지 체크. 종료예정일 계산
                     // currentRadio ="P"라면 edittext 2,3 값을 저장.
                     Poneday = (et_daily_radio_3.getText() == null) ? "" : et_daily_radio_3.getText().toString();
