@@ -214,10 +214,7 @@ public class GlobalTabsView extends FrameLayout {
                 // 할일, 스케쥴, 스스로해요 등록하기.
                 if(menuViewPager.getCurrentItem() == 0) { // 할일
                     // MainActivity 내에 있는 function 호출.
-                    (MainActivity)mContext.startTodoRegist();
-                    Intent intent = new Intent(mContext, RegistTodoActivity.class);
-                    startActivityResult.launch(intent);
-                    startActivityForResult((MainActivity)mContext, intent, 101, null);
+                    ((MainActivity)MainActivity.context_main).startTodoRegist();
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
                     Intent intent = new Intent(mContext, RegistScheduleActivity.class);
                     mContext.startActivity(intent);
@@ -724,15 +721,5 @@ moveAndScaleCenter(1 - positionOffset);
 
         }
     };
-
-    ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Log.d(TAG, "MainActivity로 돌아왔다. ");
-                    }
-                }
-            });
 
 }

@@ -1,5 +1,6 @@
 package com.mhd.elemantary.activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.SubjectVo;
@@ -533,6 +535,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            setResult(Activity.RESULT_OK);
                             finish();
                             return;
                         }
