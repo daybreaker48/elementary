@@ -1,5 +1,6 @@
 package com.mhd.elemantary.activity;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.fragment.TimePickerFragment;
 import com.mhd.elemantary.util.MHDLog;
 
 import java.util.Arrays;
@@ -92,11 +94,9 @@ public class RegistScheduleActivity extends BaseActivity {
         });
     }
     public void startSchduleTimeActivity() {
-        // 할일 요일 정보를 보내야 한다. 오늘/매주 어떤 요일
-        MHDLog.d(TAG, "sendDay: " + sendDay);
-        Intent i = new Intent(mContext, OptionDailyProgressActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(i);
+        // 시간 선택
+        TimePickerFragment mTimePickerFragment = new TimePickerFragment();
+        mTimePickerFragment.show(getSupportFragmentManager(), "timepicker");
     }
     public void startDailyTextbookActivity() {
         // 교재 선택 창을 띄운다.

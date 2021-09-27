@@ -44,6 +44,11 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         listData.add(data);
     }
 
+    public void deleteAll() {
+        // 리스트 전체삭제
+        listData.clear();
+    }
+
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
         public TextView tvSubject, tvTextbook, tvDaily;
         public CheckBox cb_todo_complete_holder;

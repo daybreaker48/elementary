@@ -95,6 +95,7 @@ public class TodoFragment extends BaseFragment {
      */
     public boolean networkResponseProcess(String nvMsg, int nvCnt, String result) {
         TodoVo todoVo = null;
+        adapter.deleteAll();
 
         if (nvCnt == 0) {
             // 정보가 없으면 비정상
@@ -106,7 +107,6 @@ public class TodoFragment extends BaseFragment {
             MHDApplication.getInstance().getMHDSvcManager().setTodoVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setTodoVo(todoVo);
         }
-
         for(int i=0; i<nvCnt; i++){
             // 각 List의 값들을 data 객체에 set 해줍니다.
             TodoData data = new TodoData();
