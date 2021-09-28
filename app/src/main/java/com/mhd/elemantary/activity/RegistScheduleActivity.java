@@ -1,7 +1,8 @@
 package com.mhd.elemantary.activity;
 
-import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,21 +10,45 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog;
+import com.github.dhaval2404.colorpicker.listener.ColorListener;
+import com.github.dhaval2404.colorpicker.listener.DismissListener;
+import com.github.dhaval2404.colorpicker.model.ColorShape;
+import com.github.dhaval2404.colorpicker.model.ColorSwatch;
+import com.github.dhaval2404.colorpicker.util.ColorUtil;
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.fragment.TimePickerFragment;
 import com.mhd.elemantary.util.MHDLog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 
-public class RegistScheduleActivity extends BaseActivity {
 
-    TextView tv_selectday, vst_top_title;
-    LinearLayout ll_schedule_time, ll_daily_textbook;
+public class RegistScheduleActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
+
+    TextView tv_selectday, vst_top_title, tv_schedule_time, tv_schedule_color;
+    LinearLayout ll_schedule_time, ll_daily_textbook, ll_schedule_color;
     private String[] day_array = new String[7];
     String sendDay = "";
+    String mMaterialColorSquare = "";
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+        if(view.getTitle().equals("학습 시작")){
+            tv_schedule_time.setText("시 간 : " + String.valueOf(hourOfDay) + ":00 ~ ");
+            TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, true);
+            mTimePickerDialog.enableMinutes(false);
+            mTimePickerDialog.setTitle("학습 종료");
+            mTimePickerDialog.show(getSupportFragmentManager(), "TimePickerDialog");
+        }
+        if(view.getTitle().equals("학습 종료")){
+            String cuString = tv_schedule_time.getText().toString();
+            tv_schedule_time.setText(cuString + String.valueOf(hourOfDay) + ":00");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +60,11 @@ public class RegistScheduleActivity extends BaseActivity {
         vst_top_title.setText(R.string.title_schedule_regist);
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
+        tv_schedule_time = (TextView) findViewById(R.id.tv_schedule_time);
+        tv_schedule_color = (TextView) findViewById(R.id.tv_schedule_color);
         ll_schedule_time = (LinearLayout) findViewById(R.id.ll_schedule_time);
         ll_daily_textbook = (LinearLayout) findViewById(R.id.ll_daily_textbook);
+        ll_schedule_color = (LinearLayout) findViewById(R.id.ll_schedule_color);
 
         AppCompatButton btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
         AppCompatButton btn_mon = (AppCompatButton) findViewById(R.id.btn_mon);
@@ -80,6 +108,10 @@ public class RegistScheduleActivity extends BaseActivity {
             @Override
             public void onClick(View v) { startSchduleTimeActivity(); }
         });
+        ll_schedule_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { startColorPicker(); }
+        });
 
         btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,9 +127,41 @@ public class RegistScheduleActivity extends BaseActivity {
     }
     public void startSchduleTimeActivity() {
         // 시간 선택
-        TimePickerFragment mTimePickerFragment = new TimePickerFragment();
-        mTimePickerFragment.show(getSupportFragmentManager(), "timepicker");
+//        TimePickerFragment mTimePickerFragment = new TimePickerFragment();
+//        mTimePickerFragment.show(getSupportFragmentManager(), "timepicker");
+        TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, true);
+        mTimePickerDialog.enableMinutes(false);
+        mTimePickerDialog.setTitle("학습 시작");
+        mTimePickerDialog.show(getSupportFragmentManager(), "TimePickerDialog");
     }
+    public void startColorPicker() {
+        // 컬러 선택
+        new MaterialColorPickerDialog
+                .Builder(mContext)
+                .setTitle("색상")
+                .setColorShape(ColorShape.SQAURE)
+                .setColorSwatch(ColorSwatch._300)
+                .setDefaultColor(mMaterialColorSquare)
+                .setColorListener(new ColorListener() {
+                    @Override
+                    public void onColorSelected(int color, @NotNull String colorHex) {
+                        // Handle Color Selection
+                        mMaterialColorSquare = colorHex;
+                        setButtonBackground(color);
+                    }
+                })
+                .setPositiveButton("확인")
+                .show();
+    }
+    private void setButtonBackground(int color) {
+        if (ColorUtil.isDarkColor(color)) {
+            tv_schedule_color.setTextColor(Color.WHITE);
+        } else {
+            tv_schedule_color.setTextColor(Color.BLACK);
+        }
+        tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
+    }
+
     public void startDailyTextbookActivity() {
         // 교재 선택 창을 띄운다.
         MHDLog.d(TAG, "sendDay: " + sendDay);

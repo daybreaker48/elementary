@@ -27,4 +27,8 @@
 
     <color name="main_background2">#9FA67A</color>
     <color name="transparent">#00000000</color>
+
+    <color name="positiveButtonTextColor">@color/colorAccent</color>
+    <color name="negativeButtonTextColor">@color/colorAccent</color>
+    <color name="bottomSheetDividerColor">@color/colorAccent</color>
 </resources>
