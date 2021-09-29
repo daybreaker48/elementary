@@ -444,7 +444,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         if (this instanceof StartActivity || this instanceof TutorialActivity || this instanceof MainActivity || this instanceof LoginActivity) {
             exitApplication();
         } else if (this instanceof RegistTodoActivity || this instanceof OptionDailyProgressActivity || this instanceof OptionDailyTextbookActivity || this instanceof RegistScheduleActivity
-                || this instanceof LoginActivity || this instanceof JoinActivity) {
+                || this instanceof LoginActivity || this instanceof JoinActivity || this instanceof OptionAlarmActivity) {
             super.onBackPressed();
         } else {
             if (drawerlayout.isDrawerOpen(Gravity.END)) {

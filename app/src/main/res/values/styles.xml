@@ -47,4 +47,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="numberPickerCustomSize">
+        <!--Display textSize-->
+        <item name="android:textSize">30sp</item>
+        <!--Display textColor-->
+        <item name="android:editTextColor">@color/black</item>
+    </style>
+
 </resources>

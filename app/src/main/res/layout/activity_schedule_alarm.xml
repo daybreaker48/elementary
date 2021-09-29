@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    tools:context=".activity.OptionDailyProgressActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/common_back_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_top_regist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="@dimen/screen_padding"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg_schedule_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/rb_schedule_alarm_2"
+            android:orientation="vertical">
+            <RadioButton
+                android:id="@+id/rb_schedule_alarm_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitle_schedule_option_1"
+                android:textSize="@dimen/font_20"
+                android:selectAllOnFocus="true"
+                android:layout_marginEnd="10dp"/>
+            <RadioButton
+                android:id="@+id/rb_schedule_alarm_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitle_schedule_option_2"
+                android:textSize="@dimen/font_20"
+                android:layout_marginEnd="10dp" />
+            <LinearLayout
+                android:id="@+id/ll_schedule_alarm_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <NumberPicker
+                        android:id="@+id/picker1"
+                        android:theme="@style/numberPickerCustomSize"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="2dp"
+                        />
+                    <NumberPicker
+                        android:id="@+id/picker2"
+                        android:theme="@style/numberPickerCustomSize"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="2dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="bottom"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_alarm_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="@string/button_cancel_post"
+                android:layout_gravity="start"
+                android:padding="2dp"
+                android:textSize="@dimen/font_20" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_alarm_save"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="@string/button_save_post"
+                android:layout_gravity="end"
+                android:padding="2dp"
+                android:textSize="@dimen/font_20" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

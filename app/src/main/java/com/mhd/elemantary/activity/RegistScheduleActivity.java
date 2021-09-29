@@ -29,8 +29,8 @@ import java.util.Arrays;
 
 public class RegistScheduleActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
 
-    TextView tv_selectday, vst_top_title, tv_schedule_time, tv_schedule_color;
-    LinearLayout ll_schedule_time, ll_daily_textbook, ll_schedule_color;
+    TextView tv_selectday, vst_top_title, tv_schedule_time, tv_schedule_color, tv_schedule_alarm;
+    LinearLayout ll_schedule_time, ll_daily_textbook, ll_schedule_color, ll_schedule_alarm;
     private String[] day_array = new String[7];
     String sendDay = "";
     String mMaterialColorSquare = "";
@@ -62,9 +62,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         tv_schedule_time = (TextView) findViewById(R.id.tv_schedule_time);
         tv_schedule_color = (TextView) findViewById(R.id.tv_schedule_color);
+        tv_schedule_alarm = (TextView) findViewById(R.id.tv_schedule_alarm);
         ll_schedule_time = (LinearLayout) findViewById(R.id.ll_schedule_time);
         ll_daily_textbook = (LinearLayout) findViewById(R.id.ll_daily_textbook);
         ll_schedule_color = (LinearLayout) findViewById(R.id.ll_schedule_color);
+        ll_schedule_alarm = (LinearLayout) findViewById(R.id.ll_schedule_alarm);
 
         AppCompatButton btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
         AppCompatButton btn_mon = (AppCompatButton) findViewById(R.id.btn_mon);
@@ -111,6 +113,10 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         ll_schedule_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { startColorPicker(); }
+        });
+        ll_schedule_alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { startAlarmActivity(); }
         });
 
         btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
@@ -162,10 +168,10 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
     }
 
-    public void startDailyTextbookActivity() {
+    public void startAlarmActivity() {
         // 교재 선택 창을 띄운다.
         MHDLog.d(TAG, "sendDay: " + sendDay);
-        Intent i = new Intent(mContext, OptionDailyTextbookActivity.class);
+        Intent i = new Intent(mContext, OptionAlarmActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);
     }
