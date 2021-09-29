@@ -53,6 +53,7 @@ public class OptionAlarmActivity extends BaseActivity {
         picker2.setMinValue(0);
         picker2.setMaxValue(2);
         picker2.setDisplayedValues(measure);
+        picker2.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         picker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
