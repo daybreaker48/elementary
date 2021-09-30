@@ -1,5 +1,6 @@
 package com.mhd.elemantary.activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class OptionAlarmActivity extends BaseActivity {
     LinearLayout ll_schedule_alarm_2;
     Calendar baseDate, targetDate = null;
     NumberPicker picker1, picker2;
-    String[] measure = new String[]{"분", "시간", "일"};
+    String[] measure = new String[]{"분", "시간"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class OptionAlarmActivity extends BaseActivity {
         picker1.setMaxValue(99);
         picker1.setValue(10);
         picker2.setMinValue(0);
-        picker2.setMaxValue(2);
+        picker2.setMaxValue(1);
         picker2.setDisplayedValues(measure);
         picker2.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         picker1.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -83,7 +84,8 @@ public class OptionAlarmActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 // 입력 값 아래 화면으로 전달하고 요일에 따른 페이지 등을 계산해서 입력.
-                // 그 후에 저장하면 모두 동시에 서버로 전송.
+                // 그 후에 저장하면 모두 동시에 서버로 전송. 그 후에 결과값 리턴
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });
