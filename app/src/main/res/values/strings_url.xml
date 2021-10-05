@@ -18,6 +18,8 @@
     <string name="url_restapi_regist_schedule">/api/MHDRT1645.jsp</string><!-- 스케쥴 등록 -->
     <string name="restapi_query_todo">MHDRT1504</string><!-- 할일 조회 -->
     <string name="url_restapi_query_todo">/api/MHDRT1504.jsp</string><!-- 할일 조회 -->
+    <string name="restapi_query_schedule">MHDRT1608</string><!-- 스케쥴 조회 -->
+    <string name="url_restapi_query_schedule">/api/MHDRT1608.jsp</string><!-- 스케쥴 조회 -->
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 

@@ -1,6 +1,7 @@
 package com.mhd.elemantary.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -25,6 +26,7 @@ import com.github.dhaval2404.colorpicker.util.ColorUtil;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
+import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
@@ -332,10 +334,49 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
             params.put("SCSTART", start);
             params.put("SCEND", end);
             params.put("SCCOLOR", color);
+            // 알람 추가해야함.
             MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_schedule, params, responseListener);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             MHDLog.printException(e);
         }
+    }
+
+    @Override
+    protected boolean networkResponseProcess(String result) {
+        boolean resultFlag = super.networkResponseProcess(result);
+        MHDLog.d(TAG, "networkResponseProcess resultFlag >>> " + resultFlag);
+
+        if(!resultFlag) return resultFlag;
+
+        // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
+
+        if("M".equals(nvResultCode)){
+            // Just show nvMsg
+            MHDDialogUtil.sAlert(mContext, nvMsg);
+            return true;
+        }else if("S".equals(nvResultCode)){
+            if(nvApi.equals(getString(R.string.restapi_regist_schedule))){
+                if (nvCnt == 0) {
+                    // 정보가 없으면 비정상
+                    // 우선 toast를 띄울 것.
+                    Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
+                } else {
+                    // 스케쥴 정상등록 여부를 알림
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                            return;
+                        }
+                    });
+                }
+
+                return true;
+            }
+        }
+
+        return true;
     }
 }

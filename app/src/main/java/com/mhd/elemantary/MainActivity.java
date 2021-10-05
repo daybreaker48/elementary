@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
+import com.mhd.elemantary.activity.RegistScheduleActivity;
 import com.mhd.elemantary.activity.RegistTodoActivity;
 import com.mhd.elemantary.adapter.MenuPagerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
@@ -153,6 +154,21 @@ public class MainActivity extends BaseActivity {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
+                    }
+                }
+            });
+
+    public void startScheduleRegist(){
+        Intent intent = new Intent(context_main, RegistScheduleActivity.class);
+        startActivityResultS.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> startActivityResultS = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f1")).queryTodo();
                     }
                 }
             });

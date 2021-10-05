@@ -216,8 +216,7 @@ public class GlobalTabsView extends FrameLayout {
                     // MainActivity 내에 있는 function 호출.
                     ((MainActivity)MainActivity.context_main).startTodoRegist();
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
-                    Intent intent = new Intent(mContext, RegistScheduleActivity.class);
-                    mContext.startActivity(intent);
+                    ((MainActivity)MainActivity.context_main).startScheduleRegist();
                 } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
                     Intent intent = new Intent(mContext, RegistSelfActivity.class);
                     mContext.startActivity(intent);

@@ -11,6 +11,7 @@ import com.mhd.elemantary.R;
 import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.LoginVo;
 import com.mhd.elemantary.common.vo.PagingBannerVo;
+import com.mhd.elemantary.common.vo.ScheduleVo;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.common.vo.UserVo;
@@ -69,6 +70,10 @@ public class MHDSvcManager {
      * 할일 정보 vo
      */
     private TodoVo todoVo;
+    /**
+     * 스케쥴 정보 vo
+     */
+    private ScheduleVo scheduleVo;
 	/**
 	 * 새로 들어온 푸시 여부(알림함 운영에 필요할 수 있다)
 	 */
@@ -317,6 +322,18 @@ public class MHDSvcManager {
     public void setTodoVo(TodoVo todoVo) {
         this.todoVo = todoVo;
     }
+	/**
+	 * get schedule Info
+	 */
+	public ScheduleVo getScheduleVo() {
+		return scheduleVo;
+	}
+	/**
+	 * set schedule Info
+	 */
+	public void setScheduleVo(ScheduleVo scheduleVo) {
+		this.scheduleVo = scheduleVo;
+	}
 	/**
 	 * get new push boolean
 	 */

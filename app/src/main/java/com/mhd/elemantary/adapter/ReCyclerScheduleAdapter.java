@@ -45,6 +45,11 @@ public class ReCyclerScheduleAdapter extends RecyclerView.Adapter<ReCyclerSchedu
         listData.add(data);
     }
 
+    public void deleteAll() {
+        // 리스트 전체삭제
+        listData.clear();
+    }
+
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
         public TextView tvTime, tvMon, tvTue, tvWed, tvThu, tvFri, tvSat, tvSun;
 
