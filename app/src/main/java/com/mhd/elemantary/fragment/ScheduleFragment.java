@@ -1,5 +1,9 @@
 package com.mhd.elemantary.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.gridlayout.widget.GridLayout;
@@ -10,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -66,35 +71,64 @@ public class ScheduleFragment extends BaseFragment {
 ////        getData();
 //        querySchedule();
 
-        GridLayout gridlayout = (GridLayout) root.findViewById(R.id.gl_schedule);
-        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView);
-        TextView textView1 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView1);
-        TextView textView2= (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView2);
-        TextView textView3 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView3);
-        TextView textView4 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView4);
-        TextView textView5 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView5);
-        TextView textView6 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView6);
-        TextView textView7 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView7);
-        TextView textView8 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView8);
-        TextView textView9 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView9);
-        TextView textView10 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView10);
-        TextView textView11 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView11);
-        TextView textView12 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView12);
-        TextView textView13 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-        gridlayout.addView(textView13);
+        LinearLayout linearLayout = (LinearLayout) root.findViewById(R.id.ll_schedule_mon);
+        TextView titleText;
+        LayerDrawable bottomBorder = getBorders(
+                Color.LTGRAY, // Background color
+                Color.RED, // Border color
+                0, // Left border in pixels
+                0, // Top border in pixels
+                0, // Right border in pixels
+                10 // Bottom border in pixels
+        );
+
+        for (int i = 0; i < 14; i++) {
+            titleText = new TextView(getContext());
+            titleText.setText("ss");
+            titleText.setTextSize(18);
+            titleText.setTextColor(Color.BLACK);
+
+            titleText.setBackground(bottomBorder);
+            linearLayout.addView(titleText, i);
+//            titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
+            param.height = 0;
+            param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+//            param.weight = 1;
+            param.gravity = Gravity.CENTER;
+
+            titleText.setLayoutParams (param);
+        }
+
+//        GridLayout gridlayout = (GridLayout) root.findViewById(R.id.gl_schedule);
+//        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView);
+//        TextView textView1 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView1);
+//        TextView textView2= (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView2);
+//        TextView textView3 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView3);
+//        TextView textView4 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView4);
+//        TextView textView5 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView5);
+//        TextView textView6 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView6);
+//        TextView textView7 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView7);
+//        TextView textView8 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView8);
+//        TextView textView9 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView9);
+//        TextView textView10 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView10);
+//        TextView textView11 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView11);
+//        TextView textView12 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView12);
+//        TextView textView13 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
+//        gridlayout.addView(textView13);
 
 //        GridLayout gridLayout = (GridLayout) root.findViewById(R.id.gl_schedule);
 //        gridLayout.setAlignmentMode(GridLayout.ALIGN_BOUNDS);
@@ -119,6 +153,34 @@ public class ScheduleFragment extends BaseFragment {
 //        }
 //        TextView tv = (TextView) root.findViewById(R.id.gl_item);
 //        gridlayout.removeView(tv);
+    }
+
+    protected LayerDrawable getBorders(int bgColor, int borderColor,
+                                       int left, int top, int right, int bottom){
+        // Initialize new color drawables
+        ColorDrawable borderColorDrawable = new ColorDrawable(borderColor);
+        ColorDrawable backgroundColorDrawable = new ColorDrawable(bgColor);
+
+        // Initialize a new array of drawable objects
+        Drawable[] drawables = new Drawable[]{
+                borderColorDrawable,
+                backgroundColorDrawable
+        };
+
+        // Initialize a new layer drawable instance from drawables array
+        LayerDrawable layerDrawable = new LayerDrawable(drawables);
+
+        // Set padding for background color layer
+        layerDrawable.setLayerInset(
+                1, // Index of the drawable to adjust [background color layer]
+                left, // Number of pixels to add to the left bound [left border]
+                top, // Number of pixels to add to the top bound [top border]
+                right, // Number of pixels to add to the right bound [right border]
+                bottom // Number of pixels to add to the bottom bound [bottom border]
+        );
+
+        // Finally, return the one or more sided bordered background drawable
+        return layerDrawable;
     }
 
     @Override
@@ -279,23 +341,22 @@ public class ScheduleFragment extends BaseFragment {
             MHDLog.printException(e);
         }
     }
-//    /**
-//     * BaseActivity에서 상속받지 못하기 때문에 parent Activity에서 받아서 현재 fragment의 function을 호출하도록 처리
-//     */
-//    public boolean networkResponseProcess(String nvMsg, int nvCnt, String result) {
-//        ScheduleVo scheduleVo = null;
-//        adapter.deleteAll();
-//
-//        if (nvCnt == 0) {
-//            // 정보가 없으면 비정상
-//            Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
-//        } else {
-//            // 할일정보를 받아옴.
-//            Gson gson = new Gson();
-//            scheduleVo = gson.fromJson(result, ScheduleVo.class);
-//            MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(null);
-//            MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(scheduleVo);
-//        }
+    /**
+     * BaseActivity에서 상속받지 못하기 때문에 parent Activity에서 받아서 현재 fragment의 function을 호출하도록 처리
+     */
+    public boolean networkResponseProcess(String nvMsg, int nvCnt, String result) {
+        ScheduleVo scheduleVo = null;
+
+        if (nvCnt == 0) {
+            // 정보가 없으면 비정상
+            Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            // 스케쥴 정보를 받아옴.
+            Gson gson = new Gson();
+            scheduleVo = gson.fromJson(result, ScheduleVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(scheduleVo);
+        }
 //        for(int i=0; i<nvCnt; i++){
 //            // 각 List의 값들을 data 객체에 set 해줍니다.
 //            TodoData data = new TodoData();
@@ -309,7 +370,7 @@ public class ScheduleFragment extends BaseFragment {
 //
 //        // adapter의 값이 변경되었다는 것을 알려줍니다.
 //        adapter.notifyDataSetChanged();
-//
-//        return true;
-//    }
+
+        return true;
+    }
 }

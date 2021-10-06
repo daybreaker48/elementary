@@ -132,6 +132,20 @@
     <string name="content_thur" translatable="true">목</string>
     <string name="content_fri" translatable="true">금</string>
     <string name="content_sat" translatable="true">토</string>
+    <string name="content_89" translatable="true">8~9</string>
+    <string name="content_910" translatable="true">9~10</string>
+    <string name="content_1011" translatable="true">10~11</string>
+    <string name="content_1112" translatable="true">11~12</string>
+    <string name="content_1213" translatable="true">12~13</string>
+    <string name="content_1314" translatable="true">13~14</string>
+    <string name="content_1415" translatable="true">14~15</string>
+    <string name="content_1516" translatable="true">15~16</string>
+    <string name="content_1617" translatable="true">16~17</string>
+    <string name="content_1718" translatable="true">17~18</string>
+    <string name="content_1819" translatable="true">18~19</string>
+    <string name="content_1920" translatable="true">19~20</string>
+    <string name="content_2021" translatable="true">20~21</string>
+    <string name="content_2122" translatable="true">21~22</string>
 
     <string name="cell_todo_1" translatable="true">순서</string>
     <string name="cell_todo_2" translatable="true">과목</string>
