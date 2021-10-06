@@ -69,14 +69,14 @@ public class ReCyclerScheduleAdapter extends RecyclerView.Adapter<ReCyclerSchedu
         void onBind(ScheduleData data) {
 //            holder.tvSubject.setText(this.textSet1[position]);
 //        holder.imageView.setBackgroundResource(this.imgSet[position]);
-            this.tvTime.setText(data.getTime());
-            this.tvMon.setText(data.getMon());
-            this.tvTue.setText(data.getTue());
-            this.tvWed.setText(data.getWed());
-            this.tvThu.setText(data.getThu());
-            this.tvFri.setText(data.getFri());
-            this.tvSat.setText(data.getSat());
-            this.tvSun.setText(data.getSun());
+//            this.tvTime.setText(data.getTime());
+//            this.tvMon.setText(data.getMon());
+//            this.tvTue.setText(data.getTue());
+//            this.tvWed.setText(data.getWed());
+//            this.tvThu.setText(data.getThu());
+//            this.tvFri.setText(data.getFri());
+//            this.tvSat.setText(data.getSat());
+//            this.tvSun.setText(data.getSun());
         }
     }
 }

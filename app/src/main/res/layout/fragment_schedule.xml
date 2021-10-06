@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/transparent"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -142,12 +142,141 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recv_receiving"
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+        <!--android:id="@+id/recv_receiving"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="vertical">-->
+    <!--</androidx.recyclerview.widget.RecyclerView>-->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gl_schedule"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical">
+        app:orientation="vertical"
+        app:alignmentMode="alignMargins"
+        app:columnCount="8"
+        app:rowCount="14">
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="dfs"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
+        <include
+            android:id="@+id/gl_item"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            layout="@layout/layout_schedule_cell" />
+        <!--<TextView-->
+            <!--android:id="@+id/gl_item"-->
+            <!--app:layout_columnWeight="1"-->
+            <!--app:layout_rowWeight="1"-->
+            <!--app:layout_gravity="fill"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="@dimen/font_18"-->
+            <!--android:text="@string/content_sun"/>-->
+        <TextView
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_gravity="fill"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_18"
+            android:text="@string/content_sun"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </androidx.gridlayout.widget.GridLayout>
 
 </LinearLayout>

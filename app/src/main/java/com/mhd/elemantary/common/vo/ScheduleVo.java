@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 
 /**
- * Todo Data VO Class
- * Created by MH.D on 2021-09-03.
+ * Schedule Data VO Class
+ * Created by MH.D on 2021-10-06.
  */
 public class ScheduleVo {
 	/**
@@ -24,11 +24,7 @@ public class ScheduleVo {
      * Paging Banner Data Class
      */
 	public class TodoListData {
-		public String subject; 		// 과목명
-        public String detail; 		// 세부항목
-		public String publish; 		// 출판사
-		public String title; 		// 학습지이름
-        public String option;       // F, P, G
+		public String subject; 		// 항목명
         public String sun; 		    //
 		public String mon; 		    //
 		public String tue; 		    //
@@ -36,11 +32,10 @@ public class ScheduleVo {
 		public String thu; 		    //
 		public String fri; 		    //
 		public String sat; 		    //
-		public String oneday; 		// 하루분량
-		public String total; 		// 총분량
-		public String rest; 		// 남은량
-		public String goal; 		// 목표일
-		public String tbend; 		// 종료일일
+		public String start; 		// 시작시간
+		public String end; 		    // 종료시간
+		public String color; 		// 색상
+		public String alarm; 		// 알람
 
 		public String getSubject() {
 			return subject;
@@ -49,38 +44,6 @@ public class ScheduleVo {
 		public void setSubject(String subject) {
 			this.subject = subject;
 		}
-
-		public String getDetail() {
-			return detail;
-		}
-
-		public void setDetail(String detail) {
-			this.detail = detail;
-		}
-
-		public String getPublish() {
-			return publish;
-		}
-
-		public void setPublish(String publish) {
-			this.publish = publish;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-        public String getOption() {
-            return option;
-        }
-
-        public void setOption(String option) {
-            this.option = option;
-        }
 
         public String getSun() {
             return sun;
@@ -138,44 +101,36 @@ public class ScheduleVo {
             this.sat = sat;
         }
 
-        public String getOneday() {
-            return oneday;
+        public String getStart() {
+            return start;
         }
 
-        public void setOneday(String oneday) {
-            this.oneday = oneday;
+        public void setStart(String start) {
+            this.start = start;
         }
 
-        public String getTotal() {
-            return total;
+        public String getEnd() {
+            return end;
         }
 
-        public void setTotal(String total) {
-            this.total = total;
+        public void setEnd(String end) {
+            this.end = end;
         }
 
-        public String getRest() {
-            return rest;
+        public String getColor() {
+            return color;
         }
 
-        public void setRest(String rest) {
-            this.rest = rest;
+        public void setColor(String color) {
+            this.color = color;
         }
 
-        public String getGoal() {
-            return goal;
+        public String getAlarm() {
+            return alarm;
         }
 
-        public void setGoal(String goal) {
-            this.goal = goal;
-        }
-
-        public String getTbend() {
-            return tbend;
-        }
-
-        public void setTbend(String tbend) {
-            this.tbend = tbend;
+        public void setAlarm(String alarm) {
+            this.alarm = alarm;
         }
 	}
 

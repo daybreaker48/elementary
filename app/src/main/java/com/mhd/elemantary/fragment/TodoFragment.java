@@ -84,7 +84,7 @@ public class TodoFragment extends BaseFragment {
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
 
-            MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_schedule, params, ((MainActivity)getActivity()).responseListener);
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             MHDLog.printException(e);
