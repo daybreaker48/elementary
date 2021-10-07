@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,8 @@ public class ScheduleFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerScheduleAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private LinearLayout linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
+    private TextView titleText;
 
 
     public static ScheduleFragment create() {
@@ -61,98 +64,15 @@ public class ScheduleFragment extends BaseFragment {
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
 
-//        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
-//        recyclerView.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(mContext);
-//        recyclerView.setLayoutManager(layoutManager);
-//        adapter = new ReCyclerScheduleAdapter();
-//        recyclerView.setAdapter(adapter);
-//
-////        getData();
-//        querySchedule();
+        linearLayoutMon = (LinearLayout) root.findViewById(R.id.ll_schedule_mon);
+        linearLayoutTue = (LinearLayout) root.findViewById(R.id.ll_schedule_tue);
+        linearLayoutWed = (LinearLayout) root.findViewById(R.id.ll_schedule_wed);
+        linearLayoutThu = (LinearLayout) root.findViewById(R.id.ll_schedule_thu);
+        linearLayoutFri = (LinearLayout) root.findViewById(R.id.ll_schedule_fri);
+        linearLayoutSat = (LinearLayout) root.findViewById(R.id.ll_schedule_sat);
+        linearLayoutSun = (LinearLayout) root.findViewById(R.id.ll_schedule_sun);
 
-        LinearLayout linearLayout = (LinearLayout) root.findViewById(R.id.ll_schedule_mon);
-        TextView titleText;
-        LayerDrawable bottomBorder = getBorders(
-                Color.LTGRAY, // Background color
-                Color.RED, // Border color
-                0, // Left border in pixels
-                0, // Top border in pixels
-                0, // Right border in pixels
-                10 // Bottom border in pixels
-        );
-
-        for (int i = 0; i < 14; i++) {
-            titleText = new TextView(getContext());
-            titleText.setText("ss");
-            titleText.setTextSize(18);
-            titleText.setTextColor(Color.BLACK);
-
-            titleText.setBackground(bottomBorder);
-            linearLayout.addView(titleText, i);
-//            titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
-            param.height = 0;
-            param.width = LinearLayout.LayoutParams.MATCH_PARENT;
-//            param.weight = 1;
-            param.gravity = Gravity.CENTER;
-
-            titleText.setLayoutParams (param);
-        }
-
-//        GridLayout gridlayout = (GridLayout) root.findViewById(R.id.gl_schedule);
-//        TextView textView = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView);
-//        TextView textView1 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView1);
-//        TextView textView2= (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView2);
-//        TextView textView3 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView3);
-//        TextView textView4 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView4);
-//        TextView textView5 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView5);
-//        TextView textView6 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView6);
-//        TextView textView7 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView7);
-//        TextView textView8 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView8);
-//        TextView textView9 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView9);
-//        TextView textView10 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView10);
-//        TextView textView11 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView11);
-//        TextView textView12 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView12);
-//        TextView textView13 = (TextView) getLayoutInflater().inflate(R.layout.layout_schedule_cell, container);
-//        gridlayout.addView(textView13);
-
-//        GridLayout gridLayout = (GridLayout) root.findViewById(R.id.gl_schedule);
-//        gridLayout.setAlignmentMode(GridLayout.ALIGN_BOUNDS);
-//        gridLayout.setColumnCount(8);
-//        gridLayout.setRowCount(14);
-//        TextView titleText;
-//        for (int i = 0; i < 72; i++) {
-//            titleText = new TextView(getContext());
-//            titleText.setText("ss");
-//            gridLayout.addView(titleText, i);
-//            titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-//            GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-//            param.height = GridLayout.LayoutParams.WRAP_CONTENT;
-//            param.width = GridLayout.LayoutParams.WRAP_CONTENT;
-//            param.rightMargin = 5;
-//            param.topMargin = 5;
-//            param.setGravity(Gravity.CENTER);
-////            param.columnSpec = GridLayout.spec(3);
-////            param.rowSpec = GridLayout.spec(4);
-//            titleText.setLayoutParams (param);
-//
-//        }
-//        TextView tv = (TextView) root.findViewById(R.id.gl_item);
-//        gridlayout.removeView(tv);
+        querySchedule();
     }
 
     protected LayerDrawable getBorders(int bgColor, int borderColor,
@@ -191,141 +111,6 @@ public class ScheduleFragment extends BaseFragment {
 //        }
     }
 
-//    private void getData() {
-//        // 임의의 데이터입니다.
-//        List<String> listTime = Arrays.asList("8~9", "9~10", "10~11", "11~12", "12~13", "13~14", "14~15", "15~16", "16~17", "17~18", "18~19", "19~20", "20~21", "21~22");
-//        List<String> listMon = Arrays.asList(
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "피아노",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listTue = Arrays.asList(
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "피아노",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listWed = Arrays.asList(
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "피아노",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listThu = Arrays.asList(
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "피아노",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listFri = Arrays.asList(
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "학교",
-//                "체조",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listSat = Arrays.asList(
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "발레",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        List<String> listSun = Arrays.asList(
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "자유",
-//                "수영",
-//                "태권도",
-//                "휴식",
-//                "영어",
-//                "수학",
-//                "국어",
-//                "취침"
-//        );
-//        for (int i = 0; i < listTime.size(); i++) {
-//            // 각 List의 값들을 data 객체에 set 해줍니다.
-//            ScheduleData data = new ScheduleData();
-//            data.setTime(listTime.get(i));
-//            data.setMon(listMon.get(i));
-//            data.setTue(listTue.get(i));
-//            data.setWed(listWed.get(i));
-//            data.setThu(listThu.get(i));
-//            data.setFri(listFri.get(i));
-//            data.setSat(listSat.get(i));
-//            data.setSun(listSun.get(i));
-//
-//            // 각 값이 들어간 data를 adapter에 추가합니다.
-//            adapter.addItem(data);
-//        }
-//
-//        // adapter의 값이 변경되었다는 것을 알려줍니다.
-//        adapter.notifyDataSetChanged();
-//    }
-
     /**
      * query schedule
      */
@@ -357,20 +142,288 @@ public class ScheduleFragment extends BaseFragment {
             MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(scheduleVo);
         }
-//        for(int i=0; i<nvCnt; i++){
-//            // 각 List의 값들을 data 객체에 set 해줍니다.
-//            TodoData data = new TodoData();
-//            data.setSubject(scheduleVo.getMsg().get(i).getSubject());
-//            data.setTextbook(scheduleVo.getMsg().get(i).getDetail());
-//            data.setDailyProgress(scheduleVo.getMsg().get(i).getOneday());
-//
-//            // 각 값이 들어간 data를 adapter에 추가합니다.
-//            adapter.addItem(data);
-//        }
-//
-//        // adapter의 값이 변경되었다는 것을 알려줍니다.
-//        adapter.notifyDataSetChanged();
+
+        // 시간표 cell 생성
+        // data가 몇개든, 모든 요일/모든 시간을 루프를 돌며 표시해야 한다.
+        int startTime = 8;
+        int endTime = 22;
+        String[] arrDay = {};
+        // 8 ~ 22, 각 시간 루프를 돌린다.
+        for (int i = startTime; i < endTime; i++) {
+            // 데이터 중 각 요일을 체크한다.
+            boolean dMon = false;
+            boolean dTue = false;
+            boolean dWed = false;
+            boolean dThu = false;
+            boolean dFri = false;
+            boolean dSat = false;
+            boolean dSun = false;
+            for (int k=0; k < scheduleVo.getCnt(); k++){
+                if("Y".equals(scheduleVo.getMsg().get(k).getMon())){
+                    if(!dMon) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutMon);
+                            dMon = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dMon = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 다른 일정이 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "mon", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutMon);
+                                dMon = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getTue())){
+                    if(!dTue) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutTue);
+                            dTue = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dTue = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "tue", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutTue);
+                                dTue = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getWed())){
+                    if(!dWed) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutWed);
+                            dWed = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dWed = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "wed", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutWed);
+                                dWed = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getThu())){
+                    if(!dThu) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutThu);
+                            dThu = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dThu = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "thu", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutThu);
+                                dThu = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getFri())){
+                    if(!dFri) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutFri);
+                            dFri = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dFri = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "fri", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutFri);
+                                dFri = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getSat())){
+                    if(!dSat) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutSat);
+                            dSat = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dSat = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "sat", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutSat);
+                                dSat = true;
+                            }
+                        }
+                    }
+                }
+                if("Y".equals(scheduleVo.getMsg().get(k).getSun())){
+                    if(!dSun) {
+                        if (i == scheduleVo.getMsg().get(k).getStart()) {
+                            drawCell(scheduleVo, k, linearLayoutSun);
+                            dSun = true;
+                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
+                            // 이미 그렸을테니 패스.
+                            dSun = true;
+                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
+                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                            // 이미 그려진 경우를 구분해내야 한다.
+                            boolean cuTimeDraw = checkTIme(scheduleVo, "sun", i);
+                            if (!cuTimeDraw) {
+                                drawBlankCell(linearLayoutSun);
+                                dSun = true;
+                            }
+                        }
+                    }
+                }
+                // 각 요일에 해당하고 시작시간과 동일한 데이터가 있으면 그리게 되고, 그 후에..
+                // 각 요일에 해당하고 시작시간과 종료시간 사이에 있는 데이터가 있으면 안그려야 하고(아무것도 안하는), 그 후에..
+                // 각 요일에 해당도 안되거나, 해당이 되지만 시간이 사이에 끼지 못하는 것은 그려야 한다.
+            }
+
+            if(!dMon)
+                drawBlankCell(linearLayoutMon);
+            if(!dTue)
+                drawBlankCell(linearLayoutTue);
+            if(!dWed)
+                drawBlankCell(linearLayoutWed);
+            if(!dThu)
+                drawBlankCell(linearLayoutThu);
+            if(!dFri)
+                drawBlankCell(linearLayoutFri);
+            if(!dSat)
+                drawBlankCell(linearLayoutSat);
+            if(!dSun)
+                drawBlankCell(linearLayoutSun);
+        }
 
         return true;
     }
+
+     private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout) {
+         // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
+         // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
+         int gap = scheduleVo.getMsg().get(k).getEnd() - scheduleVo.getMsg().get(k).getStart();
+         titleText = new TextView(getContext());
+         titleText.setText(scheduleVo.getMsg().get(k).getSubject());
+         titleText.setTextSize(15);
+         titleText.setTextColor(Color.BLACK);
+         titleText.setGravity(Gravity.CENTER);
+         LayerDrawable bottomBorder = getBorders(Color.parseColor(scheduleVo.getMsg().get(k).getColor()), Color.BLACK, 1, 1, 1, 1);
+         titleText.setBackground(bottomBorder);
+         titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+
+         mLinearLayout.addView(titleText);
+
+         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+         param.height = 0;
+         param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+         param.weight = gap;
+         param.gravity = Gravity.CENTER;
+
+         titleText.setLayoutParams (param);
+
+         return true;
+     }
+    private boolean drawBlankCell(LinearLayout mLinearLayout) {
+        // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
+        // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
+        int gap = 1;
+        titleText = new TextView(getContext());
+        titleText.setText("");
+        titleText.setTextSize(15);
+        titleText.setTextColor(Color.BLACK);
+        titleText.setGravity(Gravity.CENTER);
+        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.BLACK, 1, 1, 1, 1);
+        titleText.setBackground(bottomBorder);
+        titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+
+        mLinearLayout.addView(titleText);
+
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        param.height = 0;
+        param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        param.weight = gap;
+        param.gravity = Gravity.CENTER;
+
+        titleText.setLayoutParams (param);
+
+        return true;
+    }
+
+     private boolean checkTIme(ScheduleVo scheduleVo, String day, int cutime){
+        if("mon".equals(day)){
+            for (int k=0; k < scheduleVo.getCnt(); k++) {
+                if ("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
+                    if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                        return true;
+                }
+            }
+        }
+         if("tue".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+         if("wed".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+         if("thu".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+         if("fri".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+         if("sat".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+         if("sun".equals(day)){
+             for (int k=0; k < scheduleVo.getCnt(); k++) {
+                 if ("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
+                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                         return true;
+                 }
+             }
+         }
+        return false;
+     }
 }

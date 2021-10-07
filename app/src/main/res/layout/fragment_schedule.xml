@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/font_15"
             android:text="@string/title_schedule"/>
     </LinearLayout>
 
@@ -39,8 +39,8 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
-            android:text=""/>
+            android:textSize="@dimen/schedule_day"
+            android:text="@string/content_time"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -48,7 +48,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_mon"/>
         <TextView
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_tues"/>
         <TextView
             android:layout_width="0dp"
@@ -66,7 +66,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_wed"/>
         <TextView
             android:layout_width="0dp"
@@ -75,7 +75,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_thur"/>
         <TextView
             android:layout_width="0dp"
@@ -84,7 +84,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_fri"/>
         <TextView
             android:layout_width="0dp"
@@ -93,7 +93,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_sat"/>
         <TextView
             android:layout_width="0dp"
@@ -102,7 +102,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/schedule_day"
             android:text="@string/content_sun"/>
     </LinearLayout>
 

@@ -32,10 +32,10 @@ public class ScheduleVo {
 		public String thu; 		    //
 		public String fri; 		    //
 		public String sat; 		    //
-		public String start; 		// 시작시간
-		public String end; 		    // 종료시간
+		public int start; 		    // 시작시간
+		public int end; 		    // 종료시간
 		public String color; 		// 색상
-		public String alarm; 		// 알람
+		public int alarm; 		    // 알람
 
 		public String getSubject() {
 			return subject;
@@ -101,19 +101,19 @@ public class ScheduleVo {
             this.sat = sat;
         }
 
-        public String getStart() {
+        public int getStart() {
             return start;
         }
 
-        public void setStart(String start) {
+        public void setStart(int start) {
             this.start = start;
         }
 
-        public String getEnd() {
+        public int getEnd() {
             return end;
         }
 
-        public void setEnd(String end) {
+        public void setEnd(int end) {
             this.end = end;
         }
 
@@ -125,11 +125,11 @@ public class ScheduleVo {
             this.color = color;
         }
 
-        public String getAlarm() {
+        public int getAlarm() {
             return alarm;
         }
 
-        public void setAlarm(String alarm) {
+        public void setAlarm(int alarm) {
             this.alarm = alarm;
         }
 	}

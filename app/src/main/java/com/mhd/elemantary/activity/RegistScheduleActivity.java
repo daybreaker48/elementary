@@ -312,7 +312,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
             Toast.makeText(mContext, getString(R.string.content_alarm_time_error), Toast.LENGTH_SHORT).show();
         } else {
             if("".equals(mMaterialColorSquare))
-                mMaterialColorSquare = "ffffff";
+                mMaterialColorSquare = "#ffffff";
 
             sendScheduleData(tmpTitle, String.valueOf(startHour), String.valueOf(endHour), mMaterialColorSquare);
         }

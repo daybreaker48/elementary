@@ -10,7 +10,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_89" />
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_910" />
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1011" />
     <TextView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1112" />
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1213" />
     <TextView
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1314" />
     <TextView
         android:layout_width="match_parent"
@@ -58,7 +58,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1415" />
     <TextView
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1516" />
     <TextView
         android:layout_width="match_parent"
@@ -74,7 +74,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1617" />
     <TextView
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1718" />
     <TextView
         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1819" />
     <TextView
         android:layout_width="match_parent"
@@ -98,7 +98,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_1920" />
     <TextView
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_2021" />
     <TextView
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/font_18"
+        android:textSize="@dimen/schedule_time"
         android:text="@string/content_2122" />
 
 </LinearLayout>
