@@ -43,7 +43,7 @@ public class ScheduleFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerScheduleAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private LinearLayout linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
+    private LinearLayout linearLayoutTime, linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
     private TextView titleText;
 
 
@@ -64,6 +64,7 @@ public class ScheduleFragment extends BaseFragment {
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
 
+        linearLayoutTime= (LinearLayout) root.findViewById(R.id.ll_schedule_time);
         linearLayoutMon = (LinearLayout) root.findViewById(R.id.ll_schedule_mon);
         linearLayoutTue = (LinearLayout) root.findViewById(R.id.ll_schedule_tue);
         linearLayoutWed = (LinearLayout) root.findViewById(R.id.ll_schedule_wed);
@@ -143,12 +144,24 @@ public class ScheduleFragment extends BaseFragment {
             MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(scheduleVo);
         }
 
+        linearLayoutTime.removeAllViews();
+        linearLayoutMon.removeAllViews();
+        linearLayoutTue.removeAllViews();
+        linearLayoutWed.removeAllViews();
+        linearLayoutThu.removeAllViews();
+        linearLayoutFri.removeAllViews();
+        linearLayoutSat.removeAllViews();
+        linearLayoutSun.removeAllViews();
+
         // 시간표 cell 생성
         // data가 몇개든, 모든 요일/모든 시간을 루프를 돌며 표시해야 한다.
         int startTime = 8;
         int endTime = 22;
         String[] arrDay = {};
         // 8 ~ 22, 각 시간 루프를 돌린다.
+        for (int i = startTime; i < endTime; i++) {
+            drawTimeCell(linearLayoutTime, i);
+        }
         for (int i = startTime; i < endTime; i++) {
             // 데이터 중 각 요일을 체크한다.
             boolean dMon = false;
@@ -348,6 +361,31 @@ public class ScheduleFragment extends BaseFragment {
         titleText = new TextView(getContext());
         titleText.setText("");
         titleText.setTextSize(15);
+        titleText.setTextColor(Color.BLACK);
+        titleText.setGravity(Gravity.CENTER);
+        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.BLACK, 1, 1, 1, 1);
+        titleText.setBackground(bottomBorder);
+        titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+
+        mLinearLayout.addView(titleText);
+
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        param.height = 0;
+        param.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        param.weight = gap;
+        param.gravity = Gravity.CENTER;
+
+        titleText.setLayoutParams (param);
+
+        return true;
+    }
+    private boolean drawTimeCell(LinearLayout mLinearLayout, int time) {
+        // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
+        // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
+        int gap = 1;
+        titleText = new TextView(getContext());
+        titleText.setText(String.valueOf(time) + "~" + String.valueOf(time+1));
+        titleText.setTextSize(14);
         titleText.setTextColor(Color.BLACK);
         titleText.setGravity(Gravity.CENTER);
         LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.BLACK, 1, 1, 1, 1);
