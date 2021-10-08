@@ -19,11 +19,13 @@ import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
 import com.mhd.elemantary.activity.RegistScheduleActivity;
+import com.mhd.elemantary.activity.RegistSelfActivity;
 import com.mhd.elemantary.activity.RegistTodoActivity;
 import com.mhd.elemantary.adapter.MenuPagerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.fragment.ScheduleFragment;
+import com.mhd.elemantary.fragment.SelfFragment;
 import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -131,10 +133,15 @@ public class MainActivity extends BaseActivity {
 //                callFragmentMethod(0);
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_schedule))){
-                // TodoFragment 화면 구성.
+                // ScheduleFragment 화면 구성.
 //                callFragmentMethod(0);
                 ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_self))){
+                // SelfFragment 화면 구성.
+//                callFragmentMethod(0);
+                ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
             }
+
         }
 
         return true;
@@ -152,7 +159,6 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(context_main, RegistTodoActivity.class);
         startActivityResult.launch(intent);
     }
-
     ActivityResultLauncher<Intent> startActivityResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -165,15 +171,28 @@ public class MainActivity extends BaseActivity {
 
     public void startScheduleRegist(){
         Intent intent = new Intent(context_main, RegistScheduleActivity.class);
-        startActivityResultS.launch(intent);
+        startActivityResultSchedule.launch(intent);
     }
-
-    ActivityResultLauncher<Intent> startActivityResultS = registerForActivityResult(
+    ActivityResultLauncher<Intent> startActivityResultSchedule = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).querySchedule();
+                    }
+                }
+            });
+
+    public void startSelfRegist(){
+        Intent intent = new Intent(context_main, RegistSelfActivity.class);
+        startActivityResultSelf.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultSelf = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f1")).querySelf();
                     }
                 }
             });

@@ -12,6 +12,7 @@ import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.LoginVo;
 import com.mhd.elemantary.common.vo.PagingBannerVo;
 import com.mhd.elemantary.common.vo.ScheduleVo;
+import com.mhd.elemantary.common.vo.SelfVo;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.common.vo.UserVo;
@@ -74,6 +75,10 @@ public class MHDSvcManager {
      * 스케쥴 정보 vo
      */
     private ScheduleVo scheduleVo;
+	/**
+	 * 스스로 정보 vo
+	 */
+	private SelfVo selfVo;
 	/**
 	 * 새로 들어온 푸시 여부(알림함 운영에 필요할 수 있다)
 	 */
@@ -311,16 +316,16 @@ public class MHDSvcManager {
 		this.subjectVo = subjectVo;
 	}
     /**
-     * get todo Info
+     * get self Info
      */
-    public TodoVo getTodoVo() {
-        return todoVo;
+    public SelfVo getSelfVo() {
+        return selfVo;
     }
     /**
-     * set todo Info
+     * set self Info
      */
-    public void setTodoVo(TodoVo todoVo) {
-        this.todoVo = todoVo;
+    public void setSelfVo(SelfVo selfVo) {
+        this.selfVo = selfVo;
     }
 	/**
 	 * get schedule Info
@@ -333,6 +338,18 @@ public class MHDSvcManager {
 	 */
 	public void setScheduleVo(ScheduleVo scheduleVo) {
 		this.scheduleVo = scheduleVo;
+	}
+	/**
+	 * get todo Info
+	 */
+	public TodoVo getTodoVo() {
+		return todoVo;
+	}
+	/**
+	 * set todo Info
+	 */
+	public void setTodoVo(TodoVo todoVo) {
+		this.todoVo = todoVo;
 	}
 	/**
 	 * get new push boolean

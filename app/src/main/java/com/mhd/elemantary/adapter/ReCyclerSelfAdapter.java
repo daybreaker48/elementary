@@ -45,6 +45,11 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
         listData.add(data);
     }
 
+    public void deleteAll() {
+        // 리스트 전체삭제
+        listData.clear();
+    }
+
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
         public TextView tvSelfItem;
         public CheckBox cb_self_complete_holder;
