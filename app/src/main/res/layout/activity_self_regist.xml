@@ -26,27 +26,41 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="@dimen/subtitle_width"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:textSize="@dimen/font_20"
-                android:text="-"/>
+            android:orientation="vertical">
             <EditText
-                android:id="@+id/et_schedule_subject"
+                android:id="@+id/et_self_title_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:paddingBottom="0dp"
+                android:layout_marginBottom="@dimen/length_10"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
-                android:textColor="@color/black_overlay"
-                android:hint="스스로해요를 등록하세요"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/black"
+                android:hint="@string/content_self_hint_1"
                 android:inputType="textPersonName"
-                android:background="@null"
+                android:background="@drawable/edit_border"
+                android:textColorHint="@color/gray" />
+            <EditText
+                android:id="@+id/et_self_title_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/length_10"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/black"
+                android:hint="@string/content_self_hint_2"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_border"
+                android:textColorHint="@color/gray" />
+            <EditText
+                android:id="@+id/et_self_title_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/black"
+                android:hint="@string/content_self_hint_3"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
@@ -61,8 +75,8 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
-                android:text="+ 항목 추가"/>
+                android:textSize="@dimen/font_18"
+                android:text="@string/content_self_limit"/>
         </LinearLayout>
 
 

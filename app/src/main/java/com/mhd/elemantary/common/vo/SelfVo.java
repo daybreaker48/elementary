@@ -21,161 +21,35 @@ public class SelfVo {
     */
 	public ArrayList<SelfListData> msg = new ArrayList<SelfListData>();
     /**
-     * Paging Banner Data Class
+     * Data Class
      */
 	public class SelfListData {
-		public String subject; 		// 과목명
-        public String detail; 		// 세부항목
-		public String publish; 		// 출판사
-		public String title; 		// 학습지이름
-        public String option;       // F, P, G
-        public String sun; 		    //
-		public String mon; 		    //
-		public String tue; 		    //
-		public String wed; 		    //
-		public String thu; 		    //
-		public String fri; 		    //
-		public String sat; 		    //
-		public String oneday; 		// 하루분량
-		public String total; 		// 총분량
-		public String rest; 		// 남은량
-		public String goal; 		// 목표일
-		public String tbend; 		// 종료일일
+		public String idx; 		// 항목 이름
+		public String tbtitle; 		// 항목 이름
+        public String sfcomplete;     // 완료 여부
 
-		public String getSubject() {
-			return subject;
+		public String getIdx() {
+			return idx;
 		}
 
-		public void setSubject(String subject) {
-			this.subject = subject;
+		public void setIdx(String idx) {
+			this.idx = idx;
 		}
 
-		public String getDetail() {
-			return detail;
+		public String getTbtitle() {
+			return tbtitle;
 		}
 
-		public void setDetail(String detail) {
-			this.detail = detail;
+		public void setTbtitle(String tbtitle) {
+			this.tbtitle = tbtitle;
 		}
 
-		public String getPublish() {
-			return publish;
-		}
-
-		public void setPublish(String publish) {
-			this.publish = publish;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle(String title) {
-			this.title = title;
-		}
-
-        public String getOption() {
-            return option;
+        public String getSfcomplete() {
+            return sfcomplete;
         }
 
-        public void setOption(String option) {
-            this.option = option;
-        }
-
-        public String getSun() {
-            return sun;
-        }
-
-        public void setSun(String sun) {
-            this.sun = sun;
-        }
-
-        public String getMon() {
-            return mon;
-        }
-
-        public void setMon(String mon) {
-            this.mon = mon;
-        }
-
-        public String getTue() {
-            return tue;
-        }
-
-        public void setTue(String tue) {
-            this.tue = tue;
-        }
-
-        public String getWed() {
-            return wed;
-        }
-
-        public void setWed(String wed) {
-            this.wed = wed;
-        }
-
-        public String getThu() {
-            return thu;
-        }
-
-        public void setThu(String thu) {
-            this.thu = thu;
-        }
-
-        public String getFri() {
-            return fri;
-        }
-
-        public void setFri(String fri) {
-            this.fri = fri;
-        }
-
-        public String getSat() {
-            return sat;
-        }
-
-        public void setSat(String sat) {
-            this.sat = sat;
-        }
-
-        public String getOneday() {
-            return oneday;
-        }
-
-        public void setOneday(String oneday) {
-            this.oneday = oneday;
-        }
-
-        public String getTotal() {
-            return total;
-        }
-
-        public void setTotal(String total) {
-            this.total = total;
-        }
-
-        public String getRest() {
-            return rest;
-        }
-
-        public void setRest(String rest) {
-            this.rest = rest;
-        }
-
-        public String getGoal() {
-            return goal;
-        }
-
-        public void setGoal(String goal) {
-            this.goal = goal;
-        }
-
-        public String getTbend() {
-            return tbend;
-        }
-
-        public void setTbend(String tbend) {
-            this.tbend = tbend;
+        public void setSfcomplete(String sfcomplete) {
+            this.sfcomplete = sfcomplete;
         }
 	}
 

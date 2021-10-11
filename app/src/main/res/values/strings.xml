@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">슬기로운 초등생활</string>
+    <string name="app_name">star:D</string>
 
     <string name="common_year">년</string>
     <string name="common_month">월</string>
@@ -124,6 +124,10 @@
     <string name="content_alarm_start_none" translatable="true">시작 시간이 설정되지 않았습니다.</string>
     <string name="content_alarm_end_none" translatable="true">종료 시간이 설정되지 않았습니다.</string>
     <string name="content_alarm_time_error" translatable="true">종료시간이 시작시간보다 커야 합니다..</string>
+    <string name="content_self_limit" translatable="true">한번에 최고 3개까지 등록할 수 있습니다.</string>
+    <string name="content_self_hint_1" translatable="true">첫 번째 스스로해요를 등록하세요.</string>
+    <string name="content_self_hint_2" translatable="true">두 번째 스스로해요를 등록하세요.</string>
+    <string name="content_self_hint_3" translatable="true">세 번째 스스로해요를 등록하세요.</string>
     <string name="content_time" translatable="true">시간</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>

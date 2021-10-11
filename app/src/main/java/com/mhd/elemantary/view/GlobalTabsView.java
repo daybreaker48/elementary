@@ -218,8 +218,7 @@ public class GlobalTabsView extends FrameLayout {
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
                     ((MainActivity)MainActivity.context_main).startScheduleRegist();
                 } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
-                    Intent intent = new Intent(mContext, RegistSelfActivity.class);
-                    mContext.startActivity(intent);
+                    ((MainActivity)MainActivity.context_main).startSelfRegist();
                 }
             }
         });

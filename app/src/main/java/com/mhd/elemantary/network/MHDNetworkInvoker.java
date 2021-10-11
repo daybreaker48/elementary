@@ -396,6 +396,8 @@ public class MHDNetworkInvoker {
                     // 통신 시 서버에서 필요로 하는 값( 주로 사용자 인증에 관한 키 )을 헤더에 넣어 보낼 수 있다.
                     // 로그인 상태인것. 로그인 상태가 아니라면 메인으로 보내게 된다.
                     //headers.put("Content-Type", "charset=utf-8;application/json;");
+                    MHDLog.d(TAG, "paramsMap UUID >>>>>>>>>>>> "+userUuid);
+                    MHDLog.d(TAG, "paramsMap UFCM >>>>>>>>>>>> "+userUfcm);
                     headers.put("UUID", userUuid);
                     headers.put("UFCM", userUfcm);
                     headers.put("USER_AGENT", mContext.getString(R.string.user_agent));

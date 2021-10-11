@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.mhd.elemantary.MainActivity;
@@ -635,13 +634,13 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                     .setDeniedMessage(getString(R.string.alert_permission_denied))
                     .setPermissions(permission)
                     .check();
-        } else if (permission.equals(Manifest.permission.CAMERA)) {
-            TedPermission.with(context)
-                    .setPermissionListener(CAMERAPermissionListner)
-                    .setRationaleMessage(getString(R.string.alert_permission_request_CAMERA))
-                    .setDeniedMessage(getString(R.string.alert_permission_denied))
-                    .setPermissions(permission)
-                    .check();
+//        } else if (permission.equals(Manifest.permission.CAMERA)) {
+//            TedPermission.with(context)
+//                    .setPermissionListener(CAMERAPermissionListner)
+//                    .setRationaleMessage(getString(R.string.alert_permission_request_CAMERA))
+//                    .setDeniedMessage(getString(R.string.alert_permission_denied))
+//                    .setPermissions(permission)
+//                    .check();
         }
     }
     /**
@@ -732,19 +731,19 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Marshmallow 권한설정 리스너
      */
-    PermissionListener CAMERAPermissionListner = new PermissionListener() {
-        @Override
-        public void onPermissionGranted() {
-            MHDLog.d(TAG, "CAMERAPermissionListner Granted");
-
-            new IntentIntegrator((Activity)mContext).initiateScan();
-        }
-
-        @Override
-        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-            MHDLog.d(TAG, "CAMERAPermissionListner Denied");
-        }
-    };
+//    PermissionListener CAMERAPermissionListner = new PermissionListener() {
+//        @Override
+//        public void onPermissionGranted() {
+//            MHDLog.d(TAG, "CAMERAPermissionListner Granted");
+//
+//            new IntentIntegrator((Activity)mContext).initiateScan();
+//        }
+//
+//        @Override
+//        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//            MHDLog.d(TAG, "CAMERAPermissionListner Denied");
+//        }
+//    };
     /**
      * create temp image file
      */

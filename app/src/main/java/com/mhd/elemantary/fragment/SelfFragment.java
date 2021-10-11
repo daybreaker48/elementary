@@ -92,7 +92,7 @@ public class SelfFragment extends BaseFragment {
             // 정보가 없으면 비정상
             Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
         } else {
-            // 할일정보를 받아옴.
+            // self 정보를 받아옴.
             Gson gson = new Gson();
             selfVo = gson.fromJson(result, SelfVo.class);
             MHDApplication.getInstance().getMHDSvcManager().setSelfVo(null);
@@ -101,7 +101,10 @@ public class SelfFragment extends BaseFragment {
         for(int i=0; i<nvCnt; i++){
             // 각 List의 값들을 data 객체에 set 해줍니다.
             SelfData data = new SelfData();
-            data.setSelfItem(selfVo.getMsg().get(i).getSubject());
+            data.setSelfIdx(selfVo.getMsg().get(i).getIdx());
+            data.setSelfItem(selfVo.getMsg().get(i).getTbtitle());
+            data.setSelfComplete(selfVo.getMsg().get(i).getSfcomplete()
+            );
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
@@ -112,22 +115,14 @@ public class SelfFragment extends BaseFragment {
 
         return true;
     }
-
-
-    private void getData() {
-        // 임의의 데이터입니다.
-        List<String> listSelfItem = Arrays.asList("집안일 돕기", "스스로 씻기", "치카", "화분물주기");
-
-        for (int i = 0; i < listSelfItem.size(); i++) {
-            // 각 List의 값들을 data 객체에 set 해줍니다.
-            SelfData data = new SelfData();
-            data.setSelfItem(listSelfItem.get(i));
-
-            // 각 값이 들어간 data를 adapter에 추가합니다.
-            adapter.addItem(data);
+    public boolean networkResponseProcess_update(String nvMsg, int nvCnt, String result) {
+        if (nvCnt == 0) {
+            // 정보가 없으면 비정상. update 실패.
+            Toast.makeText(mContext, "fail", Toast.LENGTH_SHORT).show();
+        } else {// update 성공.
+            Toast.makeText(mContext, "success", Toast.LENGTH_SHORT).show();
         }
 
-        // adapter의 값이 변경되었다는 것을 알려줍니다.
-        adapter.notifyDataSetChanged();
+        return true;
     }
 }

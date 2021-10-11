@@ -24,6 +24,8 @@
     <string name="url_restapi_query_schedule">/api/MHDRT1608.jsp</string><!-- 스케쥴 조회 -->
     <string name="restapi_query_self">MHDRT1015</string><!-- 스스로 조회 -->
     <string name="url_restapi_query_self">/api/MHDRT1015.jsp</string><!-- 스스로 조회 -->
+    <string name="restapi_update_self">MHDRT1355</string><!-- 스스로 Item 업데이트 -->
+    <string name="url_restapi_update_self">/api/MHDRT1355.jsp</string><!-- 스스로 Item 업데이트 -->
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 

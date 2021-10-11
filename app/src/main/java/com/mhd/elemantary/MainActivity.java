@@ -140,6 +140,10 @@ public class MainActivity extends BaseActivity {
                 // SelfFragment 화면 구성.
 //                callFragmentMethod(0);
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_self))){
+                // SelfFragment 개별 item update.
+//                callFragmentMethod(0);
+                ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }
 
         }
@@ -192,7 +196,7 @@ public class MainActivity extends BaseActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f1")).querySelf();
+                        ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).querySelf();
                     }
                 }
             });

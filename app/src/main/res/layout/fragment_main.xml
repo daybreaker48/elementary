@@ -9,7 +9,7 @@
         android:id="@+id/am_background_view_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/zxing_transparent"/>
+        android:background="@color/transparent"/>
 
     <!--가로 Pager-->
     <com.mhd.elemantary.view.CustomViewPager
