@@ -87,7 +87,7 @@
 
     <string name="title_post" translatable="true">POST</string>
     <string name="title_receiving" translatable="true">RECEIVING</string>
-    <string name="title_todo" translatable="true">오늘의 할일</string>
+    <string name="title_todo" translatable="true">오늘의 학습</string>
     <string name="title_schedule" translatable="true">1주일 스케쥴</string>
     <string name="title_selfdo" translatable="true">스스로 해요</string>
     <string name="title_sum" translatable="true">통계</string>
