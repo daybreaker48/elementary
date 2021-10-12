@@ -121,6 +121,7 @@
             android:id="@+id/btn_login"
             android:layout_width="240dp"
             android:layout_height="60dp"
+            android:background="@drawable/ripple_effect"
             android:textSize="20sp"
             android:text="@string/text_tutorial_login_title"/>
     </LinearLayout>

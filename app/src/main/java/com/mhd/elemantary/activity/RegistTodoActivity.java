@@ -21,10 +21,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.adapter.ReCyclerAdapter;
+import com.mhd.elemantary.adapter.ReCyclerSubjectAdapter;
+import com.mhd.elemantary.common.ClickCallbackListener;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.SubjectListData;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.fragment.TodoFragment;
@@ -47,11 +52,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RegistTodoActivity extends BaseActivity implements TextView.OnEditorActionListener  {
 
-    TextView tv_selectday, vst_top_title;
-    TextView tv_rb_daily_progress_2_finishday;
+    TextView tv_selectday, vst_top_title, tv_todo_subject, tv_todo_subject_detail;
+    TextView tv_rb_daily_progress_2_finishday, tv_startday;
     LinearLayout ll_daily_progress, ll_daily_textbook;
     private String[] day_array = new String[7];
     String sendDay = "";
@@ -67,8 +74,33 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     Calendar baseDate, targetDate = null;
     String displayStrings, innerStrings = "";
     String pGoal = "";
+    String selectedSubject = "";
+    String selectedDetail = "";
 
     Spinner spi_todo_subject;
+    public ReCyclerSubjectAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    ArrayList subjectArrayList, detailArrayList;
+    BottomSheetDialog bottomSheetSubject;
+    BottomSheetDialog bottomSheetDetail;
+
+    public ClickCallbackListener callbackListener = new ClickCallbackListener() {
+        @Override
+        public void callBack(int pos) {
+            if(bottomSheetSubject.isShowing()) {
+                selectedSubject = subjectArrayList.get(pos).toString();
+                tv_todo_subject.setText(selectedSubject);
+                bottomSheetSubject.dismiss();
+                showBottomSheetSubjectDetail(selectedSubject);
+                return;
+            }
+            if(bottomSheetDetail.isShowing()) {
+                selectedDetail = detailArrayList.get(pos).toString();
+                tv_todo_subject_detail.setText(selectedDetail);
+                bottomSheetDetail.dismiss();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +108,20 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         initialize(R.layout.activity_todo_regist);
         mContext = RegistTodoActivity.this;
 
+
+        bottomSheetDetail = new BottomSheetDialog(this);
+
+        tv_todo_subject = (TextView) findViewById(R.id.tv_todo_subject);
+        tv_todo_subject_detail = (TextView) findViewById(R.id.tv_todo_subject_detail);
+        tv_todo_subject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showBottomSheetSubject(); }
+        });
+        tv_todo_subject_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showBottomSheetSubjectDetail(selectedSubject); }
+        });
+        tv_startday = (TextView) findViewById(R.id.tv_startday);
         tv_rb_daily_progress_2_finishday = (TextView) findViewById(R.id.tv_rb_daily_progress_2_finishday);
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_todo_regist);
@@ -319,9 +365,38 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         if(innerStrings.isEmpty()) {
             tv_selectday.setText(getString(R.string.content_dailyprogress));
             sendDay = "";
+            tv_startday.setText("");
             ll_rg_daily_progress.setVisibility(View.GONE);
         }else{
             tv_selectday.setText("매주 " + displayStrings);
+
+            Calendar cal = Calendar.getInstance();
+            int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            if(weekd == 7){//
+                String startday = innerStrings.substring(0,1);
+                cal.add(Calendar.DATE, Integer.parseInt(startday));
+                tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+            }else{
+                String[] strArray = innerStrings.split("");
+                int curWeekCount = 0;
+                for(String s : strArray) {
+                    if(Integer.parseInt(s) > weekd) {
+                        curWeekCount++;
+                        cal.add(Calendar.DATE, Integer.parseInt(s) - weekd);
+                        tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+                        break;
+                    }
+                }
+                // curWeekCount == 0 이면 오늘 요일보다 뒤에 학습일이 없다는 것. 다음 주로 넘어가야 한다.
+                // curWeekCount > 0 이면 오늘 요일보다 뒤에 학습일이 있다는 것. 그 요일이 첫 학습일이다.
+                if(curWeekCount == 0){
+                    String startday = innerStrings.substring(0,1);
+                    cal.add(Calendar.DATE, 7 - weekd + Integer.parseInt(startday));
+                    tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+                }
+            }
+
             ll_rg_daily_progress.setVisibility(View.VISIBLE);
         }
     }
@@ -388,14 +463,15 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 ArrayList subjectArrayList = new ArrayList<>();
                 ArrayList detailArrayList = new ArrayList<>();
                 // 과목명만 group by로 추출할 때 사용
-//        for(int i=0; i<nvCnt; i++){
-//            if(i>0 && prevSubject.equals(subjectVo.getMsg().get(i).getSubject()))
-//                continue;
-//            else {
-//                subjectArrayList.add(subjectVo.getMsg().get(i).getSubject());
-//                prevSubject = subjectVo.getMsg().get(i).getSubject();
-//            }
-//        }
+                for(int i=0; i<nvCnt; i++){
+                    if(i>0 && prevSubject.equals(subjectVo.getMsg().get(i).getSubject()))
+                        continue;
+                    else {
+                        subjectArrayList.add(subjectVo.getMsg().get(i).getSubject());
+                        prevSubject = subjectVo.getMsg().get(i).getSubject();
+                    }
+                }
+
                 // 과목 - 상세 형식으로 추출할 때 사용
                 for(int i=0; i<nvCnt; i++){
                     subjectArrayList.add(subjectVo.getMsg().get(i).getSubject() + " - " + subjectVo.getMsg().get(i).getDetail());
@@ -403,8 +479,6 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 
                 spi_todo_subject = (Spinner) findViewById(R.id.spi_todo_subject);
                 ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, R.layout.default_spinner_item, subjectArrayList);
-
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.todo_subject_array, R.layout.default_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spi_todo_subject.setAdapter(adapter);
                 // 일단 세부항목을 과목과 통합시켰다. 그래서 hidden.
@@ -635,7 +709,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }else{
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek-1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -658,7 +732,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }
                     }else{
                         // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -693,7 +767,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }else{
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek-1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -716,7 +790,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }
                     }
 
@@ -848,7 +922,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         } else {
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -871,7 +945,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }
                     } else {
                         // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -906,7 +980,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         } else {
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -929,7 +1003,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
                         }
                     }
 
@@ -1001,7 +1075,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 // 이 날짜가 종료일이다.
                 tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                 pGoal = df.format(cal.getTime());
-                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
             } else {
                 // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                 String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -1024,7 +1098,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 // 이 날짜가 종료일이다.
                 tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                 pGoal = df.format(cal.getTime());
-                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
             }
         } else {
             // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -1059,7 +1133,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 // 이 날짜가 종료일이다.
                 tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                 pGoal = df.format(cal.getTime());
-                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
             } else {
                 // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                 String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -1082,7 +1156,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 // 이 날짜가 종료일이다.
                 tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                 pGoal = df.format(cal.getTime());
-                tv_rb_daily_progress_2_finishday.setText("예상 종료일 : " + pGoal);
+                tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
             }
         }
         return true;
@@ -1113,5 +1187,91 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             // TODO Auto-generated catch block
             MHDLog.printException(e);
         }
+    }
+
+    private void showBottomSheetSubject() {
+        bottomSheetSubject = new BottomSheetDialog(this);
+        bottomSheetSubject.setContentView(R.layout.bottom_sheet_dialog);
+
+        RecyclerView recyclerView = (RecyclerView) bottomSheetSubject.findViewById(R.id.recv_subject);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new ReCyclerSubjectAdapter();
+        recyclerView.setAdapter(adapter);
+
+        SubjectVo subjectVo = MHDApplication.getInstance().getMHDSvcManager().getSubjectVo();
+        String prevSubject = "";
+        subjectArrayList = new ArrayList<>();
+        // 과목명만 group by로 추출할 때 사용
+        for(int i=0; i<nvCnt; i++){
+            if(i>0 && prevSubject.equals(subjectVo.getMsg().get(i).getSubject()))
+                continue;
+            else {
+                subjectArrayList.add(subjectVo.getMsg().get(i).getSubject());
+                prevSubject = subjectVo.getMsg().get(i).getSubject();
+            }
+        }
+
+        for(int i=0; i<subjectArrayList.size(); i++){
+            // 각 List의 값들을 data 객체에 set 해줍니다.
+            SubjectListData data = new SubjectListData();
+            data.setSubject(subjectArrayList.get(i).toString());
+
+            // 각 값이 들어간 data를 adapter에 추가합니다.
+            adapter.addItem(data);
+        }
+
+        adapter.setCallbackListener(callbackListener);
+        // adapter의 값이 변경되었다는 것을 알려줍니다.
+        adapter.notifyDataSetChanged();
+
+        bottomSheetSubject.show();
+    }
+    private void showBottomSheetSubjectDetail(String subejct) {
+        // subject가 선택되지 않았다면 subject 선택 창 띄우기
+        if("".equals(subejct)){
+            showBottomSheetSubject();
+            return;
+        }
+        bottomSheetDetail = new BottomSheetDialog(this);
+        bottomSheetDetail.setContentView(R.layout.bottom_sheet_dialog);
+
+        RecyclerView recyclerView = (RecyclerView) bottomSheetDetail.findViewById(R.id.recv_subject);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new ReCyclerSubjectAdapter();
+        recyclerView.setAdapter(adapter);
+
+        SubjectVo subjectVo = MHDApplication.getInstance().getMHDSvcManager().getSubjectVo();
+        String prevDetail = "";
+        detailArrayList = new ArrayList<>();
+        // 과목명만 group by로 추출할 때 사용
+        for(int i=0; i<nvCnt; i++){
+            if(subejct.equals(subjectVo.getMsg().get(i).getSubject())) {
+                if (i > 0 && prevDetail.equals(subjectVo.getMsg().get(i).getDetail()))
+                    continue;
+                else {
+                    detailArrayList.add(subjectVo.getMsg().get(i).getDetail());
+                    prevDetail = subjectVo.getMsg().get(i).getDetail();
+                }
+            }
+        }
+
+        for(int i=0; i<detailArrayList.size(); i++){
+            // 각 List의 값들을 data 객체에 set 해줍니다.
+            SubjectListData data = new SubjectListData();
+            data.setSubject(detailArrayList.get(i).toString());
+
+            // 각 값이 들어간 data를 adapter에 추가합니다.
+            adapter.addItem(data);
+        }
+
+        adapter.setCallbackListener(callbackListener);
+        // adapter의 값이 변경되었다는 것을 알려줍니다.
+        adapter.notifyDataSetChanged();
+
+        bottomSheetDetail.show();
     }
 }

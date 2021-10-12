@@ -111,6 +111,14 @@ public class MHDSvcManager {
 	 * Current Read ViewPager Index
 	 */
 	private int currentReadIndex = 1;
+	/**
+	 * Current Subject
+	 */
+	private String currentSubject= "";
+	/**
+	 * Current Detail
+	 */
+	private String currentDetail = "";
 
 	/**
 	 * constructor
@@ -446,5 +454,29 @@ public class MHDSvcManager {
 	 */
 	public void setIsFirstStart(boolean firstStart) {
 		isFirstStart = firstStart;
+	}
+	/**
+	 * get current subject
+	 */
+	public String getCurrentSubject() {
+		return currentSubject;
+	}
+	/**
+	 * set current subject
+	 */
+	public void setCurrentSubject(String currentSubject) {
+		currentSubject = currentSubject;
+	}
+	/**
+	 * get current detail
+	 */
+	public String getCurrentDetail() {
+		return currentDetail;
+	}
+	/**
+	 * set current detail
+	 */
+	public void setCurrentDetail(String currentDetail) {
+		currentDetail = currentDetail;
 	}
 }

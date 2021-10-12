@@ -28,6 +28,7 @@
             android:padding="@dimen/line_padding"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_todo_subject"
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -40,6 +41,7 @@
                 android:textSize="@dimen/font_20"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/black_overlay"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -48,9 +50,9 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
-            android:visibility="gone"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_todo_subject_detail"
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -63,25 +65,9 @@
                 android:textSize="@dimen/font_20"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/black_overlay"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_daily_textbook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:visibility="gone"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="@dimen/subtitle_width"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:textSize="@dimen/font_20"
-                android:text="@string/subtitle_textbook"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -134,7 +120,7 @@
                 android:paddingLeft="10dp"
                 android:textSize="@dimen/font_20"
                 android:textColor="@color/black_overlay"
-                android:hint="교재 제목을 입력하세요"
+                android:hint="교재명을 입력하세요"
                 android:inputType="textPersonName"
                 android:background="@null"
                 android:textColorHint="@color/gray" />
@@ -276,6 +262,15 @@
             android:padding="@dimen/line_padding"
             android:orientation="horizontal">
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_startday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textSize="@dimen/font_20"
+            android:text=""/>
         <!--<LinearLayout-->
             <!--android:id="@+id/ll_daily_progress"-->
             <!--android:layout_width="match_parent"-->
@@ -550,7 +545,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/ripple_effect"
                 android:text="@string/button_cancel_post"
                 android:layout_gravity="start"
                 android:padding="2dp"
@@ -560,7 +555,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/ripple_effect"
                 android:text="@string/button_save_post"
                 android:layout_gravity="end"
                 android:padding="2dp"
