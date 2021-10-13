@@ -25,6 +25,7 @@ import com.github.dhaval2404.colorpicker.model.ColorSwatch;
 import com.github.dhaval2404.colorpicker.util.ColorUtil;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.ScheduleVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -65,6 +66,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
             mTimePickerDialog.show(getSupportFragmentManager(), "TimePickerDialog");
         }
         if(view.getTitle().equals("학습 종료")){
+            endHour = hourOfDay;
             if(startHour == 0)
                 Toast.makeText(mContext, getString(R.string.content_alarm_start_none), Toast.LENGTH_SHORT).show();
             if(endHour == 0)
@@ -311,11 +313,118 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         } else if(startHour >= endHour) {
             Toast.makeText(mContext, getString(R.string.content_alarm_time_error), Toast.LENGTH_SHORT).show();
         } else {
-            if("".equals(mMaterialColorSquare))
-                mMaterialColorSquare = "#ffffff";
+            if(checkDuplicate()) {
+                if ("".equals(mMaterialColorSquare))
+                    mMaterialColorSquare = "#ffffff";
 
-            sendScheduleData(tmpTitle, String.valueOf(startHour), String.valueOf(endHour), mMaterialColorSquare);
+                sendScheduleData(tmpTitle, String.valueOf(startHour), String.valueOf(endHour), mMaterialColorSquare);
+            }
         }
+    }
+
+    private boolean checkDuplicate(){
+        // 기존 스케쥴과 중복되는 내용이 있는지 확인
+        ScheduleVo scheduleVo = MHDApplication.getInstance().getMHDSvcManager().getScheduleVo();
+        if(innerStrings.contains("2")) { // 설정 요일에 월요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                        || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                        || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_mon), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("3")) { // 설정 요일에 화요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_tue), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("4")) { // 설정 요일에 수요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_wed), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("5")) { // 설정 요일에 목요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_thu), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("6")) { // 설정 요일에 금요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_fri), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("7")) { // 설정 요일에 토요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sat), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+        if(innerStrings.contains("1")) { // 설정 요일에 일요일이 있을 때
+            for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                if("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
+                    int startTime = scheduleVo.getMsg().get(k).getStart();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd();
+                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
+                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
+                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sun), Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     private void sendScheduleData(String subject, String start, String end, String color){

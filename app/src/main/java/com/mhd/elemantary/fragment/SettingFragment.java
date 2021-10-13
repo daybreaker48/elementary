@@ -25,6 +25,7 @@ public class SettingFragment extends BaseFragment {
 //        RelativeLayout.LayoutParams mLayoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
+        getChildFragmentManager().beginTransaction().replace(R.id.preferencef_frame, new PreferenceCustomFragment()).commit();
     }
 
     @Override
