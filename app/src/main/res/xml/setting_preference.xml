@@ -4,6 +4,17 @@
     <androidx.preference.PreferenceCategory
         app:iconSpaceReserved="false"
         android:title="설 정">
+        <!--아동 등록-->
+        <EditTextPreference
+            android:title="우리 아이 등록"
+            android:summary="소중한 우리 아이를 등록해주세요"
+            android:defaultValue="test"
+            android:key="backup"/>
+
+        <androidx.preference.Preference
+            android:title="기본">
+        </androidx.preference.Preference>
+
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             android:key="message"
