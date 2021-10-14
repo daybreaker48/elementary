@@ -52,21 +52,28 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
     String mMaterialColorSquare = ""; // 설정하지 않으면 white
     String displayStrings, innerStrings = "";
     int startHour = 0, endHour = 0;
+    int startMin = 0, endMin = 0;
 
     @Override
     public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
         if(view.getTitle().equals("학습 시작")){
             startHour = hourOfDay;
-            tv_schedule_time.setText("시 간 : " + String.valueOf(hourOfDay) + ":00 ~ ");
-            TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, true);
-            mTimePickerDialog.enableMinutes(false);
+            startMin = minute;
+
+            Calendar now = Calendar.getInstance();
+            TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
+            mTimePickerDialog.enableMinutes(true);
+            mTimePickerDialog.setTimeInterval(1, 30);
             mTimePickerDialog.setMinTime(8,0,0);
             mTimePickerDialog.setMaxTime(22,0,0);
             mTimePickerDialog.setTitle("학습 종료");
             mTimePickerDialog.show(getSupportFragmentManager(), "TimePickerDialog");
+
+            tv_schedule_time.setText("시 간 : " + String.valueOf(hourOfDay) + ":"+ String.valueOf(minute<10 ? "0"+String.valueOf(minute) : String.valueOf(minute)) +" ~ ");
         }
         if(view.getTitle().equals("학습 종료")){
             endHour = hourOfDay;
+            endMin = minute;
             if(startHour == 0)
                 Toast.makeText(mContext, getString(R.string.content_alarm_start_none), Toast.LENGTH_SHORT).show();
             if(endHour == 0)
@@ -76,7 +83,8 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
 
             endHour = hourOfDay;
             String cuString = tv_schedule_time.getText().toString();
-            tv_schedule_time.setText(cuString + String.valueOf(hourOfDay) + ":00");
+
+            tv_schedule_time.setText(cuString + String.valueOf(hourOfDay) + ":"+ String.valueOf(minute<10 ? "0"+String.valueOf(minute) : String.valueOf(minute)));
         }
     }
 
@@ -166,8 +174,10 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         // 시간 선택
 //        TimePickerFragment mTimePickerFragment = new TimePickerFragment();
 //        mTimePickerFragment.show(getSupportFragmentManager(), "timepicker");
-        TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, true);
-        mTimePickerDialog.enableMinutes(false);
+        Calendar now = Calendar.getInstance();
+        TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
+        mTimePickerDialog.enableMinutes(true);
+        mTimePickerDialog.setTimeInterval(1, 30);
         mTimePickerDialog.setMinTime(8,0,0);
         mTimePickerDialog.setMaxTime(22,0,0);
         mTimePickerDialog.setTitle("학습 시작");
@@ -317,7 +327,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
                 if ("".equals(mMaterialColorSquare))
                     mMaterialColorSquare = "#ffffff";
 
-                sendScheduleData(tmpTitle, String.valueOf(startHour), String.valueOf(endHour), mMaterialColorSquare);
+                sendScheduleData(tmpTitle, String.valueOf(startHour), String.valueOf(endHour), String.valueOf(startMin), String.valueOf(endMin), mMaterialColorSquare);
             }
         }
     }
@@ -325,14 +335,16 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
     private boolean checkDuplicate(){
         // 기존 스케쥴과 중복되는 내용이 있는지 확인
         ScheduleVo scheduleVo = MHDApplication.getInstance().getMHDSvcManager().getScheduleVo();
+        int tmpStartTime = (startHour*100+startMin);
+        int tmpEndTime = (endHour*100+endMin);
         if(innerStrings.contains("2")) { // 설정 요일에 월요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                        || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                        || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                        || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                        || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_mon), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -342,11 +354,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("3")) { // 설정 요일에 화요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_tue), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -356,11 +368,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("4")) { // 설정 요일에 수요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_wed), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -370,11 +382,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("5")) { // 설정 요일에 목요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_thu), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -384,11 +396,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("6")) { // 설정 요일에 금요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_fri), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -398,11 +410,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("7")) { // 설정 요일에 토요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sat), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -412,11 +424,11 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         if(innerStrings.contains("1")) { // 설정 요일에 일요일이 있을 때
             for (int k = 0; k < scheduleVo.getCnt(); k++) {
                 if("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd();
-                    if((startTime>=startHour && endTime<=endHour) || (startTime<=startHour && endTime>=endHour)
-                            || (startTime<=startHour && (endTime>startHour && endTime<=endHour))
-                            || (endTime>=endHour && (startTime>=startHour && startTime<endHour))){ //  중복
+                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
+                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
+                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
                         Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sun), Toast.LENGTH_SHORT).show();
                         return false;
                     }
@@ -427,7 +439,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         return true;
     }
 
-    private void sendScheduleData(String subject, String start, String end, String color){
+    private void sendScheduleData(String subject, String start, String end, String startmin, String endmin, String color){
         try {
             // Map 방식 0
             Map<String, String> params = new HashMap<String, String>();
@@ -441,7 +453,9 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
             params.put("SCFRI", innerStrings.contains("6") ? "Y" : "N");
             params.put("SCSAT", innerStrings.contains("7") ? "Y" : "N");
             params.put("SCSTART", start);
+            params.put("SCSTARTMIN", startmin);
             params.put("SCEND", end);
+            params.put("SCENDMIN", endmin);
             params.put("SCCOLOR", color);
             // 알람 추가해야함.
             MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_schedule, params, responseListener);

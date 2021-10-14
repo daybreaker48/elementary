@@ -31,7 +31,7 @@ public class SettingFragment extends BaseFragment {
 //        mTitle.setLayoutParams(mLayoutParams);
         getChildFragmentManager().beginTransaction().replace(R.id.preferencef_frame, new PreferenceCustomFragment()).commit();
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
