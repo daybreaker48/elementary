@@ -33,7 +33,9 @@ public class ScheduleVo {
 		public String fri; 		    //
 		public String sat; 		    //
 		public int start; 		    // 시작시간
+		public int startmin; 		    // 시작시간
 		public int end; 		    // 종료시간
+		public int endmin; 		    // 종료시간
 		public String color; 		// 색상
 		public int alarm; 		    // 알람
 
@@ -109,12 +111,28 @@ public class ScheduleVo {
             this.start = start;
         }
 
+        public int getStartMin() {
+            return startmin;
+        }
+
+        public void setStartMin(int startmin) {
+            this.startmin = startmin;
+        }
+
         public int getEnd() {
             return end;
         }
 
         public void setEnd(int end) {
             this.end = end;
+        }
+
+        public int getEndMin() {
+            return endmin;
+        }
+
+        public void setEndMin(int endmin) {
+            this.endmin = endmin;
         }
 
         public String getColor() {

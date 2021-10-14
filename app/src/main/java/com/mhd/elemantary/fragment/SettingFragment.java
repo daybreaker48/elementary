@@ -1,11 +1,15 @@
 package com.mhd.elemantary.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
+
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.util.MHDLog;
 
 public class SettingFragment extends BaseFragment {
 
@@ -25,6 +29,15 @@ public class SettingFragment extends BaseFragment {
 //        RelativeLayout.LayoutParams mLayoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
+        getChildFragmentManager().beginTransaction().replace(R.id.preferencef_frame, new PreferenceCustomFragment()).commit();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                MHDLog.d("SettingFragment", key);
+            }
+        });
     }
 
     @Override

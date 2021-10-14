@@ -162,168 +162,177 @@ public class ScheduleFragment extends BaseFragment {
         for (int i = startTime; i < endTime; i++) {
             drawTimeCell(linearLayoutTime, i);
         }
-        for (int i = startTime; i < endTime; i++) {
-            // 데이터 중 각 요일을 체크한다.
-            boolean dMon = false;
-            boolean dTue = false;
-            boolean dWed = false;
-            boolean dThu = false;
-            boolean dFri = false;
-            boolean dSat = false;
-            boolean dSun = false;
-            for (int k=0; k < scheduleVo.getCnt(); k++){
-                if("Y".equals(scheduleVo.getMsg().get(k).getMon())){
-                    if(!dMon) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutMon);
-                            dMon = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dMon = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 다른 일정이 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "mon", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutMon);
-                                dMon = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getTue())){
-                    if(!dTue) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutTue);
-                            dTue = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dTue = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "tue", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutTue);
-                                dTue = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getWed())){
-                    if(!dWed) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutWed);
-                            dWed = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dWed = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "wed", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutWed);
-                                dWed = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getThu())){
-                    if(!dThu) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutThu);
-                            dThu = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dThu = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "thu", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutThu);
-                                dThu = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getFri())){
-                    if(!dFri) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutFri);
-                            dFri = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dFri = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "fri", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutFri);
-                                dFri = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getSat())){
-                    if(!dSat) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutSat);
-                            dSat = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dSat = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "sat", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutSat);
-                                dSat = true;
-                            }
-                        }
-                    }
-                }
-                if("Y".equals(scheduleVo.getMsg().get(k).getSun())){
-                    if(!dSun) {
-                        if (i == scheduleVo.getMsg().get(k).getStart()) {
-                            drawCell(scheduleVo, k, linearLayoutSun);
-                            dSun = true;
-                        } else if (i > scheduleVo.getMsg().get(k).getStart() && i < scheduleVo.getMsg().get(k).getEnd()) {
-                            // 이미 그렸을테니 패스.
-                            dSun = true;
-                        } else if (i < scheduleVo.getMsg().get(k).getStart()) {
-                            // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
-                            // 이미 그려진 경우를 구분해내야 한다.
-                            boolean cuTimeDraw = checkTIme(scheduleVo, "sun", i);
-                            if (!cuTimeDraw) {
-                                drawBlankCell(linearLayoutSun);
-                                dSun = true;
-                            }
-                        }
-                    }
-                }
-                // 각 요일에 해당하고 시작시간과 동일한 데이터가 있으면 그리게 되고, 그 후에..
-                // 각 요일에 해당하고 시작시간과 종료시간 사이에 있는 데이터가 있으면 안그려야 하고(아무것도 안하는), 그 후에..
-                // 각 요일에 해당도 안되거나, 해당이 되지만 시간이 사이에 끼지 못하는 것은 그려야 한다.
-            }
+        for (int i = startTime*100; i < endTime*100; i+=100) {
+            // 각 시간별로 루프를 돌며
+            for (int d = 0; d<31; d+=30) {
+                boolean dMon = false;
+                boolean dTue = false;
+                boolean dWed = false;
+                boolean dThu = false;
+                boolean dFri = false;
+                boolean dSat = false;
+                boolean dSun = false;
 
-            if(!dMon)
-                drawBlankCell(linearLayoutMon);
-            if(!dTue)
-                drawBlankCell(linearLayoutTue);
-            if(!dWed)
-                drawBlankCell(linearLayoutWed);
-            if(!dThu)
-                drawBlankCell(linearLayoutThu);
-            if(!dFri)
-                drawBlankCell(linearLayoutFri);
-            if(!dSat)
-                drawBlankCell(linearLayoutSat);
-            if(!dSun)
-                drawBlankCell(linearLayoutSun);
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    int sTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
+                    int eTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
+
+                    // 시간루프에 따른 해당 시간에 대해 각 데이타별로 루프를 돌며 그리기 시작.
+                    // 각 시간대(30분 단위)에 한해서 시간표의 좌에서 우로 그려진다.
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
+                        if (!dMon) {
+                            if (i+d == sTime) {
+                                // 시작 시간이 일치한다면 gap 계산해서 그린다.
+                                drawCell(scheduleVo, k, linearLayoutMon);
+                                dMon = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dMon = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 다른 일정이 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "mon", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutMon);
+                                    dMon = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
+                        if (!dTue) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutTue);
+                                dTue = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dTue = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "tue", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutTue);
+                                    dTue = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
+                        if (!dWed) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutWed);
+                                dWed = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dWed = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "wed", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutWed);
+                                    dWed = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
+                        if (!dThu) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutThu);
+                                dThu = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dThu = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "thu", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutThu);
+                                    dThu = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
+                        if (!dFri) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutFri);
+                                dFri = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dFri = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "fri", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutFri);
+                                    dFri = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
+                        if (!dSat) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutSat);
+                                dSat = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dSat = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "sat", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutSat);
+                                    dSat = true;
+                                }
+                            }
+                        }
+                    }
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
+                        if (!dSun) {
+                            if (i+d == sTime) {
+                                drawCell(scheduleVo, k, linearLayoutSun);
+                                dSun = true;
+                            } else if (i+d > sTime && i+d < eTime) {
+                                // 이미 그렸을테니 패스.
+                                dSun = true;
+                            } else if (i+d < sTime) {
+                                // 데이터가 있어서 이미 그려진 경우가 있고, 없어서 공백을 그려야할 때가 있다.
+                                // 이미 그려진 경우를 구분해내야 한다.
+                                boolean cuTimeDraw = checkTIme(scheduleVo, "sun", i+d);
+                                if (!cuTimeDraw) {
+                                    drawBlankCell(linearLayoutSun);
+                                    dSun = true;
+                                }
+                            }
+                        }
+                    }
+                    // 각 요일에 해당하고 시작시간과 동일한 데이터가 있으면 그리게 되고, 그 후에..
+                    // 각 요일에 해당하고 시작시간과 종료시간 사이에 있는 데이터가 있으면 안그려야 하고(아무것도 안하는), 그 후에..
+                    // 각 요일에 해당도 안되거나, 해당이 되지만 시간이 사이에 끼지 못하는 것은 그려야 한다.
+                }
+
+                if (!dMon)
+                    drawBlankCell(linearLayoutMon);
+                if (!dTue)
+                    drawBlankCell(linearLayoutTue);
+                if (!dWed)
+                    drawBlankCell(linearLayoutWed);
+                if (!dThu)
+                    drawBlankCell(linearLayoutThu);
+                if (!dFri)
+                    drawBlankCell(linearLayoutFri);
+                if (!dSat)
+                    drawBlankCell(linearLayoutSat);
+                if (!dSun)
+                    drawBlankCell(linearLayoutSun);
+            }
         }
 
         return true;
@@ -332,7 +341,14 @@ public class ScheduleFragment extends BaseFragment {
      private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout) {
          // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
          // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
-         int gap = scheduleVo.getMsg().get(k).getEnd() - scheduleVo.getMsg().get(k).getStart();
+         int sHour = scheduleVo.getMsg().get(k).getStart();
+         int sMin = scheduleVo.getMsg().get(k).getStartMin();
+         int eHour = scheduleVo.getMsg().get(k).getEnd();
+         int eMin = scheduleVo.getMsg().get(k).getEndMin();
+         int sCalc = sMin == 30 ? -1 : 0;
+         int eCalc= eMin == 30 ? 1 : 0;
+
+         int gap = ((eHour - sHour)*2) + sCalc + eCalc;
          titleText = new TextView(getContext());
          titleText.setText(scheduleVo.getMsg().get(k).getSubject());
          titleText.setTextSize(15);
@@ -382,9 +398,11 @@ public class ScheduleFragment extends BaseFragment {
     private boolean drawTimeCell(LinearLayout mLinearLayout, int time) {
         // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
         // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
+        // 30분 단위까지 표시하도록 수정_2021.10.14
         int gap = 1;
         titleText = new TextView(getContext());
         titleText.setText(String.valueOf(time) + "~" + String.valueOf(time+1));
+//        titleText.setText(String.valueOf(time) + ":00");
         titleText.setTextSize(14);
         titleText.setTextColor(Color.BLACK);
         titleText.setGravity(Gravity.CENTER);
@@ -402,6 +420,19 @@ public class ScheduleFragment extends BaseFragment {
 
         titleText.setLayoutParams (param);
 
+//        titleText = new TextView(getContext());
+////        titleText.setText(String.valueOf(time) + "~" + String.valueOf(time+1));
+//        titleText.setText(String.valueOf(time) + ":30");
+//        titleText.setTextSize(14);
+//        titleText.setTextColor(Color.BLACK);
+//        titleText.setGravity(Gravity.CENTER);
+//        titleText.setBackground(bottomBorder);
+//        titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+//
+//        mLinearLayout.addView(titleText);
+//
+//        titleText.setLayoutParams (param);
+
         return true;
     }
 
@@ -409,7 +440,7 @@ public class ScheduleFragment extends BaseFragment {
         if("mon".equals(day)){
             for (int k=0; k < scheduleVo.getCnt(); k++) {
                 if ("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
-                    if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                    if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                         return true;
                 }
             }
@@ -417,7 +448,7 @@ public class ScheduleFragment extends BaseFragment {
          if("tue".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
@@ -425,7 +456,7 @@ public class ScheduleFragment extends BaseFragment {
          if("wed".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
@@ -433,7 +464,7 @@ public class ScheduleFragment extends BaseFragment {
          if("thu".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
@@ -441,7 +472,7 @@ public class ScheduleFragment extends BaseFragment {
          if("fri".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
@@ -449,7 +480,7 @@ public class ScheduleFragment extends BaseFragment {
          if("sat".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
@@ -457,7 +488,7 @@ public class ScheduleFragment extends BaseFragment {
          if("sun".equals(day)){
              for (int k=0; k < scheduleVo.getCnt(); k++) {
                  if ("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
-                     if(cutime >= scheduleVo.getMsg().get(k).getStart() && cutime <= scheduleVo.getMsg().get(k).getEnd())
+                     if(cutime >= (scheduleVo.getMsg().get(k).getStart()*100)+scheduleVo.getMsg().get(k).getStartMin() && cutime <= (scheduleVo.getMsg().get(k).getEnd()*100)+scheduleVo.getMsg().get(k).getEndMin())
                          return true;
                  }
              }
