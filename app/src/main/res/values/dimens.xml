@@ -256,5 +256,5 @@
 
     <!-- push -->
     <dimen name="schedule_time">15sp</dimen>
-    <dimen name="schedule_day">18dp</dimen>
+    <dimen name="schedule_day">14sp</dimen>
 </resources>
