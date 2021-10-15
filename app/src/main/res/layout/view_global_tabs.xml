@@ -26,11 +26,11 @@
         android:background="@drawable/topmenu"/>
     <ImageView
         android:id="@+id/vst_right_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/length_26"
+        android:layout_height="@dimen/length_26"
         android:layout_gravity="end|top"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="@dimen/length_10"
         android:padding="8dp"
         android:background="@drawable/regist"/>
 
@@ -44,7 +44,7 @@
         <ImageView
             android:id="@+id/vst_main_first_image"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/length_28"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:src="@drawable/todo"
@@ -52,7 +52,7 @@
         <ImageView
             android:id="@+id/vst_main_second_image"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/length_28"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:src="@drawable/schedule"
@@ -60,7 +60,7 @@
         <ImageView
             android:id="@+id/vst_main_third_image"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/length_28"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:src="@drawable/self"
@@ -68,7 +68,7 @@
         <ImageView
             android:id="@+id/vst_main_fourth_image"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/length_28"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:src="@drawable/summary"
@@ -76,7 +76,7 @@
         <ImageView
             android:id="@+id/vst_main_fifth_image"
             android:layout_width="0dp"
-            android:layout_height="32dp"
+            android:layout_height="@dimen/length_28"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:src="@drawable/setting"

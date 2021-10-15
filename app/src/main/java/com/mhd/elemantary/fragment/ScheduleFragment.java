@@ -1,9 +1,12 @@
 package com.mhd.elemantary.fragment;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
@@ -81,11 +84,14 @@ public class ScheduleFragment extends BaseFragment {
         // Initialize new color drawables
         ColorDrawable borderColorDrawable = new ColorDrawable(borderColor);
         ColorDrawable backgroundColorDrawable = new ColorDrawable(bgColor);
+//        GradientDrawable backgroundCornerDrawable =  new GradientDrawable();
+//        backgroundCornerDrawable.setCornerRadius( 20 );
 
         // Initialize a new array of drawable objects
         Drawable[] drawables = new Drawable[]{
                 borderColorDrawable,
                 backgroundColorDrawable
+//                backgroundCornerDrawable
         };
 
         // Initialize a new layer drawable instance from drawables array
@@ -183,7 +189,7 @@ public class ScheduleFragment extends BaseFragment {
                         if (!dMon) {
                             if (i+d == sTime) {
                                 // 시작 시간이 일치한다면 gap 계산해서 그린다.
-                                drawCell(scheduleVo, k, linearLayoutMon);
+                                drawCell(scheduleVo, k, linearLayoutMon, i, d);
                                 dMon = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -193,7 +199,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "mon", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutMon);
+                                    drawBlankCell(linearLayoutMon, i, d);
                                     dMon = true;
                                 }
                             }
@@ -202,7 +208,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
                         if (!dTue) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutTue);
+                                drawCell(scheduleVo, k, linearLayoutTue, i, d);
                                 dTue = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -212,7 +218,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "tue", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutTue);
+                                    drawBlankCell(linearLayoutTue, i, d);
                                     dTue = true;
                                 }
                             }
@@ -221,7 +227,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
                         if (!dWed) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutWed);
+                                drawCell(scheduleVo, k, linearLayoutWed, i, d);
                                 dWed = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -231,7 +237,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "wed", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutWed);
+                                    drawBlankCell(linearLayoutWed, i, d);
                                     dWed = true;
                                 }
                             }
@@ -240,7 +246,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
                         if (!dThu) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutThu);
+                                drawCell(scheduleVo, k, linearLayoutThu, i, d);
                                 dThu = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -250,7 +256,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "thu", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutThu);
+                                    drawBlankCell(linearLayoutThu, i, d);
                                     dThu = true;
                                 }
                             }
@@ -259,7 +265,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
                         if (!dFri) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutFri);
+                                drawCell(scheduleVo, k, linearLayoutFri, i, d);
                                 dFri = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -269,7 +275,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "fri", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutFri);
+                                    drawBlankCell(linearLayoutFri, i, d);
                                     dFri = true;
                                 }
                             }
@@ -278,7 +284,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
                         if (!dSat) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutSat);
+                                drawCell(scheduleVo, k, linearLayoutSat, i, d);
                                 dSat = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -288,7 +294,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "sat", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutSat);
+                                    drawBlankCell(linearLayoutSat, i, d);
                                     dSat = true;
                                 }
                             }
@@ -297,7 +303,7 @@ public class ScheduleFragment extends BaseFragment {
                     if ("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
                         if (!dSun) {
                             if (i+d == sTime) {
-                                drawCell(scheduleVo, k, linearLayoutSun);
+                                drawCell(scheduleVo, k, linearLayoutSun, i, d);
                                 dSun = true;
                             } else if (i+d > sTime && i+d < eTime) {
                                 // 이미 그렸을테니 패스.
@@ -307,7 +313,7 @@ public class ScheduleFragment extends BaseFragment {
                                 // 이미 그려진 경우를 구분해내야 한다.
                                 boolean cuTimeDraw = checkTIme(scheduleVo, "sun", i+d);
                                 if (!cuTimeDraw) {
-                                    drawBlankCell(linearLayoutSun);
+                                    drawBlankCell(linearLayoutSun, i, d);
                                     dSun = true;
                                 }
                             }
@@ -319,26 +325,26 @@ public class ScheduleFragment extends BaseFragment {
                 }
 
                 if (!dMon)
-                    drawBlankCell(linearLayoutMon);
+                    drawBlankCell(linearLayoutMon, i, d);
                 if (!dTue)
-                    drawBlankCell(linearLayoutTue);
+                    drawBlankCell(linearLayoutTue, i, d);
                 if (!dWed)
-                    drawBlankCell(linearLayoutWed);
+                    drawBlankCell(linearLayoutWed, i, d);
                 if (!dThu)
-                    drawBlankCell(linearLayoutThu);
+                    drawBlankCell(linearLayoutThu, i, d);
                 if (!dFri)
-                    drawBlankCell(linearLayoutFri);
+                    drawBlankCell(linearLayoutFri, i, d);
                 if (!dSat)
-                    drawBlankCell(linearLayoutSat);
+                    drawBlankCell(linearLayoutSat, i, d);
                 if (!dSun)
-                    drawBlankCell(linearLayoutSun);
+                    drawBlankCell(linearLayoutSun, i, d);
             }
         }
 
         return true;
     }
 
-     private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout) {
+     private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout, int ii, int dd) {
          // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
          // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
          int sHour = scheduleVo.getMsg().get(k).getStart();
@@ -347,51 +353,83 @@ public class ScheduleFragment extends BaseFragment {
          int eMin = scheduleVo.getMsg().get(k).getEndMin();
          int sCalc = sMin == 30 ? -1 : 0;
          int eCalc= eMin == 30 ? 1 : 0;
-
          int gap = ((eHour - sHour)*2) + sCalc + eCalc;
+         int bottomline = 0;
+         if((dd==0 && gap%2==0) || (dd==30 && gap%2==1)){
+             bottomline = 1;
+         }
+
+         LinearLayout myLinearLayout = new LinearLayout(getContext());
+         myLinearLayout.setOrientation(LinearLayout.VERTICAL);
+         LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(
+                 LinearLayout.LayoutParams.MATCH_PARENT,
+                 LinearLayout.LayoutParams.MATCH_PARENT);
+         mParams.height = 0;
+         mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+         mParams.weight = gap;
+         mParams.gravity = Gravity.CENTER;
+         myLinearLayout.setPadding(6,6,6,6);
+         myLinearLayout.setLayoutParams(mParams);
+         LayerDrawable shape = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, bottomline);
+         myLinearLayout.setBackground(shape);
+
          titleText = new TextView(getContext());
          titleText.setText(scheduleVo.getMsg().get(k).getSubject());
-         titleText.setTextSize(15);
-         titleText.setTextColor(Color.BLACK);
+         titleText.setTextSize(13);
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             Typeface typeface = getResources().getFont(R.font.main_font);
+             titleText.setTypeface(typeface);
+         }else{
+             Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"); // font 폴더내에 있는 jua.ttf 파일을 typeface로 설정
+             titleText.setTypeface(typeface);
+         }
+         titleText.setTextColor(Color.WHITE);
          titleText.setGravity(Gravity.CENTER);
-         LayerDrawable bottomBorder = getBorders(Color.parseColor(scheduleVo.getMsg().get(k).getColor()), Color.BLACK, 1, 1, 1, 1);
-         titleText.setBackground(bottomBorder);
-         titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+//         LayerDrawable bottomBorder = getBorders(Color.parseColor(scheduleVo.getMsg().get(k).getColor()), Color.GRAY, 0, 0, 0, 0);
+//         titleText.setBackground(bottomBorder);
+         GradientDrawable shape2 =  new GradientDrawable();
+         shape2.setCornerRadius( 20 );
+         shape2.setColor(Color.parseColor(scheduleVo.getMsg().get(k).getColor()));
+         titleText.setBackground(shape2);
+//         GradientDrawable gd = new GradientDrawable();
+//         gd.setColor(Color.RED);
+//         gd.setCornerRadius(10);
+//         gd.setStroke(2, Color.WHITE);
+//
+//         view.setBackground(gd);
 
-         mLinearLayout.addView(titleText);
+         myLinearLayout.addView(titleText);
+         mLinearLayout.addView(myLinearLayout);
 
          LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-         param.height = 0;
+         param.height = LinearLayout.LayoutParams.MATCH_PARENT;
          param.width = LinearLayout.LayoutParams.MATCH_PARENT;
-         param.weight = gap;
          param.gravity = Gravity.CENTER;
 
-         titleText.setLayoutParams (param);
+         titleText.setLayoutParams(param);
 
          return true;
      }
-    private boolean drawBlankCell(LinearLayout mLinearLayout) {
+    private boolean drawBlankCell(LinearLayout mLinearLayout, int ii, int dd) {
         // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
         // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
         int gap = 1;
-        titleText = new TextView(getContext());
-        titleText.setText("");
-        titleText.setTextSize(15);
-        titleText.setTextColor(Color.BLACK);
-        titleText.setGravity(Gravity.CENTER);
-        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.BLACK, 1, 1, 1, 1);
-        titleText.setBackground(bottomBorder);
-        titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        LinearLayout myLinearLayout = new LinearLayout(getContext());
+        myLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        mParams.height = 0;
+        mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
+        mParams.weight = gap;
+        mParams.gravity = Gravity.CENTER;
+        myLinearLayout.setPadding(6,6,6,6);
+        myLinearLayout.setLayoutParams(mParams);
+        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, dd == 30 ? 1 : 0);
+        myLinearLayout.setBackground(bottomBorder);
 
-        mLinearLayout.addView(titleText);
+        mLinearLayout.addView(myLinearLayout);
 
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        param.height = 0;
-        param.width = LinearLayout.LayoutParams.MATCH_PARENT;
-        param.weight = gap;
-        param.gravity = Gravity.CENTER;
-
-        titleText.setLayoutParams (param);
 
         return true;
     }
@@ -401,14 +439,20 @@ public class ScheduleFragment extends BaseFragment {
         // 30분 단위까지 표시하도록 수정_2021.10.14
         int gap = 1;
         titleText = new TextView(getContext());
-        titleText.setText(String.valueOf(time) + "~" + String.valueOf(time+1));
-//        titleText.setText(String.valueOf(time) + ":00");
-        titleText.setTextSize(14);
+//        titleText.setText(String.valueOf(time) + "~" + String.valueOf(time+1));
+        titleText.setText(String.valueOf(time) + ":00");
+        titleText.setTextSize(12);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Typeface typeface = getResources().getFont(R.font.main_font);
+            titleText.setTypeface(typeface);
+        }else{
+            Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"); // font 폴더내에 있는 jua.ttf 파일을 typeface로 설정
+            titleText.setTypeface(typeface);
+        }
         titleText.setTextColor(Color.BLACK);
         titleText.setGravity(Gravity.CENTER);
-        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.BLACK, 1, 1, 1, 1);
+        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 1, 1, 1, 1);
         titleText.setBackground(bottomBorder);
-        titleText.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
         mLinearLayout.addView(titleText);
 
