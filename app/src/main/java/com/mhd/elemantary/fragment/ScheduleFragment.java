@@ -9,6 +9,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,7 +47,7 @@ public class ScheduleFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerScheduleAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private LinearLayout linearLayoutTime, linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
+    private LinearLayout linearLayoutTime, linearLayoutLine, linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
     private TextView titleText;
 
 
@@ -68,6 +69,7 @@ public class ScheduleFragment extends BaseFragment {
 //        mTitle.setLayoutParams(mLayoutParams);
 
         linearLayoutTime= (LinearLayout) root.findViewById(R.id.ll_schedule_time);
+        linearLayoutLine= (LinearLayout) root.findViewById(R.id.ll_schedule_line);
         linearLayoutMon = (LinearLayout) root.findViewById(R.id.ll_schedule_mon);
         linearLayoutTue = (LinearLayout) root.findViewById(R.id.ll_schedule_tue);
         linearLayoutWed = (LinearLayout) root.findViewById(R.id.ll_schedule_wed);
@@ -151,6 +153,7 @@ public class ScheduleFragment extends BaseFragment {
         }
 
         linearLayoutTime.removeAllViews();
+        linearLayoutLine.removeAllViews();
         linearLayoutMon.removeAllViews();
         linearLayoutTue.removeAllViews();
         linearLayoutWed.removeAllViews();
@@ -167,6 +170,7 @@ public class ScheduleFragment extends BaseFragment {
         // 8 ~ 22, 각 시간 루프를 돌린다.
         for (int i = startTime; i < endTime; i++) {
             drawTimeCell(linearLayoutTime, i);
+            drawBlankCell(linearLayoutLine, i, 99);
         }
         for (int i = startTime*100; i < endTime*100; i+=100) {
             // 각 시간별로 루프를 돌며
@@ -360,7 +364,7 @@ public class ScheduleFragment extends BaseFragment {
          }
 
          LinearLayout myLinearLayout = new LinearLayout(getContext());
-         myLinearLayout.setOrientation(LinearLayout.VERTICAL);
+         myLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
          LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(
                  LinearLayout.LayoutParams.MATCH_PARENT,
                  LinearLayout.LayoutParams.MATCH_PARENT);
@@ -368,10 +372,10 @@ public class ScheduleFragment extends BaseFragment {
          mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
          mParams.weight = gap;
          mParams.gravity = Gravity.CENTER;
-         myLinearLayout.setPadding(6,6,6,6);
+         myLinearLayout.setPadding(6,9,6,10);
          myLinearLayout.setLayoutParams(mParams);
-         LayerDrawable shape = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, bottomline);
-         myLinearLayout.setBackground(shape);
+//         LayerDrawable shape = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, bottomline);
+//         myLinearLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bottom_border));
 
          titleText = new TextView(getContext());
          titleText.setText(scheduleVo.getMsg().get(k).getSubject());
@@ -415,7 +419,7 @@ public class ScheduleFragment extends BaseFragment {
         // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
         int gap = 1;
         LinearLayout myLinearLayout = new LinearLayout(getContext());
-        myLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        myLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
@@ -423,13 +427,15 @@ public class ScheduleFragment extends BaseFragment {
         mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
         mParams.weight = gap;
         mParams.gravity = Gravity.CENTER;
-        myLinearLayout.setPadding(6,6,6,6);
+        if(dd == 99) {
+            LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, 1);
+            myLinearLayout.setBackground(bottomBorder);
+        }
         myLinearLayout.setLayoutParams(mParams);
-        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, dd == 30 ? 1 : 0);
-        myLinearLayout.setBackground(bottomBorder);
-
         mLinearLayout.addView(myLinearLayout);
 
+//        if(dd == 99)
+//            myLinearLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bottom_border));
 
         return true;
     }
