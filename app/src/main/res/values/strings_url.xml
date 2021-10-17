@@ -29,4 +29,7 @@
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->
 
+    <string name="restapi_regist_kids">MHDRT2351</string><!-- 아이 등록 -->
+    <string name="url_restapi_regist_kids">/api/MHDRT2351.jsp</string><!-- 아이 등록 -->
+
 </resources>

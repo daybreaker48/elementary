@@ -95,6 +95,7 @@
     <string name="title_todo_regist" translatable="true">할일 등록</string>
     <string name="title_schedule_regist" translatable="true">스케쥴 등록</string>
     <string name="title_self_regist" translatable="true">스스로해요 등록</string>
+    <string name="title_kids_regist" translatable="true">아이 등록</string>
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
     <string name="title_todo_regist_daily" translatable="true">하루학습</string>
     <string name="title_schedule_regist_alarm" translatable="true">알림</string>
@@ -110,6 +111,8 @@
     <string name="subtitle_schedule_color" translatable="true">색 상</string>
     <string name="subtitle_schedule_alarm" translatable="true">알 림</string>
     <string name="subtitle_schedule_alarm_none" translatable="true">알림 없음</string>
+    <string name="subtitle_schedule_name" translatable="true">이 름</string>
+    <string name="subtitle_schedule_age" translatable="true">나 이</string>
 
     <string name="subtitle_daily_radio_1" translatable="true">하루학습</string>
     <string name="subtitle_daily_radio_2" translatable="true">총 페이지/하루학습</string>
@@ -136,6 +139,8 @@
     <string name="content_self_hint_1" translatable="true">첫 번째 스스로해요를 등록하세요.</string>
     <string name="content_self_hint_2" translatable="true">두 번째 스스로해요를 등록하세요.</string>
     <string name="content_self_hint_3" translatable="true">세 번째 스스로해요를 등록하세요.</string>
+    <string name="content_kids_limit" translatable="true">한번에 최고 3명까지 등록할 수 있습니다.</string>
+    <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
     <string name="content_time" translatable="true">시간</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>

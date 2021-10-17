@@ -5,13 +5,15 @@
         app:iconSpaceReserved="false"
         android:title="설 정">
         <!--아동 등록-->
-        <EditTextPreference
+        <Preference
+            app:iconSpaceReserved="false"
             android:title="우리 아이 등록"
             android:summary="소중한 우리 아이를 등록해주세요"
-            android:defaultValue="test"
-            android:key="backup"/>
+            android:defaultValue=""
+            android:key="kids"/>
 
         <androidx.preference.Preference
+            app:iconSpaceReserved="false"
             android:title="기본">
         </androidx.preference.Preference>
 

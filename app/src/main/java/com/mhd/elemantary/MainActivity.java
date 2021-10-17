@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
+import com.mhd.elemantary.activity.RegistKidsActivity;
 import com.mhd.elemantary.activity.RegistScheduleActivity;
 import com.mhd.elemantary.activity.RegistSelfActivity;
 import com.mhd.elemantary.activity.RegistTodoActivity;
@@ -26,6 +27,7 @@ import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.fragment.ScheduleFragment;
 import com.mhd.elemantary.fragment.SelfFragment;
+import com.mhd.elemantary.fragment.SettingFragment;
 import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -197,6 +199,21 @@ public class MainActivity extends BaseActivity {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).querySelf();
+                    }
+                }
+            });
+
+    public void startKidsRegist(){
+        Intent intent = new Intent(context_main, RegistKidsActivity.class);
+        startActivityResultKids.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultKids = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // preference 업데이트 & 화면 갱신.
+                        ((SettingFragment) getSupportFragmentManager().findFragmentByTag("f4")).batchFunction("");
                     }
                 }
             });

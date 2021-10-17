@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.network.manager.ResponseListener;
 import com.mhd.elemantary.util.MHDDialogUtil;
@@ -14,6 +15,7 @@ import com.mhd.elemantary.util.MHDLog;
 import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 public class PreferenceCustomFragment extends PreferenceFragmentCompat {
@@ -30,6 +32,21 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
     public String nvFmApi = "";
     public int nvFmCnt = 0;
     public String nvFmMsg = "";
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.setting_preference, rootKey);
+
+        Preference preference = findPreference("kids");
+        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference p) {
+                // Handle preference click
+                ((MainActivity)MainActivity.context_main).startKidsRegist();
+                return true;
+            }
+        });
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,11 +78,6 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
                 return;
             }
         };
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.setting_preference, rootKey);
     }
 
     /**

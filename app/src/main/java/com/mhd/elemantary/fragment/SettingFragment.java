@@ -42,6 +42,7 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public void batchFunction(String api) {
+        MHDLog.d("SettingFragment batchFunction", api);
 //        if(api.equals(getString(R.string.api_editor_clear))) {
 //            // editor 내용 초기화.
 //            editor.clearAllContents();

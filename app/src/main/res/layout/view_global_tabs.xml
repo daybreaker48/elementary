@@ -23,6 +23,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="8dp"
         android:padding="8dp"
+        android:visibility="gone"
         android:background="@drawable/topmenu"/>
     <ImageView
         android:id="@+id/vst_right_image"
