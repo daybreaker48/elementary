@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.KidsVo;
+import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -115,12 +118,12 @@ public class RegistKidsActivity extends BaseActivity {
                 // Map 방식 0
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
-                params.put("kidname1", et_kids_name_1_value);
-                params.put("kidage1", et_kids_age_1_value);
-                params.put("kidname2", et_kids_name_2_value);
-                params.put("kidage2", et_kids_age_2_value);
-                params.put("kidname3", et_kids_name_3_value);
-                params.put("kidage3", et_kids_age_3_value);
+                params.put("KIDNAME1", et_kids_name_1_value);
+                params.put("KIDAGE1", et_kids_age_1_value);
+                params.put("KIDNAME2", et_kids_name_2_value);
+                params.put("KIDAGE2", et_kids_age_2_value);
+                params.put("KIDNAME3", et_kids_name_3_value);
+                params.put("KIDAGE3", et_kids_age_3_value);
                 MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_kids, params, responseListener);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
@@ -147,6 +150,12 @@ public class RegistKidsActivity extends BaseActivity {
                     // 우선 toast를 띄울 것.
                     Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
                 } else {
+                    Gson gson = new Gson();
+                    KidsVo kidsVo;
+                    kidsVo = gson.fromJson(nvMsg, KidsVo.class);
+                    MHDApplication.getInstance().getMHDSvcManager().setKidsVo(null);
+                    MHDApplication.getInstance().getMHDSvcManager().setKidsVo(kidsVo);
+
                     // Self 정상등록 여부를 알림
                     MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
                         @Override

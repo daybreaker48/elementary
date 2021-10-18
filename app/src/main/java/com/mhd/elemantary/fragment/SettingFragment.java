@@ -29,15 +29,7 @@ public class SettingFragment extends BaseFragment {
 //        RelativeLayout.LayoutParams mLayoutParams = (RelativeLayout.LayoutParams) mTitle.getLayoutParams();
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
-        getChildFragmentManager().beginTransaction().replace(R.id.preferencef_frame, new PreferenceCustomFragment()).commit();
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                MHDLog.d("SettingFragment", key);
-            }
-        });
+        init();
     }
 
     @Override
@@ -47,6 +39,20 @@ public class SettingFragment extends BaseFragment {
 //            // editor 내용 초기화.
 //            editor.clearAllContents();
 //        }
+
+        init();
+    }
+
+    private void init(){
+        getChildFragmentManager().beginTransaction().replace(R.id.preferencef_frame, new PreferenceCustomFragment()).commit();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                MHDLog.d("SettingFragment", key);
+            }
+        });
     }
 }
 

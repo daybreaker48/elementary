@@ -9,6 +9,7 @@ import android.os.Build;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.business.model.PushVo;
+import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.LoginVo;
 import com.mhd.elemantary.common.vo.PagingBannerVo;
 import com.mhd.elemantary.common.vo.ScheduleVo;
@@ -63,6 +64,10 @@ public class MHDSvcManager {
 	 * 유저 정보 vo
 	 */
 	private UserVo userVo;
+	/**
+	 * 아이 정보 vo
+	 */
+	private KidsVo kidsVo;
 	/**
 	 * 과목 정보 vo
 	 */
@@ -310,6 +315,18 @@ public class MHDSvcManager {
 	 */
 	public void setUserVo(UserVo userVo) {
 		this.userVo = userVo;
+	}
+	/**
+	 * get Kids info vo
+	 */
+	public KidsVo getKidsVo() {
+		return kidsVo;
+	}
+	/*
+	 * set User info vo
+	 */
+	public void setKidsVo(KidsVo kidsVo) {
+		this.kidsVo = kidsVo;
 	}
 	/**
 	 * get Subject Info

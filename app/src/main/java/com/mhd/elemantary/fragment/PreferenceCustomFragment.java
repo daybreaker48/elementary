@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.network.manager.ResponseListener;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -38,6 +40,16 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.setting_preference, rootKey);
 
         Preference preference = findPreference("kids");
+        if(MHDApplication.getInstance().getMHDSvcManager().getKidsVo() != null){
+            KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+            int kidsCount = kidsVo.getCnt();
+            String kidsInfo = "";
+            for(int i=0;i<kidsCount;i++){
+                if(i==0) kidsInfo = kidsVo.getMsg().get(i).getName() + "/" + kidsVo.getMsg().get(i).getAge();
+                else kidsInfo = kidsInfo + "\n" + kidsVo.getMsg().get(i).getName() + "/" + kidsVo.getMsg().get(i).getAge();
+            }
+            preference.setSummary(kidsInfo);
+        }
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference p) {
