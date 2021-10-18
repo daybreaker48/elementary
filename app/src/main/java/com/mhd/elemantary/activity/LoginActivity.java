@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
@@ -122,11 +123,20 @@ public class LoginActivity extends BaseActivity {
             // 가입되었다는 메세지 띄우고 로그인 창으로 이동.
             // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.(이건 나중에)
             // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
-            Gson gson = new Gson();
-            UserVo userVo;
-            userVo = gson.fromJson(nvMsg, UserVo.class);
+            UserVo userVo = new UserVo();
+            userVo.setUuID(MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+            userVo.setUuToken(MHDApplication.getInstance().getMHDSvcManager().getFcmToken());
+            userVo.setUuAppVer(MHDApplication.getInstance().getAppVersion());
+            userVo.setUuMail(et_login_id.getText().toString());
+            userVo.setUuLogin("E");
             MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+
+            Gson gson = new Gson();
+            KidsVo kidsVo;
+            kidsVo = gson.fromJson(nvJsonDataString, KidsVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setKidsVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setKidsVo(kidsVo);
 
             if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
                 // MainActivity 로 이동

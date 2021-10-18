@@ -152,7 +152,7 @@ public class RegistKidsActivity extends BaseActivity {
                 } else {
                     Gson gson = new Gson();
                     KidsVo kidsVo;
-                    kidsVo = gson.fromJson(nvMsg, KidsVo.class);
+                    kidsVo = gson.fromJson(nvJsonDataString, KidsVo.class);
                     MHDApplication.getInstance().getMHDSvcManager().setKidsVo(null);
                     MHDApplication.getInstance().getMHDSvcManager().setKidsVo(kidsVo);
 

@@ -45,8 +45,8 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
             int kidsCount = kidsVo.getCnt();
             String kidsInfo = "";
             for(int i=0;i<kidsCount;i++){
-                if(i==0) kidsInfo = kidsVo.getMsg().get(i).getName() + "/" + kidsVo.getMsg().get(i).getAge();
-                else kidsInfo = kidsInfo + "\n" + kidsVo.getMsg().get(i).getName() + "/" + kidsVo.getMsg().get(i).getAge();
+                if(i==0) kidsInfo = kidsVo.getMsg().get(i).getName() + " / " + kidsVo.getMsg().get(i).getAge() + "세";
+                else kidsInfo = kidsInfo + "\n" + kidsVo.getMsg().get(i).getName() + " / " + kidsVo.getMsg().get(i).getAge() + "세";
             }
             preference.setSummary(kidsInfo);
         }
