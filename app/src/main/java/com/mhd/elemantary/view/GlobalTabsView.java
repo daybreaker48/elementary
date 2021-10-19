@@ -204,20 +204,20 @@ public class GlobalTabsView extends FrameLayout {
 //                    mContext.startActivity(intent);
 //                } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
 //                    viewPager.setCurrentItem(2);
-//                } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
+//                } else if(menuViewPager.getCurrentItem() == 2) {// 습관
 //                    viewPager.setCurrentItem(2);
 //                }
             }
         });
         mTopRightImage.setOnClickListener(new OnClickListener() {//            @Override
             public void onClick(View v) {
-                // 할일, 스케쥴, 스스로해요 등록하기.
+                // 할일, 스케쥴, 습관 등록하기.
                 if(menuViewPager.getCurrentItem() == 0) { // 할일
                     // MainActivity 내에 있는 function 호출.
                     ((MainActivity)MainActivity.context_main).startTodoRegist();
                 } else if(menuViewPager.getCurrentItem() == 1) {// 스케쥴
                     ((MainActivity)MainActivity.context_main).startScheduleRegist();
-                } else if(menuViewPager.getCurrentItem() == 2) {// 스스로
+                } else if(menuViewPager.getCurrentItem() == 2) {// 습관
                     ((MainActivity)MainActivity.context_main).startSelfRegist();
                 }
             }

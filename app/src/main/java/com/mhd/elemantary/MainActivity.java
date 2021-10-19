@@ -120,10 +120,20 @@ public class MainActivity extends BaseActivity {
         if(!resultFlag) return resultFlag;
 
         // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
-
         if("M".equals(nvResultCode)){
-            // Just show nvMsg
-            MHDDialogUtil.sAlert(mContext, nvMsg);
+            // fragment에서 호출된거라면 그쪽 호출하고
+            if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_todo))){ // 학습
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_schedule))){ // 스케쥴
+                ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_self))){ // 습관
+                ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_self))){ // 습관 완료
+                ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
+            }else {
+                // 그게 아니라면 Just show nvMsg
+                MHDDialogUtil.sAlert(mContext, nvMsg);
+            }
             return true;
         }else if("S".equals(nvResultCode)){
             if(nvApi.equals(getApplicationContext().getString(R.string.restapi_regist_post))){

@@ -36,6 +36,17 @@
             android:text="다인이 학습"/>
     </LinearLayout>
 
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:gravity="center"-->
+<!--        android:visibility="gone"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="@dimen/font_20"-->
+<!--        android:text="@string/content_no_todo"/>-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_receiving"
         android:layout_width="match_parent"

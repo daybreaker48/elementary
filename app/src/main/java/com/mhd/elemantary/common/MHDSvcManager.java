@@ -86,7 +86,7 @@ public class MHDSvcManager {
      */
     private ScheduleVo scheduleVo;
 	/**
-	 * 스스로 정보 vo
+	 * 습관 정보 vo
 	 */
 	private SelfVo selfVo;
 	/**

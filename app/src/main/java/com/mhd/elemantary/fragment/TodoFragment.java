@@ -174,7 +174,54 @@ public class TodoFragment extends BaseFragment {
         adapter.deleteAll();
 
         if (nvCnt == 0) {
-            // 정보가 없으면 비정상
+            // 정보가 없으면
+            Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            // 할일정보를 받아옴.
+            Gson gson = new Gson();
+            todoVo = gson.fromJson(result, TodoVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setTodoVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setTodoVo(todoVo);
+        }
+        for(int i=0; i<nvCnt; i++){
+            // 각 List의 값들을 data 객체에 set 해줍니다.
+            TodoData data = new TodoData();
+            data.setSubject(todoVo.getMsg().get(i).getSubject());
+            data.setDetail(todoVo.getMsg().get(i).getDetail());
+            data.setDaily(todoVo.getMsg().get(i).getOneday());
+            data.setTotal(todoVo.getMsg().get(i).getTotal());
+            data.setRest(todoVo.getMsg().get(i).getRest());
+            data.setGoal(todoVo.getMsg().get(i).getGoal());
+            data.setSun(todoVo.getMsg().get(i).getSun());
+            data.setMon(todoVo.getMsg().get(i).getMon());
+            data.setTue(todoVo.getMsg().get(i).getTue());
+            data.setWed(todoVo.getMsg().get(i).getWed());
+            data.setThu(todoVo.getMsg().get(i).getThu());
+            data.setFri(todoVo.getMsg().get(i).getFri());
+            data.setSat(todoVo.getMsg().get(i).getSat());
+            data.setPublisher(todoVo.getMsg().get(i).getPublish());
+            data.setTitle(todoVo.getMsg().get(i).getTitle());
+            data.setOption(todoVo.getMsg().get(i).getOption());
+
+            // 각 값이 들어간 data를 adapter에 추가합니다.
+            adapter.addItem(data);
+        }
+
+        // adapter의 값이 변경되었다는 것을 알려줍니다.
+        adapter.notifyDataSetChanged();
+
+        return true;
+    }
+
+    /**
+     * BaseActivity에서 상속받지 못하기 때문에 parent Activity에서 받아서 현재 fragment의 function을 호출하도록 처리
+     */
+    public boolean noData(String nvApiParam) {
+        TodoVo todoVo = null;
+        adapter.deleteAll();
+
+        if (nvCnt == 0) {
+            // 정보가 없으면
             Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
         } else {
             // 할일정보를 받아옴.

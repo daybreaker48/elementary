@@ -80,7 +80,7 @@ public class SelfFragment extends BaseFragment {
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] 스스로 해요");
+        vst_top_title.setText("["+displayKid+"] 습관");
 
         ll_top_self.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +123,7 @@ public class SelfFragment extends BaseFragment {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
             displayKid = item.getTitle().toString();
-            vst_top_title.setText("["+displayKid+"] 스스로 해요");
+            vst_top_title.setText("["+displayKid+"] 습관");
             powerMenu.setSelectedPosition(position); // change selected item
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
