@@ -25,6 +25,7 @@ import com.github.dhaval2404.colorpicker.model.ColorSwatch;
 import com.github.dhaval2404.colorpicker.util.ColorUtil;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.ScheduleVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
@@ -441,9 +442,19 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
 
     private void sendScheduleData(String subject, String start, String end, String startmin, String endmin, String color){
         try {
+            MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
+            String dKid = "";
+            for(int k=0; k<menuVo.getMsg().size(); k++){
+                if("SC".equals(menuVo.getMsg().get(k).getMenuname())){
+                    // 해당메뉴에 설정된 아이정보
+                    dKid = menuVo.getMsg().get(k).getKidname();
+                }
+            }
+
             // Map 방식 0
             Map<String, String> params = new HashMap<String, String>();
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("TKNAME", dKid);
             params.put("TBSUBJECT", subject);
             params.put("SCSUN", innerStrings.contains("1") ? "Y" : "N");
             params.put("SCMON", innerStrings.contains("2") ? "Y" : "N");

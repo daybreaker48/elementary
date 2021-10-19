@@ -11,6 +11,7 @@ import com.mhd.elemantary.R;
 import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.LoginVo;
+import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.PagingBannerVo;
 import com.mhd.elemantary.common.vo.ScheduleVo;
 import com.mhd.elemantary.common.vo.SelfVo;
@@ -68,6 +69,10 @@ public class MHDSvcManager {
 	 * 아이 정보 vo
 	 */
 	private KidsVo kidsVo;
+	/**
+	 * 메뉴 정보 vo
+	 */
+	private MenuVo menuVo;
 	/**
 	 * 과목 정보 vo
 	 */
@@ -317,13 +322,25 @@ public class MHDSvcManager {
 		this.userVo = userVo;
 	}
 	/**
+	 * get menu info vo
+	 */
+	public MenuVo getMenuVo() {
+		return menuVo;
+	}
+	/*
+	 * set menu info vo
+	 */
+	public void setMenuVo(MenuVo menuVo) {
+		this.menuVo = menuVo;
+	}
+	/**
 	 * get Kids info vo
 	 */
 	public KidsVo getKidsVo() {
 		return kidsVo;
 	}
 	/*
-	 * set User info vo
+	 * set Kids info vo
 	 */
 	public void setKidsVo(KidsVo kidsVo) {
 		this.kidsVo = kidsVo;

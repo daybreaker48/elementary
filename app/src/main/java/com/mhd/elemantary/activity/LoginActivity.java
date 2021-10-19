@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsVo;
+import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
@@ -28,6 +29,7 @@ import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
 import com.mhd.elemantary.webview.activity.HybridWebGuestActivity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -161,6 +163,22 @@ public class LoginActivity extends BaseActivity {
             kidsVo = gson.fromJson(nvJsonDataString, KidsVo.class);
             MHDApplication.getInstance().getMHDSvcManager().setKidsVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setKidsVo(kidsVo);
+
+            // 메뉴별로 보여주는 아이가 다를 수 있기 때문에. MenuVo에 저장해서 관리
+            String jsonString = "{" +
+                                    "\"msg\":[{" +
+                                        "\"menuname\":\"TO\"," +
+                                        "\"kidname\":\""+ kidsVo.getMsg().get(0).getName() +"\"},{" +
+                                        "\"menuname\":\"SC\"," +
+                                        "\"kidname\":\""+ kidsVo.getMsg().get(0).getName() +"\"},{" +
+                                        "\"menuname\":\"SE\"," +
+                                        "\"kidname\":\""+ kidsVo.getMsg().get(0).getName() +"\"},{" +
+                                        "\"menuname\":\"SU\"," +
+                                        "\"kidname\":\""+ kidsVo.getMsg().get(0).getName() +"\"}]}";
+            MenuVo menuVo;
+            menuVo = gson.fromJson(jsonString, MenuVo.class);
+            MHDApplication.getInstance().getMHDSvcManager().setMenuVo(null);
+            MHDApplication.getInstance().getMHDSvcManager().setMenuVo(menuVo);
 
             if(MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null){
                 // MainActivity 로 이동

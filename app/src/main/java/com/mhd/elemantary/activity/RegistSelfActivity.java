@@ -18,10 +18,12 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
+import com.skydoves.powermenu.PowerMenuItem;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +32,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RegistSelfActivity extends BaseActivity {
@@ -76,9 +79,18 @@ public class RegistSelfActivity extends BaseActivity {
             Toast.makeText(mContext, getString(R.string.content_self_hint_1), Toast.LENGTH_SHORT).show();
         }else{
             try {
+                MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
+                String dKid = "";
+                for(int k=0; k<menuVo.getMsg().size(); k++){
+                    if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
+                        // 해당메뉴에 설정된 아이정보
+                        dKid = menuVo.getMsg().get(k).getKidname();
+                    }
+                }
                 // Map 방식 0
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+                params.put("TKNAME", dKid);
                 params.put("SFTITLE_1", tmpSelf_1);
                 params.put("SFTITLE_2", tmpSelf_2);
                 params.put("SFTITLE_3", tmpSelf_3);

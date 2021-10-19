@@ -1,12 +1,20 @@
 package com.mhd.elemantary.fragment;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -14,11 +22,18 @@ import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.adapter.ReCyclerSelfAdapter;
 import com.mhd.elemantary.common.MHDApplication;
+import com.mhd.elemantary.common.vo.KidsVo;
+import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.SelfData;
 import com.mhd.elemantary.common.vo.SelfVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDLog;
+import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.OnMenuItemClickListener;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +44,9 @@ public class SelfFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerSelfAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    PowerMenu powerMenu;
+    TextView vst_top_title;
+    String displayKid = "";
 
     public static SelfFragment create() {
         return new SelfFragment();
@@ -46,6 +64,49 @@ public class SelfFragment extends BaseFragment {
 //        LinearLayout.LayoutParams mLayoutParams = (LinearLayout.LayoutParams) mTitle.getLayoutParams();
 //        mLayoutParams.topMargin = Util.getInstance().getStatusBarHeight(root.getContext());
 //        mTitle.setLayoutParams(mLayoutParams);
+        LinearLayout ll_top_self = (LinearLayout) root.findViewById(R.id.ll_top_self);
+
+        // vo에 있는 아이 정보를 메뉴item 으로 삽입.
+        KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+        MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
+        List<PowerMenuItem> kidsList = new ArrayList();
+        for(int k=0; k<kidsVo.getCnt(); k++){
+            kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+        }
+        vst_top_title = (TextView) root.findViewById(R.id.vst_top_title);
+        for(int k=0; k<menuVo.getMsg().size(); k++){
+            if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
+                // 해당메뉴에 설정된 아이정보
+                displayKid = menuVo.getMsg().get(k).getKidname();
+            }
+        }
+        vst_top_title.setText("["+displayKid+"] 스스로 해요");
+
+        ll_top_self.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                powerMenu = new PowerMenu.Builder(getActivity())
+                        .addItemList(kidsList) //
+//                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+//                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                        .setTextSize(14)
+                        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                        .setMenuRadius(10f) // sets the corner radius.
+                        .setMenuShadow(10f) // sets the shadow.
+                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                        .setTextGravity(Gravity.CENTER)
+                        .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                        .setSelectedTextColor(Color.WHITE)
+                        .setMenuColor(Color.WHITE)
+                        .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                        .setOnMenuItemClickListener(onMenuItemClickListener)
+                        .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                        .setDividerHeight(1)
+                        .build();
+
+                powerMenu.showAsDropDown(v);
+            }
+        });
 
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
         recyclerView.setHasFixedSize(true);
@@ -55,10 +116,29 @@ public class SelfFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-//        getData();
-        // query self
         querySelf();
     }
+
+    private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+            displayKid = item.getTitle().toString();
+            vst_top_title.setText("["+displayKid+"] 스스로 해요");
+            powerMenu.setSelectedPosition(position); // change selected item
+            // MenuVo 정보를 갱신
+            MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
+            for(int k=0; k<menuVo.getMsg().size(); k++){
+                if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
+                    // 해당메뉴에 설정된 아이정보
+                    menuVo.getMsg().get(k).setKidname(displayKid);
+                    querySelf();
+                    break;
+                }
+            }
+
+            powerMenu.dismiss();
+        }
+    };
 
     @Override
     public void batchFunction(String api) {
@@ -76,6 +156,7 @@ public class SelfFragment extends BaseFragment {
             Map<String, String> params = new HashMap<String, String>();
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("TKNAME", displayKid);
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_self, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {

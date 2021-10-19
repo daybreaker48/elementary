@@ -9,39 +9,31 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/ll_top_receiving"
-        android:layout_width="match_parent"
+        android:id="@+id/ll_top_todo"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:background="@color/white_t75"
+        android:paddingLeft="5dp"
         android:orientation="horizontal">
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btn_move_stat_left"-->
-            <!--android:layout_width="65dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="left"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:background="@android:color/transparent"-->
-            <!--android:textSize="@dimen/font_18"-->
-            <!--android:text="@string/button_1"/>-->
+        <ImageView
+            android:id="@+id/iv_kid_select"
+            android:layout_width="@dimen/length_26"
+            android:layout_height="@dimen/length_26"
+            android:layout_gravity="center"
+            android:gravity="start|center_vertical"
+            android:layout_marginRight="@dimen/length_5"
+            android:padding="8dp"
+            android:background="@drawable/kid_selelct"/>
         <TextView
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="start|center_vertical"
             android:textColor="@color/black"
             android:textSize="@dimen/font_18"
-            android:text="@string/title_todo"/>
-        <!--<android.support.v7.widget.AppCompatButton-->
-            <!--android:id="@+id/btn_menu_right"-->
-            <!--android:layout_width="65dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="right"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:background="@android:color/transparent"-->
-            <!--android:textSize="@dimen/font_18"-->
-            <!--android:text="@string/button_2"/>-->
+            android:text="다인이 학습"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
