@@ -36,14 +36,6 @@
                 android:background="@color/white"
                 android:textSize="@dimen/font_20"
                 android:text="@string/subtitle_subject"/>
-            <Spinner
-                android:id="@+id/spi_todo_subject"
-                android:textSize="@dimen/font_20"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black_overlay"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

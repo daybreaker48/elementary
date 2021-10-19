@@ -28,7 +28,7 @@ public class TodoVo {
         public String detail; 		// 세부항목
 		public String publish; 		// 출판사
 		public String title; 		// 학습지이름
-        public String option;       // F, P, G
+        public String option;       // Fix, Page, Goal
         public String sun; 		    //
 		public String mon; 		    //
 		public String tue; 		    //

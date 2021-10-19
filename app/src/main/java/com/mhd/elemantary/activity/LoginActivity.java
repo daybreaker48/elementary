@@ -1,5 +1,6 @@
 package com.mhd.elemantary.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,11 @@ import com.mhd.elemantary.webview.activity.HybridWebGuestActivity;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 public class LoginActivity extends BaseActivity {
 
@@ -114,14 +120,32 @@ public class LoginActivity extends BaseActivity {
         // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
 
         if("M".equals(nvResultCode)){
-            // Just show nvMsg
-            MHDDialogUtil.sAlert(mContext, nvMsg);
+            // nvMsg = "NK" 라면 회원이지만 아이 정보가 없다는 것.
+            if("NK".equals(nvMsg)){
+                UserVo userVo = new UserVo();
+                userVo.setUuID(MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+                userVo.setUuToken(MHDApplication.getInstance().getMHDSvcManager().getFcmToken());
+                userVo.setUuAppVer(MHDApplication.getInstance().getAppVersion());
+                userVo.setUuMail(et_login_id.getText().toString());
+                userVo.setUuLogin("E");
+                MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
+                MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
+
+                MHDDialogUtil.sAlert(mContext, R.string.content_not_kids, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startKidsRegistMain();
+                        return;
+                    }
+                });
+            }else {
+                MHDDialogUtil.sAlert(mContext, nvMsg);
+            }
         }else if("S".equals(nvResultCode)){
             // 로그인 성공. user vo 를 구성하고
             MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
 
             // 가입되었다는 메세지 띄우고 로그인 창으로 이동.
-            // 가입하고 나서 최초 한번 학생등록 컨펌 창을 띄운다.(이건 나중에)
             // vo 및 각종 변수에 저장하고 메인으로 넘긴다. 레코드가 하나여도 jsonarray 로 보내니 gson에서 에러가 나드라.
             UserVo userVo = new UserVo();
             userVo.setUuID(MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
@@ -158,4 +182,22 @@ public class LoginActivity extends BaseActivity {
 
         return true;
     }
+
+    public void startKidsRegistMain(){
+        Intent intent = new Intent(mContext, RegistKidsActivity.class);
+        startActivityResultKids.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultKids = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // 아이 정보가 등록이 됐다면 다시 로그인 태운다?
+                        loginService();
+                    } else {
+                        // Login 단에서 아이 정보가 하나도 등록이 안된다면 앱 종료
+                        exitApplication();
+                    }
+                }
+            });
 }

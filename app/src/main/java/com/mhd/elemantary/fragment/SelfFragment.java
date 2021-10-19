@@ -2,6 +2,7 @@ package com.mhd.elemantary.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
@@ -52,6 +53,7 @@ public class SelfFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReCyclerSelfAdapter();
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
 //        getData();
         // query self

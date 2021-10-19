@@ -2,8 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.preference.PreferenceCategory
-        app:iconSpaceReserved="false"
-        android:title="설 정">
+        app:iconSpaceReserved="false">
         <!--아동 등록-->
         <Preference
             app:iconSpaceReserved="false"

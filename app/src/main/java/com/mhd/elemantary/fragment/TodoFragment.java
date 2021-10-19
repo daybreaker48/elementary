@@ -1,36 +1,26 @@
 package com.mhd.elemantary.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.activity.BaseActivity;
-import com.mhd.elemantary.activity.RegistTodoActivity;
 import com.mhd.elemantary.adapter.ReCyclerAdapter;
 import com.mhd.elemantary.common.MHDApplication;
-import com.mhd.elemantary.common.vo.SubjectVo;
 import com.mhd.elemantary.common.vo.TodoData;
 import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
-import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -62,6 +52,7 @@ public class TodoFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReCyclerAdapter();
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // query todo
         queryTodo();
@@ -111,8 +102,21 @@ public class TodoFragment extends BaseFragment {
             // 각 List의 값들을 data 객체에 set 해줍니다.
             TodoData data = new TodoData();
             data.setSubject(todoVo.getMsg().get(i).getSubject());
-            data.setTextbook(todoVo.getMsg().get(i).getDetail());
-            data.setDailyProgress(todoVo.getMsg().get(i).getOneday());
+            data.setDetail(todoVo.getMsg().get(i).getDetail());
+            data.setDaily(todoVo.getMsg().get(i).getOneday());
+            data.setTotal(todoVo.getMsg().get(i).getTotal());
+            data.setRest(todoVo.getMsg().get(i).getRest());
+            data.setGoal(todoVo.getMsg().get(i).getGoal());
+            data.setSun(todoVo.getMsg().get(i).getSun());
+            data.setMon(todoVo.getMsg().get(i).getMon());
+            data.setTue(todoVo.getMsg().get(i).getTue());
+            data.setWed(todoVo.getMsg().get(i).getWed());
+            data.setThu(todoVo.getMsg().get(i).getThu());
+            data.setFri(todoVo.getMsg().get(i).getFri());
+            data.setSat(todoVo.getMsg().get(i).getSat());
+            data.setPublisher(todoVo.getMsg().get(i).getPublish());
+            data.setTitle(todoVo.getMsg().get(i).getTitle());
+            data.setOption(todoVo.getMsg().get(i).getOption());
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);

@@ -269,6 +269,22 @@
                     android:src="@drawable/del_button"/>
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/length_10"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:textSize="@dimen/font_15"
+                android:text="@string/content_kids_limit"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

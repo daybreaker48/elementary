@@ -16,8 +16,6 @@ import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.SelfData;
-import com.mhd.elemantary.common.vo.SelfVo;
-import com.mhd.elemantary.common.vo.TodoData;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDLog;
 

@@ -10,12 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_todo_subject_holder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:textSize="@dimen/font_18"
@@ -26,27 +28,57 @@
             android:layout_weight="7"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_todo_textbook_holder"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_todo_textbook_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/detail_background"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/font_16"
+                    android:text=""/>
+                <TextView
+                    android:id="@+id/tv_todo_publisher_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/font_16"
+                    android:text="fff"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_todo_title_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:includeFontPadding="false"
-                android:textSize="@dimen/font_18"
-                android:text="sss"/>
+                android:textSize="@dimen/font_16"
+                android:text="fff"/>
             <TextView
                 android:id="@+id/tv_todo_daily_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:textSize="@dimen/font_18"
+                android:textSize="@dimen/font_16"
                 android:text="fff"/>
         </LinearLayout>
         <CheckBox
             android:id="@+id/cb_todo_complete_holder"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"/>
         <!--<TextView-->
             <!--android:id="@+id/tv_todo_complete_holder"-->
             <!--android:layout_width="0dp"-->

@@ -2,6 +2,7 @@ package com.mhd.elemantary.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -82,7 +83,10 @@ public class RegistKidsActivity extends BaseActivity {
         AppCompatButton btn_todo_cancel = (AppCompatButton) findViewById(R.id.btn_todo_cancel);
         btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { finish(); }
+            public void onClick(View v) {
+                setResult(Activity.RESULT_CANCELED);
+                finish();
+            }
         });
         AppCompatButton btn_todo_save = (AppCompatButton) findViewById(R.id.btn_todo_save);
         btn_todo_save.setOnClickListener(new View.OnClickListener() {

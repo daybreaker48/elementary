@@ -120,6 +120,7 @@
     <string name="subtitle_schedule_option_1" translatable="true">알림 없음</string>
     <string name="subtitle_schedule_option_2" translatable="true">10분 전</string>
 
+    <string name="content_todo_detail" translatable="true">세부항목을 입력해주세요.</string>
     <string name="content_todo_publisher" translatable="true">출판사를 입력해주세요.</string>
     <string name="content_todo_title" translatable="true">제목을 입력해주세요.</string>
     <string name="content_todo_subject" translatable="true">과목을 입력해주세요.</string>
@@ -141,6 +142,7 @@
     <string name="content_self_hint_3" translatable="true">세 번째 스스로해요를 등록하세요.</string>
     <string name="content_kids_limit" translatable="true">한번에 최고 3명까지 등록할 수 있습니다.</string>
     <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
+    <string name="content_not_kids" translatable="true">등록된 아이 정보가 없습니다.\n관리할 아이 정보를 입력하셔야 합니다.</string>
     <string name="content_time" translatable="true">시간</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>
