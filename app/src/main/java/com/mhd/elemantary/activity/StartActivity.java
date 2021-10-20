@@ -195,7 +195,7 @@ public class StartActivity extends BaseActivity {
             MHDDialogUtil.sAlert(mContext, nvMsg);
             return true;
         }else if("S".equals(nvResultCode)){
-            if(nvCnt == 0){
+            if(nvCnt == 0 && MHDApplication.getInstance().getMHDSvcManager().getIsFirstStart()){
                 // tb_user 테이블에 사용자가 없는 경우. 회원이 아닌 경우.
                 // 튜토리얼은 앱 최초 실행때만 보여주는 것이 맞으나, 일단은 가입하지 않은 경우는 튜토리얼을 계속 보여주는거로. 나중에 수정할 수도 있다.
                 // 슬라이드 형식 말고 자연스럽게 나타나게.

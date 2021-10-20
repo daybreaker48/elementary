@@ -4,7 +4,7 @@
         <!--image대신 직접 selector를 그리겠다고 선언한다. -->
         <shape android:shape="oval">
             <!--도형안에 채워질 색을 정의한다.-->
-            <solid android:color="#FF00DD" />
+            <solid android:color="#ffffff" />
             <size
                 android:width="30dp"
                 android:height="30dp"/>
@@ -17,7 +17,7 @@
         <!--image대신 직접 selector를 그리겠다고 선언한다. -->
         <shape android:shape="oval">
             <!--도형안에 채워질 색을 정의한다.-->
-            <solid android:color="#ffffff" />
+            <solid android:color="#FF00DD" />
             <size
                 android:width="30dp"
                 android:height="30dp"/>

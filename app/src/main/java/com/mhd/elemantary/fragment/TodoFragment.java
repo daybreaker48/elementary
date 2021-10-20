@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -30,6 +31,7 @@ import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDLog;
 import com.skydoves.powermenu.MenuAnimation;
+import com.skydoves.powermenu.MenuBaseAdapter;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
@@ -46,8 +48,8 @@ public class TodoFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    PowerMenu powerMenu;
-    TextView vst_top_title;
+    PowerMenu powerMenu = null;
+    TextView vst_top_title, tv_no_data;
     String displayKid = "";
 
     public static TodoFragment create() {
@@ -68,6 +70,7 @@ public class TodoFragment extends BaseFragment {
 //        mTitle.setLayoutParams(mLayoutParams);
 
         LinearLayout ll_top_todo = (LinearLayout) root.findViewById(R.id.ll_top_todo);
+        tv_no_data = (TextView) root.findViewById(R.id.tv_no_data);
 
         // vo에 있는 아이 정보를 메뉴item 으로 삽입.
         KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
@@ -85,9 +88,35 @@ public class TodoFragment extends BaseFragment {
         }
         vst_top_title.setText("["+displayKid+"] 학습");
 
+        powerMenu = new PowerMenu.Builder(getActivity())
+                .addItemList(kidsList) //
+                //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+                //                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                .setTextSize(14)
+                .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                .setDividerHeight(1)
+                .setHeaderView(null)
+                .setFooterView(null)
+                .build();
+
         ll_top_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+                List<PowerMenuItem> kidsList = new ArrayList();
+                for(int k=0; k<kidsVo.getCnt(); k++){
+                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+                }
                 powerMenu = new PowerMenu.Builder(getActivity())
                         .addItemList(kidsList) //
 //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
@@ -105,19 +134,32 @@ public class TodoFragment extends BaseFragment {
                         .setOnMenuItemClickListener(onMenuItemClickListener)
                         .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
                         .setDividerHeight(1)
+                        .setHeaderView(null)
+                        .setFooterView(null)
                         .build();
 
                 powerMenu.showAsDropDown(v);
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
+        recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReCyclerAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        adapter.setOnItemClickListener(new ReCyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                // position을 가지고 라인을 알아낸 다음에
+                // 해당 라인의 메뉴를 띄우려 했는데 이건 일단 보류. 안할 수도 있다.
+                // 클릭하면 바로 수정화면으로 넘기고, 거기에 삭제버튼을 만든다.
+                ((MainActivity)getActivity()).startTodoModify(position);
+                Toast.makeText(mContext, "test" + position, Toast.LENGTH_SHORT).show();
+            }
+        }) ;
 
         queryTodo();
     }
@@ -142,6 +184,42 @@ public class TodoFragment extends BaseFragment {
             powerMenu.dismiss();
         }
     };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 기존에 선택됐던 item
+        if(powerMenu != null) {
+            int sp = powerMenu.getSelectedPosition() == -1 ? 0 : powerMenu.getSelectedPosition();
+            KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+            List<PowerMenuItem> kidsList = new ArrayList();
+            for (int k = 0; k < kidsVo.getCnt(); k++) {
+                kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == sp ? true : false));
+            }
+
+            powerMenu = new PowerMenu.Builder(getActivity())
+                    .addItemList(kidsList) //
+                    //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+                    //                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                    .setTextSize(14)
+                    .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                    .setMenuRadius(10f) // sets the corner radius.
+                    .setMenuShadow(10f) // sets the shadow.
+                    .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                    .setTextGravity(Gravity.CENTER)
+                    .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                    .setSelectedTextColor(Color.WHITE)
+                    .setMenuColor(Color.WHITE)
+                    .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                    .setOnMenuItemClickListener(onMenuItemClickListener)
+                    .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                    .setDividerHeight(1)
+                    .setHeaderView(null)
+                    .setFooterView(null)
+                    .build();
+        }
+    }
 
     @Override
     public void batchFunction(String api) {
@@ -173,6 +251,9 @@ public class TodoFragment extends BaseFragment {
         TodoVo todoVo = null;
         adapter.deleteAll();
 
+        tv_no_data.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+
         if (nvCnt == 0) {
             // 정보가 없으면
             Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
@@ -183,6 +264,7 @@ public class TodoFragment extends BaseFragment {
             MHDApplication.getInstance().getMHDSvcManager().setTodoVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setTodoVo(todoVo);
         }
+
         for(int i=0; i<nvCnt; i++){
             // 각 List의 값들을 data 객체에 set 해줍니다.
             TodoData data = new TodoData();
@@ -213,50 +295,8 @@ public class TodoFragment extends BaseFragment {
         return true;
     }
 
-    /**
-     * BaseActivity에서 상속받지 못하기 때문에 parent Activity에서 받아서 현재 fragment의 function을 호출하도록 처리
-     */
-    public boolean noData(String nvApiParam) {
-        TodoVo todoVo = null;
-        adapter.deleteAll();
-
-        if (nvCnt == 0) {
-            // 정보가 없으면
-            Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
-        } else {
-            // 할일정보를 받아옴.
-            Gson gson = new Gson();
-            todoVo = gson.fromJson(result, TodoVo.class);
-            MHDApplication.getInstance().getMHDSvcManager().setTodoVo(null);
-            MHDApplication.getInstance().getMHDSvcManager().setTodoVo(todoVo);
-        }
-        for(int i=0; i<nvCnt; i++){
-            // 각 List의 값들을 data 객체에 set 해줍니다.
-            TodoData data = new TodoData();
-            data.setSubject(todoVo.getMsg().get(i).getSubject());
-            data.setDetail(todoVo.getMsg().get(i).getDetail());
-            data.setDaily(todoVo.getMsg().get(i).getOneday());
-            data.setTotal(todoVo.getMsg().get(i).getTotal());
-            data.setRest(todoVo.getMsg().get(i).getRest());
-            data.setGoal(todoVo.getMsg().get(i).getGoal());
-            data.setSun(todoVo.getMsg().get(i).getSun());
-            data.setMon(todoVo.getMsg().get(i).getMon());
-            data.setTue(todoVo.getMsg().get(i).getTue());
-            data.setWed(todoVo.getMsg().get(i).getWed());
-            data.setThu(todoVo.getMsg().get(i).getThu());
-            data.setFri(todoVo.getMsg().get(i).getFri());
-            data.setSat(todoVo.getMsg().get(i).getSat());
-            data.setPublisher(todoVo.getMsg().get(i).getPublish());
-            data.setTitle(todoVo.getMsg().get(i).getTitle());
-            data.setOption(todoVo.getMsg().get(i).getOption());
-
-            // 각 값이 들어간 data를 adapter에 추가합니다.
-            adapter.addItem(data);
-        }
-
-        // adapter의 값이 변경되었다는 것을 알려줍니다.
-        adapter.notifyDataSetChanged();
-
-        return true;
+    public void noData(String nvApiParam) {
+        tv_no_data.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 }

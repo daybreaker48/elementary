@@ -85,7 +85,7 @@ public class GlobalTabsView extends FrameLayout {
     public GlobalTabsView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        if(MHDApplication.getInstance().getMHDSvcManager().getIsFirstStart() == true)
+//        if(MHDApplication.getInstance().getMHDSvcManager().getIsFirstStart() == true)
             init();
     }
 

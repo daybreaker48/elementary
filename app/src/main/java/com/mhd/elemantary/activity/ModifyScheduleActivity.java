@@ -12,12 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.widget.AppCompatButton;
-
 import com.github.dhaval2404.colorpicker.MaterialColorPickerDialog;
 import com.github.dhaval2404.colorpicker.listener.ColorListener;
 import com.github.dhaval2404.colorpicker.model.ColorShape;
@@ -34,16 +28,19 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.widget.AppCompatButton;
 
-public class RegistScheduleActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
+
+public class ModifyScheduleActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
 
     TextView tv_selectday, vst_top_title, tv_schedule_time, tv_schedule_color, tv_schedule_alarm;
     LinearLayout ll_schedule_time, ll_daily_textbook, ll_schedule_color, ll_schedule_alarm;
@@ -64,7 +61,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
             startMin = minute;
 
             Calendar now = Calendar.getInstance();
-            TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
+            TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(ModifyScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
             mTimePickerDialog.enableMinutes(true);
             mTimePickerDialog.setTimeInterval(1, 30);
             mTimePickerDialog.setMinTime(8,0,0);
@@ -95,7 +92,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_schedule_regist);
-        mContext = RegistScheduleActivity.this;
+        mContext = ModifyScheduleActivity.this;
 
         et_schedule_subject = (EditText) findViewById(R.id.et_schedule_subject);
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
@@ -192,7 +189,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
 //        TimePickerFragment mTimePickerFragment = new TimePickerFragment();
 //        mTimePickerFragment.show(getSupportFragmentManager(), "timepicker");
         Calendar now = Calendar.getInstance();
-        TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(RegistScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
+        TimePickerDialog mTimePickerDialog = TimePickerDialog.newInstance(ModifyScheduleActivity.this, now.get(Calendar.HOUR_OF_DAY), 0, true);
         mTimePickerDialog.enableMinutes(true);
         mTimePickerDialog.setTimeInterval(1, 30);
         mTimePickerDialog.setMinTime(8,0,0);

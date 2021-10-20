@@ -66,6 +66,14 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
         <activity
+            android:name="com.mhd.elemantary.activity.ModifyTodoActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.ModifyScheduleActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
             android:name="com.mhd.elemantary.activity.RegistSelfActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>

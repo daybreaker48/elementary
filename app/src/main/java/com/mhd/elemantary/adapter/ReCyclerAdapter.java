@@ -2,13 +2,19 @@ package com.mhd.elemantary.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import java.util.ArrayList;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.vo.TodoData;
 import com.mhd.elemantary.util.MHDLog;
@@ -17,6 +23,17 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
 
     private String[] textSet1;
     private ArrayList<TodoData> listData = new ArrayList<>();
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+    // 리스너 객체 참조를 저장하는 변수
+    private static OnItemClickListener mListener = null;
+
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
 
     @NonNull
     @Override
@@ -65,6 +82,20 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
 
             this.tv_todo_publisher_holder = view.findViewById(R.id.tv_todo_publisher_holder);
             this.tv_todo_title_holder = view.findViewById(R.id.tv_todo_title_holder);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 리스너 객체의 메서드 호출.
+                        if (mListener != null) {
+                            mListener.onItemClick(v, pos) ;
+                            // 여기서 메뉴를 띄워야 하는 듯
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(TodoData data) {

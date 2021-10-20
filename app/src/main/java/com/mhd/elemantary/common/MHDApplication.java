@@ -1,6 +1,10 @@
 package com.mhd.elemantary.common;
 
+import android.content.SharedPreferences;
+
 import com.mhd.elemantary.util.MHDLog;
+
+import androidx.preference.PreferenceManager;
 
 /**
  * Created by MH.D on 2017-03-27.

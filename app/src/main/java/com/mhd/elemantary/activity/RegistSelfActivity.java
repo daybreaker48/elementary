@@ -38,6 +38,7 @@ import java.util.Map;
 public class RegistSelfActivity extends BaseActivity {
     TextView vst_top_title;
     EditText et_self_title_1, et_self_title_2, et_self_title_3;
+    AppCompatButton btn_move_stat_left;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class RegistSelfActivity extends BaseActivity {
         et_self_title_1 = (EditText) findViewById(R.id.et_self_title_1);
         et_self_title_2 = (EditText) findViewById(R.id.et_self_title_2);
         et_self_title_3 = (EditText) findViewById(R.id.et_self_title_3);
+        btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
 
         AppCompatButton btn_todo_cancel = (AppCompatButton) findViewById(R.id.btn_todo_cancel);
         btn_todo_cancel.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +64,21 @@ public class RegistSelfActivity extends BaseActivity {
                 saveProcess();
             }
         });
+        btn_move_stat_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { finish(); }
+        });
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
-        vst_top_title.setText(R.string.title_self_regist);
+        MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
+        String displayKid = "";
+        for(int k=0; k<menuVo.getMsg().size(); k++){
+            if("TO".equals(menuVo.getMsg().get(k).getMenuname())){
+                // 해당메뉴에 설정된 아이정보
+                displayKid = menuVo.getMsg().get(k).getKidname();
+            }
+        }
+        vst_top_title.setText("["+displayKid+"] "+ getString(R.string.title_self_regist));
     }
 
     private void saveProcess() {

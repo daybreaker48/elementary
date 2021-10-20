@@ -111,7 +111,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MHDLog.d(TAG, this.getClass().getSimpleName() + " activity created=========");
+        MHDLog.d(TAG, this.getClass().getSimpleName() + " activity created=========" + MHDApplication.getInstance().isAnyActivityInvokedOnce());
         mExternalLibraryManager = new ExternalLibraryManager(this, isEssentialCheckNeeded());
 
         // Application 컴포넌트 최초 호출이라면.
@@ -515,7 +515,14 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         MHDDialogUtil.sAlert(this, getString(R.string.confirm_logout), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                logout();
+                if(MHDApplication.getInstance().getMHDSvcManager().userLogout()){
+                    Intent i = new Intent(BaseActivity.this, LoginActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(i);
+                    finish();
+                }else{
+                    // logout 오류
+                }
             }
         }, new DialogInterface.OnClickListener() {
             @Override

@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
+import com.mhd.elemantary.activity.LoginActivity;
+import com.mhd.elemantary.activity.ModifyTodoActivity;
 import com.mhd.elemantary.activity.RegistKidsActivity;
 import com.mhd.elemantary.activity.RegistScheduleActivity;
 import com.mhd.elemantary.activity.RegistSelfActivity;
@@ -121,7 +123,8 @@ public class MainActivity extends BaseActivity {
 
         // resultFlag 이 true 라면 현재 여기에 필요한 data 들이 전역에 들어가 있는 상태.
         if("M".equals(nvResultCode)){
-            // fragment에서 호출된거라면 그쪽 호출하고
+            // fragment에서 호출된거라면 우선 데이타가 없다는 것으로 간주.
+            // 그런 경우라면 없다고 화면에 띄우기 위해 fragment 내 함수 호출해서 화면 표시
             if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_todo))){ // 학습
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_schedule))){ // 스케쥴
@@ -227,4 +230,23 @@ public class MainActivity extends BaseActivity {
                     }
                 }
             });
+
+    public void startTodoModify(int position){
+        Intent intent = new Intent(context_main, ModifyTodoActivity.class);
+        intent.putExtra("position", position);
+        startActivityResultTodoModify.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultTodoModify = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
+                    }
+                }
+            });
+
+    public void logoutProcess(){
+        confirmLogout();
+    }
 }

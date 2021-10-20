@@ -2,38 +2,32 @@ package com.mhd.elemantary.activity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
-import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.adapter.ReCyclerAdapter;
 import com.mhd.elemantary.adapter.ReCyclerSubjectAdapter;
 import com.mhd.elemantary.common.ClickCallbackListener;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.SubjectListData;
 import com.mhd.elemantary.common.vo.SubjectVo;
+import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.constant.MHDConstants;
-import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -56,8 +50,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RegistTodoActivity extends BaseActivity implements TextView.OnEditorActionListener  {
-
+public class ModifyTodoActivity extends BaseActivity implements TextView.OnEditorActionListener  {
     TextView tv_selectday, vst_top_title, tv_todo_subject, tv_todo_subject_detail;
     TextView tv_rb_daily_progress_2_finishday, tv_startday;
     LinearLayout ll_daily_progress, ll_daily_textbook;
@@ -108,7 +101,16 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_todo_regist);
-        mContext = RegistTodoActivity.this;
+        mContext = ModifyTodoActivity.this;
+
+        Intent intent = getIntent();
+        int itemPosition = intent.getIntExtra("position", -1);
+        TodoVo mTodoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
+
+        /* 수정 처리 */
+        selectedSubject = mTodoVo.getMsg().get(itemPosition).getSubject();
+        selectedDetail = mTodoVo.getMsg().get(itemPosition).getDetail();
+        /* 수정 처리 */
 
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
@@ -118,6 +120,24 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         btn_thur = (AppCompatButton) findViewById(R.id.btn_thur);
         btn_fri = (AppCompatButton) findViewById(R.id.btn_fri);
         btn_sat = (AppCompatButton) findViewById(R.id.btn_sat);
+
+        /* 수정 처리 */
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getSun()))
+            selectDay(0);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getMon()))
+            selectDay(1);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getTue()))
+            selectDay(2);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getWed()))
+            selectDay(3);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getThu()))
+            selectDay(4);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getFri()))
+            selectDay(5);
+        if("Y".equals(mTodoVo.getMsg().get(itemPosition).getSat()))
+            selectDay(6);
+        /* 수정 처리 */
+
         btn_sun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { selectDay(0); }
@@ -171,7 +191,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] "+ getString(R.string.title_todo_regist));
+        vst_top_title.setText("["+displayKid+"] "+ getString(R.string.title_todo_modify));
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         ll_daily_progress = (LinearLayout) findViewById(R.id.ll_daily_progress);
@@ -495,7 +515,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
 
-            MHDNetworkInvoker.getInstance().sendVolleyRequest(RegistTodoActivity.this, R.string.url_restapi_check_subject, params, responseListener);
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(ModifyTodoActivity.this, R.string.url_restapi_check_subject, params, responseListener);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             MHDLog.printException(e);
@@ -594,7 +614,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     // 우선 toast를 띄울 것.
                     Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
                 } else {
-                    // 할일 정상등록 여부를 알림
+                    // 학습 정상 수정 여부를 알림
                     MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

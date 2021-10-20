@@ -56,9 +56,10 @@ public class ScheduleFragment extends BaseFragment {
     private RecyclerView.LayoutManager layoutManager;
     private LinearLayout linearLayoutTime, linearLayoutLine, linearLayoutMon, linearLayoutTue, linearLayoutWed, linearLayoutThu, linearLayoutFri, linearLayoutSat, linearLayoutSun;
     private TextView titleText;
-    PowerMenu powerMenu;
-    TextView vst_top_title;
+    PowerMenu powerMenu = null;
+    TextView vst_top_title,tv_no_data;
     String displayKid = "";
+    LinearLayout ll_area_data;
 
     public static ScheduleFragment create() {
         return new ScheduleFragment();
@@ -78,6 +79,8 @@ public class ScheduleFragment extends BaseFragment {
 //        mTitle.setLayoutParams(mLayoutParams);
 
         LinearLayout ll_top_schedule = (LinearLayout) root.findViewById(R.id.ll_top_schedule);
+        ll_area_data = (LinearLayout) root.findViewById(R.id.ll_area_data);
+        tv_no_data = (TextView) root.findViewById(R.id.tv_no_data);
 
         // vo에 있는 아이 정보를 메뉴item 으로 삽입.
         KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
@@ -95,9 +98,35 @@ public class ScheduleFragment extends BaseFragment {
         }
         vst_top_title.setText("["+displayKid+"] 스케쥴");
 
+        powerMenu = new PowerMenu.Builder(getActivity())
+                .addItemList(kidsList) //
+                //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+                //                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                .setTextSize(14)
+                .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                .setDividerHeight(1)
+                .setHeaderView(null)
+                .setFooterView(null)
+                .build();
+
         ll_top_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+                List<PowerMenuItem> kidsList = new ArrayList();
+                for(int k=0; k<kidsVo.getCnt(); k++){
+                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+                }
                 powerMenu = new PowerMenu.Builder(getActivity())
                         .addItemList(kidsList) //
 //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
@@ -132,6 +161,42 @@ public class ScheduleFragment extends BaseFragment {
         linearLayoutSun = (LinearLayout) root.findViewById(R.id.ll_schedule_sun);
 
         querySchedule();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 기존에 선택됐던 item
+        if(powerMenu != null) {
+            int sp = powerMenu.getSelectedPosition() == -1 ? 0 : powerMenu.getSelectedPosition();
+            KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+            List<PowerMenuItem> kidsList = new ArrayList();
+            for (int k = 0; k < kidsVo.getCnt(); k++) {
+                kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == sp ? true : false));
+            }
+
+            powerMenu = new PowerMenu.Builder(getActivity())
+                    .addItemList(kidsList) //
+                    //                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+                    //                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                    .setTextSize(14)
+                    .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                    .setMenuRadius(10f) // sets the corner radius.
+                    .setMenuShadow(10f) // sets the shadow.
+                    .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                    .setTextGravity(Gravity.CENTER)
+                    .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                    .setSelectedTextColor(Color.WHITE)
+                    .setMenuColor(Color.WHITE)
+                    .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                    .setOnMenuItemClickListener(onMenuItemClickListener)
+                    .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                    .setDividerHeight(1)
+                    .setHeaderView(null)
+                    .setFooterView(null)
+                    .build();
+        }
     }
 
     private OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
@@ -215,6 +280,9 @@ public class ScheduleFragment extends BaseFragment {
      */
     public boolean networkResponseProcess(String nvMsg, int nvCnt, String result) {
         ScheduleVo scheduleVo = null;
+
+        tv_no_data.setVisibility(View.GONE);
+        ll_area_data.setVisibility(View.VISIBLE);
 
         if (nvCnt == 0) {
             // 정보가 없으면 비정상
@@ -620,4 +688,9 @@ public class ScheduleFragment extends BaseFragment {
          }
         return false;
      }
+
+    public void noData(String nvApiParam) {
+        tv_no_data.setVisibility(View.VISIBLE);
+        ll_area_data.setVisibility(View.GONE);
+    }
 }

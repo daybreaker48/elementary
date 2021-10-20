@@ -3,6 +3,7 @@ package com.mhd.elemantary.activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -30,6 +31,8 @@ import com.mhd.elemantary.webview.activity.HybridWebGuestActivity;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.preference.PreferenceManager;
 
 public class JoinActivity extends BaseActivity {
 
@@ -202,6 +205,13 @@ public class JoinActivity extends BaseActivity {
         }else if("S".equals(nvResultCode)){
             // 회원가입 성공. user vo 를 구성하고
             MHDLog.d(TAG, "networkResponseProcess nvMsg >>> " + nvMsg);
+
+            // 이제 Tutorial 이 뜨지 않는다.
+            MHDApplication.getInstance().getMHDSvcManager().setIsFirstStart(false);
+            SharedPreferences appPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+            SharedPreferences.Editor editor = appPref.edit();
+            editor.putBoolean("execFirst", false);
+            editor.commit();
 
             MHDDialogUtil.sAlert(mContext, R.string.alert_join_success, new DialogInterface.OnClickListener() {
                 @Override

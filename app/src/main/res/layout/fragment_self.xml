@@ -36,6 +36,18 @@
             android:text="@string/title_selfdo"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_20"
+        android:text="@string/content_no_self"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_receiving"
         android:layout_width="match_parent"

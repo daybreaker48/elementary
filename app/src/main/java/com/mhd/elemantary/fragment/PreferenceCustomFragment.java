@@ -2,6 +2,7 @@ package com.mhd.elemantary.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import org.json.JSONObject;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 public class PreferenceCustomFragment extends PreferenceFragmentCompat {
     public final String TAG = getClass().getName();
@@ -35,11 +39,15 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
     public int nvFmCnt = 0;
     public String nvFmMsg = "";
 
+    SharedPreferences pref;
+
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.setting_preference, rootKey);
 
-        Preference preference = findPreference("kids");
+        Preference preferenceLogout = findPreference("logout");
+        Preference preferenceKids = findPreference("kids");
         if(MHDApplication.getInstance().getMHDSvcManager().getKidsVo() != null){
             KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
             int kidsCount = kidsVo.getCnt();
@@ -48,17 +56,57 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
                 if(i==0) kidsInfo = kidsVo.getMsg().get(i).getName() + " / " + kidsVo.getMsg().get(i).getAge() + "세";
                 else kidsInfo = kidsInfo + "\n" + kidsVo.getMsg().get(i).getName() + " / " + kidsVo.getMsg().get(i).getAge() + "세";
             }
-            preference.setSummary(kidsInfo);
+            preferenceKids.setSummary(kidsInfo);
         }
-        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        preferenceKids.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference p) {
-                // Handle preference click
                 ((MainActivity)MainActivity.context_main).startKidsRegist();
                 return true;
             }
         });
+        preferenceLogout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference p) {
+                // alert 띄우고 로그아웃 처리
+                ((MainActivity)MainActivity.context_main).logoutProcess();
+                return true;
+            }
+        });
+
+        //SharedPreference객체를 참조하여 설정상태에 대한 제어 가능..
+        pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
+
+    //설정값 변경리스너 객체 맴버변수
+    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if(key.equals("autologin")){
+                boolean autologinP = pref.getBoolean(key, false);
+                SwitchPreferenceCompat sp = (SwitchPreferenceCompat) findPreference(key);
+                if(autologinP) {
+                    sp.setSummary("자동로그인 설정되었습니다.");
+                    // 계정정보 저장?
+                }else {
+                    sp.setSummary("자동로그인을 설정하려면 체크하세요.");
+                }
+//                if(key.equals("message")){
+//                    boolean b= pref.getBoolean("message", false);
+//                    Toast.makeText(getActivity(), "소리알림 : "+ b, Toast.LENGTH_SHORT).show();
+//
+//                }else
+//
+
+//                }else if(key.equals("nickName")){
+//                    EditTextPreference ep= (EditTextPreference) findPreference(key);
+//                    ep.setSummary(pref.getString(key, ""));
+//                }else if(key.equals("favor")){
+//                    Set<String> datas= pref.getStringSet(key, null);
+
+            }
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +138,13 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
                 return;
             }
         };
+
+//        boolean autologinP = pref.getBoolean("autologin", false);
+//        SwitchPreferenceCompat sp = (SwitchPreferenceCompat) findPreference("autologin");
+//        if(autologinP)
+//            sp.setSummary("자동로그인 설정되었습니다.");
+//        else
+//            sp.setSummary("자동로그인을 설정하려면 체크하세요.");
     }
 
     /**
@@ -144,5 +199,20 @@ public class PreferenceCustomFragment extends PreferenceFragmentCompat {
 ////            editor.clearAllContents();
 ////        }
 //    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //설정값 변경리스너..등록
+        pref.registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        pref.unregisterOnSharedPreferenceChangeListener(listener);
+    }
 }
 

@@ -2,6 +2,7 @@ package com.mhd.elemantary.common;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -24,6 +25,8 @@ import com.mhd.elemantary.util.Util;
 import com.mhd.elemantary.view.GlobalTabsView;
 
 import java.util.List;
+
+import androidx.preference.PreferenceManager;
 
 
 /**
@@ -130,6 +133,9 @@ public class MHDSvcManager {
 	 */
 	private String currentDetail = "";
 
+	public SharedPreferences appPref;
+	public boolean execFirst;
+
 	/**
 	 * constructor
 	 */
@@ -150,7 +156,9 @@ public class MHDSvcManager {
 	public void init() {
 		this.srvEnvFlag = this.mContext.getString(R.string.SERVICE_ENVIRONMENT);
 		this.mhdNetInfoCVO = new MHDNetInfoCVO();
-		this.isFirstStart = true;
+
+		appPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+		this.isFirstStart = appPref.getBoolean("execFirst", true);
 
 		// app 이 새로 init 되는 시점에 항상 uuid 값이 svcmanager에 setting 된다. 빈값은 없다.
 		// preference 에는 넣지 않는다. 나중에 비교하고 갱신한다.
@@ -246,6 +254,27 @@ public class MHDSvcManager {
 	public boolean isLoginTaskRunning() {
 		boolean isLogin = MHDApplication.getInstance().getMHDSvcManager().getUserVo() != null;
 		return isLogin;
+	}
+	/**
+	 * logout. 모든 vo를 비우고 로그인화면으로
+	 */
+	public boolean userLogout() {
+		try{
+			setPushVo(null);
+			setUserVo(null);
+			setKidsVo(null);
+			setMenuVo(null);
+			setSubjectVo(null);
+			setTodoVo(null);
+			setScheduleVo(null);
+			setSelfVo(null);
+
+		} catch (Exception e) {
+			MHDLog.printException(e);
+
+			return false;
+		}
+		return true;
 	}
 	/**
 	 * get network info cvo
