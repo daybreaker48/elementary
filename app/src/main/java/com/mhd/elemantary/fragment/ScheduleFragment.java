@@ -96,7 +96,7 @@ public class ScheduleFragment extends BaseFragment {
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] 스케쥴");
+        vst_top_title.setText("[ "+displayKid+" ] 스케줄");
 
         powerMenu = new PowerMenu.Builder(getActivity())
                 .addItemList(kidsList) //
@@ -203,7 +203,7 @@ public class ScheduleFragment extends BaseFragment {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
             displayKid = item.getTitle().toString();
-            vst_top_title.setText("["+displayKid+"] 스케쥴");
+            vst_top_title.setText("[ "+displayKid+" ] 스케쥴");
             powerMenu.setSelectedPosition(position); // change selected item
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
@@ -515,7 +515,7 @@ public class ScheduleFragment extends BaseFragment {
          mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
          mParams.weight = gap;
          mParams.gravity = Gravity.CENTER;
-         myLinearLayout.setPadding(6,9,6,10);
+         myLinearLayout.setPadding(6,9,6,9);
          myLinearLayout.setLayoutParams(mParams);
 //         LayerDrawable shape = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, bottomline);
 //         myLinearLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bottom_border));
@@ -598,9 +598,9 @@ public class ScheduleFragment extends BaseFragment {
             Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"); // font 폴더내에 있는 jua.ttf 파일을 typeface로 설정
             titleText.setTypeface(typeface);
         }
-        titleText.setTextColor(Color.BLACK);
+        titleText.setTextColor(getResources().getColor(R.color.dark_grey));
         titleText.setGravity(Gravity.CENTER);
-        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 1, 1, 1, 1);
+        LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 0, 0, 1, 1);
         titleText.setBackground(bottomBorder);
 
         mLinearLayout.addView(titleText);

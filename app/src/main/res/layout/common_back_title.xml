@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/main_theme"
     android:orientation="horizontal" >
 
     <LinearLayout
         android:id="@+id/ll_top_receiving"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:paddingLeft="15dp"
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_move_stat_left"
@@ -23,7 +23,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
-            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_18"
             android:text="@string/title_todo"/>
     </LinearLayout>

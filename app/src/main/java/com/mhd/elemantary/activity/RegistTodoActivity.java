@@ -1215,6 +1215,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             params.put("TDONEDAY", oneday);
             params.put("TDTOTAL", total);
             params.put("TDGOAL", goal);
+            params.put("TDWEEKD", goal);
             MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_todo, params, responseListener);
         } catch (Exception e) {
             // TODO Auto-generated catch block

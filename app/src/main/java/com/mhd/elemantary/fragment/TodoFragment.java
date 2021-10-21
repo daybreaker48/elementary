@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,9 +58,9 @@ public class TodoFragment extends BaseFragment {
     TextView vst_top_title, tv_no_data, tv_todo_subject_section;
     String displayKid = "";
 
-    LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_today, btn_next_1, btn_next_2, btn_next_3;
-    TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, btn_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
-    TextView tv_past_3_week, tv_past_2_week, tv_past_1_week, btn_today_week, tv_next_1_week, tv_next_2_week, tv_next_3_week;
+    LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_todoy, btn_next_1, btn_next_2, btn_next_3, ll_area_days;
+    TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, tv_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
+    TextView tv_past_3_week, tv_past_2_week, tv_past_1_week, tv_today_week, tv_next_1_week, tv_next_2_week, tv_next_3_week;
 
     public static TodoFragment create() {
         return new TodoFragment();
@@ -96,31 +97,33 @@ public class TodoFragment extends BaseFragment {
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] 오늘의 학습");
+        vst_top_title.setText("[ "+displayKid+" ] 오늘의 학습");
 
-        LinearLayout btn_past_3 = (LinearLayout) root.findViewById(R.id.btn_past_3);
-        LinearLayout btn_past_2 = (LinearLayout) root.findViewById(R.id.btn_past_2);
-        LinearLayout btn_past_1 = (LinearLayout) root.findViewById(R.id.btn_past_1);
-        LinearLayout btn_todoy = (LinearLayout) root.findViewById(R.id.btn_today);
-        LinearLayout btn_next_1 = (LinearLayout) root.findViewById(R.id.btn_next_1);
-        LinearLayout btn_next_2 = (LinearLayout) root.findViewById(R.id.btn_next_2);
-        LinearLayout btn_next_3 = (LinearLayout) root.findViewById(R.id.btn_next_3);
+        ll_area_days = (LinearLayout) root.findViewById(R.id.ll_area_days);
 
-        TextView tv_today_day = (TextView) root.findViewById(R.id.tv_today_day);
-        TextView tv_past_3_day = (TextView) root.findViewById(R.id.tv_past_3_day);
-        TextView tv_past_2_day = (TextView) root.findViewById(R.id.tv_past_2_day);
-        TextView tv_past_1_day = (TextView) root.findViewById(R.id.tv_past_1_day);
-        TextView tv_next_1_day = (TextView) root.findViewById(R.id.tv_next_1_day);
-        TextView tv_next_2_day = (TextView) root.findViewById(R.id.tv_next_2_day);
-        TextView tv_next_3_day = (TextView) root.findViewById(R.id.tv_next_3_day);
+        btn_past_3 = (LinearLayout) root.findViewById(R.id.btn_past_3);
+        btn_past_2 = (LinearLayout) root.findViewById(R.id.btn_past_2);
+        btn_past_1 = (LinearLayout) root.findViewById(R.id.btn_past_1);
+        btn_todoy = (LinearLayout) root.findViewById(R.id.btn_today);
+        btn_next_1 = (LinearLayout) root.findViewById(R.id.btn_next_1);
+        btn_next_2 = (LinearLayout) root.findViewById(R.id.btn_next_2);
+        btn_next_3 = (LinearLayout) root.findViewById(R.id.btn_next_3);
 
-        TextView tv_today_week = (TextView) root.findViewById(R.id.tv_today_week);
-        TextView tv_past_3_week = (TextView) root.findViewById(R.id.tv_past_3_week);
-        TextView tv_past_2_week = (TextView) root.findViewById(R.id.tv_past_2_week);
-        TextView tv_past_1_week = (TextView) root.findViewById(R.id.tv_past_1_week);
-        TextView tv_next_1_week = (TextView) root.findViewById(R.id.tv_next_1_week);
-        TextView tv_next_2_week = (TextView) root.findViewById(R.id.tv_next_2_week);
-        TextView tv_next_3_week = (TextView) root.findViewById(R.id.tv_next_3_week);
+        tv_today_day = (TextView) root.findViewById(R.id.tv_today_day);
+        tv_past_3_day = (TextView) root.findViewById(R.id.tv_past_3_day);
+        tv_past_2_day = (TextView) root.findViewById(R.id.tv_past_2_day);
+        tv_past_1_day = (TextView) root.findViewById(R.id.tv_past_1_day);
+        tv_next_1_day = (TextView) root.findViewById(R.id.tv_next_1_day);
+        tv_next_2_day = (TextView) root.findViewById(R.id.tv_next_2_day);
+        tv_next_3_day = (TextView) root.findViewById(R.id.tv_next_3_day);
+
+        tv_today_week = (TextView) root.findViewById(R.id.tv_today_week);
+        tv_past_3_week = (TextView) root.findViewById(R.id.tv_past_3_week);
+        tv_past_2_week = (TextView) root.findViewById(R.id.tv_past_2_week);
+        tv_past_1_week = (TextView) root.findViewById(R.id.tv_past_1_week);
+        tv_next_1_week = (TextView) root.findViewById(R.id.tv_next_1_week);
+        tv_next_2_week = (TextView) root.findViewById(R.id.tv_next_2_week);
+        tv_next_3_week = (TextView) root.findViewById(R.id.tv_next_3_week);
 
         Calendar cal = Calendar.getInstance();
         int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
@@ -165,7 +168,7 @@ public class TodoFragment extends BaseFragment {
                 .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
                 .setSelectedTextColor(Color.WHITE)
                 .setMenuColor(Color.WHITE)
-                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.powermenu_select))
                 .setOnMenuItemClickListener(onMenuItemClickListener)
                 .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
                 .setDividerHeight(1)
@@ -173,38 +176,38 @@ public class TodoFragment extends BaseFragment {
                 .setFooterView(null)
                 .build();
 
-        ll_top_todo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
-                List<PowerMenuItem> kidsList = new ArrayList();
-                for(int k=0; k<kidsVo.getCnt(); k++){
-                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
-                }
-                powerMenu = new PowerMenu.Builder(getActivity())
-                        .addItemList(kidsList) //
-//                .addItem(new PowerMenuItem("한다인", false)) // add an item.
-//                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
-                        .setTextSize(14)
-                        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
-                        .setMenuRadius(10f) // sets the corner radius.
-                        .setMenuShadow(10f) // sets the shadow.
-                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
-                        .setTextGravity(Gravity.CENTER)
-                        .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
-                        .setSelectedTextColor(Color.WHITE)
-                        .setMenuColor(Color.WHITE)
-                        .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
-                        .setOnMenuItemClickListener(onMenuItemClickListener)
-                        .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
-                        .setDividerHeight(1)
-                        .setHeaderView(null)
-                        .setFooterView(null)
-                        .build();
-
-                powerMenu.showAsDropDown(v);
-            }
-        });
+//        vst_right_2_image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+//                List<PowerMenuItem> kidsList = new ArrayList();
+//                for(int k=0; k<kidsVo.getCnt(); k++){
+//                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+//                }
+//                powerMenu = new PowerMenu.Builder(getActivity())
+//                        .addItemList(kidsList) //
+////                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+////                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+//                        .setTextSize(14)
+//                        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+//                        .setMenuRadius(10f) // sets the corner radius.
+//                        .setMenuShadow(10f) // sets the shadow.
+//                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+//                        .setTextGravity(Gravity.CENTER)
+//                        .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+//                        .setSelectedTextColor(Color.WHITE)
+//                        .setMenuColor(Color.WHITE)
+//                        .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.v))
+//                        .setOnMenuItemClickListener(onMenuItemClickListener)
+//                        .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+//                        .setDividerHeight(1)
+//                        .setHeaderView(null)
+//                        .setFooterView(null)
+//                        .build();
+//
+//                powerMenu.showAsDropDown(v);
+//            }
+//        });
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
         recyclerView.setHasFixedSize(true);
@@ -234,7 +237,7 @@ public class TodoFragment extends BaseFragment {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
             displayKid = item.getTitle().toString();
-            vst_top_title.setText("["+displayKid+"] 학습");
+            vst_top_title.setText("[ "+displayKid+" ] 학습");
             powerMenu.setSelectedPosition(position); // change selected item
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
@@ -277,7 +280,7 @@ public class TodoFragment extends BaseFragment {
                     .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
                     .setSelectedTextColor(Color.WHITE)
                     .setMenuColor(Color.WHITE)
-                    .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+                    .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.powermenu_select))
                     .setOnMenuItemClickListener(onMenuItemClickListener)
                     .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
                     .setDividerHeight(1)
@@ -300,10 +303,15 @@ public class TodoFragment extends BaseFragment {
      */
     public void queryTodo(){
         try {
+            Calendar cal = Calendar.getInstance();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String tdDate = df.format(cal.getTime()).substring(6);
+
             Map<String, String> params = new HashMap<String, String>();
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
             params.put("TKNAME", displayKid);
+            params.put("TDDATE", tdDate);
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {
@@ -318,6 +326,7 @@ public class TodoFragment extends BaseFragment {
         adapter.deleteAll();
 
         tv_no_data.setVisibility(View.GONE);
+        ll_area_days.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
 
         if (nvCnt == 0) {
@@ -364,27 +373,58 @@ public class TodoFragment extends BaseFragment {
 
     public void noData(String nvApiParam) {
         tv_no_data.setVisibility(View.VISIBLE);
+        ll_area_days.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
     }
 
     public String selectWeek(int day) {
         switch (day) {
-            case 0:
-                return "Sun";
             case 1:
-                return "Mon";
+                return "Sun";
             case 2:
-                return "Tue";
+                return "Mon";
             case 3:
-                return "Wed";
+                return "Tue";
             case 4:
-                return "Thu";
+                return "Wed";
             case 5:
-                return "Fri";
+                return "Thu";
             case 6:
+                return "Fri";
+            case 7:
                 return "Sat";
             default:
                 return "Sun";
         }
+    }
+
+    public void showPMenu(){
+        KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+        List<PowerMenuItem> kidsList = new ArrayList();
+        for(int k=0; k<kidsVo.getCnt(); k++){
+            kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+        }
+        powerMenu = new PowerMenu.Builder(getActivity())
+                .addItemList(kidsList) //
+//                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+//                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                .setTextSize(14)
+                .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.powermenu_select))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                .setDividerHeight(1)
+                .setHeaderView(null)
+                .setFooterView(null)
+                .build();
+
+        powerMenu.showAsDropDown(vst_top_title);
     }
 }

@@ -23,7 +23,7 @@
             android:gravity="start|center_vertical"
             android:layout_marginRight="@dimen/length_5"
             android:padding="8dp"
-            android:background="@drawable/kid_selelct"/>
+            android:background="@drawable/kid_select"/>
         <TextView
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"

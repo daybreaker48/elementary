@@ -249,4 +249,10 @@ public class MainActivity extends BaseActivity {
     public void logoutProcess(){
         confirmLogout();
     }
+
+    public void showPMenu(int position){
+        if(position == 0)
+            ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).showPMenu();
+    }
+
 }

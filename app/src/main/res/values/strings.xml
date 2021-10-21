@@ -88,14 +88,14 @@
     <string name="title_post" translatable="true">POST</string>
     <string name="title_receiving" translatable="true">RECEIVING</string>
     <string name="title_todo" translatable="true">오늘의 학습</string>
-    <string name="title_schedule" translatable="true">1주일 스케쥴</string>
+    <string name="title_schedule" translatable="true">1주일 스케줄</string>
     <string name="title_selfdo" translatable="true">습관</string>
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
     <string name="title_todo_regist" translatable="true">학습 등록</string>
     <string name="title_todo_modify" translatable="true">학습 수정</string>
-    <string name="title_schedule_regist" translatable="true">스케쥴 등록</string>
-    <string name="title_schedule_modify" translatable="true">스케쥴 수정</string>
+    <string name="title_schedule_regist" translatable="true">스케줄 등록</string>
+    <string name="title_schedule_modify" translatable="true">스케줄 수정</string>
     <string name="title_self_regist" translatable="true">습관 등록</string>
     <string name="title_kids_regist" translatable="true">아이 등록</string>
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
@@ -146,7 +146,7 @@
     <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
     <string name="content_not_kids" translatable="true">등록된 아이 정보가 없습니다.\n관리할 아이 정보를 입력하셔야 합니다.</string>
     <string name="content_no_todo" translatable="true">학습 정보가 존재하지 않습니다.</string>
-    <string name="content_no_schedule" translatable="true">스케쥴 정보가 존재하지 않습니다.</string>
+    <string name="content_no_schedule" translatable="true">스케줄 정보가 존재하지 않습니다.</string>
     <string name="content_no_self" translatable="true">습관 정보가 존재하지 않습니다.</string>
     <string name="content_no_sum" translatable="true">통계 정보가 존재하지 않습니다.</string>
     <string name="content_time" translatable="true">시간</string>

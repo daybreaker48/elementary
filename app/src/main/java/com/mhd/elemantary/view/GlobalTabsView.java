@@ -47,7 +47,7 @@ public class GlobalTabsView extends FrameLayout {
     private ImageView mThirdImage;
     private ImageView mFourthImage;
     private ImageView mFifthImage;
-    private ImageView mTopLeftImage, mTopRightImage;
+    private ImageView mTopLeftImage, mTopRightImage,mTopRightImage_2;
 
     private View mIndicator;
 
@@ -222,6 +222,13 @@ public class GlobalTabsView extends FrameLayout {
                 }
             }
         });
+        mTopRightImage_2.setOnClickListener(new OnClickListener() {//            @Override
+            public void onClick(View v) {
+                // show powermenu
+                // MainActivity 내에 있는 function 호출.
+                ((MainActivity)MainActivity.context_main).showPMenu(menuViewPager.getCurrentItem());
+            }
+        });
     }
 
     public void setUpWithReadViewPager(final ViewPager viewPager) {
@@ -288,6 +295,7 @@ public class GlobalTabsView extends FrameLayout {
         mFifthImage = (ImageView) findViewById(R.id.vst_main_fifth_image);
         mTopLeftImage = (ImageView) findViewById(R.id.vst_left_image);
         mTopRightImage = (ImageView) findViewById(R.id.vst_right_image);
+        mTopRightImage_2 = (ImageView) findViewById(R.id.vst_right_2_image);
 
         mIndicator = findViewById(R.id.vst_indicator);
         mIndicator.setAlpha(1);
