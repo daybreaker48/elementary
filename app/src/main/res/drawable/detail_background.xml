@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid
-        android:color="@color/detail_bg_color" />
-    <padding
-        android:left="15dp"
-        android:top="3dp"
-        android:right="15dp"
-        android:bottom="3dp" />
-    <corners
-        android:radius="10dp" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!--도형안에 채워질 색을 정의한다.-->
+    <solid android:color="@color/ultra_violet" />
+    <size
+        android:width="45dp"
+        android:height="45dp"/>
 </shape>

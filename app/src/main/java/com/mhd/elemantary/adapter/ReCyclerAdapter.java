@@ -40,7 +40,6 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_list_holder_view, parent, false);
         RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(holderView);
-        MHDLog.d("dagian", "viewholder create");
         return recyclerViewHolder;
     }
 
@@ -48,6 +47,11 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
         holder.onBind(listData.get(position));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -66,21 +70,27 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         listData.clear();
     }
 
+    public int getDDD() {
+        return 0;
+    }
+
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
-        public TextView tvSubject, tvDetail, tvDaily;
-        public TextView tv_todo_publisher_holder, tv_todo_title_holder;
+        public TextView tvSubject, tvDetail, tvDaily, tvSection;
+        public TextView tv_todo_publisher_holder, tv_todo_title_holder, tv_todo_subject_section;
         public CheckBox cb_todo_complete_holder;
+
 //        public ImageView imageView;
 
         public RecyclerViewHolder(View view){
             super(view);
 
-            this.tvSubject = view.findViewById(R.id.tv_todo_subject_holder);
+            this.tvSection = view.findViewById(R.id.tv_todo_subject_section);
+//            this.tvSubject = view.findViewById(R.id.tv_todo_subject_holder);
             this.tvDetail = view.findViewById(R.id.tv_todo_textbook_holder);
             this.tvDaily = view.findViewById(R.id.tv_todo_daily_holder);
             this.cb_todo_complete_holder = view.findViewById(R.id.cb_todo_complete_holder);
 
-            this.tv_todo_publisher_holder = view.findViewById(R.id.tv_todo_publisher_holder);
+//            this.tv_todo_publisher_holder = view.findViewById(R.id.tv_todo_publisher_holder);
             this.tv_todo_title_holder = view.findViewById(R.id.tv_todo_title_holder);
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -101,11 +111,13 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         void onBind(TodoData data) {
 //            holder.tvSubject.setText(this.textSet1[position]);
 //        holder.imageView.setBackgroundResource(this.imgSet[position]);
-            this.tvSubject.setText(data.getSubject());
+            this.tvSection.setText(data.getSubject());
+            this.tvSection.setVisibility(Integer.parseInt(data.getSection()));
+//            this.tvSubject.setText(data.getSubject());
             this.tvDetail.setText(data.getDetail());
-            this.tvDaily.setText("하루학습 : " + data.getDaily());
+            this.tvDaily.setText(data.getDaily() + " page");
             String temp = data.getPublisher();
-            this.tv_todo_publisher_holder.setText(data.getPublisher());
+//            this.tv_todo_publisher_holder.setText(data.getPublisher());
             this.tv_todo_title_holder.setText(data.getTitle());
         }
     }

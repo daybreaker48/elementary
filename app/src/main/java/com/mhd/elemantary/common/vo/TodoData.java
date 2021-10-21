@@ -21,6 +21,7 @@ public class TodoData {
 	private String publisher;
 	private String title;
 	private String option;
+	private String section;
 
 	public String getSubject() {
 		return subject;
@@ -118,5 +119,11 @@ public class TodoData {
 	}
 	public void setOption(String option) {
 		this.option = option;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
 	}
 }

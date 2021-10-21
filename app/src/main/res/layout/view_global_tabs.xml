@@ -30,8 +30,8 @@
         android:layout_width="@dimen/length_26"
         android:layout_height="@dimen/length_26"
         android:layout_gravity="end|top"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="@dimen/length_10"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="@dimen/length_15"
         android:padding="8dp"
         android:background="@drawable/regist"/>
 

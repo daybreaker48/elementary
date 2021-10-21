@@ -41,6 +41,7 @@ public class TodoVo {
 		public String rest; 		// 남은량
 		public String goal; 		// 목표일
 		public String tbend; 		// 종료일일
+		public String section; 		// 종료일일
 
 		public String getSubject() {
 			return subject;
@@ -176,6 +177,14 @@ public class TodoVo {
 
         public void setTbend(String tbend) {
             this.tbend = tbend;
+        }
+
+        public String getSection() {
+            return section;
+        }
+
+        public void setSection(String section) {
+            this.section = section;
         }
 	}
 

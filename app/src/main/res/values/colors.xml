@@ -33,4 +33,7 @@
     <color name="positiveButtonTextColor">@color/colorAccent</color>
     <color name="negativeButtonTextColor">@color/colorAccent</color>
     <color name="bottomSheetDividerColor">@color/colorAccent</color>
+
+    <color name="main_theme">#733273</color>
+    <color name="main_theme_text">#A566FF</color>
 </resources>

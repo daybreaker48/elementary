@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ import com.mhd.elemantary.common.vo.TodoData;
 import com.mhd.elemantary.common.vo.TodoVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDLog;
+import com.mhd.elemantary.view.RecyclerDecoration;
 import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.MenuBaseAdapter;
 import com.skydoves.powermenu.OnMenuItemClickListener;
@@ -38,7 +40,10 @@ import com.skydoves.powermenu.PowerMenuItem;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +54,12 @@ public class TodoFragment extends BaseFragment {
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title, tv_no_data;
+    TextView vst_top_title, tv_no_data, tv_todo_subject_section;
     String displayKid = "";
+
+    LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_today, btn_next_1, btn_next_2, btn_next_3;
+    TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, btn_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
+    TextView tv_past_3_week, tv_past_2_week, tv_past_1_week, btn_today_week, tv_next_1_week, tv_next_2_week, tv_next_3_week;
 
     public static TodoFragment create() {
         return new TodoFragment();
@@ -71,6 +80,7 @@ public class TodoFragment extends BaseFragment {
 
         LinearLayout ll_top_todo = (LinearLayout) root.findViewById(R.id.ll_top_todo);
         tv_no_data = (TextView) root.findViewById(R.id.tv_no_data);
+        tv_todo_subject_section = (TextView) root.findViewById(R.id.tv_todo_subject_section);
 
         // vo에 있는 아이 정보를 메뉴item 으로 삽입.
         KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
@@ -86,7 +96,61 @@ public class TodoFragment extends BaseFragment {
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] 학습");
+        vst_top_title.setText("["+displayKid+"] 오늘의 학습");
+
+        LinearLayout btn_past_3 = (LinearLayout) root.findViewById(R.id.btn_past_3);
+        LinearLayout btn_past_2 = (LinearLayout) root.findViewById(R.id.btn_past_2);
+        LinearLayout btn_past_1 = (LinearLayout) root.findViewById(R.id.btn_past_1);
+        LinearLayout btn_todoy = (LinearLayout) root.findViewById(R.id.btn_today);
+        LinearLayout btn_next_1 = (LinearLayout) root.findViewById(R.id.btn_next_1);
+        LinearLayout btn_next_2 = (LinearLayout) root.findViewById(R.id.btn_next_2);
+        LinearLayout btn_next_3 = (LinearLayout) root.findViewById(R.id.btn_next_3);
+
+        TextView tv_today_day = (TextView) root.findViewById(R.id.tv_today_day);
+        TextView tv_past_3_day = (TextView) root.findViewById(R.id.tv_past_3_day);
+        TextView tv_past_2_day = (TextView) root.findViewById(R.id.tv_past_2_day);
+        TextView tv_past_1_day = (TextView) root.findViewById(R.id.tv_past_1_day);
+        TextView tv_next_1_day = (TextView) root.findViewById(R.id.tv_next_1_day);
+        TextView tv_next_2_day = (TextView) root.findViewById(R.id.tv_next_2_day);
+        TextView tv_next_3_day = (TextView) root.findViewById(R.id.tv_next_3_day);
+
+        TextView tv_today_week = (TextView) root.findViewById(R.id.tv_today_week);
+        TextView tv_past_3_week = (TextView) root.findViewById(R.id.tv_past_3_week);
+        TextView tv_past_2_week = (TextView) root.findViewById(R.id.tv_past_2_week);
+        TextView tv_past_1_week = (TextView) root.findViewById(R.id.tv_past_1_week);
+        TextView tv_next_1_week = (TextView) root.findViewById(R.id.tv_next_1_week);
+        TextView tv_next_2_week = (TextView) root.findViewById(R.id.tv_next_2_week);
+        TextView tv_next_3_week = (TextView) root.findViewById(R.id.tv_next_3_week);
+
+        Calendar cal = Calendar.getInstance();
+        int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
+        tv_today_day.setText(df.format(cal.getTime()).substring(6));
+        tv_today_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, -3);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_past_3_day.setText(df.format(cal.getTime()).substring(6));
+        tv_past_3_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, 1);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_past_2_day.setText(df.format(cal.getTime()).substring(6));
+        tv_past_2_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, 1);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_past_1_day.setText(df.format(cal.getTime()).substring(6));
+        tv_past_1_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, 2);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_next_1_day.setText(df.format(cal.getTime()).substring(6));
+        tv_next_1_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, 1);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_next_2_day.setText(df.format(cal.getTime()).substring(6));
+        tv_next_2_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, 1);
+        weekd = cal.get(Calendar.DAY_OF_WEEK);
+        tv_next_3_day.setText(df.format(cal.getTime()).substring(6));
+        tv_next_3_week.setText(selectWeek(weekd));
 
         powerMenu = new PowerMenu.Builder(getActivity())
                 .addItemList(kidsList) //
@@ -148,7 +212,9 @@ public class TodoFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReCyclerAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        RecyclerDecoration recyclerDecoration = new RecyclerDecoration(1);
+        recyclerView.addItemDecoration(recyclerDecoration);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         adapter.setOnItemClickListener(new ReCyclerAdapter.OnItemClickListener() {
             @Override
@@ -284,6 +350,7 @@ public class TodoFragment extends BaseFragment {
             data.setPublisher(todoVo.getMsg().get(i).getPublish());
             data.setTitle(todoVo.getMsg().get(i).getTitle());
             data.setOption(todoVo.getMsg().get(i).getOption());
+            data.setSection(todoVo.getMsg().get(i).getSection());
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
@@ -298,5 +365,26 @@ public class TodoFragment extends BaseFragment {
     public void noData(String nvApiParam) {
         tv_no_data.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
+    }
+
+    public String selectWeek(int day) {
+        switch (day) {
+            case 0:
+                return "Sun";
+            case 1:
+                return "Mon";
+            case 2:
+                return "Tue";
+            case 3:
+                return "Wed";
+            case 4:
+                return "Thu";
+            case 5:
+                return "Fri";
+            case 6:
+                return "Sat";
+            default:
+                return "Sun";
+        }
     }
 }
