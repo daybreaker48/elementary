@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            fontPath="fonts/DidactGothic-Regular.ttf"
+            android:fontFamily="@font/main_font_bold"
+            android:includeFontPadding="false"
             android:textSize="@dimen/font_36"
             android:textColor="@color/black"
             android:text="@string/text_tutorial_login_title"
@@ -40,6 +41,8 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/font_20"
                 android:textColor="@color/black_overlay"
                 android:hint="이메일 입력"
@@ -61,6 +64,8 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/font_20"
                 android:textColor="@color/black_overlay"
                 android:hint="비밀번호 입력"
@@ -81,6 +86,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/font_14"
                 android:layout_marginLeft="10dp"
                 android:text="@string/text_tutorial_find_pwd"/>
@@ -90,6 +97,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textSize="@dimen/font_14"
                 android:layout_marginRight="10dp"
                 android:text="@string/text_tutorial_join"/>
@@ -103,25 +112,27 @@
         android:background="@color/white"
         android:layout_weight="3"
         android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_google"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            android:background="@color/red"
-            android:text="@string/text_google_login"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_kakao"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:textSize="20sp"
-            android:background="@color/yellow"
-            android:text="@string/text_kakao_login"/>
+        <!--<androidx.appcompat.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_google"-->
+            <!--android:layout_width="240dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:background="@color/red"-->
+            <!--android:text="@string/text_google_login"/>-->
+        <!--<androidx.appcompat.widget.AppCompatButton-->
+            <!--android:id="@+id/btn_kakao"-->
+            <!--android:layout_width="240dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:background="@color/yellow"-->
+            <!--android:text="@string/text_kakao_login"/>-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="240dp"
             android:layout_height="60dp"
             android:background="@drawable/ripple_effect"
+            android:fontFamily="@font/main_font"
+            android:includeFontPadding="false"
             android:textSize="20sp"
             android:text="@string/text_tutorial_login_title"/>
     </LinearLayout>

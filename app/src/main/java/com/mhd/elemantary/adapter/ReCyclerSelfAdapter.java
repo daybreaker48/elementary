@@ -27,7 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapter.RecyclerViewHolder> {
-
     private ArrayList<SelfData> listData = new ArrayList<>();
     private static Context context;
 
@@ -45,6 +44,11 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
         holder.onBind(listData.get(position));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -66,7 +70,6 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
         public TextView tvSelfItem;
         public CheckBox cbSelfComplete;
-//        public ImageView imageView;
 
         public RecyclerViewHolder(View view){
             super(view);
@@ -76,8 +79,6 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
         }
 
         void onBind(final SelfData data) {
-//            holder.tvSubject.setText(this.textSet1[position]);
-//        holder.imageView.setBackgroundResource(this.imgSet[position]);
             this.tvSelfItem.setText(data.getSelfItem());
             this.cbSelfComplete.setOnCheckedChangeListener(null);
             if("Y".equals(data.getSelfComplete())){

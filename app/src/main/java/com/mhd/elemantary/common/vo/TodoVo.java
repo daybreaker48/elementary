@@ -42,6 +42,8 @@ public class TodoVo {
 		public String goal; 		// 목표일
 		public String tbend; 		// 종료일일
 		public String section; 		// 종료일일
+		public String tdcomplete; 	// 종료일일
+		public String idx;      	// 종료일일
 
 		public String getSubject() {
 			return subject;
@@ -185,6 +187,22 @@ public class TodoVo {
 
         public void setSection(String section) {
             this.section = section;
+        }
+
+        public String getTdcomplete() {
+            return tdcomplete;
+        }
+
+        public void setTdcomplete(String tdcomplete) {
+            this.tdcomplete = tdcomplete;
+        }
+
+        public String getIdx() {
+            return idx;
+        }
+
+        public void setIdx(String idx) {
+            this.idx = idx;
         }
 	}
 

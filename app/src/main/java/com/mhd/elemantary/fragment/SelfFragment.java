@@ -47,6 +47,7 @@ public class SelfFragment extends BaseFragment {
     PowerMenu powerMenu = null;
     TextView vst_top_title, tv_no_data;
     String displayKid = "";
+    int displayKidPosition = 0;
 
     public static SelfFragment create() {
         return new SelfFragment();
@@ -79,6 +80,7 @@ public class SelfFragment extends BaseFragment {
             if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
                 // 해당메뉴에 설정된 아이정보
                 displayKid = menuVo.getMsg().get(k).getKidname();
+                displayKidPosition = 0;
             }
         }
         vst_top_title.setText("["+displayKid+"] 습관");
@@ -102,36 +104,36 @@ public class SelfFragment extends BaseFragment {
                 .setDividerHeight(1)
                 .build();
 
-        ll_top_self.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
-                List<PowerMenuItem> kidsList = new ArrayList();
-                for(int k=0; k<kidsVo.getCnt(); k++){
-                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
-                }
-                powerMenu = new PowerMenu.Builder(getActivity())
-                        .addItemList(kidsList) //
-//                .addItem(new PowerMenuItem("한다인", false)) // add an item.
-//                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
-                        .setTextSize(14)
-                        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
-                        .setMenuRadius(10f) // sets the corner radius.
-                        .setMenuShadow(10f) // sets the shadow.
-                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
-                        .setTextGravity(Gravity.CENTER)
-                        .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
-                        .setSelectedTextColor(Color.WHITE)
-                        .setMenuColor(Color.WHITE)
-                        .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
-                        .setOnMenuItemClickListener(onMenuItemClickListener)
-                        .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
-                        .setDividerHeight(1)
-                        .build();
-
-                powerMenu.showAsDropDown(v);
-            }
-        });
+//        ll_top_self.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+//                List<PowerMenuItem> kidsList = new ArrayList();
+//                for(int k=0; k<kidsVo.getCnt(); k++){
+//                    kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+//                }
+//                powerMenu = new PowerMenu.Builder(getActivity())
+//                        .addItemList(kidsList) //
+////                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+////                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+//                        .setTextSize(14)
+//                        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+//                        .setMenuRadius(10f) // sets the corner radius.
+//                        .setMenuShadow(10f) // sets the shadow.
+//                        .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+//                        .setTextGravity(Gravity.CENTER)
+//                        .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+//                        .setSelectedTextColor(Color.WHITE)
+//                        .setMenuColor(Color.WHITE)
+//                        .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary))
+//                        .setOnMenuItemClickListener(onMenuItemClickListener)
+//                        .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+//                        .setDividerHeight(1)
+//                        .build();
+//
+//                powerMenu.showAsDropDown(v);
+//            }
+//        });
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recv_receiving);
         recyclerView.setHasFixedSize(true);
@@ -186,6 +188,7 @@ public class SelfFragment extends BaseFragment {
             displayKid = item.getTitle().toString();
             vst_top_title.setText("["+displayKid+"] 습관");
             powerMenu.setSelectedPosition(position); // change selected item
+            displayKidPosition = position;
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
             for(int k=0; k<menuVo.getMsg().size(); k++){
@@ -278,5 +281,36 @@ public class SelfFragment extends BaseFragment {
             tv_no_data.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }
+    }
+
+    public void showPMenu(){
+        KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+        List<PowerMenuItem> kidsList = new ArrayList();
+        for(int k=0; k<kidsVo.getCnt(); k++){
+            kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
+        }
+        powerMenu = new PowerMenu.Builder(getActivity())
+                .addItemList(kidsList) //
+//                .addItem(new PowerMenuItem("한다인", false)) // add an item.
+//                .addItem(new PowerMenuItem("한지인", false)) // aad an item list.
+                .setTextSize(14)
+                .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT) // Animation start point (TOP | LEFT).
+                .setMenuRadius(10f) // sets the corner radius.
+                .setMenuShadow(10f) // sets the shadow.
+                .setTextColor(ContextCompat.getColor(getActivity(), R.color.black))
+                .setTextGravity(Gravity.CENTER)
+                .setTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"))
+                .setSelectedTextColor(Color.WHITE)
+                .setMenuColor(Color.WHITE)
+                .setSelectedMenuColor(ContextCompat.getColor(getActivity(), R.color.powermenu_select))
+                .setOnMenuItemClickListener(onMenuItemClickListener)
+                .setDivider(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.gray))) // sets a divider.
+                .setDividerHeight(1)
+                .setHeaderView(null)
+                .setFooterView(null)
+                .build();
+
+        powerMenu.setSelectedPosition(displayKidPosition);
+        powerMenu.showAsDropDown(vst_top_title, 600, 0);
     }
 }

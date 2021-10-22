@@ -55,8 +55,11 @@ public class TodoFragment extends BaseFragment {
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title, tv_no_data, tv_todo_subject_section;
+    TextView vst_top_title, tv_no_data, tv_todo_subject_section, tv_area_month;
     String displayKid = "";
+    int displayKidPosition = 0;
+    int weekd = 1;
+    String displayDays = "";
 
     LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_todoy, btn_next_1, btn_next_2, btn_next_3, ll_area_days;
     TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, tv_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
@@ -81,6 +84,7 @@ public class TodoFragment extends BaseFragment {
 
         LinearLayout ll_top_todo = (LinearLayout) root.findViewById(R.id.ll_top_todo);
         tv_no_data = (TextView) root.findViewById(R.id.tv_no_data);
+        tv_area_month = (TextView) root.findViewById(R.id.tv_area_month);
         tv_todo_subject_section = (TextView) root.findViewById(R.id.tv_todo_subject_section);
 
         // vo에 있는 아이 정보를 메뉴item 으로 삽입.
@@ -95,6 +99,7 @@ public class TodoFragment extends BaseFragment {
             if("TO".equals(menuVo.getMsg().get(k).getMenuname())){
                 // 해당메뉴에 설정된 아이정보
                 displayKid = menuVo.getMsg().get(k).getKidname();
+                displayKidPosition = 0;
             }
         }
         vst_top_title.setText("[ "+displayKid+" ] 오늘의 학습");
@@ -126,34 +131,10 @@ public class TodoFragment extends BaseFragment {
         tv_next_3_week = (TextView) root.findViewById(R.id.tv_next_3_week);
 
         Calendar cal = Calendar.getInstance();
-        int weekd = cal.get(Calendar.DAY_OF_WEEK); // 오늘 요일
-        DateFormat df = new SimpleDateFormat("yyyyMMdd");
-        tv_today_day.setText(df.format(cal.getTime()).substring(6));
-        tv_today_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, -3);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_past_3_day.setText(df.format(cal.getTime()).substring(6));
-        tv_past_3_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, 1);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_past_2_day.setText(df.format(cal.getTime()).substring(6));
-        tv_past_2_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, 1);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_past_1_day.setText(df.format(cal.getTime()).substring(6));
-        tv_past_1_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, 2);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_next_1_day.setText(df.format(cal.getTime()).substring(6));
-        tv_next_1_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, 1);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_next_2_day.setText(df.format(cal.getTime()).substring(6));
-        tv_next_2_week.setText(selectWeek(weekd));
-        cal.add(Calendar.DATE, 1);
-        weekd = cal.get(Calendar.DAY_OF_WEEK);
-        tv_next_3_day.setText(df.format(cal.getTime()).substring(6));
-        tv_next_3_week.setText(selectWeek(weekd));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        displayDays = df.format(cal.getTime());
+        MHDLog.d("calendar 시작", df.format(cal.getTime()));
+        setTopWeek();
 
         powerMenu = new PowerMenu.Builder(getActivity())
                 .addItemList(kidsList) //
@@ -226,7 +207,7 @@ public class TodoFragment extends BaseFragment {
                 // 해당 라인의 메뉴를 띄우려 했는데 이건 일단 보류. 안할 수도 있다.
                 // 클릭하면 바로 수정화면으로 넘기고, 거기에 삭제버튼을 만든다.
                 ((MainActivity)getActivity()).startTodoModify(position);
-                Toast.makeText(mContext, "test" + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "modify " + position, Toast.LENGTH_SHORT).show();
             }
         }) ;
 
@@ -239,6 +220,7 @@ public class TodoFragment extends BaseFragment {
             displayKid = item.getTitle().toString();
             vst_top_title.setText("[ "+displayKid+" ] 학습");
             powerMenu.setSelectedPosition(position); // change selected item
+            displayKidPosition = position;
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
             for(int k=0; k<menuVo.getMsg().size(); k++){
@@ -303,20 +285,25 @@ public class TodoFragment extends BaseFragment {
      */
     public void queryTodo(){
         try {
-            Calendar cal = Calendar.getInstance();
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            String tdDate = df.format(cal.getTime()).substring(6);
-
             Map<String, String> params = new HashMap<String, String>();
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
             params.put("TKNAME", displayKid);
-            params.put("TDDATE", tdDate);
+            params.put("TDDATE", displayDays);
+            params.put("TDWEEKD", String.valueOf(weekd));
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {
             MHDLog.printException(e);
         }
+    }
+    public void changeDays(String tddate, int weekdd){
+        // 여기서 기준날짜를 변경했는데, 데이터를 가져오다가 에러가 난다면..
+        // 기준날짜와 보여지는 것에서 어긋남이 발생할 수도 있다.
+        displayDays = tddate;
+        weekd = weekdd;
+
+        queryTodo();
     }
     /**
      * BaseActivity에서 상속받지 못하기 때문에 parent Activity에서 받아서 현재 fragment의 function을 호출하도록 처리
@@ -326,7 +313,6 @@ public class TodoFragment extends BaseFragment {
         adapter.deleteAll();
 
         tv_no_data.setVisibility(View.GONE);
-        ll_area_days.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
 
         if (nvCnt == 0) {
@@ -360,6 +346,8 @@ public class TodoFragment extends BaseFragment {
             data.setTitle(todoVo.getMsg().get(i).getTitle());
             data.setOption(todoVo.getMsg().get(i).getOption());
             data.setSection(todoVo.getMsg().get(i).getSection());
+            data.setComplete(todoVo.getMsg().get(i).getTdcomplete());
+            data.setIdx(todoVo.getMsg().get(i).getIdx());
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
@@ -368,13 +356,17 @@ public class TodoFragment extends BaseFragment {
         // adapter의 값이 변경되었다는 것을 알려줍니다.
         adapter.notifyDataSetChanged();
 
+        // 기준 날짜가 변경된대로 날짜버튼 새로 설정.
+        setTopWeek();
+
         return true;
     }
 
     public void noData(String nvApiParam) {
         tv_no_data.setVisibility(View.VISIBLE);
-        ll_area_days.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
+
+        setTopWeek();
     }
 
     public String selectWeek(int day) {
@@ -425,6 +417,81 @@ public class TodoFragment extends BaseFragment {
                 .setFooterView(null)
                 .build();
 
-        powerMenu.showAsDropDown(vst_top_title);
+        powerMenu.setSelectedPosition(displayKidPosition);
+        powerMenu.showAsDropDown(vst_top_title, 600, 0);
+    }
+
+    public void setTopWeek(){
+        //cal 에 특정 날짜를 지정해서 그거 기준으로 아래를 계산해여 한다.
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, Integer.parseInt(displayDays.substring(0, 4)));
+        cal.set(Calendar.MONTH, Integer.parseInt(displayDays.substring(5, 7))-1);
+        cal.set(Calendar.DATE, Integer.parseInt(displayDays.substring(8, 10))-1);
+        cal.set(Calendar.HOUR, 12);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        tv_area_month.setText(displayDays.substring(5, 7));
+
+        weekd = cal.get(Calendar.DAY_OF_WEEK); // 기준 날짜 요일, displayDays 가 기준날짜.
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+        MHDLog.d("calendar", df.format(cal.getTime()));
+
+        tv_today_day.setText(df.format(cal.getTime()).substring(8));
+        tv_today_week.setText(selectWeek(weekd));
+        cal.add(Calendar.DATE, -3);
+        tv_past_3_day.setText(df.format(cal.getTime()).substring(8));
+        tv_past_3_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays = df.format(cal.getTime());
+        final int tmpWeek = cal.get(Calendar.DAY_OF_WEEK);
+        btn_past_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays, tmpWeek); }
+        });
+        cal.add(Calendar.DATE, 1);
+        tv_past_2_day.setText(df.format(cal.getTime()).substring(8));
+        tv_past_2_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays2 = df.format(cal.getTime());
+        final int tmpWeek2 = cal.get(Calendar.DAY_OF_WEEK);
+        btn_past_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays2, tmpWeek2); }
+        });
+        cal.add(Calendar.DATE, 1);
+        tv_past_1_day.setText(df.format(cal.getTime()).substring(8));
+        tv_past_1_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays3 = df.format(cal.getTime());
+        final int tmpWeek3 = cal.get(Calendar.DAY_OF_WEEK);
+        btn_past_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays3, tmpWeek3); }
+        });
+        cal.add(Calendar.DATE, 2);
+        tv_next_1_day.setText(df.format(cal.getTime()).substring(8));
+        tv_next_1_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays4 = df.format(cal.getTime());
+        final int tmpWeek4 = cal.get(Calendar.DAY_OF_WEEK);
+        btn_next_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays4, tmpWeek4); }
+        });
+        cal.add(Calendar.DATE, 1);
+        tv_next_2_day.setText(df.format(cal.getTime()).substring(8));
+        tv_next_2_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays5 = df.format(cal.getTime());
+        final int tmpWeek5 = cal.get(Calendar.DAY_OF_WEEK);
+        btn_next_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays5, tmpWeek5); }
+        });
+        cal.add(Calendar.DATE, 1);
+        tv_next_3_day.setText(df.format(cal.getTime()).substring(8));
+        tv_next_3_week.setText(selectWeek(cal.get(Calendar.DAY_OF_WEEK)));
+        final String tmpDays6 = df.format(cal.getTime());
+        final int tmpWeek6 = cal.get(Calendar.DAY_OF_WEEK);
+        btn_next_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { changeDays(tmpDays6, tmpWeek6); }
+        });
     }
 }

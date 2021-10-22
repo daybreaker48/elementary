@@ -12,7 +12,7 @@
         android:id="@+id/include"
         layout="@layout/common_back_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="56dp" />
 
     <LinearLayout
         android:id="@+id/ll_top_regist"
@@ -32,10 +32,27 @@
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_18"
                 android:text="@string/subtitle_subject"/>
+            <TextView
+                android:id="@+id/tv_todo_subject_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="10dp"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/black_overlay"
+                android:hint="과목을 선택하세요"
+                android:inputType="textPersonName"
+                android:background="@null"
+                android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,18 +65,27 @@
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_18"
                 android:text="@string/subtitle_subject_detail"/>
-            <Spinner
-                android:id="@+id/spi_todo_subject_detail"
-                android:textSize="@dimen/font_20"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black_overlay"
-                android:visibility="gone"
+            <TextView
+                android:id="@+id/tv_todo_subject_detail_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="10dp"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/black_overlay"
+                android:hint="세부항목을 선택하세요"
+                android:inputType="textPersonName"
+                android:background="@null"
+                android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,9 +97,11 @@
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_18"
                 android:text="@string/subtitle_textbook_publish"/>
             <EditText
                 android:id="@+id/et_textbook_publish"
@@ -82,7 +110,9 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
                 android:textColor="@color/black_overlay"
                 android:hint="출판사를 입력하세요"
                 android:inputType="textPersonName"
@@ -99,9 +129,11 @@
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_18"
                 android:text="@string/subtitle_textbook_subject"/>
             <EditText
                 android:id="@+id/et_textbook_subject"
@@ -110,7 +142,9 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
                 android:textColor="@color/black_overlay"
                 android:hint="교재명을 입력하세요"
                 android:inputType="textPersonName"
@@ -129,7 +163,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:background="@color/white"
-                android:textColor="@color/blue"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/main_theme"
                 android:textSize="@dimen/font_18"
                 android:text="@string/content_dailyprogress"/>
         </LinearLayout>
@@ -147,11 +183,13 @@
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sun"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:background="@drawable/circle"
                     android:text="@string/content_sun"
                     android:padding="2dp"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textColor="@color/red"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
@@ -163,11 +201,13 @@
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_mon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:background="@drawable/circle"
                     android:text="@string/content_mon"
                     android:padding="2dp"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textSize="@dimen/font_18" />
             </LinearLayout>
             <LinearLayout

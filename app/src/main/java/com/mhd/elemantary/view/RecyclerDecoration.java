@@ -22,8 +22,21 @@ public class RecyclerDecoration extends RecyclerView.ItemDecoration {
 
         MHDLog.d("ttt", parent.getChildAdapterPosition(view) + "/" + parent.getAdapter().getItemCount());
         MHDLog.d("ttt", parent.getChildAdapterPosition(view) + "/" + parent.getAdapter().getItemCount());
-        ReCyclerAdapter rea = (ReCyclerAdapter) parent.getAdapter();
-        if(parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1)
+        ReCyclerAdapter todoAdapter = (ReCyclerAdapter) parent.getAdapter();
+        int[] arr_delete_divider = todoAdapter.getSectionPosition();
+        if(arr_delete_divider.length > 0) {
+            if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
+                int eheight = this.divHeight;
+                for (int i : arr_delete_divider) {
+                    if (i == parent.getChildAdapterPosition(view)) {
+                        eheight = 0;
+                        break;
+                    }
+                }
+                outRect.bottom = eheight;
+            }
+        }else{
             outRect.bottom = divHeight;
+        }
     }
 }

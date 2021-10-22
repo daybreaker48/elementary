@@ -145,20 +145,6 @@
         android:layout_marginRight="5dp"
         android:background="@color/main_theme"/>
 
-    <TextView
-        android:id="@+id/tv_no_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:visibility="gone"
-        android:fontFamily="@font/main_font"
-        android:includeFontPadding="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_20"
-        android:text="@string/content_no_schedule"/>
-
     <!-- 시간표 내용 -->
     <LinearLayout
         android:id="@+id/ll_area_data"
@@ -253,5 +239,19 @@
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:fontFamily="@font/main_font"
+        android:includeFontPadding="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_20"
+        android:text="@string/content_no_schedule"/>
 
 </LinearLayout>

@@ -22,6 +22,8 @@ public class TodoData {
 	private String title;
 	private String option;
 	private String section;
+	private String complete;
+	private String idx;
 
 	public String getSubject() {
 		return subject;
@@ -125,5 +127,17 @@ public class TodoData {
 	}
 	public void setSection(String section) {
 		this.section = section;
+	}
+	public String getComplete() {
+		return complete;
+	}
+	public void setComplete(String complete) {
+		this.complete = complete;
+	}
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
 	}
 }

@@ -133,6 +133,8 @@ public class MainActivity extends BaseActivity {
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_self))){ // 습관 완료
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){ // 학습 완료
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
             }else {
                 // 그게 아니라면 Just show nvMsg
                 MHDDialogUtil.sAlert(mContext, nvMsg);
@@ -159,6 +161,10 @@ public class MainActivity extends BaseActivity {
                 // SelfFragment 개별 item update.
 //                callFragmentMethod(0);
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){
+                // TodoFragment 개별 item update.
+//                callFragmentMethod(0);
+//                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }
 
         }
@@ -253,6 +259,10 @@ public class MainActivity extends BaseActivity {
     public void showPMenu(int position){
         if(position == 0)
             ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).showPMenu();
+        if(position == 1)
+            ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).showPMenu();
+        if(position == 2)
+            ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).showPMenu();
     }
 
 }

@@ -71,6 +71,7 @@
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
     <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
     <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>
+    <string name="text_never" translatable="true">비정상적인 접근입니다.</string>
 
     <string name="text_terms_title_header" translatable="true">text_terms_title_</string>
     <string name="text_terms_title_T" translatable="true">이용약관</string>

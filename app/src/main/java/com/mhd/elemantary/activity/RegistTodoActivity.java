@@ -58,7 +58,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RegistTodoActivity extends BaseActivity implements TextView.OnEditorActionListener  {
 
-    TextView tv_selectday, vst_top_title, tv_todo_subject, tv_todo_subject_detail;
+    TextView tv_selectday, vst_top_title, tv_todo_subject, tv_todo_subject_detail, tv_todo_subject_2, tv_todo_subject_detail_2;
     TextView tv_rb_daily_progress_2_finishday, tv_startday;
     LinearLayout ll_daily_progress, ll_daily_textbook;
     private String[] day_array = new String[7];
@@ -91,14 +91,14 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
         public void callBack(int pos) {
             if(bottomSheetSubject.isShowing()) {
                 selectedSubject = subjectArrayList.get(pos).toString();
-                tv_todo_subject.setText(selectedSubject);
+                tv_todo_subject_2.setText(selectedSubject);
                 bottomSheetSubject.dismiss();
                 showBottomSheetSubjectDetail(selectedSubject);
                 return;
             }
             if(bottomSheetDetail.isShowing()) {
                 selectedDetail = detailArrayList.get(pos).toString();
-                tv_todo_subject_detail.setText(selectedDetail);
+                tv_todo_subject_detail_2.setText(selectedDetail);
                 bottomSheetDetail.dismiss();
             }
         }
@@ -151,11 +151,21 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
 
         tv_todo_subject = (TextView) findViewById(R.id.tv_todo_subject);
         tv_todo_subject_detail = (TextView) findViewById(R.id.tv_todo_subject_detail);
+        tv_todo_subject_2 = (TextView) findViewById(R.id.tv_todo_subject_2);
+        tv_todo_subject_detail_2 = (TextView) findViewById(R.id.tv_todo_subject_detail_2);
         tv_todo_subject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { showBottomSheetSubject(); }
         });
         tv_todo_subject_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showBottomSheetSubjectDetail(selectedSubject); }
+        });
+        tv_todo_subject_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { showBottomSheetSubject(); }
+        });
+        tv_todo_subject_detail_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { showBottomSheetSubjectDetail(selectedSubject); }
         });
@@ -448,7 +458,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
             if(weekd == 7){//
                 String startday = innerStrings.substring(0,1);
                 cal.add(Calendar.DATE, Integer.parseInt(startday));
-                tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+                tv_startday.setText("예상 학습 시작일 : " + df.format(cal.getTime()));
             }else{
                 String[] strArray = innerStrings.split("");
                 int curWeekCount = 0;
@@ -456,7 +466,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     if(Integer.parseInt(s) > weekd) {
                         curWeekCount++;
                         cal.add(Calendar.DATE, Integer.parseInt(s) - weekd);
-                        tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+                        tv_startday.setText("예상 학습 시작일 : " + df.format(cal.getTime()));
                         break;
                     }
                 }
@@ -465,7 +475,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                 if(curWeekCount == 0){
                     String startday = innerStrings.substring(0,1);
                     cal.add(Calendar.DATE, 7 - weekd + Integer.parseInt(startday));
-                    tv_startday.setText("학습 시작일 : " + df.format(cal.getTime()));
+                    tv_startday.setText("예상 학습 시작일 : " + df.format(cal.getTime()));
                 }
             }
 
@@ -698,7 +708,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }else{
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek-1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -721,7 +731,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }
                     }else{
                         // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -756,7 +766,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }else{
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek-1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -779,7 +789,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }
                     }
 
@@ -915,7 +925,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         } else {
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -938,7 +948,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }
                     } else {
                         // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -973,7 +983,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         } else {
                             // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                             String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -996,7 +1006,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                             // 이 날짜가 종료일이다.
                             tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                             pGoal = df.format(cal.getTime());
-                            tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                            tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                         }
                     }
 
@@ -1097,7 +1107,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     // 이 날짜가 종료일이다.
                     tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                     pGoal = df.format(cal.getTime());
-                    tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                    tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                 } else {
                     // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                     String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -1120,7 +1130,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     // 이 날짜가 종료일이다.
                     tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                     pGoal = df.format(cal.getTime());
-                    tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                    tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                 }
             } else {
                 // weekd > 1이면 weekd = 1 일때와 비슷한 방식이지만. 그 전에 먼저 해야할 것이
@@ -1155,7 +1165,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     // 이 날짜가 종료일이다.
                     tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                     pGoal = df.format(cal.getTime());
-                    tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                    tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                 } else {
                     // extraDays > 0 이면 그 다음 주 추가학습일이 필요한 것.
                     String lastDays = innerStrings.substring(lengthWeek - 1); // 한 주의 마지막 학습요일. spendWeek주 후, 그 다음주의 extraDays 값에 해당하는 인덱스의 요일코드만큼 더한 날짜가 종료일이다.
@@ -1178,7 +1188,7 @@ public class RegistTodoActivity extends BaseActivity implements TextView.OnEdito
                     // 이 날짜가 종료일이다.
                     tv_rb_daily_progress_2_finishday.setVisibility(View.VISIBLE);
                     pGoal = df.format(cal.getTime());
-                    tv_rb_daily_progress_2_finishday.setText("학습 종료일 : " + pGoal);
+                    tv_rb_daily_progress_2_finishday.setText("예상 학습 종료일 : " + pGoal);
                 }
             }
         }
