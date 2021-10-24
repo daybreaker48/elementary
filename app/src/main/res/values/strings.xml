@@ -39,6 +39,8 @@
     <string name="confirm_exit">종료하시겠습니까?</string>
     <string name="confirm_logout">로그아웃하시겠습니까?</string>
     <string name="confirm_post">작성하신 포스트를 저장하시겠습니까?</string>
+    <string name="confirm_delete">삭제하시겠습니까?</string>
+    <string name="confirm_end">최종 완료하게 됩니다. 진행하시겠습니까?</string>
 
     <string name="bottom_btn_1">btn</string>
     <string name="bottom_btn_2">btn</string>
@@ -108,6 +110,8 @@
     <string name="subtitle_subject_detail" translatable="true">세부항목</string>
     <string name="subtitle_textbook" translatable="true">학습지</string>
     <string name="subtitle_textbook_subject" translatable="true">교재명</string>
+    <string name="subtitle_days" translatable="true">학습요일</string>
+    <string name="subtitle_todo_amount" translatable="true">학습량</string>
     <string name="subtitle_textbook_publish" translatable="true">출판사</string>
     <string name="subtitle_dailyprogress" translatable="true">오늘 완료합니다.</string>
     <string name="subtitle_schedule_time" translatable="true">시 간</string>
@@ -125,7 +129,7 @@
 
     <string name="content_todo_detail" translatable="true">세부항목을 입력해주세요.</string>
     <string name="content_todo_publisher" translatable="true">출판사를 입력해주세요.</string>
-    <string name="content_todo_title" translatable="true">제목을 입력해주세요.</string>
+    <string name="content_todo_title" translatable="true">교재명을 입력해주세요.</string>
     <string name="content_todo_subject" translatable="true">과목을 입력해주세요.</string>
     <string name="content_dailyprogress" translatable="true">학습할 요일을 선택해주세요.</string>
     <string name="content_alarm_start_none" translatable="true">시작 시간이 설정되지 않았습니다.</string>
@@ -172,6 +176,9 @@
     <string name="content_1920" translatable="true">19~20</string>
     <string name="content_2021" translatable="true">20~21</string>
     <string name="content_2122" translatable="true">21~22</string>
+    <string name="content_base_start_todo" translatable="true">최초 학습 시작일 : </string>
+    <string name="content_start_todo" translatable="true">예상 학습 시작일 : </string>
+    <string name="content_finish_todo" translatable="true">예상 학습 종료일 : </string>
 
     <string name="cell_todo_1" translatable="true">순서</string>
     <string name="cell_todo_2" translatable="true">과목</string>

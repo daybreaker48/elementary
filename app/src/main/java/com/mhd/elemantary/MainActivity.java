@@ -163,6 +163,8 @@ public class MainActivity extends BaseActivity {
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){
                 // TodoFragment 개별 item update.
+                // 최종 완료 아이템이 있다면 재조회해서 빠지게 하는 것이 맞긴하다.
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
 //                callFragmentMethod(0);
 //                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }

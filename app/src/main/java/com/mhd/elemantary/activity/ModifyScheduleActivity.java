@@ -255,64 +255,64 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
             case 0:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_sun))) {
                     day_array[0] = "";
-                    btn_sun.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_sun.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[0] = getString(R.string.content_sun);
-                    btn_sun.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_sun.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 1:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_mon))) {
                     day_array[1] = "";
-                    btn_mon.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_mon.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[1] = getString(R.string.content_mon);
-                    btn_mon.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_mon.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 2:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_tues))) {
                     day_array[2] = "";
-                    btn_tues.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_tues.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[2] = getString(R.string.content_tues);
-                    btn_tues.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_tues.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 3:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_wed))) {
                     day_array[3] = "";
-                    btn_wed.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_wed.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[3] = getString(R.string.content_wed);
-                    btn_wed.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_wed.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 4:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_thur))) {
                     day_array[4] = "";
-                    btn_thur.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_thur.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[4] = getString(R.string.content_thur);
-                    btn_thur.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_thur.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 5:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_fri))) {
                     day_array[5] = "";
-                    btn_fri.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_fri.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[5] = getString(R.string.content_fri);
-                    btn_fri.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_fri.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             case 6:
                 if(Arrays.asList(day_array).contains(getString(R.string.content_sat))) {
                     day_array[6] = "";
-                    btn_sat.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle, null));
+                    btn_sat.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_transparent, null));
                 }else {
                     day_array[6] = getString(R.string.content_sat);
-                    btn_sat.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle, null));
+                    btn_sat.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.circle_toggle_transparent, null));
                 }
                 break;
             default:

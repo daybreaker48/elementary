@@ -42,9 +42,11 @@ import com.skydoves.powermenu.PowerMenuItem;
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -206,7 +208,9 @@ public class TodoFragment extends BaseFragment {
                 // position을 가지고 라인을 알아낸 다음에
                 // 해당 라인의 메뉴를 띄우려 했는데 이건 일단 보류. 안할 수도 있다.
                 // 클릭하면 바로 수정화면으로 넘기고, 거기에 삭제버튼을 만든다.
-                ((MainActivity)getActivity()).startTodoModify(position);
+                // 지난 데이타는 수정하지 못하게 한다.
+                if(checkToday(displayDays))
+                    ((MainActivity)getActivity()).startTodoModify(position);
 //                Toast.makeText(mContext, "modify " + position, Toast.LENGTH_SHORT).show();
             }
         }) ;
@@ -291,6 +295,9 @@ public class TodoFragment extends BaseFragment {
             params.put("TKNAME", displayKid);
             params.put("TDDATE", displayDays);
             params.put("TDWEEKD", String.valueOf(weekd));
+            //과거냐 아니냐를 보내는 것이 낫다. 과거라면 완료된 것도 가져온다.checkToday
+            params.put("TDPAST", checkToday(displayDays) ? "N" : "Y");
+            MHDLog.d("queryTodo", checkToday(displayDays) ? "N" : "Y");
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {
@@ -311,6 +318,7 @@ public class TodoFragment extends BaseFragment {
     public boolean networkResponseProcess(String nvMsg, int nvCnt, String result) {
         TodoVo todoVo = null;
         adapter.deleteAll();
+        adapter.setQueryDays(displayDays);
 
         tv_no_data.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
@@ -348,6 +356,10 @@ public class TodoFragment extends BaseFragment {
             data.setSection(todoVo.getMsg().get(i).getSection());
             data.setComplete(todoVo.getMsg().get(i).getTdcomplete());
             data.setIdx(todoVo.getMsg().get(i).getIdx());
+            data.setStart(todoVo.getMsg().get(i).getTdstart());
+            data.setEnd(todoVo.getMsg().get(i).getTdend());
+            data.setUse(todoVo.getMsg().get(i).getTduse());
+            data.setTdpc(todoVo.getMsg().get(i).getTdpc());
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
@@ -371,8 +383,6 @@ public class TodoFragment extends BaseFragment {
 
     public String selectWeek(int day) {
         switch (day) {
-            case 1:
-                return "Sun";
             case 2:
                 return "Mon";
             case 3:
@@ -389,7 +399,9 @@ public class TodoFragment extends BaseFragment {
                 return "Sun";
         }
     }
-
+    /*
+    //
+    */
     public void showPMenu(){
         KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
         List<PowerMenuItem> kidsList = new ArrayList();
@@ -422,12 +434,12 @@ public class TodoFragment extends BaseFragment {
     }
 
     public void setTopWeek(){
-        //cal 에 특정 날짜를 지정해서 그거 기준으로 아래를 계산해여 한다.
+        //cal 에 특정 날짜를 지정해서 그거 기준으로 아래를 계산해야 한다.
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, Integer.parseInt(displayDays.substring(0, 4)));
         cal.set(Calendar.MONTH, Integer.parseInt(displayDays.substring(5, 7))-1);
-        cal.set(Calendar.DATE, Integer.parseInt(displayDays.substring(8, 10))-1);
-        cal.set(Calendar.HOUR, 12);
+        cal.set(Calendar.DATE, Integer.parseInt(displayDays.substring(8, 10)));
+        cal.set(Calendar.HOUR, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         tv_area_month.setText(displayDays.substring(5, 7));
@@ -493,5 +505,28 @@ public class TodoFragment extends BaseFragment {
             @Override
             public void onClick(View v) { changeDays(tmpDays6, tmpWeek6); }
         });
+    }
+
+    public boolean checkToday(String rdate) {
+        Calendar cal = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String tdate = df.format(cal.getTime());
+        Date rdate_d = null;
+        Date tdate_d = null;
+        try {
+            rdate_d = df.parse(rdate);
+            tdate_d = df.parse(tdate);
+        } catch(ParseException e) {
+            e.printStackTrace();
+        }
+
+        int compare = rdate_d.compareTo(tdate_d);
+        if (compare > 0) { // 미래
+            return true;
+        } else if (compare < 0) { // 과거
+            return false;
+        } else {
+            return true;
+        }
     }
 }

@@ -24,6 +24,10 @@ public class TodoData {
 	private String section;
 	private String complete;
 	private String idx;
+	private String start;
+	private String end;
+	private String use;
+	private String tdpc;
 
 	public String getSubject() {
 		return subject;
@@ -139,5 +143,29 @@ public class TodoData {
 	}
 	public void setIdx(String idx) {
 		this.idx = idx;
+	}
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
+	public String getUse() {
+		return use;
+	}
+	public void setUse(String use) {
+		this.use = use;
+	}
+	public String getTdpc() {
+		return tdpc;
+	}
+	public void setTdpc(String tdpc) {
+		this.tdpc = tdpc;
 	}
 }

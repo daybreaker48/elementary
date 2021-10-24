@@ -29,14 +29,14 @@
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:gravity="start|center_vertical"
+            android:layout_weight="1"
             android:fontFamily="@font/ngb_font"
             android:includeFontPadding="false"
+            android:gravity="start|center_vertical"
+            android:text="[] 오늘의 학습"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_18"
-            android:text="[] 오늘의 학습"/>
+            android:textSize="@dimen/font_18" />
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"

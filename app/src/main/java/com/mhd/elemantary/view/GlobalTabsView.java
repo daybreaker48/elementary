@@ -3,10 +3,6 @@ package com.mhd.elemantary.view;
 import android.animation.ArgbEvaluator;
 import android.content.Context;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +11,6 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -27,14 +22,9 @@ import android.widget.ImageView;
 
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
-import com.mhd.elemantary.activity.RegistScheduleActivity;
-import com.mhd.elemantary.activity.RegistSelfActivity;
-import com.mhd.elemantary.activity.RegistTodoActivity;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 
 public class GlobalTabsView extends FrameLayout {
@@ -314,7 +304,7 @@ public class GlobalTabsView extends FrameLayout {
 //        mFifthImage.getDrawable().setAlpha(120);
 
         mCenterColor = ContextCompat.getColor(getContext(), R.color.white);
-        mSideColor = ContextCompat.getColor(getContext(), R.color.dark_grey);
+        mSideColor = ContextCompat.getColor(getContext(), R.color.dark_gray);
 
         mArgEvaluator = new ArgbEvaluator();
 

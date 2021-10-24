@@ -10,18 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.gridlayout.widget.GridLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +26,6 @@ import com.mhd.elemantary.adapter.ReCyclerScheduleAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.MenuVo;
-import com.mhd.elemantary.common.vo.ScheduleData;
 import com.mhd.elemantary.common.vo.ScheduleVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDLog;
@@ -41,10 +34,7 @@ import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -601,7 +591,7 @@ public class ScheduleFragment extends BaseFragment {
             Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"); // font 폴더내에 있는 jua.ttf 파일을 typeface로 설정
             titleText.setTypeface(typeface);
         }
-        titleText.setTextColor(getResources().getColor(R.color.dark_grey));
+        titleText.setTextColor(getResources().getColor(R.color.dark_gray));
         titleText.setGravity(Gravity.CENTER);
         LayerDrawable bottomBorder = getBorders(Color.WHITE, Color.GRAY, 0, 0, 1, 1);
         titleText.setBackground(bottomBorder);

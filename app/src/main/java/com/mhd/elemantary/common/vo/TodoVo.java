@@ -40,10 +40,13 @@ public class TodoVo {
 		public String total; 		// 총분량
 		public String rest; 		// 남은량
 		public String goal; 		// 목표일
-		public String tbend; 		// 종료일일
+        public String tdend;      	// 종료일일
 		public String section; 		// 종료일일
 		public String tdcomplete; 	// 종료일일
 		public String idx;      	// 종료일일
+		public String tdstart;      	// 종료일일
+		public String tduse;      	// 종료일일
+		public String tdpc;      	// 종료일일
 
 		public String getSubject() {
 			return subject;
@@ -173,12 +176,12 @@ public class TodoVo {
             this.goal = goal;
         }
 
-        public String getTbend() {
-            return tbend;
+        public String getTdend() {
+            return tdend;
         }
 
-        public void setTbend(String tbend) {
-            this.tbend = tbend;
+        public void setTdend(String tdend) {
+            this.tdend = tdend;
         }
 
         public String getSection() {
@@ -203,6 +206,30 @@ public class TodoVo {
 
         public void setIdx(String idx) {
             this.idx = idx;
+        }
+
+        public String getTdstart() {
+            return tdstart;
+        }
+
+        public void setTdstart(String tdstart) {
+            this.tdstart = tdstart;
+        }
+
+        public String getTduse() {
+            return tduse;
+        }
+
+        public void setTduse(String tduse) {
+            this.tduse = tduse;
+        }
+
+        public String getTdpc() {
+            return tdpc;
+        }
+
+        public void setTdpc(String tdpc) {
+            this.tdpc = tdpc;
         }
 	}
 
