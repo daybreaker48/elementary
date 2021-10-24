@@ -59,7 +59,8 @@
         </activity>
         <activity
             android:name="com.mhd.elemantary.activity.RegistTodoActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="com.mhd.elemantary.activity.RegistScheduleActivity"
@@ -79,14 +80,6 @@
         </activity>
         <activity
             android:name="com.mhd.elemantary.activity.RegistKidsActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
-        </activity>
-        <activity
-            android:name="com.mhd.elemantary.activity.OptionDailyProgressActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
-        </activity>
-        <activity
-            android:name="com.mhd.elemantary.activity.OptionDailyTextbookActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
         <activity
