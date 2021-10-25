@@ -52,6 +52,7 @@
                 android:layout_height="@dimen/length_26"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:background="@drawable/delete"/>
         </LinearLayout>
     </LinearLayout>

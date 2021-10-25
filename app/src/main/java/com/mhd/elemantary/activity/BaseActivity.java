@@ -146,7 +146,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onError(String message) {
                 MHDLog.e(TAG, "ResponseListener onError >>>>>>>>>> " + message.toString());
-                MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestError, new DialogInterface.OnClickListener() {
+                MHDDialogUtil.sAlert(mContext, "요청을 수행하는 중에 오류가 발생하였습니다.", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) { return; }
                 });

@@ -37,7 +37,7 @@ public class GlobalTabsView extends FrameLayout {
     private ImageView mThirdImage;
     private ImageView mFourthImage;
     private ImageView mFifthImage;
-    private ImageView mTopLeftImage, mTopRightImage,mTopRightImage_2;
+    private ImageView mTopLeftImage, mTopRightImage, mTopRightImage_2;
 
     private View mIndicator;
 
@@ -237,39 +237,45 @@ public class GlobalTabsView extends FrameLayout {
     }
 
     private void sideMenuSetOnClickListener(final ViewPager2 viewPager) {
+        viewPager.setPageTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                return;
+            }
+        });
         mFirstImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 0)
-                    viewPager.setCurrentItem(0);
+                    viewPager.setCurrentItem(0, false);
             }
         });
         mSecondImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 1)
-                    viewPager.setCurrentItem(1);
+                    viewPager.setCurrentItem(1, false);
             }
         });
         mThirdImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 2)
-                    viewPager.setCurrentItem(2);
+                    viewPager.setCurrentItem(2, false);
             }
         });
         mFourthImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 3)
-                    viewPager.setCurrentItem(3);
+                    viewPager.setCurrentItem(3, false);
             }
         });
         mFifthImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (viewPager.getCurrentItem() != 4)
-                    viewPager.setCurrentItem(4);
+                    viewPager.setCurrentItem(4, false);
             }
         });
     }
@@ -358,8 +364,12 @@ public class GlobalTabsView extends FrameLayout {
     private void moveViewsFiveMenu(float fractionFromCenter, int position, int startPosition) {
 //        mIndicator.setAlpha(fractionFromCenter);
 //        mIndicator.setScaleX(fractionFromCenter);
+        MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + fractionFromCenter + "/"+ position+"/"+ startPosition);
         if(currentposition == 99) currentposition = position;
         if(currentposition == position) {
+            mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
+            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+        } else if (fractionFromCenter == 0) {
             mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
             MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
         } else {
@@ -462,20 +472,50 @@ public class GlobalTabsView extends FrameLayout {
             switch (position) {
                 case 0: // 0↔1
                     mTopRightImage.setVisibility(View.VISIBLE);
+                    mTopRightImage_2.setVisibility(View.VISIBLE);
+                    mFirstImage.setAlpha(selectedMenu);
+                    mSecondImage.setAlpha(previousMenu);
+                    mThirdImage.setAlpha(previousMenu);
+                    mFourthImage.setAlpha(previousMenu);
+                    mFifthImage.setAlpha(previousMenu);
                     break;
                 case 1: // 1↔2, 0→1 에 도착했을 때.
                     mTopRightImage.setVisibility(View.VISIBLE);
+                    mTopRightImage_2.setVisibility(View.VISIBLE);
+                    mFirstImage.setAlpha(previousMenu);
+                    mSecondImage.setAlpha(selectedMenu);
+                    mThirdImage.setAlpha(previousMenu);
+                    mFourthImage.setAlpha(previousMenu);
+                    mFifthImage.setAlpha(previousMenu);
 //                    mFourthImage.setAlpha(1 - fractionFromCenter);
 //                    mFifthImage.setAlpha(1 - fractionFromCenter);
                     break;
                 case 2: // 2↔3, 1→2 에 도착했을 때.
+                    mTopRightImage_2.setVisibility(View.VISIBLE);
                     mTopRightImage.setVisibility(View.VISIBLE);
+                    mFirstImage.setAlpha(previousMenu);
+                    mSecondImage.setAlpha(previousMenu);
+                    mThirdImage.setAlpha(selectedMenu);
+                    mFourthImage.setAlpha(previousMenu);
+                    mFifthImage.setAlpha(previousMenu);
                     break;
                 case 3: // 3↔4, 2→3 에 도착했을 때.
-                    mTopRightImage.setVisibility(View.INVISIBLE);
+                    mTopRightImage.setVisibility(View.GONE);
+                    mTopRightImage_2.setVisibility(View.VISIBLE);
+                    mFirstImage.setAlpha(previousMenu);
+                    mSecondImage.setAlpha(previousMenu);
+                    mThirdImage.setAlpha(previousMenu);
+                    mFourthImage.setAlpha(selectedMenu);
+                    mFifthImage.setAlpha(previousMenu);
                     break;
                 case 4: // 4↔5, 3→4 에 도착했을 때.
                     mTopRightImage.setVisibility(View.INVISIBLE);
+                    mTopRightImage_2.setVisibility(View.INVISIBLE);
+                    mFirstImage.setAlpha(previousMenu);
+                    mSecondImage.setAlpha(previousMenu);
+                    mThirdImage.setAlpha(previousMenu);
+                    mFourthImage.setAlpha(previousMenu);
+                    mFifthImage.setAlpha(selectedMenu);
                     break;
             }
         }
@@ -651,7 +691,7 @@ public class GlobalTabsView extends FrameLayout {
 //                moveViews(1 - positionOffset);
 
                 //
-moveAndScaleCenter(1 - positionOffset);
+            moveAndScaleCenter(1 - positionOffset);
 
 //                mIndicator.setTranslationX((positionOffset - 1) * mIndicatorTranslationX);
 

@@ -4,24 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/ll_top_setting"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white_t75"
+        android:layout_height="56dp"
+        android:background="@color/main_theme"
+        android:paddingLeft="15dp"
+        android:paddingTop="2dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_18"
-            android:text="@string/title_setting"/>
+            android:layout_weight="1"
+            android:fontFamily="@font/ngb_font"
+            android:includeFontPadding="false"
+            android:gravity="start|center_vertical"
+            android:text="설 정"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_18" />
     </LinearLayout>
 
     <FrameLayout

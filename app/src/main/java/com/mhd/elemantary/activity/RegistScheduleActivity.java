@@ -50,7 +50,7 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
     EditText et_schedule_subject;
     private String[] day_array = new String[7];
     String sendDay = "";
-    String mMaterialColorSquare = ""; // 설정하지 않으면 white
+    String mMaterialColorSquare = "#ba68c8"; // 설정하지 않으면 white
     String displayStrings, innerStrings = "";
     int startHour = 0, endHour = 0;
     int startMin = 0, endMin = 0;

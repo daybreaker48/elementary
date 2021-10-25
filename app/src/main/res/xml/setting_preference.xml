@@ -9,7 +9,8 @@
             android:title="우리 아이 등록"
             android:summary="소중한 우리 아이를 등록해주세요"
             android:defaultValue=""
-            android:key="kids"/>
+            android:key="kids"
+            android:layout="@layout/pref_layout"/>
 
         <!--<SwitchPreferenceCompat-->
             <!--app:iconSpaceReserved="false"-->
@@ -52,7 +53,8 @@
         <androidx.preference.Preference
             app:iconSpaceReserved="false"
             android:title="로그아웃"
-            android:summary="로그아웃하고 로그인 화면으로 이동합니다."
-            android:key="logout"/>
+            android:summary="로그인 화면으로 이동합니다."
+            android:key="logout"
+            android:layout="@layout/pref_layout"/>
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

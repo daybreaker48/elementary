@@ -491,6 +491,7 @@ public class ScheduleFragment extends BaseFragment {
          int sMin = scheduleVo.getMsg().get(k).getStartMin();
          int eHour = scheduleVo.getMsg().get(k).getEnd();
          int eMin = scheduleVo.getMsg().get(k).getEndMin();
+         String sIdx = scheduleVo.getMsg().get(k).getIdx();
          int sCalc = sMin == 30 ? -1 : 0;
          int eCalc= eMin == 30 ? 1 : 0;
          int gap = ((eHour - sHour)*2) + sCalc + eCalc;
@@ -547,6 +548,13 @@ public class ScheduleFragment extends BaseFragment {
          param.gravity = Gravity.CENTER;
 
          titleText.setLayoutParams(param);
+
+         myLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).startScheduleModify(k);
+            }
+        });
 
          return true;
      }

@@ -38,4 +38,6 @@
     <color name="main_theme">#733273</color>
     <color name="main_theme_text">#A566FF</color>
     <color name="powermenu_select">#02b3be</color>
+
+    <color name="base_schedule">#ba68c8</color>
 </resources>

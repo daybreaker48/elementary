@@ -66,7 +66,9 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
     String pStart = "";
     String selectedSubject = "";
     String selectedDetail = "";
+    /* 수정 처리 */
     String dataIndex = "";
+    /* 수정 처리 */
 
     public ReCyclerSubjectAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -100,6 +102,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
         initialize(R.layout.activity_todo_regist);
         mContext = ModifyTodoActivity.this;
 
+        /* 수정 처리 */
         Intent intent = getIntent();
         int itemPosition = intent.getIntExtra("position", -1);
         TodoVo mTodoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
@@ -110,6 +113,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
             Toast.makeText(mContext, R.string.text_never, Toast.LENGTH_SHORT).show();
             finish();
         }
+        /* 수정 처리 */
 
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
@@ -277,6 +281,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
 
         /* 수정 처리 */
         vst_right_image = (ImageView) findViewById(R.id.vst_right_image);
+        vst_right_image.setVisibility(View.VISIBLE);
         vst_right_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

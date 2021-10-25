@@ -7,6 +7,7 @@ package com.mhd.elemantary.common.vo;
 public class ScheduleData {
 	private String subject;
 	private String color;
+	private String idx;
 //	private String mon;
 //	private String tue;
 //	private String wed;
@@ -29,6 +30,12 @@ public class ScheduleData {
 	}
 	public void setColor(String color) {
 		this.color = color;
+	}
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
 	}
 //	public String getMon() {
 //		return mon;

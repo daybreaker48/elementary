@@ -38,6 +38,8 @@ public class ScheduleVo {
 		public int endmin; 		    // 종료시간
 		public String color; 		// 색상
 		public int alarm; 		    // 알람
+        public String idx;
+
 
 		public String getSubject() {
 			return subject;
@@ -149,6 +151,14 @@ public class ScheduleVo {
 
         public void setAlarm(int alarm) {
             this.alarm = alarm;
+        }
+
+        public String getIdx() {
+            return idx;
+        }
+
+        public void setIdx(String idx) {
+            this.idx = idx;
         }
 	}
 
