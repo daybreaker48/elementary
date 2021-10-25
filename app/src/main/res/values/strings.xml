@@ -69,6 +69,8 @@
     <string name="text_google_login" translatable="true">Google로 시작</string>
     <string name="text_kakao_login" translatable="true">Kakao로 시작</string>
     <string name="text_tutorial_find_pwd" translatable="true">비밀번호 찾기</string>
+    <string name="text_auto_login" translatable="true">로그인 상태 유지</string>
+    <string name="text_save_id" translatable="true">아이디 저장</string>
     <string name="text_tutorial_join" translatable="true">회원가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
     <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
@@ -106,6 +108,7 @@
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
     <string name="title_todo_regist_daily" translatable="true">하루학습</string>
     <string name="title_schedule_regist_alarm" translatable="true">알림</string>
+    <string name="title_login" translatable="true">Sign in</string>
 
     <string name="empty_space" translatable="true"> </string>
     <string name="subtitle_subject" translatable="true">과 목</string>

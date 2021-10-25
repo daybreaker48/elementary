@@ -39,20 +39,28 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.preference.PreferenceManager;
 
 public class LoginActivity extends BaseActivity {
-
+    TextView vst_top_title;
     private Button btn_login;
     private EditText et_login_id, et_login_pwd;
     private TextView tv_join;
+    AppCompatButton btn_move_stat_left;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_login);
-
         mContext = LoginActivity.this;
+
+        btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
+        btn_move_stat_left.setVisibility(View.GONE);
+
+        vst_top_title = (TextView) findViewById(R.id.vst_top_title);
+        vst_top_title.setText(R.string.title_login);
+
         btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
