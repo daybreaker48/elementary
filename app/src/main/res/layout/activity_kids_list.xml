@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_theme"
-    android:orientation="horizontal" >
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.KidsListActivity">
 
     <LinearLayout
-        android:id="@+id/ll_top_receiving"
+        android:id="@+id/ll_top_kidslist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/main_theme"
         android:paddingLeft="15dp"
+        android:paddingTop="2dp"
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_move_stat_left"
@@ -17,6 +22,15 @@
             android:layout_height="40dp"
             android:layout_gravity="left|center_vertical"
             android:background="@drawable/back"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_kid_select"-->
+            <!--android:layout_width="@dimen/length_26"-->
+            <!--android:layout_height="@dimen/length_26"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="start|center_vertical"-->
+            <!--android:layout_marginRight="@dimen/length_5"-->
+            <!--android:padding="8dp"-->
+            <!--android:background="@drawable/kid_select"/>-->
         <TextView
             android:id="@+id/vst_top_title"
             android:layout_width="wrap_content"
@@ -28,7 +42,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textSize="@dimen/font_18"
-            android:text="@string/title_todo"/>
+            android:text="@string/title_kidslist"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -52,9 +66,19 @@
                 android:layout_height="@dimen/length_26"
                 android:layout_gravity="center"
                 android:padding="8dp"
-                android:visibility="gone"
-                android:background="@drawable/delete"/>
+                android:background="@drawable/regist"/>
         </LinearLayout>
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recv_kidslist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/length_55"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

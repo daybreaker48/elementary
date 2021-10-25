@@ -93,6 +93,7 @@
     <string name="title_todo" translatable="true">오늘의 학습</string>
     <string name="title_schedule" translatable="true">1주일 스케줄</string>
     <string name="title_selfdo" translatable="true">습관</string>
+    <string name="title_kidslist" translatable="true">우리 아이</string>
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
     <string name="title_todo_regist" translatable="true">학습 등록</string>
@@ -101,6 +102,7 @@
     <string name="title_schedule_modify" translatable="true">스케줄 수정</string>
     <string name="title_self_regist" translatable="true">습관 등록</string>
     <string name="title_kids_regist" translatable="true">아이 등록</string>
+    <string name="title_kids_modify" translatable="true">아이 수정</string>
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
     <string name="title_todo_regist_daily" translatable="true">하루학습</string>
     <string name="title_schedule_regist_alarm" translatable="true">알림</string>

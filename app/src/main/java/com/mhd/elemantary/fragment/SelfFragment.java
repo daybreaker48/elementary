@@ -253,8 +253,7 @@ public class SelfFragment extends BaseFragment {
             SelfData data = new SelfData();
             data.setSelfIdx(selfVo.getMsg().get(i).getIdx());
             data.setSelfItem(selfVo.getMsg().get(i).getTbtitle());
-            data.setSelfComplete(selfVo.getMsg().get(i).getSfcomplete()
-            );
+            data.setSelfComplete(selfVo.getMsg().get(i).getSfcomplete());
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);

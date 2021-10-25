@@ -38,8 +38,10 @@
     <string name="url_restapi_update_todo_check">/api/MHDRT1358.jsp</string><!-- 학습 완료 업데이트 -->
     <string name="restapi_regist_kids">MHDRT2351</string><!-- 아이 등록 -->
     <string name="url_restapi_regist_kids">/api/MHDRT2351.jsp</string><!-- 아이 등록 -->
-
-
+    <string name="restapi_modify_kids">MHDRT1828</string><!-- 아이 수정 -->
+    <string name="url_restapi_modify_kids">/api/MHDRT1828.jsp</string><!-- 아이 수정 -->
+    <string name="restapi_delete_kids">MHDRT1829</string><!-- 아이 삭제 -->
+    <string name="url_restapi_delete_kids">/api/MHDRT1829.jsp</string><!-- 아이 삭제 -->
 
     <string name="restapi_regist_post">MHDRT1705</string><!-- 포스트 등록 -->
     <string name="url_restapi_regist_post">/api/MHDRT1705.jsp</string><!-- 포스트 등록 -->

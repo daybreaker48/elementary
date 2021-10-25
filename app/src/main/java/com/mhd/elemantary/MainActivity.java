@@ -9,19 +9,16 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
-import com.mhd.elemantary.activity.LoginActivity;
 import com.mhd.elemantary.activity.ModifyScheduleActivity;
 import com.mhd.elemantary.activity.ModifyTodoActivity;
 import com.mhd.elemantary.activity.RegistKidsActivity;
+import com.mhd.elemantary.activity.KidsListActivity;
 import com.mhd.elemantary.activity.RegistScheduleActivity;
 import com.mhd.elemantary.activity.RegistSelfActivity;
 import com.mhd.elemantary.activity.RegistTodoActivity;
@@ -35,8 +32,6 @@ import com.mhd.elemantary.fragment.TodoFragment;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.view.GlobalTabsView;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
 
 public class MainActivity extends BaseActivity {
 
@@ -230,6 +225,21 @@ public class MainActivity extends BaseActivity {
         startActivityResultKids.launch(intent);
     }
     ActivityResultLauncher<Intent> startActivityResultKids = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // preference 업데이트 & 화면 갱신.
+                        ((SettingFragment) getSupportFragmentManager().findFragmentByTag("f4")).batchFunction("");
+                    }
+                }
+            });
+    public void startKidsList(){
+        Intent intent = new Intent(context_main, KidsListActivity.class);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        startActivityResultKidsList.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultKidsList = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override public void onActivityResult(ActivityResult result) {

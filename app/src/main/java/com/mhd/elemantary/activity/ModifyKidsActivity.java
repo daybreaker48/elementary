@@ -11,13 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatButton;
-
 import com.google.gson.Gson;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsVo;
-import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
@@ -25,19 +22,38 @@ import com.mhd.elemantary.util.MHDLog;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistKidsActivity extends BaseActivity {
+import androidx.appcompat.widget.AppCompatButton;
+
+public class ModifyKidsActivity extends BaseActivity {
     TextView vst_top_title;
     EditText et_kids_name_1, et_kids_name_2, et_kids_name_3;
     EditText et_kids_age_1, et_kids_age_2, et_kids_age_3;
-    LinearLayout ll_regist_kids_2, ll_regist_kids_3;
+    LinearLayout ll_regist_kids_2, ll_regist_kids_3, ll_kids_comment;
     ImageView iv_kids_add_button, iv_kids_del_button_1, iv_kids_del_button_2;
     AppCompatButton btn_move_stat_left;
+    /* 수정 처리 */
+    String dataIndex = "";
+    ImageView vst_right_image;
+    /* 수정 처리 */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_kids_regist);
-        mContext = RegistKidsActivity.this;
+        mContext = ModifyKidsActivity.this;
+
+        /* 수정 처리 */
+        Intent intent = getIntent();
+        int itemPosition = intent.getIntExtra("position", -1);
+        KidsVo mKidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+        dataIndex = mKidsVo.getMsg().get(itemPosition).getIdx();
+
+        if(itemPosition == -1){
+            //비정상적인 접근
+            Toast.makeText(mContext, R.string.text_never, Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        /* 수정 처리 */
 
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_move_stat_left.setOnClickListener(new View.OnClickListener() {
@@ -48,14 +64,25 @@ public class RegistKidsActivity extends BaseActivity {
         });
         ll_regist_kids_2 = (LinearLayout) findViewById(R.id.ll_regist_kids_2);
         ll_regist_kids_3 = (LinearLayout) findViewById(R.id.ll_regist_kids_3);
+        ll_kids_comment = (LinearLayout) findViewById(R.id.ll_kids_comment);
         iv_kids_add_button = (ImageView) findViewById(R.id.iv_kids_add_button);
+        /* 수정 처리 */
+        ll_kids_comment.setVisibility(View.GONE);
+        iv_kids_add_button.setVisibility(View.GONE);
+        /* 수정 처리 */
         iv_kids_del_button_1 = (ImageView) findViewById(R.id.iv_kids_del_button_1);
         iv_kids_del_button_2 = (ImageView) findViewById(R.id.iv_kids_del_button_2);
 
         et_kids_name_1 = (EditText) findViewById(R.id.et_kids_name_1);
+        /* 수정 처리 */
+        et_kids_name_1.setText(mKidsVo.getMsg().get(itemPosition).getName());
+        /* 수정 처리 */
         et_kids_name_2 = (EditText) findViewById(R.id.et_kids_name_2);
         et_kids_name_3 = (EditText) findViewById(R.id.et_kids_name_3);
         et_kids_age_1 = (EditText) findViewById(R.id.et_kids_age_1);
+        /* 수정 처리 */
+        et_kids_age_1.setText(mKidsVo.getMsg().get(itemPosition).getAge());
+        /* 수정 처리 */
         et_kids_age_2 = (EditText) findViewById(R.id.et_kids_age_2);
         et_kids_age_3 = (EditText) findViewById(R.id.et_kids_age_3);
 
@@ -105,7 +132,28 @@ public class RegistKidsActivity extends BaseActivity {
         });
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
-        vst_top_title.setText(R.string.title_kids_regist);
+        vst_top_title.setText(R.string.title_kids_modify);
+
+        /* 수정 처리 */
+        vst_right_image = (ImageView) findViewById(R.id.vst_right_image);
+        vst_right_image.setVisibility(View.VISIBLE);
+        vst_right_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MHDDialogUtil.sAlert(ModifyKidsActivity.this, R.string.confirm_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteKids(mKidsVo.getMsg().get(itemPosition).getIdx());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+            }
+        });
+        /* 수정 처리 */
     }
 
     private void saveProcess() {
@@ -123,20 +171,13 @@ public class RegistKidsActivity extends BaseActivity {
         et_kids_age_2_value = (et_kids_age_2_value==null || "".equals(et_kids_age_2_value)) ? "" : et_kids_age_2_value;
         et_kids_age_3_value = (et_kids_age_3_value==null || "".equals(et_kids_age_3_value)) ? "" : et_kids_age_3_value;
 
+        /* 수정 처리 */
         if ("".equals(et_kids_name_1_value) && "".equals(et_kids_name_2_value) && "".equals(et_kids_name_3_value)) {
             Toast.makeText(mContext, getString(R.string.content_kids_name), Toast.LENGTH_SHORT).show();
         }else if("".equals(et_kids_name_1_value) && !"".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "첫 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "수정할 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
         }else if(!"".equals(et_kids_name_1_value) && "".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "첫 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if("".equals(et_kids_name_2_value) && !"".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "두 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if(!"".equals(et_kids_name_2_value) && "".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "두 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if("".equals(et_kids_name_3_value) && !"".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "세 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if(!"".equals(et_kids_name_3_value) && "".equals(et_kids_age_1_value)){
-            Toast.makeText(mContext, "세 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "수정할 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
         }else{
             try {
                 // Map 방식 0
@@ -144,16 +185,14 @@ public class RegistKidsActivity extends BaseActivity {
                 params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
                 params.put("KIDNAME1", et_kids_name_1_value);
                 params.put("KIDAGE1", et_kids_age_1_value);
-                params.put("KIDNAME2", et_kids_name_2_value);
-                params.put("KIDAGE2", et_kids_age_2_value);
-                params.put("KIDNAME3", et_kids_name_3_value);
-                params.put("KIDAGE3", et_kids_age_3_value);
-                MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_regist_kids, params, responseListener);
+                params.put("IDX", dataIndex);
+                MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_modify_kids, params, responseListener);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 MHDLog.printException(e);
             }
         }
+        /* 수정 처리 */
     }
 
     @Override
@@ -168,7 +207,7 @@ public class RegistKidsActivity extends BaseActivity {
             MHDDialogUtil.sAlert(mContext, nvMsg);
             return true;
         }else if("S".equals(nvResultCode)){
-            if(nvApi.equals(getString(R.string.restapi_regist_kids))){
+            if(nvApi.equals(getString(R.string.restapi_modify_kids)) || nvApi.equals(getString(R.string.restapi_delete_kids))){
                 if (nvCnt == 0) {
                     // 정보가 없으면 비정상
                     // 우선 toast를 띄울 것.
@@ -196,5 +235,19 @@ public class RegistKidsActivity extends BaseActivity {
         }
 
         return true;
+    }
+
+    private void deleteKids(String sIndex){
+        // db index 값 받아서 넘기면서 바로 삭제 처리
+        try {
+            Map<String, String> params = new HashMap<String, String>();
+            //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+            params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("IDX", sIndex);
+
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_delete_kids, params, responseListener);
+        } catch (Exception e) {
+            MHDLog.printException(e);
+        }
     }
 }

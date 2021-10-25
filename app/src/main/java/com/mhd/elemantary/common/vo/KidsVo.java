@@ -27,6 +27,7 @@ public class KidsVo {
 		public String umail; 		// 아이디
 		public String name; 		// 이름
         public String age;   		// 나이
+        public String idx;   		//
 
 		public String getUmail() {
 			return umail;
@@ -51,6 +52,14 @@ public class KidsVo {
 		public void setAge(String age) {
             this.age = age;
         }
+
+		public String getIdx() {
+			return idx;
+		}
+
+		public void setIdx(String idx) {
+			this.idx = idx;
+		}
 	}
 
 

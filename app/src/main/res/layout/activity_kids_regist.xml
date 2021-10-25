@@ -12,7 +12,7 @@
         android:id="@+id/include"
         layout="@layout/common_back_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="56dp" />
 
     <LinearLayout
         android:id="@+id/ll_top_regist"
@@ -270,6 +270,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_kids_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

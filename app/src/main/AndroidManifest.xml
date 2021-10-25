@@ -83,6 +83,14 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
         <activity
+            android:name="com.mhd.elemantary.activity.ModifyKidsActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.mhd.elemantary.activity.KidsListActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
             android:name="com.mhd.elemantary.activity.OptionAlarmActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
