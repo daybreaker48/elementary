@@ -30,6 +30,17 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
     private ArrayList<SelfData> listData = new ArrayList<>();
     private static Context context;
 
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+    // 리스너 객체 참조를 저장하는 변수
+    private static ReCyclerSelfAdapter.OnItemClickListener mListener = null;
+
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(ReCyclerSelfAdapter.OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
+
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -76,6 +87,20 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
 
             this.tvSelfItem = view.findViewById(R.id.tv_self_item_holder);
             this.cbSelfComplete = view.findViewById(R.id.cb_self_complete_holder);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 리스너 객체의 메서드 호출.
+                        if (mListener != null) {
+                            mListener.onItemClick(v, pos) ;
+                            // 여기서 메뉴를 띄워야 하는 듯
+                        }
+                    }
+                }
+            });
         }
 
         void onBind(final SelfData data) {

@@ -79,6 +79,10 @@
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>
         <activity
+            android:name="com.mhd.elemantary.activity.ModifySelfActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
+        </activity>
+        <activity
             android:name="com.mhd.elemantary.activity.RegistKidsActivity"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
         </activity>

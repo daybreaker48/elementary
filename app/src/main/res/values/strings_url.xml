@@ -22,6 +22,10 @@
     <string name="url_restapi_modify_schedule">/api/MHDRT1226.jsp</string><!-- 스케쥴 수정 -->
     <string name="restapi_regist_self">MHDRT1016</string><!-- 습관 등록 -->
     <string name="url_restapi_regist_self">/api/MHDRT1016.jsp</string><!-- 습관 등록 -->
+    <string name="restapi_modify_self">MHDRT2036</string><!-- 습관 수정 -->
+    <string name="url_restapi_modify_self">/api/MHDRT2036.jsp</string><!-- 습관 수정 -->
+    <string name="restapi_delete_self">MHDRT2037</string><!-- 습관 삭제 -->
+    <string name="url_restapi_delete_self">/api/MHDRT2037.jsp</string><!-- 습관 삭제 -->
     <string name="restapi_query_todo">MHDRT1504</string><!-- 학습 조회 -->
     <string name="url_restapi_query_todo">/api/MHDRT1504.jsp</string><!-- 학습 조회 -->
     <string name="restapi_delete_todo">MHDRT1853</string><!-- 학습 삭제 -->

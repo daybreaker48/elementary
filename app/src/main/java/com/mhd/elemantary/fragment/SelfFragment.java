@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.adapter.ReCyclerAdapter;
 import com.mhd.elemantary.adapter.ReCyclerSelfAdapter;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsVo;
@@ -142,6 +143,18 @@ public class SelfFragment extends BaseFragment {
         adapter = new ReCyclerSelfAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        adapter.setOnItemClickListener(new ReCyclerSelfAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                // position을 가지고 라인을 알아낸 다음에
+                // 해당 라인의 메뉴를 띄우려 했는데 이건 일단 보류. 안할 수도 있다.
+                // 클릭하면 바로 수정화면으로 넘기고, 거기에 삭제버튼을 만든다.
+                // 지난 데이타는 수정하지 못하게 한다.
+                    ((MainActivity)getActivity()).startSelfModify(position);
+            }
+        }) ;
+
 
         querySelf();
     }

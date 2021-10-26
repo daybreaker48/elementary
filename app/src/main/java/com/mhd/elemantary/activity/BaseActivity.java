@@ -441,7 +441,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         // 메인 & 그 외 특정 화면에서는 종료처리(팝업을 띄운다)
         if (this instanceof StartActivity || this instanceof TutorialActivity || this instanceof MainActivity || this instanceof LoginActivity) {
             exitApplication();
-        } else if (this instanceof RegistTodoActivity || this instanceof RegistScheduleActivity || this instanceof ModifyKidsActivity || this instanceof ModifyTodoActivity || this instanceof ModifyScheduleActivity
+        } else if (this instanceof RegistTodoActivity || this instanceof RegistScheduleActivity || this instanceof ModifyKidsActivity || this instanceof ModifySelfActivity || this instanceof ModifyTodoActivity || this instanceof ModifyScheduleActivity
                 || this instanceof LoginActivity || this instanceof JoinActivity || this instanceof OptionAlarmActivity || this instanceof RegistKidsActivity || this instanceof KidsListActivity || this instanceof RegistSelfActivity){
             super.onBackPressed();
         } else {

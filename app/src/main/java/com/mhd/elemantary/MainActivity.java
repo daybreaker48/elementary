@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
 import com.mhd.elemantary.activity.ModifyScheduleActivity;
+import com.mhd.elemantary.activity.ModifySelfActivity;
 import com.mhd.elemantary.activity.ModifyTodoActivity;
 import com.mhd.elemantary.activity.RegistKidsActivity;
 import com.mhd.elemantary.activity.KidsListActivity;
@@ -276,6 +277,21 @@ public class MainActivity extends BaseActivity {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).querySchedule();
+                    }
+                }
+            });
+
+    public void startSelfModify(int position){
+        Intent intent = new Intent(context_main, ModifySelfActivity.class);
+        intent.putExtra("position", position);
+        startActivityResultSelfModify.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultSelfModify = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).querySelf();
                     }
                 }
             });

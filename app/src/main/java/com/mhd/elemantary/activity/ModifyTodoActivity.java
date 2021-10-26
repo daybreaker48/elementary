@@ -303,14 +303,15 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
         int toto = Integer.parseInt(mTodoVo.getMsg().get(itemPosition).getTotal());
         int oned = Integer.parseInt(mTodoVo.getMsg().get(itemPosition).getOneday());
         Poneday = mTodoVo.getMsg().get(itemPosition).getOneday();
-        Ptotal = String.valueOf(toto-rest);
-        et_daily_radio_2.setText(String.valueOf(toto-rest));
+        Ptotal = String.valueOf(toto);
+        et_daily_radio_2.setText(String.valueOf(toto));
         et_daily_radio_3.setText(Poneday);
         et_daily_radio_2.setClickable(false);
         et_daily_radio_2.setFocusable(false);
         tv_startday.setText(getString(R.string.content_base_start_todo) + " " + mTodoVo.getMsg().get(itemPosition).getTdstart().substring(0,10));
 
-        calcGoal();
+        if(toto > 0)
+            calcGoal();
         /* 수정 처리 */
     }
 
