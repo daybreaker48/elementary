@@ -32,7 +32,7 @@ public class ModifyKidsActivity extends BaseActivity {
     ImageView iv_kids_add_button, iv_kids_del_button_1, iv_kids_del_button_2;
     AppCompatButton btn_move_stat_left;
     /* 수정 처리 */
-    String dataIndex = "";
+    String dataIndex = "", pastName = "";
     ImageView vst_right_image;
     /* 수정 처리 */
 
@@ -75,13 +75,17 @@ public class ModifyKidsActivity extends BaseActivity {
 
         et_kids_name_1 = (EditText) findViewById(R.id.et_kids_name_1);
         /* 수정 처리 */
+        pastName = mKidsVo.getMsg().get(itemPosition).getName();
         et_kids_name_1.setText(mKidsVo.getMsg().get(itemPosition).getName());
+        et_kids_name_1.setEnabled(false);
         /* 수정 처리 */
         et_kids_name_2 = (EditText) findViewById(R.id.et_kids_name_2);
         et_kids_name_3 = (EditText) findViewById(R.id.et_kids_name_3);
         et_kids_age_1 = (EditText) findViewById(R.id.et_kids_age_1);
         /* 수정 처리 */
         et_kids_age_1.setText(mKidsVo.getMsg().get(itemPosition).getAge());
+        et_kids_age_1.setFocusableInTouchMode(true);
+        et_kids_age_1.requestFocus();
         /* 수정 처리 */
         et_kids_age_2 = (EditText) findViewById(R.id.et_kids_age_2);
         et_kids_age_3 = (EditText) findViewById(R.id.et_kids_age_3);

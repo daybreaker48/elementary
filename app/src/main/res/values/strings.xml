@@ -152,7 +152,7 @@
     <string name="content_self_hint_1" translatable="true">첫 번째 습관을 등록하세요.</string>
     <string name="content_self_hint_2" translatable="true">두 번째 습관을 등록하세요.</string>
     <string name="content_self_hint_3" translatable="true">세 번째 습관을 등록하세요.</string>
-    <string name="content_kids_limit" translatable="true">한번에 최고 3명까지 등록할 수 있습니다.</string>
+    <string name="content_kids_limit" translatable="true">한번에 최고 3명까지 등록할 수 있으며 나중에 이름은 수정할 수 없습니다.</string>
     <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
     <string name="content_not_kids" translatable="true">등록된 아이 정보가 없습니다.\n관리할 아이 정보를 입력하셔야 합니다.</string>
     <string name="content_no_todo" translatable="true">학습 정보가 존재하지 않습니다.</string>
