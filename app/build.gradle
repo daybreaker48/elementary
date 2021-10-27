@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "28.0.3"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.mhd.elementary"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 14
-        versionName "8.0"
+        versionCode 15
+        versionName "9.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
@@ -45,12 +46,13 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     //implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     //implementation 'com.google.zxing:core:3.2.1'
-    implementation 'com.google.firebase:firebase-messaging:17.3.3'
+    implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-storage:16.0.3'
-    implementation 'com.google.firebase:firebase-auth:16.0.4'
+    implementation 'com.google.firebase:firebase-auth'
     //    implementation 'com.google.firebase:firebase-analytics:16.0.1'
-    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     //compile 'com.android.volley:volley:1.0.0'
     //    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
     implementation 'io.github.inflationx:calligraphy3:3.1.1'
@@ -69,6 +71,9 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation "com.github.skydoves:powermenu:2.2.0"
 
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
+    implementation 'com.google.firebase:firebase-analytics'
+
+    implementation "com.kakao.sdk:v2-user:2.8.2" // 카카오 로그인
 }
 
-apply plugin: 'com.google.gms.google-services'

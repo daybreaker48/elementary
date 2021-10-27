@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
+        ext.kotlin_version = '1.5.10'
         google()
         jcenter()
         maven {
@@ -9,8 +10,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
-        classpath 'com.google.gms:google-services:4.2.0'
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.google.gms:google-services:4.3.10'
     }
 }
 
@@ -21,6 +22,10 @@ allprojects {
         maven {
             url 'https://maven.google.com/'
             name 'Google'
+        }
+        mavenCentral()
+        maven {
+            url 'https://devrepo.kakao.com/nexus/content/groups/public/'
         }
     }
 }

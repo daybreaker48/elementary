@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.KidsVo;
@@ -26,6 +29,7 @@ import com.mhd.elemantary.view.GlobalTabsView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
 
@@ -166,9 +170,22 @@ public class MHDSvcManager {
 		MHDLog.d(TAG, "deviceNewUuid init >>> " + this.deviceNewUuid);
 
 		// app 이 새로 init 되는 시점에서 항상 fcm token 값을 호출해서 null 이 아닌 경우 svcmanager에 setting 된다.
-		String currentToken = FirebaseInstanceId.getInstance().getToken();
-		setFcmToken(currentToken == null ? "" : currentToken);
-		MHDLog.d(TAG, "fcmToken init >>> " + this.fcmToken);
+		FirebaseMessaging.getInstance().getToken()
+				.addOnCompleteListener(new OnCompleteListener<String>() {
+					@Override
+					public void onComplete(@NonNull Task<String> task) {
+						if (!task.isSuccessful()) {
+							MHDLog.d(TAG, "Fetching FCM registration token failed", task.getException());
+							return;
+						}
+
+						// Get new FCM registration token
+						String currentToken = task.getResult();
+
+						// Log and toast
+						setFcmToken(currentToken == null ? "" : currentToken);
+					}
+				});
 	}
 	/**
 	 * network connection info load

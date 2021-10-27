@@ -1,37 +1,37 @@
 package com.mhd.elemantary.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.Account;
 import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.MenuVo;
 import com.mhd.elemantary.common.vo.UserVo;
-import com.mhd.elemantary.constant.MHDConstants;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
-import com.mhd.elemantary.util.Util;
 import com.mhd.elemantary.webview.activity.HybridWebGuestActivity;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +47,12 @@ public class LoginActivity extends BaseActivity {
     private Button btn_login;
     private EditText et_login_id, et_login_pwd;
     private TextView tv_join;
-    AppCompatButton btn_move_stat_left;
+    AppCompatButton btn_move_stat_left, btn_google, btn_kakao;
+    GoogleSignInClient mGoogleSignInClient;
+    SignInButton sign_in_button;
+    String userID = "";
+    String userPWD = "";
+    String loginType = "E";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +60,89 @@ public class LoginActivity extends BaseActivity {
         initialize(R.layout.activity_login);
         mContext = LoginActivity.this;
 
+        // 해쉬 키 찍어보기
+//        try {
+//            PackageInfo info = getPackageManager().getPackageInfo("com.mhd.elementary", PackageManager.GET_SIGNATURES);
+//            for (Signature signature : info.signatures) {
+//                MessageDigest md = MessageDigest.getInstance("SHA");
+//                md.update(signature.toByteArray());
+//                MHDLog.d("dagian key", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+//            }
+//        } catch (PackageManager.NameNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
+        btn_google = (AppCompatButton) findViewById(R.id.btn_google);
+        btn_kakao = (AppCompatButton) findViewById(R.id.btn_kakao);
+
+        btn_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+        btn_kakao.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this,(oAuthToken, error) -> {
+                    if (error != null) {
+                        MHDLog.d(TAG, "kakao 로그인 실패");
+                    } else if (oAuthToken != null) {
+                        MHDLog.d(TAG, "kakao 로그인 성공(토큰)" + oAuthToken.getAccessToken());
+
+                        UserApiClient.getInstance().me((user, meError) -> {
+                            if (meError != null) {
+                                MHDLog.d(TAG, "kakao 사용자 정보 요청 실패");
+                            } else {
+                                MHDLog.d(TAG, "kakao 로그인 완료");
+                                MHDLog.d(TAG, "kakao 로그인 완료" + user.toString());
+                                MHDLog.d(TAG, "사용자 정보 요청 성공" +
+                                        "\n회원번호: "+user.getId() +
+                                        "\nnick: "+user.getProperties().get("nickname"));
+                                Account user1 = user.getKakaoAccount();
+                                MHDLog.d(TAG, "kakao 사용자 계정" + user1);
+
+                                loginService("K", String.valueOf(user.getId()), user.getProperties().get("nickname"));
+                            }
+                            return null;
+                        });
+                    }
+                    return null;
+                });
+
+            }
+        });
+//        btn_login_out.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                UserApiClient.getInstance().logout(error -> {
+//                    if (error != null) {
+//                        Log.e(TAG, "로그아웃 실패, SDK에서 토큰 삭제됨", error);
+//                    }else{
+//                        Log.e(TAG, "로그아웃 성공, SDK에서 토큰 삭제됨");
+//                    }
+//                    return null;
+//                });
+//            }
+//        });
+        sign_in_button = (SignInButton) findViewById(R.id.sign_in_button);
+        sign_in_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
         btn_move_stat_left.setVisibility(View.GONE);
 
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
         vst_top_title.setText(R.string.title_login);
 
+//        MHDLog.d("dagian", Utility.getKeyHash(this));
+
         btn_login = (Button) findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginService();
-            }
-        });
         et_login_id = (EditText) findViewById(R.id.et_login_id);
         et_login_pwd = (EditText) findViewById(R.id.et_login_pwd);
         tv_join = (TextView) findViewById(R.id.tv_join);
@@ -78,31 +153,101 @@ public class LoginActivity extends BaseActivity {
                 mContext.startActivity(intent);
             }
         });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginService("E", et_login_id.getText().toString(), et_login_pwd.getText().toString());
+            }
+        });
+
+        // 앱에 필요한 사용자 데이터를 요청하도록 로그인 옵션을 설정한다.
+        // DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("790798364026-gp83cj2jgn84d9u0hjh17jfcjjdtq7i4.apps.googleusercontent.com")
+                .requestEmail() // email addresses도 요청함
+                .build();
+
+        // 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
+        mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
+
+        // 기존에 로그인 했던 계정을 확인한다.
+        GoogleSignInAccount gsa = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+
+        // 로그인 되있는 경우
+        if (gsa != null) {
+            // 로그인 성공. 자동로그인
+            Toast.makeText(mContext, "자동로그인 성공", Toast.LENGTH_SHORT).show();
+        } else {
+            // 로그인되어있지 않은 경우.
+            Toast.makeText(mContext, "자동로그인 해지", Toast.LENGTH_SHORT).show();
+        }
     }
-    private void loginService(){
-        //입력된 정보를 취합해서 서버 전송
 
-        //필터링. (gender, year, agree terms)
-        if(et_login_id.getText().toString().length() == 0) { MHDDialogUtil.sAlert(mContext, R.string.alert_not_id); return; }
-        if(et_login_pwd.getText().toString().length() == 0) { MHDDialogUtil.sAlert(mContext, R.string.alert_not_pwd); return; }
+    private void signIn(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityResultGoogle.launch(signInIntent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultGoogle = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+                        handleSignInResult(task);
+                    }
+                }
+            });
 
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            // call service intro check
-            // String 방식
-//            StringBuilder fullParams = new StringBuilder("{");
-//            fullParams.append("\"UUID\":\""+userVo.getUuID()+"\"")
-//                    .append(",\"UUPN\":\""+userVo.getUuPN()+"\"")
-//                    .append(",\"UUOS\":\""+userVo.getUuOs()+"\"")
-//                    .append(",\"UUDEVICE\":\""+userVo.getUuDevice()+"\"")
-//                    .append(",\"UUTOKEN\":\""+userVo.getUuToken()+"\"")
-//                    .append(",\"UUAPP\":\""+userVo.getUuAppVer()+"\"")
-//                    .append("}");
+            GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
+
+            if (acct != null) {
+                // 로그인 성공
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
+
+                MHDLog.d(TAG, "handleSignInResult:personName "+personName);
+                MHDLog.d(TAG, "handleSignInResult:personGivenName "+personGivenName);
+                MHDLog.d(TAG, "handleSignInResult:personEmail "+personEmail);
+                MHDLog.d(TAG, "handleSignInResult:personId "+personId);
+                MHDLog.d(TAG, "handleSignInResult:personFamilyName "+personFamilyName);
+                MHDLog.d(TAG, "handleSignInResult:personPhoto "+personPhoto);
+
+                // 구글로그인 자체는 정상. 서버에서는 저장만 한다.
+                loginService("G", personEmail, personId);
+            }
+        } catch (ApiException e) {
+            MHDDialogUtil.sAlert(mContext, R.string.alert_not_login);
+        }
+    }
+
+    private void loginService(String ltype, String uuid, String uupwd){
+        //필터링. agree terms 해야 함.
+        if("E".equals(ltype)) {
+            if (uuid == null || "".equals(uuid)) {
+                MHDDialogUtil.sAlert(mContext, R.string.alert_not_id);
+                return;
+            }
+            if (uupwd == null || "".equals(uupwd)) {
+                MHDDialogUtil.sAlert(mContext, R.string.alert_not_pwd);
+                return;
+            }
+        }
+        userID = uuid;
+        userPWD = uupwd;
+        loginType = ltype;
+        try {
             // Map 방식 0
             Map<String, String> params = new HashMap<String, String>();
             params.put("UUAPP", MHDApplication.getInstance().getAppVersion());
-            params.put("UUMAIL", et_login_id.getText().toString());
-            params.put("UUPWD", et_login_pwd.getText().toString());
-            params.put("UULOGIN", "E");
+            params.put("UUMAIL", userID);
+            params.put("UUPWD", userPWD);
+            params.put("UULOGIN", ltype);
             MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_login_member, params, responseListener);
 
 //            new Handler().postDelayed(new Runnable() {
@@ -145,8 +290,8 @@ public class LoginActivity extends BaseActivity {
                 userVo.setUuID(MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
                 userVo.setUuToken(MHDApplication.getInstance().getMHDSvcManager().getFcmToken());
                 userVo.setUuAppVer(MHDApplication.getInstance().getAppVersion());
-                userVo.setUuMail(et_login_id.getText().toString());
-                userVo.setUuLogin("E");
+                userVo.setUuMail(userID);
+                userVo.setUuLogin(loginType);
                 MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
                 MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
 
@@ -177,7 +322,7 @@ public class LoginActivity extends BaseActivity {
             userVo.setUuID(MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
             userVo.setUuToken(MHDApplication.getInstance().getMHDSvcManager().getFcmToken());
             userVo.setUuAppVer(MHDApplication.getInstance().getAppVersion());
-            userVo.setUuMail(et_login_id.getText().toString());
+            userVo.setUuMail(userID);
             userVo.setUuLogin("E");
             MHDApplication.getInstance().getMHDSvcManager().setUserVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setUserVo(userVo);
@@ -208,18 +353,6 @@ public class LoginActivity extends BaseActivity {
                 // MainActivity 로 이동
                 goMain();
             }
-//            // 학생을 등록하겠느냐는 컨펌창을 띄우고 확인 -> 등록창, 취소 -> 메인
-//            MHDDialogUtil.sAlert(this, R.string.alert_join_success, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // 학생 등록창으로 이동.
-//                }
-//            }, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    // 메인으로 이동. 아무 내용 안나올 것.
-//                }
-//            });
         }
 
         return true;
@@ -235,7 +368,7 @@ public class LoginActivity extends BaseActivity {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         // 아이 정보가 등록이 됐다면 다시 로그인 태운다?
-                        loginService();
+                        loginService(loginType, userID, userPWD);
                     } else {
                         // Login 단에서 아이 정보가 하나도 등록이 안된다면 앱 종료
                         exitApplication();

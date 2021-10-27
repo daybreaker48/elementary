@@ -32,6 +32,7 @@
     <string name="alert_not_agree_gps">위치정보이용약관에 동의해주세요.</string>
     <string name="alert_not_name">이름을 입력해주세요.</string>
     <string name="alert_not_id">유효한 Email 주소를 입력해주세요.</string>
+    <string name="alert_not_login">로그인에 실패하였습니다.\n잠시 후 다시 시도해주세요.</string>
     <string name="alert_not_pwd">비밀번호를 입력해주세요.</string>
     <string name="alert_empty_post">내용을 작성하셔야 합니다.</string>
     <string name="alert_join_success">정상적으로 가입되었습니다.\n로그인 해주세요.</string>
@@ -65,8 +66,8 @@
     <string name="text_tutorial_four_content" translatable="true">학업 성취율을 한눈에!</string>
     <string name="text_tutorial_join_title" translatable="true">손쉬운 가입</string>
     <string name="text_join_email" translatable="true">이메일로 회원가입</string>
-    <string name="text_tutorial_login_title" translatable="true">로그인</string>
-    <string name="text_google_login" translatable="true">Google로 시작</string>
+    <string name="text_tutorial_login_title" translatable="true">Email 로그인</string>
+    <string name="text_google_login" translatable="true">google 로그인</string>
     <string name="text_kakao_login" translatable="true">Kakao로 시작</string>
     <string name="text_tutorial_find_pwd" translatable="true">비밀번호 찾기</string>
     <string name="text_auto_login" translatable="true">로그인 상태 유지</string>

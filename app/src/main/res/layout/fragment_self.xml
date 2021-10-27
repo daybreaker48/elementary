@@ -35,7 +35,7 @@
             android:fontFamily="@font/ngb_font"
             android:includeFontPadding="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_17"
+            android:textSize="@dimen/font_18"
             android:text="@string/title_selfdo"/>
     </LinearLayout>
 

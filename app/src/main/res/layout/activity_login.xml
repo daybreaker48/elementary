@@ -116,34 +116,43 @@
         android:orientation="vertical">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_google"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textSize="20sp"
+            android:textSize="13sp"
             android:background="@drawable/btn_google"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
+            android:textColor="@color/white"
             android:includeFontPadding="false"
             android:text="@string/text_google_login"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_kakao"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:textSize="20sp"
-            android:background="@drawable/btn_kakao"
+            android:background="@drawable/kakao_btn_w"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
-            android:includeFontPadding="false"
-            android:text="@string/text_kakao_login"/>
+            android:includeFontPadding="false"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_login"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/btn_login"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
+            android:textColor="@color/white"
             android:includeFontPadding="false"
-            android:textSize="20sp"
+            android:textSize="13sp"
             android:text="@string/text_tutorial_login_title"/>
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import com.mhd.elemantary.R;
 import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.UserVo;
 import com.mhd.elemantary.network.MHDNetworkInvoker;
+import com.mhd.elemantary.service.MyFirebaseMessagingService;
 import com.mhd.elemantary.util.MHDDialogUtil;
 import com.mhd.elemantary.util.MHDLog;
 import com.mhd.elemantary.util.Util;
@@ -29,6 +30,9 @@ public class StartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_intro);
         mContext = StartActivity.this;
+
+        Intent fcm = new Intent(getApplicationContext(), MyFirebaseMessagingService.class);
+        startService(fcm);
 
         // 상단 status bar 를 감추고 그 영역까지 확대시킨다.
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_FULLSCREEN);

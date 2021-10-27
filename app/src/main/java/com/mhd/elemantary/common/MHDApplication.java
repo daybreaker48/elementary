@@ -2,6 +2,8 @@ package com.mhd.elemantary.common;
 
 import android.content.SharedPreferences;
 
+//import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.common.KakaoSdk;
 import com.mhd.elemantary.util.MHDLog;
 
 import androidx.preference.PreferenceManager;
@@ -25,6 +27,9 @@ public class MHDApplication extends AbstractApplication {
 		super.onCreate();
 		
 		MHD_APPLICATION = this;
+
+		// Kakao SDK 초기화
+		KakaoSdk.init(this, "c88e112c6bceda98920c8db73b3e2ac4");
 	}
     /**
      * getter mIsAnyActivityInvokedOnce

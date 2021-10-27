@@ -124,15 +124,35 @@
             android:name="com.mhd.elemantary.webview.activity.HybridWebGuestActivity"
             android:theme="@style/FullScreenTheme">
         </activity>
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!--Redirect URI: "kakaoc88e112c6bceda98920c8db73b3e2ac4://oauth"-->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaoc88e112c6bceda98920c8db73b3e2ac4"/>
+            </intent-filter>
+        </activity>
+
 
         <service android:name="com.mhd.elemantary.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name="com.mhd.elemantary.service.FCMInstanceIDService">
+        <!--<service android:name="com.mhd.elemantary.service.MyFirebaseMessagingService">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANT_ID_EVENT"/>-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+        <service
+            android:name="com.mhd.elemantary.service.MyFirebaseMessagingService"
+            android:stopWithTask="false">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANT_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service android:name="com.mhd.elemantary.service.FCMJobService">
