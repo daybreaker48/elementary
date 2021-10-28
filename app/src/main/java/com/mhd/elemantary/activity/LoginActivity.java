@@ -85,9 +85,9 @@ public class LoginActivity extends BaseActivity {
         boolean tmpKeep = MHDPreferences.getInstance().getPrefLoginKeep();
         btn_login_keep.setSelected(tmpKeep);
         if(tmpKeep){
-            btn_login_keep.setBackgroundResource(R.drawable.circle_back_fill);
+            btn_login_keep.setBackgroundResource(R.drawable.circle_check_ok);
         }else{
-            btn_login_keep.setBackgroundResource(R.drawable.circle_back_border);
+            btn_login_keep.setBackgroundResource(R.drawable.circle_check_not);
         }
 
         //////////////// 로그인 상태 유지 클릭이벤트
@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity {
             et_login_id.setText(MHDPreferences.getInstance().getPrefIDKeep());
             // 아이디저장 버튼 select 처리
             btn_id_keep.setSelected(true);
-            btn_id_keep.setBackgroundResource(R.drawable.circle_back_fill);
+            btn_id_keep.setBackgroundResource(R.drawable.circle_check_ok);
         }
         //////////////// 비번입력 EditText 초기화
         et_login_pwd = (EditText) findViewById(R.id.et_login_pwd);
@@ -580,20 +580,20 @@ public class LoginActivity extends BaseActivity {
 
         if(btn_login_keep.isSelected()){ // 로그인 유지
             MHDPreferences.getInstance().savePrefLoginKeep(true);
-            btn_login_keep.setBackgroundResource(R.drawable.circle_back_fill);
+            btn_login_keep.setBackgroundResource(R.drawable.circle_check_ok);
         }else{ // 로그인 유지 안함.
             MHDPreferences.getInstance().savePrefLoginKeep(false);
-            btn_login_keep.setBackgroundResource(R.drawable.circle_back_border);
+            btn_login_keep.setBackgroundResource(R.drawable.circle_check_not);
         }
     }
     private void idKeepStateChange(){
         btn_id_keep.setSelected(!btn_id_keep.isSelected());
 
         if(btn_id_keep.isSelected()){ // loginService 태울 때 아이디 최종 저장. 여기서는 버튼 모양만 변경
-            btn_id_keep.setBackgroundResource(R.drawable.circle_back_fill);
+            btn_id_keep.setBackgroundResource(R.drawable.circle_check_ok);
         }else{ // loginService 태울 때 아이디 최종 삭제. 여기서는 버튼 모양만 변경
             MHDPreferences.getInstance().savePrefIDKeep("");
-            btn_id_keep.setBackgroundResource(R.drawable.circle_back_border);
+            btn_id_keep.setBackgroundResource(R.drawable.circle_check_not);
         }
     }
 }

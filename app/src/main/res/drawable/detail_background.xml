@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <!--도형안에 채워질 색을 정의한다.-->
-    <solid android:color="@color/detail_bg_color" />
+    <solid android:color="#C5DDE8" />
     <size
         android:width="45dp"
         android:height="45dp"/>

@@ -9,7 +9,8 @@
         android:id="@+id/ll_top_receiving"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="15dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="10dp"
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_move_stat_left"

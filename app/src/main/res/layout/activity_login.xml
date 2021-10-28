@@ -30,22 +30,23 @@
             android:background="@color/white"
             android:padding="@dimen/line_padding"
             android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/et_login_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@drawable/edit_border"
+                android:fontFamily="@font/main_font"
+                android:hint="아이디(이메일)"
+                android:includeFontPadding="false"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
-                android:paddingLeft="10dp"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:textSize="@dimen/font_18"
-                android:textColor="@color/main_theme"
-                android:hint="아이디(이메일)"
                 android:text=""
-                android:inputType="textPersonName"
-                android:background="@drawable/edit_border"
-                android:textColorHint="@color/gray" />
+                android:textColor="@color/main_theme"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/font_15" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +63,7 @@
                 android:paddingLeft="10dp"
                 android:fontFamily="@font/main_font"
                 android:includeFontPadding="false"
-                android:textSize="@dimen/font_18"
+                android:textSize="@dimen/font_15"
                 android:textColor="@color/main_theme"
                 android:hint="패스워드"
                 android:text=""
@@ -74,14 +75,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_login_keep"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:background="@drawable/circle_back_fill"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/circle_check_ok"
                 android:layout_gravity="start"/>
             <TextView
                 android:id="@+id/tv_autologin"
@@ -100,7 +100,8 @@
                 android:id="@+id/btn_id_keep"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:background="@drawable/circle_back_border"
+                android:padding="5dp"
+                android:background="@drawable/circle_check_not"
                 android:layout_gravity="start"/>
             <TextView
                 android:id="@+id/tv_save_id"
@@ -132,7 +133,7 @@
             android:id="@+id/btn_google"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="44dp"
             android:textSize="13sp"
             android:background="@drawable/btn_google"
             android:layout_margin="5dp"
@@ -153,7 +154,7 @@
             android:id="@+id/btn_login"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="44dp"
             android:background="@drawable/btn_login"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
@@ -172,7 +173,7 @@
             <TextView
                 android:id="@+id/tv_join"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:layout_gravity="start"
                 android:textColor="@color/black"

@@ -111,8 +111,10 @@
     <string name="title_todo_regist_textbook" translatable="true">학습지</string>
     <string name="title_todo_regist_daily" translatable="true">하루학습</string>
     <string name="title_schedule_regist_alarm" translatable="true">알림</string>
-    <string name="title_login" translatable="true">Sign in</string>
-    <string name="title_join" translatable="true">Sign up</string>
+    <string name="title_login_en" translatable="true">Sign in</string>
+    <string name="title_login" translatable="true">로그인</string>
+    <string name="title_join_en" translatable="true">Sign up</string>
+    <string name="title_join" translatable="true">회원가입</string>
 
     <string name="empty_space" translatable="true"> </string>
     <string name="subtitle_subject" translatable="true">과 목</string>
