@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape android:shape="rectangle"
+<shape android:shape="oval"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/main_theme"/>
-    <corners android:topRightRadius="20dp"
-        android:bottomLeftRadius="20dp"
-        android:topLeftRadius="20dp"
-        android:bottomRightRadius="20dp"/>
+    <size
+        android:width="30dp"
+        android:height="30dp"/>
 </shape>
 <!-- 상단 좌우 모서리에 round 효과를 준 view -->

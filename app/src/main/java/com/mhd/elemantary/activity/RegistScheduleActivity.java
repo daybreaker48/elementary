@@ -375,100 +375,102 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         ScheduleVo scheduleVo = MHDApplication.getInstance().getMHDSvcManager().getScheduleVo();
         int tmpStartTime = (startHour*100+startMin);
         int tmpEndTime = (endHour*100+endMin);
-        if(innerStrings.contains("2")) { // 설정 요일에 월요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                        || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                        || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_mon), Toast.LENGTH_SHORT).show();
-                        return false;
+        if(scheduleVo != null && scheduleVo.getCnt() > 0) {
+            if (innerStrings.contains("2")) { // 설정 요일에 월요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getMon())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_mon), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("3")) { // 설정 요일에 화요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_tue), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("3")) { // 설정 요일에 화요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getTue())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_tue), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("4")) { // 설정 요일에 수요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_wed), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("4")) { // 설정 요일에 수요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getWed())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_wed), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("5")) { // 설정 요일에 목요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_thu), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("5")) { // 설정 요일에 목요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getThu())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_thu), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("6")) { // 설정 요일에 금요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_fri), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("6")) { // 설정 요일에 금요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getFri())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_fri), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("7")) { // 설정 요일에 토요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sat), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("7")) { // 설정 요일에 토요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getSat())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sat), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }
-        }
-        if(innerStrings.contains("1")) { // 설정 요일에 일요일이 있을 때
-            for (int k = 0; k < scheduleVo.getCnt(); k++) {
-                if("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
-                    int startTime = scheduleVo.getMsg().get(k).getStart()*100 + scheduleVo.getMsg().get(k).getStartMin();
-                    int endTime = scheduleVo.getMsg().get(k).getEnd()*100 + scheduleVo.getMsg().get(k).getEndMin();
-                    if((startTime>=tmpStartTime && endTime<=tmpEndTime) || (startTime<=tmpStartTime && endTime>=tmpEndTime)
-                            || (startTime<=tmpStartTime && (endTime>tmpStartTime && endTime<=tmpEndTime))
-                            || (endTime>=tmpEndTime && (startTime>=tmpStartTime && startTime<tmpEndTime))){ //  중복
-                        Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sun), Toast.LENGTH_SHORT).show();
-                        return false;
+            if (innerStrings.contains("1")) { // 설정 요일에 일요일이 있을 때
+                for (int k = 0; k < scheduleVo.getCnt(); k++) {
+                    if ("Y".equals(scheduleVo.getMsg().get(k).getSun())) {
+                        int startTime = scheduleVo.getMsg().get(k).getStart() * 100 + scheduleVo.getMsg().get(k).getStartMin();
+                        int endTime = scheduleVo.getMsg().get(k).getEnd() * 100 + scheduleVo.getMsg().get(k).getEndMin();
+                        if ((startTime >= tmpStartTime && endTime <= tmpEndTime) || (startTime <= tmpStartTime && endTime >= tmpEndTime)
+                                || (startTime <= tmpStartTime && (endTime > tmpStartTime && endTime <= tmpEndTime))
+                                || (endTime >= tmpEndTime && (startTime >= tmpStartTime && startTime < tmpEndTime))) { //  중복
+                            Toast.makeText(mContext, getString(R.string.content_schedule_duplicate_sun), Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
                     }
                 }
             }

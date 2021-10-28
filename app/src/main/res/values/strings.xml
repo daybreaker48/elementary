@@ -33,9 +33,10 @@
     <string name="alert_not_name">이름을 입력해주세요.</string>
     <string name="alert_not_id">유효한 Email 주소를 입력해주세요.</string>
     <string name="alert_not_login">로그인에 실패하였습니다.\n잠시 후 다시 시도해주세요.</string>
-    <string name="alert_not_pwd">비밀번호를 입력해주세요.</string>
+    <string name="alert_not_pwd">패스워드를 입력해주세요.</string>
     <string name="alert_empty_post">내용을 작성하셔야 합니다.</string>
     <string name="alert_join_success">정상적으로 가입되었습니다.\n로그인 해주세요.</string>
+    <string name="alert_kids_limit">자녀 등록은 최대 6명까지입니다.</string>
 
     <string name="confirm_exit">종료하시겠습니까?</string>
     <string name="confirm_logout">로그아웃하시겠습니까?</string>
@@ -65,22 +66,22 @@
     <string name="text_tutorial_four_subject" translatable="true">통계</string>
     <string name="text_tutorial_four_content" translatable="true">학업 성취율을 한눈에!</string>
     <string name="text_tutorial_join_title" translatable="true">손쉬운 가입</string>
-    <string name="text_join_email" translatable="true">이메일로 회원가입</string>
+    <string name="text_join_email" translatable="true">Email로 회원가입</string>
     <string name="text_tutorial_login_title" translatable="true">Email 로그인</string>
-    <string name="text_google_login" translatable="true">google 로그인</string>
+    <string name="text_google_login" translatable="true">Google 로그인</string>
     <string name="text_kakao_login" translatable="true">Kakao로 시작</string>
     <string name="text_tutorial_find_pwd" translatable="true">비밀번호 찾기</string>
     <string name="text_auto_login" translatable="true">로그인 상태 유지</string>
     <string name="text_save_id" translatable="true">아이디 저장</string>
-    <string name="text_tutorial_join" translatable="true">회원가입</string>
+    <string name="text_tutorial_join" translatable="true">Email 회원가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
-    <string name="text_privacy_anchor" translatable="true">개인정보보호정책에 동의 합니다.</string>
+    <string name="text_privacy_anchor" translatable="true">개인정보처리방침에 동의 합니다.</string>
     <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>
     <string name="text_never" translatable="true">비정상적인 접근입니다.</string>
 
     <string name="text_terms_title_header" translatable="true">text_terms_title_</string>
     <string name="text_terms_title_T" translatable="true">이용약관</string>
-    <string name="text_terms_title_P" translatable="true">개인정보보호정책</string>
+    <string name="text_terms_title_P" translatable="true">개인정보처리방침</string>
     <string name="text_terms_title_G" translatable="true">위치정보이용약관</string>
 
     <string name="button_menu_right" translatable="true">Menu</string>
@@ -111,6 +112,7 @@
     <string name="title_todo_regist_daily" translatable="true">하루학습</string>
     <string name="title_schedule_regist_alarm" translatable="true">알림</string>
     <string name="title_login" translatable="true">Sign in</string>
+    <string name="title_join" translatable="true">Sign up</string>
 
     <string name="empty_space" translatable="true"> </string>
     <string name="subtitle_subject" translatable="true">과 목</string>
@@ -158,7 +160,7 @@
     <string name="content_self_hint_2" translatable="true">두 번째 습관을 등록하세요.</string>
     <string name="content_self_hint_3" translatable="true">세 번째 습관을 등록하세요.</string>
     <string name="content_self_modify" translatable="true">수정할 습관을 입력하세요.</string>
-    <string name="content_kids_limit" translatable="true">한번에 최고 3명까지 등록할 수 있으며 나중에 이름은 수정할 수 없습니다.</string>
+    <string name="content_kids_limit" translatable="true">한번에 최고 3명, 총 6명까지 등록할 수 있으며 나중에 이름은 수정할 수 없습니다.</string>
     <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
     <string name="content_not_kids" translatable="true">등록된 아이 정보가 없습니다.\n관리할 아이 정보를 입력하셔야 합니다.</string>
     <string name="content_no_todo" translatable="true">학습 정보가 존재하지 않습니다.</string>

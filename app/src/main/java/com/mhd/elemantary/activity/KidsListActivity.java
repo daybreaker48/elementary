@@ -1,6 +1,7 @@
 package com.mhd.elemantary.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +21,7 @@ import com.mhd.elemantary.common.MHDApplication;
 import com.mhd.elemantary.common.vo.KidsData;
 import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.MenuVo;
+import com.mhd.elemantary.util.MHDDialogUtil;
 import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
@@ -42,17 +44,30 @@ public class KidsListActivity extends BaseActivity {
     private ReCyclerKidsAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     ImageView mTopRightImage;
+    int kidsCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_kids_list);
         mContext = KidsListActivity.this;
-
+        if(MHDApplication.getInstance().getMHDSvcManager().getKidsVo() != null) {
+            KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+            kidsCount = kidsVo == null ? 0 : kidsVo.getCnt();
+        }
         mTopRightImage = (ImageView) findViewById(R.id.vst_right_image);
         mTopRightImage.setOnClickListener(new View.OnClickListener() {//            @Override
             public void onClick(View v) {
-                startKidsRegist();
+                if(kidsCount >= 6){
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_kids_limit, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+                }else {
+                    startKidsRegist();
+                }
             }
         });
         LinearLayout ll_top_kidslist = (LinearLayout) findViewById(R.id.ll_top_kidslist);
@@ -105,6 +120,8 @@ public class KidsListActivity extends BaseActivity {
 
         // adapter의 값이 변경되었다는 것을 알려줍니다.
         adapter.notifyDataSetChanged();
+
+        kidsCount = kidsVo == null ? 0 : kidsVo.getCnt();
     }
 
     public void startKidsRegist(){

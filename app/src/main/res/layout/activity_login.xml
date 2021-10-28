@@ -42,7 +42,7 @@
                 android:textSize="@dimen/font_18"
                 android:textColor="@color/main_theme"
                 android:hint="아이디(이메일)"
-                android:text="t@t.com"
+                android:text=""
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
@@ -65,8 +65,8 @@
                 android:textSize="@dimen/font_18"
                 android:textColor="@color/main_theme"
                 android:hint="패스워드"
-                android:text="1111"
-                android:inputType="textPersonName"
+                android:text=""
+                android:inputType="numberPassword"
                 android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
@@ -77,11 +77,18 @@
             android:padding="@dimen/line_padding"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login_keep"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/circle_back_fill"
+                android:layout_gravity="start"/>
             <TextView
                 android:id="@+id/tv_autologin"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="22dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:layout_gravity="start"
                 android:textColor="@color/black"
                 android:fontFamily="@font/main_font"
@@ -89,17 +96,24 @@
                 android:textSize="@dimen/font_14"
                 android:layout_marginLeft="10dp"
                 android:text="@string/text_auto_login"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_id_keep"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/circle_back_border"
+                android:layout_gravity="start"/>
             <TextView
                 android:id="@+id/tv_save_id"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="22dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:layout_gravity="end"
                 android:textColor="@color/black"
                 android:fontFamily="@font/main_font"
                 android:includeFontPadding="false"
                 android:textSize="@dimen/font_14"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:text="@string/text_save_id"/>
         </LinearLayout>
 
@@ -118,7 +132,7 @@
             android:id="@+id/btn_google"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:textSize="13sp"
             android:background="@drawable/btn_google"
             android:layout_margin="5dp"
@@ -139,7 +153,7 @@
             android:id="@+id/btn_login"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:background="@drawable/btn_login"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
@@ -147,12 +161,6 @@
             android:includeFontPadding="false"
             android:textSize="13sp"
             android:text="@string/text_tutorial_login_title"/>
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -177,6 +185,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="6"
                 android:gravity="end"
+                android:visibility="gone"
                 android:background="@color/white"
                 android:orientation="horizontal">
                 <TextView

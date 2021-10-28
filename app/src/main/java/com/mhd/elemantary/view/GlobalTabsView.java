@@ -141,10 +141,10 @@ public class GlobalTabsView extends FrameLayout {
                                        float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 
-                MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
-                MHDLog.d("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
-                MHDLog.d("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
-                MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
+                MHDLog.i("dagian", "position >>>>>>>>>>>>>> " + position);
+                MHDLog.i("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
+                MHDLog.i("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
+                MHDLog.i("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
                 if (position == menuViewPager.getCurrentItem() && isStart) {
                     wDirection = true; // right
@@ -676,10 +676,10 @@ public class GlobalTabsView extends FrameLayout {
     private ViewPager.OnPageChangeListener mMenuPageChangeListener = new ViewPager.OnPageChangeListener(){
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            MHDLog.d("dagian", "position >>>>>>>>>>>>>> " + position);
-            MHDLog.d("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
-            MHDLog.d("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
-            MHDLog.d("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
+            MHDLog.i("dagian", "position >>>>>>>>>>>>>> " + position);
+            MHDLog.i("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
+            MHDLog.i("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
+            MHDLog.i("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
             if (position == menuViewPager.getCurrentItem() && isStart) {
                 wDirection = true; // right

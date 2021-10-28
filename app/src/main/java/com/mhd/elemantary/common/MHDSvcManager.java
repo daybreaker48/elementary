@@ -1,5 +1,6 @@
 package com.mhd.elemantary.common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,10 +9,16 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.kakao.sdk.user.UserApiClient;
+import com.mhd.elemantary.MainActivity;
 import com.mhd.elemantary.R;
+import com.mhd.elemantary.activity.LoginActivity;
 import com.mhd.elemantary.business.model.PushVo;
 import com.mhd.elemantary.common.vo.KidsVo;
 import com.mhd.elemantary.common.vo.LoginVo;
@@ -28,6 +35,7 @@ import com.mhd.elemantary.util.Util;
 import com.mhd.elemantary.view.GlobalTabsView;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
@@ -275,7 +283,7 @@ public class MHDSvcManager {
 	/**
 	 * logout. 모든 vo를 비우고 로그인화면으로
 	 */
-	public boolean userLogout() {
+	public boolean userLogout(Context context) {
 		try{
 			setPushVo(null);
 			setUserVo(null);
@@ -286,6 +294,34 @@ public class MHDSvcManager {
 			setScheduleVo(null);
 			setSelfVo(null);
 
+			MHDPreferences.getInstance().savePrefUserID("");
+			MHDPreferences.getInstance().savePrefUserPWD("");
+
+			//////////////// 구글 기존 로그인정보 조회
+			// DEFAULT_SIGN_IN parameter는 유저의 ID와 기본적인 프로필 정보를 요청하는데 사용된다.
+			GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+					.requestIdToken("790798364026-gp83cj2jgn84d9u0hjh17jfcjjdtq7i4.apps.googleusercontent.com")
+					.requestEmail() // email addresses 요청
+					.build();
+			// 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
+			GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient((MainActivity)context, gso);
+			mGoogleSignInClient.signOut()
+					.addOnCompleteListener((MainActivity)context, new OnCompleteListener<Void>() {
+						@Override
+						public void onComplete(@NonNull Task<Void> task) {
+							MHDLog.d(TAG, "google 로그아웃 성공");
+						}
+					});
+			UserApiClient.getInstance().logout (error -> {
+				if (error != null) {
+					MHDLog.d(TAG, "kakao 로그아웃 실패, SDK에서 토큰 삭제됨");
+				}else{
+					MHDLog.d(TAG, "kakao 로그아웃 성공, SDK에서 토큰 삭제됨");
+				}
+				return null;
+			});
+
+			MHDPreferences.getInstance().savePrefLogout(true);
 		} catch (Exception e) {
 			MHDLog.printException(e);
 

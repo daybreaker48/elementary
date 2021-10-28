@@ -32,21 +32,35 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.preference.PreferenceManager;
 
 public class JoinActivity extends BaseActivity {
 
     private CheckBox btnCheckTerms, btnCheckPrivacy, btnCheckGps;
-    private TextView btnTerms, btnPrivacy, btnGps;
+    private TextView btnTerms, btnPrivacy, btnGps, vst_top_title;
     private EditText et_join_name, et_join_id, et_join_pwd;
     private Button btn_join;
     private String selectedSex = "M";
+    private AppCompatButton btn_move_stat_left;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_join);
         mContext = JoinActivity.this;
+
+        //////////////// 화면 타이틀 초기화
+        vst_top_title = (TextView) findViewById(R.id.vst_top_title);
+        vst_top_title.setText(R.string.title_join);
+
+        btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
+        btn_move_stat_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnCheckTerms = (CheckBox) findViewById(R.id.checkTerms);
         btnCheckPrivacy = (CheckBox) findViewById(R.id.checkPrivacy);

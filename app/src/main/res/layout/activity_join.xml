@@ -5,48 +5,25 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.elemantary.activity.LoginActivity"
+    tools:context="com.mhd.elemantary.activity.JoinActivity"
     android:orientation="vertical">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/common_back_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
         android:background="@color/white"
-        android:layout_weight="7"
+        android:layout_weight="6"
+        android:paddingTop="50dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_tutorial_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            fontPath="fonts/DidactGothic-Regular.ttf"
-            android:textSize="@dimen/font_36"
-            android:textColor="@color/black"
-            android:text="@string/text_tutorial_join_title"
-            tools:text="@string/text_tutorial_join_title"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/et_join_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:paddingBottom="0dp"
-                android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
-                android:textColor="@color/black_overlay"
-                android:hint="이름 입력"
-                android:inputType="textPersonName"
-                android:background="@null"
-                android:textColorHint="@color/gray" />
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,15 +33,18 @@
             <EditText
                 android:id="@+id/et_join_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
-                android:textColor="@color/black_overlay"
-                android:hint="이메일 입력"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/main_theme"
+                android:hint="아이디(이메일)"
+                android:text=""
                 android:inputType="textPersonName"
-                android:background="@null"
+                android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
@@ -76,23 +56,58 @@
             <EditText
                 android:id="@+id/et_join_pwd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
-                android:textColor="@color/black_overlay"
-                android:hint="비밀번호 입력"
-                android:inputType="textPersonName"
-                android:background="@null"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/main_theme"
+                android:hint="패스워드"
+                android:text=""
+                android:inputType="numberPassword"
+                android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/line_padding"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_join_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="10dp"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/font_18"
+                android:textColor="@color/main_theme"
+                android:hint="이름 입력"
+                android:text=""
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_border"
+                android:textColorHint="@color/gray" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_weight="4"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -104,13 +119,16 @@
                     android:id="@+id/checkTerms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/text_terms_anchor" />
                 <TextView
                     android:id="@+id/tv_terms_all_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textColor="@color/black"
                     android:text="@string/common_all_view"
                     tools:text="@string/common_all_view"/>
@@ -125,13 +143,16 @@
                     android:id="@+id/checkPrivacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/text_privacy_anchor" />
                 <TextView
                     android:id="@+id/tv_privacy_all_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textColor="@color/black"
                     android:text="@string/common_all_view"
                     tools:text="@string/common_all_view"/>
@@ -141,18 +162,22 @@
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
                 <CheckBox
                     android:id="@+id/checkGps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/text_gps_anchor" />
                 <TextView
                     android:id="@+id/tv_gps_all_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    fontPath="fonts/DidactGothic-Regular.ttf"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textColor="@color/black"
                     android:text="@string/common_all_view"
                     tools:text="@string/common_all_view"/>
@@ -164,12 +189,20 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:background="@color/white"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:layout_weight="3">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_join"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/btn_login"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/main_font"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:textSize="13sp"
             android:text="@string/text_join_email"/>
     </LinearLayout>
 

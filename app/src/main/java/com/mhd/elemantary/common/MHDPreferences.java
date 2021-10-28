@@ -40,6 +40,22 @@ public class MHDPreferences {
 		 * FCM token
 		 */
 		String PREF_NAME_FCM_TOKEN = "FCM_TOKEN";
+		/**
+		 * 로그인 유지 상태
+		 */
+		String PREF_NAME_LOGIN_KEEP = "LOGIN_KEEP";
+		/**
+		 * 아이디 저장 상태
+		 */
+		String PREF_NAME_ID_KEEP = "ID_KEEP";
+		/**
+		 * 계정정보
+		 */
+		String PREF_NAME_ID = "NAME_ID";
+		String PREF_NAME_PWD = "NAME_PWD";
+		String PREF_NAME_LTYPE = "NAME_LTYPE";
+		String PREF_NAME_KAKAO = "NAME_KAKAO";
+		String PREF_LOGOUT = "LOGOUT";
 	}
 
 	private SharedPreferences mSharedPreferences;
@@ -137,6 +153,60 @@ public class MHDPreferences {
 	 */
 	public void savePrefFcmToken(String token) {
 		setValue(PreferenceKey.PREF_NAME_FCM_TOKEN, token);
+	}
+	/**
+	 * 로그인 유지 상태 저장
+	 */
+	public void savePrefLoginKeep(boolean keep) {
+		setValue(PreferenceKey.PREF_NAME_LOGIN_KEEP, keep);
+	}
+	public boolean getPrefLoginKeep() {
+		return getBooleanValue(PreferenceKey.PREF_NAME_LOGIN_KEEP, true);
+	}
+	/**
+	 * 아이디 유지 상태 저장
+	 */
+	public void savePrefIDKeep(String keep) {
+		setValue(PreferenceKey.PREF_NAME_ID_KEEP, keep);
+	}
+	public String getPrefIDKeep() {
+		return getStringValue(PreferenceKey.PREF_NAME_ID_KEEP, "");
+	}
+	/**
+	 * 로그인 유지 상태일때 계정정보 저장
+	 */
+	public void savePrefUserID(String keep) {
+		setValue(PreferenceKey.PREF_NAME_ID, keep);
+	}
+	public String getPrefUserID() {
+		return getStringValue(PreferenceKey.PREF_NAME_ID, "");
+	}
+	public void savePrefUserPWD(String keep) {
+		setValue(PreferenceKey.PREF_NAME_PWD, keep);
+	}
+	public String getPrefUserPWD() {
+		return getStringValue(PreferenceKey.PREF_NAME_PWD, "");
+	}
+	public void savePrefUserLtype(String keep) {
+		setValue(PreferenceKey.PREF_NAME_LTYPE, keep);
+	}
+	public String getPrefUserLtype() {
+		return getStringValue(PreferenceKey.PREF_NAME_LTYPE, "");
+	}
+	public void savePrefKakaoToken(String keep) {
+		setValue(PreferenceKey.PREF_NAME_KAKAO, keep);
+	}
+	public String getPrefKakaoToken() {
+		return getStringValue(PreferenceKey.PREF_NAME_KAKAO, "");
+	}
+	/**
+	 * 로그아웃 여부. 이 경우는 자동로그인을 태우지 않는다.
+	 */
+	public void savePrefLogout(boolean keep) {
+		setValue(PreferenceKey.PREF_LOGOUT, keep);
+	}
+	public boolean getPrefLogout() {
+		return getBooleanValue(PreferenceKey.PREF_LOGOUT, false);
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class BaseWebActivity extends BaseActivity implements BaseWebCallback {
 				MHDDialogUtil.sAlert(BaseWebActivity.this, R.string.alert_network_disable, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						exitProcess();
+//						exitProcess();
 					}
 				});
 			}
@@ -202,9 +202,9 @@ public class BaseWebActivity extends BaseActivity implements BaseWebCallback {
 				String param = getIntent().getExtras().getString(MHDConstants.WebView.WEBVIEW_TARGET_PARAMS, "");
 
 				if (!"".equals(param)) {
-					webview.loadUrl(url + "?" + param);
+					webview.loadUrl(MHDApplication.getInstance().getMHDSvcManager().getMHDNetInfoCVO().getSvrIntroUrl() + url + "?" + param);
 				} else {
-					webview.loadUrl(url);
+					webview.loadUrl(MHDApplication.getInstance().getMHDSvcManager().getMHDNetInfoCVO().getSvrIntroUrl() + url);
 				}
 				setTitle(title);
 			} else {		//int형 resource id 존재시 로드 (strings.xml 쪽에 도메인:포트를 제외한 하부 경로들)

@@ -509,7 +509,7 @@ public class ScheduleFragment extends BaseFragment {
          mParams.width = LinearLayout.LayoutParams.MATCH_PARENT;
          mParams.weight = gap;
          mParams.gravity = Gravity.CENTER;
-         myLinearLayout.setPadding(6,9,6,8);
+         myLinearLayout.setPadding(6,9,6,7);
          myLinearLayout.setLayoutParams(mParams);
 //         LayerDrawable shape = getBorders(Color.WHITE, Color.GRAY, 0, 0, 0, bottomline);
 //         myLinearLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bottom_border));
@@ -524,6 +524,7 @@ public class ScheduleFragment extends BaseFragment {
              Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "notoregular.otf"); // font 폴더내에 있는 jua.ttf 파일을 typeface로 설정
              titleText.setTypeface(typeface);
          }
+         titleText.setIncludeFontPadding(false);
          titleText.setTextColor(Color.WHITE);
          titleText.setGravity(Gravity.CENTER);
 //         LayerDrawable bottomBorder = getBorders(Color.parseColor(scheduleVo.getMsg().get(k).getColor()), Color.GRAY, 0, 0, 0, 0);

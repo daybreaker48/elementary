@@ -514,7 +514,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         MHDDialogUtil.sAlert(this, getString(R.string.confirm_logout), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(MHDApplication.getInstance().getMHDSvcManager().userLogout()){
+                if(MHDApplication.getInstance().getMHDSvcManager().userLogout(BaseActivity.this)){
                     Intent i = new Intent(BaseActivity.this, LoginActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(i);

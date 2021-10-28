@@ -623,8 +623,8 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_cancel"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="7"
+                android:layout_height="36dp"
+                android:layout_weight="12"
                 android:background="@drawable/btn_back_border"
                 android:text="@string/button_cancel_post"
                 android:layout_gravity="start"
@@ -632,7 +632,7 @@
                 android:fontFamily="@font/main_font"
                 android:includeFontPadding="false"
                 android:textColor="@color/main_theme"
-                android:textSize="@dimen/font_20" />
+                android:textSize="@dimen/font_16" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -640,8 +640,8 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_save"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="7"
+                android:layout_height="36dp"
+                android:layout_weight="12"
                 android:background="@drawable/btn_back_fill"
                 android:text="@string/button_save_post"
                 android:layout_gravity="end"
@@ -649,7 +649,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/white"
                 android:padding="2dp"
-                android:textSize="@dimen/font_20" />
+                android:textSize="@dimen/font_16" />
         </LinearLayout>
     </LinearLayout>
 

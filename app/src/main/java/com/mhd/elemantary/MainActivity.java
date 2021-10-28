@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mhd.elemantary.activity.BaseActivity;
+import com.mhd.elemantary.activity.ModifyKidsActivity;
 import com.mhd.elemantary.activity.ModifyScheduleActivity;
 import com.mhd.elemantary.activity.ModifySelfActivity;
 import com.mhd.elemantary.activity.ModifyTodoActivity;
@@ -72,12 +73,12 @@ public class MainActivity extends BaseActivity {
                 if(position == 0) {
 //                    background.setBackgroundColor(colorBlue);
 //                    background.setAlpha(1 - positionOffset);
-                    MHDLog.e("dagian = 0", 1 - positionOffset);
+                    MHDLog.i("dagian = 0", 1 - positionOffset);
                 }
                 else if(position == 1) {
 //                    background.setBackgroundColor(colorPurple);
 //                    background.setAlpha(positionOffset);
-                    MHDLog.e("dagian = 1", positionOffset);
+                    MHDLog.i("dagian = 1", positionOffset);
                 }
             }
         };
@@ -292,6 +293,21 @@ public class MainActivity extends BaseActivity {
                 @Override public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).querySelf();
+                    }
+                }
+            });
+
+    public void startKidsModify(int position){
+        Intent intent = new Intent(context_main, ModifyKidsActivity.class);
+        intent.putExtra("position", position);
+        startActivityResultKidsModify.launch(intent);
+    }
+    ActivityResultLauncher<Intent> startActivityResultKidsModify = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        ((SettingFragment) getSupportFragmentManager().findFragmentByTag("f4")).batchFunction("");
                     }
                 }
             });

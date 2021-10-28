@@ -32,12 +32,18 @@ public class RegistKidsActivity extends BaseActivity {
     LinearLayout ll_regist_kids_2, ll_regist_kids_3;
     ImageView iv_kids_add_button, iv_kids_del_button_1, iv_kids_del_button_2;
     AppCompatButton btn_move_stat_left;
+    int kidsCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_kids_regist);
         mContext = RegistKidsActivity.this;
+
+        if(MHDApplication.getInstance().getMHDSvcManager().getKidsVo() != null) {
+            KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
+            kidsCount = kidsVo == null ? 0 : kidsVo.getCnt();
+        }
 
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_move_stat_left.setOnClickListener(new View.OnClickListener() {
@@ -62,9 +68,9 @@ public class RegistKidsActivity extends BaseActivity {
         iv_kids_add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ll_regist_kids_2.getVisibility() == View.GONE){
+                if(kidsCount < 5 && ll_regist_kids_2.getVisibility() == View.GONE){
                     ll_regist_kids_2.setVisibility(View.VISIBLE);
-                }else if(ll_regist_kids_3.getVisibility() == View.GONE){
+                }else if(kidsCount < 4 && ll_regist_kids_3.getVisibility() == View.GONE){
                     ll_regist_kids_3.setVisibility(View.VISIBLE);
                 }else{
                     Toast.makeText(mContext, getString(R.string.content_kids_limit), Toast.LENGTH_SHORT).show();
@@ -129,13 +135,13 @@ public class RegistKidsActivity extends BaseActivity {
             Toast.makeText(mContext, "첫 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
         }else if(!"".equals(et_kids_name_1_value) && "".equals(et_kids_age_1_value)){
             Toast.makeText(mContext, "첫 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if("".equals(et_kids_name_2_value) && !"".equals(et_kids_age_1_value)){
+        }else if(ll_regist_kids_2.getVisibility() == View.VISIBLE && "".equals(et_kids_name_2_value) && !"".equals(et_kids_age_1_value)){
             Toast.makeText(mContext, "두 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if(!"".equals(et_kids_name_2_value) && "".equals(et_kids_age_1_value)){
+        }else if(ll_regist_kids_2.getVisibility() == View.VISIBLE && !"".equals(et_kids_name_2_value) && "".equals(et_kids_age_1_value)){
             Toast.makeText(mContext, "두 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if("".equals(et_kids_name_3_value) && !"".equals(et_kids_age_1_value)){
+        }else if(ll_regist_kids_3.getVisibility() == View.VISIBLE && "".equals(et_kids_name_3_value) && !"".equals(et_kids_age_1_value)){
             Toast.makeText(mContext, "세 번째 아이 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-        }else if(!"".equals(et_kids_name_3_value) && "".equals(et_kids_age_1_value)){
+        }else if(ll_regist_kids_3.getVisibility() == View.VISIBLE && !"".equals(et_kids_name_3_value) && "".equals(et_kids_age_1_value)){
             Toast.makeText(mContext, "세 번째 아이 나이를 입력해주세요.", Toast.LENGTH_SHORT).show();
         }else{
             try {
