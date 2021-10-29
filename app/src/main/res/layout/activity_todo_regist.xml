@@ -54,6 +54,7 @@
                 android:textColor="@color/black_overlay"
                 android:hint="과목을 선택하세요"
                 android:inputType="textPersonName"
+                android:maxLength="254"
                 android:background="@null"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
@@ -90,6 +91,7 @@
                 android:textColor="@color/black_overlay"
                 android:hint="세부항목을 선택하세요"
                 android:inputType="textPersonName"
+                android:maxLength="254"
                 android:background="@null"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
@@ -126,6 +128,7 @@
                 android:hint="출판사를 입력하세요"
                 android:inputType="textPersonName"
                 android:background="@null"
+                android:maxLength="254"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
@@ -161,6 +164,7 @@
                 android:hint="교재명을 입력하세요"
                 android:inputType="textPersonName"
                 android:background="@null"
+                android:maxLength="254"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
         <LinearLayout
@@ -370,7 +374,8 @@
                     android:textSize="@dimen/font_16"
                     android:textColor="@color/black_overlay"
                     android:hint="하루분량(필수)"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:background="@null"
                     android:textColorHint="@color/gray" />
                 <TextView
@@ -427,7 +432,8 @@
                     android:textSize="@dimen/font_16"
                     android:textColor="@color/black_overlay"
                     android:hint="총페이지"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
+                    android:maxLength="3"
                     android:background="@null"
                     android:textColorHint="@color/gray" />
                 <TextView

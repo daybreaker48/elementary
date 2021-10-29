@@ -91,6 +91,8 @@
     <string name="button_move_stat_left" translatable="true">Stat</string>
     <string name="button_1" translatable="true">btn_1</string>
     <string name="button_2" translatable="true">btn_2</string>
+    <string name="past_month" translatable="true">&lt;&lt;</string>
+    <string name="next_month">&gt;&gt;</string>
 
     <string name="title_post" translatable="true">POST</string>
     <string name="title_receiving" translatable="true">RECEIVING</string>

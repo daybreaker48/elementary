@@ -8,6 +8,9 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -31,6 +34,7 @@ import com.mhd.elemantary.webview.activity.HybridWebGuestActivity;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.preference.PreferenceManager;
@@ -43,12 +47,17 @@ public class JoinActivity extends BaseActivity {
     private Button btn_join;
     private String selectedSex = "M";
     private AppCompatButton btn_move_stat_left;
+    String inputID = "";
+    String inputPWD = "";
+    Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_join);
         mContext = JoinActivity.this;
+
+        pattern = Patterns.EMAIL_ADDRESS;
 
         //////////////// 화면 타이틀 초기화
         vst_top_title = (TextView) findViewById(R.id.vst_top_title);
@@ -72,6 +81,7 @@ public class JoinActivity extends BaseActivity {
         et_join_name = (EditText) findViewById(R.id.et_join_name);
         et_join_id = (EditText) findViewById(R.id.et_join_id);
         et_join_pwd = (EditText) findViewById(R.id.et_join_pwd);
+        btn_join.setEnabled(false);
 
         btnTerms.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +105,67 @@ public class JoinActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 joinService();
+            }
+        });
+
+        et_join_id.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputID = et_join_id.getText().toString();
+                inputPWD = et_join_pwd.getText().toString();
+                if(inputID == null) inputID = "";
+                if(inputPWD == null) inputID = "";
+
+                if(pattern.matcher(inputID).matches()){
+                    if(inputPWD.length() <= 10 && inputPWD.length() >= 4){
+                        btn_join.setEnabled(true);
+                        btn_join.setBackgroundResource(R.drawable.btn_login);
+                    }else{
+                        btn_join.setEnabled(false);
+                        btn_join.setBackgroundResource(R.drawable.btn_login_false);
+                    }
+                }else{
+                    btn_join.setEnabled(false);
+                    btn_join.setBackgroundResource(R.drawable.btn_login_false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        et_join_pwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputID = et_join_id.getText().toString();
+                inputPWD = et_join_pwd.getText().toString();
+                if(inputID == null) inputID = "";
+                if(inputPWD == null) inputID = "";
+
+                if(inputPWD.length() <= 10 && inputPWD.length() >= 4){
+                    if(pattern.matcher(inputID).matches()) {
+                        btn_join.setEnabled(true);
+                        btn_join.setBackgroundResource(R.drawable.btn_login);
+                    }else{
+                        btn_join.setEnabled(false);
+                        btn_join.setBackgroundResource(R.drawable.btn_login_false);
+                    }
+                }else{
+                    btn_join.setEnabled(false);
+                    btn_join.setBackgroundResource(R.drawable.btn_login_false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         });
     }
@@ -157,7 +228,7 @@ public class JoinActivity extends BaseActivity {
         //필터링. (gender, year, agree terms)
         if(!btnCheckTerms.isChecked()){ MHDDialogUtil.sAlert(mContext, R.string.alert_not_agree_terms); return; }
         if(!btnCheckPrivacy.isChecked()){ MHDDialogUtil.sAlert(mContext, R.string.alert_not_agree_privacy); return; }
-        if(!btnCheckGps.isChecked()){ MHDDialogUtil.sAlert(mContext, R.string.alert_not_agree_gps); return; }
+//        if(!btnCheckGps.isChecked()){ MHDDialogUtil.sAlert(mContext, R.string.alert_not_agree_gps); return; }
         if(et_join_name.getText().toString().length() == 0) { MHDDialogUtil.sAlert(mContext, R.string.alert_not_name); return; }
         if(et_join_id.getText().toString().length() == 0) { MHDDialogUtil.sAlert(mContext, R.string.alert_not_id); return; }
         if(et_join_pwd.getText().toString().length() == 0) { MHDDialogUtil.sAlert(mContext, R.string.alert_not_pwd); return; }

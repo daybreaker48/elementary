@@ -57,7 +57,7 @@ public class TodoFragment extends BaseFragment {
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title, tv_no_data, tv_todo_subject_section, tv_area_month;
+    TextView vst_top_title, tv_no_data, tv_todo_subject_section, tv_area_month, tv_area_month_move, tv_area_month_past, tv_area_month_next;
     String displayKid = "";
     int displayKidPosition = 0;
     int weekd = 1;
@@ -66,6 +66,7 @@ public class TodoFragment extends BaseFragment {
     LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_todoy, btn_next_1, btn_next_2, btn_next_3, ll_area_days;
     TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, tv_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
     TextView tv_past_3_week, tv_past_2_week, tv_past_1_week, tv_today_week, tv_next_1_week, tv_next_2_week, tv_next_3_week;
+    TextView tv_area_today;
 
     public static TodoFragment create() {
         return new TodoFragment();
@@ -132,6 +133,41 @@ public class TodoFragment extends BaseFragment {
         tv_next_2_week = (TextView) root.findViewById(R.id.tv_next_2_week);
         tv_next_3_week = (TextView) root.findViewById(R.id.tv_next_3_week);
 
+        tv_area_month_past = (TextView) root.findViewById(R.id.tv_area_month_past);
+        tv_area_month_past.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                cal.add(Calendar.MONTH, -1);
+                displayDays = df.format(cal.getTime());
+                setTopWeek();
+                changeDays(displayDays, weekd);
+            }
+        });
+        tv_area_month_next = (TextView) root.findViewById(R.id.tv_area_month_next);
+        tv_area_month_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                cal.add(Calendar.MONTH, 1);
+                displayDays = df.format(cal.getTime());
+                setTopWeek();
+                changeDays(displayDays, weekd);
+            }
+        });
+        tv_area_month_move = (TextView) root.findViewById(R.id.tv_area_month_move);
+        tv_area_today = (TextView) root.findViewById(R.id.tv_area_today);
+        tv_area_today.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                displayDays = df.format(cal.getTime());
+                changeDays(displayDays, weekd);changeDays(displayDays, weekd);
+            }
+        });
         Calendar cal = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         displayDays = df.format(cal.getTime());
@@ -165,8 +201,9 @@ public class TodoFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new ReCyclerAdapter();
         recyclerView.setAdapter(adapter);
-        RecyclerDecoration recyclerDecoration = new RecyclerDecoration(1);
-        recyclerView.addItemDecoration(recyclerDecoration);
+        RecyclerDecoration recyclerDecoration = new RecyclerDecoration(1, R.color.gray);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         adapter.setOnItemClickListener(new ReCyclerAdapter.OnItemClickListener() {
             @Override
@@ -409,6 +446,7 @@ public class TodoFragment extends BaseFragment {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         tv_area_month.setText(displayDays.substring(5, 7));
+        tv_area_month_move.setText(displayDays.substring(5, 7));
 
         weekd = cal.get(Calendar.DAY_OF_WEEK); // 기준 날짜 요일, displayDays 가 기준날짜.
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");

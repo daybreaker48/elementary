@@ -67,6 +67,7 @@
                 android:textColor="@color/main_theme"
                 android:hint="패스워드"
                 android:text=""
+                android:maxLength="10"
                 android:inputType="numberPassword"
                 android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
@@ -155,7 +156,7 @@
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/btn_login_false"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
             android:textColor="@color/white"

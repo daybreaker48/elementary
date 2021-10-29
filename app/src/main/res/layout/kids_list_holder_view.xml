@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:paddingLeft="@dimen/length_10"
             android:gravity="left|center_vertical"
-            android:textSize="@dimen/font_18"
+            android:textSize="@dimen/font_14"
             android:text=""/>
     </LinearLayout>
 

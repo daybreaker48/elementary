@@ -59,7 +59,7 @@
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/main_font"
                         android:includeFontPadding="false"
-                        android:textSize="@dimen/font_17"
+                        android:textSize="@dimen/font_16"
                         android:textColor="@color/black"
                         android:hint="@string/subtitle_schedule_name"
                         android:inputType="textPersonName"
@@ -80,10 +80,11 @@
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/main_font"
                         android:includeFontPadding="false"
-                        android:textSize="@dimen/font_17"
+                        android:textSize="@dimen/font_16"
                         android:textColor="@color/black"
                         android:hint="@string/subtitle_schedule_age"
                         android:inputType="number"
+                        android:maxLength="2"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray"/>
                 </LinearLayout>

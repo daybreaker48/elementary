@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="@dimen/subtitle_width"
@@ -33,7 +34,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_16"
                 android:text="@string/subtitle_subject"/>
             <EditText
                 android:id="@+id/et_schedule_subject"
@@ -42,10 +43,11 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingLeft="10dp"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_16"
                 android:textColor="@color/black_overlay"
                 android:hint="과목을 입력하세요"
                 android:inputType="textPersonName"
+                android:maxLength="254"
                 android:background="@null"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
@@ -54,6 +56,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_selectday"
@@ -62,7 +65,7 @@
                 android:gravity="center"
                 android:background="@color/white"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_18"
+                android:textSize="@dimen/font_16"
                 android:text="@string/content_dailyprogress"/>
         </LinearLayout>
         <LinearLayout
@@ -85,7 +88,7 @@
                     android:text="@string/content_sun"
                     android:padding="2dp"
                     android:textColor="@color/red"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -100,7 +103,7 @@
                     android:background="@drawable/circle"
                     android:text="@string/content_mon"
                     android:padding="2dp"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -115,7 +118,7 @@
                     android:background="@drawable/circle"
                     android:text="@string/content_tues"
                     android:padding="2dp"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -130,7 +133,7 @@
                     android:background="@drawable/circle"
                     android:text="@string/content_wed"
                     android:padding="2dp"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -145,7 +148,7 @@
                     android:background="@drawable/circle"
                     android:text="@string/content_thur"
                     android:padding="2dp"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -160,7 +163,7 @@
                     android:background="@drawable/circle"
                     android:text="@string/content_fri"
                     android:padding="2dp"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -176,12 +179,14 @@
                     android:text="@string/content_sat"
                     android:padding="2dp"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/font_18" />
+                    android:textSize="@dimen/font_16" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/line_divide"
             android:padding="@dimen/line_padding"
             android:orientation="horizontal">
@@ -198,9 +203,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_16"
                 android:text="@string/subtitle_schedule_time"/>
         </LinearLayout>
         <LinearLayout
@@ -215,9 +222,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:textColor="@color/white"
                 android:background="@color/base_schedule"
-                android:textSize="@dimen/font_20"
+                android:textSize="@dimen/font_16"
                 android:text="@string/subtitle_schedule_color"/>
         </LinearLayout>
         <LinearLayout

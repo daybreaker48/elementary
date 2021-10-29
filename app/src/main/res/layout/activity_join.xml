@@ -42,6 +42,7 @@
                 android:textSize="@dimen/font_15"
                 android:textColor="@color/main_theme"
                 android:hint="아이디(이메일)"
+                android:maxLength="254"
                 android:text=""
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_border"
@@ -64,9 +65,10 @@
                 android:includeFontPadding="false"
                 android:textSize="@dimen/font_15"
                 android:textColor="@color/main_theme"
-                android:hint="패스워드"
+                android:hint="패스워드(4 ~ 10자리)"
                 android:text=""
                 android:inputType="numberPassword"
+                android:maxLength="10"
                 android:background="@drawable/edit_border"
                 android:textColorHint="@color/gray" />
         </LinearLayout>
@@ -197,7 +199,7 @@
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:background="@drawable/btn_login"
+            android:background="@drawable/btn_login_false"
             android:layout_margin="5dp"
             android:fontFamily="@font/main_font"
             android:textColor="@color/white"

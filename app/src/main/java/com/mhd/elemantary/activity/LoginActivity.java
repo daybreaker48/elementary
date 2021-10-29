@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,7 @@ import com.mhd.elemantary.util.MHDLog;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -58,12 +62,17 @@ public class LoginActivity extends BaseActivity {
     String loginType = "";
     String token = "";
     OAuthToken tmp;
+    String inputID = "";
+    String inputPWD = "";
+    Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_login);
         mContext = LoginActivity.this;
+
+        pattern = Patterns.EMAIL_ADDRESS;
 
         //////////////// 해쉬 키 찍어보기
 //        try {
@@ -131,6 +140,66 @@ public class LoginActivity extends BaseActivity {
         }
         //////////////// 비번입력 EditText 초기화
         et_login_pwd = (EditText) findViewById(R.id.et_login_pwd);
+        et_login_id.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputID = et_login_id.getText().toString();
+                inputPWD = et_login_pwd.getText().toString();
+                if(inputID == null) inputID = "";
+                if(inputPWD == null) inputID = "";
+
+                if(pattern.matcher(inputID).matches()){
+                    if(inputPWD.length() <= 10 && inputPWD.length() >= 4){
+                        btn_login.setEnabled(true);
+                        btn_login.setBackgroundResource(R.drawable.btn_login);
+                    }else{
+                        btn_login.setEnabled(false);
+                        btn_login.setBackgroundResource(R.drawable.btn_login_false);
+                    }
+                }else{
+                    btn_login.setEnabled(false);
+                    btn_login.setBackgroundResource(R.drawable.btn_login_false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        et_login_pwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                inputID = et_login_id.getText().toString();
+                inputPWD = et_login_pwd.getText().toString();
+                if(inputID == null) inputID = "";
+                if(inputPWD == null) inputID = "";
+
+                if(inputPWD.length() <= 10 && inputPWD.length() >= 4){
+                    if(pattern.matcher(inputID).matches()) {
+                        btn_login.setEnabled(true);
+                        btn_login.setBackgroundResource(R.drawable.btn_login);
+                    }else{
+                        btn_login.setEnabled(false);
+                        btn_login.setBackgroundResource(R.drawable.btn_login_false);
+                    }
+                }else{
+                    btn_login.setEnabled(false);
+                    btn_login.setBackgroundResource(R.drawable.btn_login_false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         //////////////// back 버튼 초기화, GONE
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_move_stat_left.setVisibility(View.GONE);
