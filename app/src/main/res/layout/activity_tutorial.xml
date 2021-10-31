@@ -5,7 +5,7 @@
     android:id="@+id/common_match_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.elemantary.activity.TutorialActivity"
+    tools:context="com.mhd.stard.activity.TutorialActivity"
     android:background="@drawable/intro">
 
     <View
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"/>-->
 
-    <com.mhd.elemantary.common.CircleIndicator
+    <com.mhd.stard.common.CircleIndicator
         android:id="@+id/circle_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

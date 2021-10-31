@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">star:D</string>
+    <string name="app_name">STAR:D</string>
 
     <string name="common_year">년</string>
     <string name="common_month">월</string>
@@ -31,9 +31,12 @@
     <string name="alert_not_agree_privacy">개인정보보호정책에 동의해주세요.</string>
     <string name="alert_not_agree_gps">위치정보이용약관에 동의해주세요.</string>
     <string name="alert_not_name">이름을 입력해주세요.</string>
-    <string name="alert_not_id">유효한 Email 주소를 입력해주세요.</string>
+    <string name="alert_not_nick">닉네임을 입력해주세요.</string>
+    <string name="alert_not_id">이메일을 입력해주세요.</string>
     <string name="alert_not_login">로그인에 실패하였습니다.\n잠시 후 다시 시도해주세요.</string>
-    <string name="alert_not_pwd">패스워드를 입력해주세요.</string>
+    <string name="alert_not_pwd">비밀번호를 입력해주세요.(4~10자리)</string>
+    <string name="alert_confirm_pwd">비밀번호 확인을 입력해주세요.</string>
+    <string name="alert_pwd_diff">비밀번호가 서로 다릅니다.</string>
     <string name="alert_empty_post">내용을 작성하셔야 합니다.</string>
     <string name="alert_join_success">정상적으로 가입되었습니다.\n로그인 해주세요.</string>
     <string name="alert_kids_limit">자녀 등록은 최대 6명까지입니다.</string>
@@ -75,7 +78,7 @@
     <string name="text_save_id" translatable="true">아이디 저장</string>
     <string name="text_tutorial_join" translatable="true">Email 회원가입</string>
     <string name="text_terms_anchor" translatable="true">이용약관에 동의합니다.</string>
-    <string name="text_privacy_anchor" translatable="true">개인정보처리방침에 동의 합니다.</string>
+    <string name="text_privacy_anchor" translatable="true">개인정보처리방침에 동의합니다.</string>
     <string name="text_gps_anchor" translatable="true">위치정보이용약관에 동의합니다.</string>
     <string name="text_never" translatable="true">비정상적인 접근입니다.</string>
 
@@ -99,7 +102,7 @@
     <string name="title_todo" translatable="true">오늘의 학습</string>
     <string name="title_schedule" translatable="true">1주일 스케줄</string>
     <string name="title_selfdo" translatable="true">습관</string>
-    <string name="title_kidslist" translatable="true">우리 아이</string>
+    <string name="title_kidslist" translatable="true">자녀 정보</string>
     <string name="title_sum" translatable="true">통계</string>
     <string name="title_setting" translatable="true">설정</string>
     <string name="title_todo_regist" translatable="true">학습 등록</string>
@@ -132,7 +135,7 @@
     <string name="subtitle_schedule_alarm" translatable="true">알 림</string>
     <string name="subtitle_schedule_alarm_none" translatable="true">알림 없음</string>
     <string name="subtitle_schedule_name" translatable="true">이 름</string>
-    <string name="subtitle_schedule_age" translatable="true">나 이</string>
+    <string name="subtitle_schedule_age" translatable="true">나이</string>
 
     <string name="subtitle_daily_radio_1" translatable="true">하루학습</string>
     <string name="subtitle_daily_radio_2" translatable="true">총 페이지/하루학습</string>
@@ -147,8 +150,8 @@
     <string name="content_dailyprogress" translatable="true">학습할 요일을 선택해주세요.</string>
     <string name="content_alarm_start_none" translatable="true">시작 시간이 설정되지 않았습니다.</string>
     <string name="content_alarm_end_none" translatable="true">종료 시간이 설정되지 않았습니다.</string>
-    <string name="content_alarm_time_error" translatable="true">종료시간이 시작시간보다 커야 합니다..</string>
-    <string name="content_schedule_duplicate" translatable="true">※ 요일과 시간이 중복되는 내용이 있으면 등록되지 않습니다.</string>
+    <string name="content_alarm_time_error" translatable="true">종료시간이 시작시간보다 커야 합니다.</string>
+    <string name="content_schedule_duplicate" translatable="true">※ 요일과 시간이 중복되면 등록되지 않습니다.</string>
     <string name="content_schedule_duplicate_mon" translatable="true">월요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_tue" translatable="true">화요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_wed" translatable="true">수요일에 중복되는 시간이 있습니다.</string>
@@ -156,7 +159,7 @@
     <string name="content_schedule_duplicate_fri" translatable="true">금요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_sat" translatable="true">토요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_sun" translatable="true">일요일에 중복되는 시간이 있습니다.</string>
-    <string name="content_self_title" translatable="true">스스로해요</string>
+    <string name="content_self_title" translatable="true">스스로 해요</string>
     <string name="content_self_title2" translatable="true">(어릴 적 습관이 인생을 좌우한다)</string>
     <string name="content_self_check" translatable="true">체크</string>
     <string name="content_self_limit" translatable="true">한번에 최고 3개까지 등록할 수 있습니다.</string>
@@ -164,12 +167,12 @@
     <string name="content_self_hint_2" translatable="true">두 번째 습관을 등록하세요.</string>
     <string name="content_self_hint_3" translatable="true">세 번째 습관을 등록하세요.</string>
     <string name="content_self_modify" translatable="true">수정할 습관을 입력하세요.</string>
-    <string name="content_kids_limit" translatable="true">한번에 최고 3명, 총 6명까지 등록할 수 있으며 나중에 이름은 수정할 수 없습니다.</string>
+    <string name="content_kids_limit" translatable="true">한번에 최고 3명, 총 6명까지 등록할 수 있으며,\n등록된 이름은 수정할 수 없습니다.</string>
     <string name="content_kids_name" translatable="true">아이 이름을 입력해주세요.</string>
-    <string name="content_not_kids" translatable="true">등록된 아이 정보가 없습니다.\n관리할 아이 정보를 입력하셔야 합니다.</string>
-    <string name="content_no_todo" translatable="true">학습 정보가 존재하지 않습니다.</string>
-    <string name="content_no_schedule" translatable="true">스케줄 정보가 존재하지 않습니다.</string>
-    <string name="content_no_self" translatable="true">습관 정보가 존재하지 않습니다.</string>
+    <string name="content_not_kids" translatable="true">등록된 자녀가 없습니다.\n우리 아이를 등록해주세요.</string>
+    <string name="content_no_todo" translatable="true">등록된 학습이 없습니다.</string>
+    <string name="content_no_schedule" translatable="true">등록된 스케줄이 없습니다.</string>
+    <string name="content_no_self" translatable="true">등록된 습관이 없습니다.</string>
     <string name="content_no_sum" translatable="true">통계 정보가 존재하지 않습니다.</string>
     <string name="content_time" translatable="true">시간</string>
     <string name="content_sun" translatable="true">일</string>

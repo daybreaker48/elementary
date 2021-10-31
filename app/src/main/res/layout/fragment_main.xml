@@ -12,7 +12,7 @@
         android:background="@color/transparent"/>
 
     <!--가로 Pager-->
-    <com.mhd.elemantary.view.CustomViewPager
+    <com.mhd.stard.view.CustomViewPager
         android:id="@+id/am_main_view_pager_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

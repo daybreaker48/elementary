@@ -5,7 +5,7 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.elemantary.activity.LoginActivity"
+    tools:context="com.mhd.stard.activity.LoginActivity"
     android:orientation="vertical">
 
     <include
@@ -29,16 +29,25 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
-
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/main_font_bold"
+                android:includeFontPadding="false"
+                android:paddingLeft="10dp"
+                android:text="아이디"
+                android:textColor="@color/main_theme" />
             <EditText
                 android:id="@+id/et_login_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/edit_border"
                 android:fontFamily="@font/main_font"
-                android:hint="아이디(이메일)"
                 android:includeFontPadding="false"
+                android:hint="이메일을 입력해주세요."
                 android:inputType="textPersonName"
                 android:paddingLeft="10dp"
                 android:paddingTop="0dp"
@@ -53,7 +62,17 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/main_font_bold"
+                android:includeFontPadding="false"
+                android:paddingLeft="10dp"
+                android:text="비밀번호"
+                android:textColor="@color/main_theme" />
             <EditText
                 android:id="@+id/et_login_pwd"
                 android:layout_width="match_parent"
@@ -65,7 +84,7 @@
                 android:includeFontPadding="false"
                 android:textSize="@dimen/font_15"
                 android:textColor="@color/main_theme"
-                android:hint="패스워드"
+                android:hint="비밀번호"
                 android:text=""
                 android:maxLength="10"
                 android:inputType="numberPassword"
@@ -87,7 +106,7 @@
             <TextView
                 android:id="@+id/tv_autologin"
                 android:layout_width="0dp"
-                android:layout_height="22dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:layout_gravity="start"
@@ -99,15 +118,15 @@
                 android:text="@string/text_auto_login"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_id_keep"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:padding="5dp"
                 android:background="@drawable/circle_check_not"
                 android:layout_gravity="start"/>
             <TextView
                 android:id="@+id/tv_save_id"
                 android:layout_width="0dp"
-                android:layout_height="22dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:layout_gravity="end"

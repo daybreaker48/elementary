@@ -5,7 +5,7 @@
     android:id="@+id/common_match_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mhd.elemantary.MainActivity"
+    tools:context="com.mhd.stard.MainActivity"
     android:background="@color/white_t75">
 
     <View
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.mhd.elemantary.view.GlobalTabsView
+    <com.mhd.stard.view.GlobalTabsView
         android:id="@+id/am_snap_tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

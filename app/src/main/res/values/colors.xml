@@ -35,9 +35,11 @@
     <color name="negativeButtonTextColor">@color/colorAccent</color>
     <color name="bottomSheetDividerColor">@color/colorAccent</color>
 
-    <color name="main_theme">#733273</color>
+    <color name="main_theme">#00ACC1</color>
     <color name="main_theme_text">#A566FF</color>
     <color name="powermenu_select">#02b3be</color>
 
     <color name="base_schedule">#ba68c8</color>
+
+    <color name="shong_pink">#EC6098</color>
 </resources>

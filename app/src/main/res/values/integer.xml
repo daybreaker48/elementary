@@ -1,0 +1,6 @@
+<resources>
+
+    <integer name="screen_in_time" translatable="true">200</integer>
+    <integer name="screen_out_time" translatable="true">100</integer>
+
+</resources>

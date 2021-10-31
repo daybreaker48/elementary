@@ -30,38 +30,30 @@
             android:textSize="@dimen/font_18"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/tv_no_data"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/white_t75"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal">
-        <!--<android.support.v7.widget.AppCompatButton-->
-        <!--android:id="@+id/btn_move_stat_left"-->
-        <!--android:layout_width="65dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_gravity="left"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:textSize="@dimen/font_18"-->
-        <!--android:text="@string/button_1"/>-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+        android:layout_marginBottom="@dimen/length_55"
+        android:background="@color/light_gray"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_20"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/no_data_icon"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/main_font"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="@dimen/length_100"
+            android:textSize="@dimen/font_16"
             android:text="서비스 준비 중 입니다."/>
-        <!--<android.support.v7.widget.AppCompatButton-->
-        <!--android:id="@+id/btn_menu_right"-->
-        <!--android:layout_width="65dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_gravity="right"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@android:color/transparent"-->
-        <!--android:textSize="@dimen/font_18"-->
-        <!--android:text="@string/button_2"/>-->
     </LinearLayout>
-
 </LinearLayout>

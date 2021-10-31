@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:context="com.mhd.elemantary.MainActivity">
+        tools:context="com.mhd.stard.MainActivity">
 
         <!-- navigation area -->
         <include

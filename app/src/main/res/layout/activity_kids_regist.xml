@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/common_back_title"
+        layout="@layout/sub_common_back_title"
         android:layout_width="match_parent"
         android:layout_height="56dp" />
 
@@ -59,9 +59,9 @@
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/main_font"
                         android:includeFontPadding="false"
-                        android:textSize="@dimen/font_16"
+                        android:textSize="@dimen/font_15"
                         android:textColor="@color/black"
-                        android:hint="@string/subtitle_schedule_name"
+                        android:hint="@string/content_kids_name"
                         android:inputType="textPersonName"
                         android:background="@drawable/edit_border"
                         android:textColorHint="@color/gray" />
@@ -80,7 +80,7 @@
                         android:paddingLeft="10dp"
                         android:fontFamily="@font/main_font"
                         android:includeFontPadding="false"
-                        android:textSize="@dimen/font_16"
+                        android:textSize="@dimen/font_15"
                         android:textColor="@color/black"
                         android:hint="@string/subtitle_schedule_age"
                         android:inputType="number"
@@ -298,7 +298,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:background="@color/white"
-                android:textSize="@dimen/font_15"
+                android:textSize="@dimen/font_14"
                 android:text="@string/content_kids_limit"/>
         </LinearLayout>
 
@@ -316,11 +316,12 @@
             android:layout_gravity="bottom"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_cancel"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="42dp"
                 android:layout_weight="12"
                 android:background="@drawable/btn_back_border"
                 android:text="@string/button_cancel_post"
@@ -334,18 +335,19 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="2"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_save"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="42dp"
+                android:layout_gravity="end"
                 android:layout_weight="12"
                 android:background="@drawable/btn_back_fill"
-                android:text="@string/button_save_post"
-                android:layout_gravity="end"
                 android:fontFamily="@font/main_font"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
                 android:padding="2dp"
+                android:text="@string/button_save_post"
+                android:textColor="@color/white"
                 android:textSize="@dimen/font_16" />
         </LinearLayout>
     </LinearLayout>

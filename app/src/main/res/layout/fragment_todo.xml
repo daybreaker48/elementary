@@ -40,67 +40,73 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="42dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="4dp"
+        android:paddingBottom="4dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/bottom_border"
         android:orientation="horizontal">
+        <View android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="6"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/card_background"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_area_month_past"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_gravity="start|center_vertical"
                 android:gravity="center"
                 android:fontFamily="@font/main_font_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
-                android:text="@string/past_month"
+                android:paddingTop="2dp"
+                android:background="@drawable/past_month"
+                android:text=""
                 android:textSize="16sp" />
             <TextView
                 android:id="@+id/tv_area_month_move"
-                android:layout_width="40dp"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_gravity="start|center_vertical"
                 android:gravity="center"
                 android:fontFamily="@font/main_font_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:text="12"
-                android:textSize="15sp" />
+                android:textSize="18sp" />
             <TextView
                 android:id="@+id/tv_area_month_next"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_gravity="start|center_vertical"
                 android:gravity="center"
                 android:fontFamily="@font/main_font_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
-                android:text="@string/next_month"
+                android:background="@drawable/next_month"
+                android:text=""
                 android:textSize="16sp" />
         </LinearLayout>
-        <View android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"/>
+
         <TextView
             android:id="@+id/tv_area_today"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:layout_gravity="end|center_vertical"
+            android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:layout_margin="6dp"
+            android:layout_margin="2dp"
             android:fontFamily="@font/main_font"
             android:includeFontPadding="false"
             android:background="@drawable/btn_today"
@@ -279,7 +285,7 @@
                     android:gravity="top"
                     android:fontFamily="@font/main_font"
                     android:includeFontPadding="false"
-                    android:textColor="@color/main_theme_text"
+                    android:textColor="@color/main_theme"
                     android:text="@string/content_mon"
                     android:textSize="@dimen/font_12" />
             </LinearLayout>
@@ -391,19 +397,34 @@
         </LinearLayout>
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/tv_no_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:visibility="gone"
-        android:fontFamily="@font/main_font"
-        android:includeFontPadding="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_20"
-        android:text="@string/content_no_todo"/>
+            <LinearLayout
+                android:id="@+id/tv_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/length_55"
+                android:background="@color/light_gray"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/no_data_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/gray"
+                    android:layout_marginBottom="@dimen/length_100"
+                    android:textSize="@dimen/font_16"
+                    android:text="@string/content_no_todo"/>
+            </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recv_receiving"

@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/common_back_title"
+        layout="@layout/sub_common_back_title"
         android:layout_width="match_parent"
         android:layout_height="56dp" />
 
@@ -24,69 +24,104 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:layout_marginBottom="10dp"
+            android:background="@drawable/bottom_border_gray"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:orientation="horizontal">
+
             <TextView
+                android:id="@+id/tv_todo_subject"
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
+                android:gravity="start"
                 android:background="@color/white"
-                android:textSize="@dimen/font_16"
-                android:text="@string/subtitle_subject"/>
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:text="제 목"
+                android:textColor="@color/main_theme"
+                android:textSize="@dimen/font_16" />
+
             <EditText
                 android:id="@+id/et_schedule_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:paddingBottom="0dp"
-                android:paddingLeft="10dp"
-                android:textSize="@dimen/font_16"
-                android:textColor="@color/black_overlay"
-                android:hint="과목을 입력하세요"
+                android:background="@null"
+                android:fontFamily="@font/main_font"
+                android:hint="제목을 입력하세요"
+                android:includeFontPadding="false"
                 android:inputType="textPersonName"
                 android:maxLength="254"
-                android:background="@null"
-                android:textColorHint="@color/gray" />
+                android:paddingLeft="10dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:textColor="@color/black_overlay"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/font_16" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="@dimen/line_padding"
-            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/subtitle_width"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/main_theme"
+                android:background="@color/white"
+                android:textSize="@dimen/font_16"
+                android:text="@string/subtitle_days"/>
             <TextView
                 android:id="@+id/tv_selectday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
+                android:paddingLeft="10dp"
                 android:background="@color/white"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_16"
                 android:text="@string/content_dailyprogress"/>
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
+            android:background="@drawable/subject_section_background"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sun"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/circle_transparent"
                     android:text="@string/content_sun"
                     android:padding="2dp"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:textColor="@color/red"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
@@ -94,28 +129,33 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_mon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/circle"
-                    android:text="@string/content_mon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:padding="2dp"
+                    android:text="@string/content_mon"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_tues"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/content_tues"
                     android:padding="2dp"
                     android:textSize="@dimen/font_16" />
@@ -124,13 +164,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_wed"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/content_wed"
                     android:padding="2dp"
                     android:textSize="@dimen/font_16" />
@@ -139,13 +181,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_thur"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/content_thur"
                     android:padding="2dp"
                     android:textSize="@dimen/font_16" />
@@ -154,13 +198,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_fri"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/content_fri"
                     android:padding="2dp"
                     android:textSize="@dimen/font_16" />
@@ -169,66 +215,275 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_sat"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/circle"
+                    android:background="@drawable/circle_transparent"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
                     android:text="@string/content_sat"
                     android:padding="2dp"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/font_16" />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/line_divide"
-            android:padding="@dimen/line_padding"
-            android:orientation="horizontal">
-        </LinearLayout>
+
+
+<!--        -->
+<!--        -->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:padding="@dimen/line_padding"-->
+<!--            android:orientation="horizontal">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_sun"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_sun"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textColor="@color/red"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_mon"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_mon"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_tues"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_tues"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_wed"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_wed"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_thur"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_thur"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_fri"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_fri"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:orientation="horizontal">-->
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/btn_sat"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/circle"-->
+<!--                    android:text="@string/content_sat"-->
+<!--                    android:padding="2dp"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:textSize="@dimen/font_16" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+
+
         <LinearLayout
             android:id="@+id/ll_schedule_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
+            android:background="@drawable/bottom_border_gray"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/subtitle_width"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/main_theme"
+                android:background="@color/white"
+                android:textSize="@dimen/font_16"
+                android:text="@string/subtitle_schedule_time"/>
             <TextView
                 android:id="@+id/tv_schedule_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textColor="@color/black"
+                android:gravity="start"
+                android:paddingLeft="10dp"
                 android:background="@color/white"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
                 android:textSize="@dimen/font_16"
-                android:text="@string/subtitle_schedule_time"/>
+                android:text="시간을 선택하세요."/>
         </LinearLayout>
+
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_schedule_time"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:padding="@dimen/line_padding"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_schedule_time"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:background="@color/white"-->
+<!--                android:textSize="@dimen/font_16"-->
+<!--                android:text="시간을 선택하세요."/>-->
+<!--        </LinearLayout>-->
+
         <LinearLayout
             android:id="@+id/ll_schedule_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/line_padding"
+            android:background="@drawable/bottom_border_gray"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/tv_schedule_color"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textColor="@color/white"
-                android:background="@color/base_schedule"
+                android:gravity="start"
+                android:layout_gravity="center"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/main_theme"
+                android:background="@color/white"
                 android:textSize="@dimen/font_16"
                 android:text="@string/subtitle_schedule_color"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:paddingLeft="10dp"
+                android:background="@color/white"
+                android:fontFamily="@font/main_font"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_16"
+                android:text="색상을 선택하세요."/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:background="@color/white"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/tv_schedule_color"
+                    android:layout_width="54dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:background="@color/base_schedule"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:text=""
+                    android:textSize="@dimen/font_16" />
+            </LinearLayout>
         </LinearLayout>
+<!--        -->
+<!--        -->
+<!--        <LinearLayout-->
+<!--            android:id="@+id/ll_schedule_color"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:padding="@dimen/line_padding"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_schedule_color"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="10dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@color/base_schedule"-->
+<!--                android:textSize="@dimen/font_16"-->
+<!--                android:text="@string/subtitle_schedule_color"/>-->
+<!--        </LinearLayout>-->
         <LinearLayout
             android:id="@+id/ll_schedule_alarm"
             android:layout_width="match_parent"
@@ -277,11 +532,12 @@
             android:layout_gravity="bottom"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_cancel"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="42dp"
                 android:layout_weight="12"
                 android:background="@drawable/btn_back_border"
                 android:text="@string/button_cancel_post"
@@ -298,7 +554,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_todo_save"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="42dp"
                 android:layout_weight="12"
                 android:background="@drawable/btn_back_fill"
                 android:text="@string/button_save_post"
