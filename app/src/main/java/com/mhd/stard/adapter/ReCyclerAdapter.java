@@ -34,6 +34,9 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     private ArrayList<TodoData> listData = new ArrayList<>();
     private static Context context;
     private String queryDays = "";
+    public static String sectionDivide = "";
+    public static int[] detailBack = {R.drawable.detail_background,R.drawable.detail_background_1,R.drawable.detail_background_2,R.drawable.detail_background_3,R.drawable.detail_background_4};
+    public static int detailIdx = 0;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -141,6 +144,12 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         }
 
         void onBind(TodoData data, String tdate) {
+            if(Integer.parseInt(data.getSection()) == 0){ // 섹션을 표시할 때. 이때가 컬러를 바꿔야 할 때.
+                if(detailIdx == 4) detailIdx = 0;
+                else detailIdx++;
+            }
+            sectionDivide = data.getSubject();
+            this.tvDetail.setBackgroundResource(detailBack[detailIdx]);
             this.tvSection.setText(data.getSubject());
             this.tvSection.setVisibility(Integer.parseInt(data.getSection()));
             this.tvDetail.setText(data.getDetail());
