@@ -341,18 +341,32 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:orientation="horizontal">
-            <TextView
+            <LinearLayout
                 android:layout_width="@dimen/subtitle_width"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:gravity="start"
-                android:fontFamily="@font/main_font"
-                android:includeFontPadding="false"
-                android:textColor="@color/main_theme"
-                android:background="@color/white"
-                android:textSize="@dimen/font_16"
-                android:text="@string/subtitle_todo_amount"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:gravity="start"
+                    android:fontFamily="@font/main_font"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/main_theme"
+                    android:background="@color/white"
+                    android:textSize="@dimen/font_16"
+                    android:text="@string/subtitle_todo_amount"/>
+                <ImageView
+                    android:id="@+id/iv_help_todo"
+                    android:layout_width="@dimen/length_22"
+                    android:layout_height="@dimen/length_22"
+                    android:layout_gravity="end|center_vertical"
+                    android:gravity="end|center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:background="@drawable/help"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
