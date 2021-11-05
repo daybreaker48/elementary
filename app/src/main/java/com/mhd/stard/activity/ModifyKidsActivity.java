@@ -224,7 +224,7 @@ public class ModifyKidsActivity extends BaseActivity {
                     MHDApplication.getInstance().getMHDSvcManager().setKidsVo(kidsVo);
 
                     // Self 정상등록 여부를 알림
-                    MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_modify_server, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             setResult(Activity.RESULT_OK);

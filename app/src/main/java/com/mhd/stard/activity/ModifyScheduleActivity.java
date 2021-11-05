@@ -613,7 +613,7 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
                     Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     // 스케쥴 정상등록 여부를 알림
-                    MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_regist_server, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             setResult(Activity.RESULT_OK);
@@ -631,7 +631,7 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
                     Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     // 스케쥴 정상등록 여부를 알림
-                    MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_modify_server, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             setResult(Activity.RESULT_OK);
@@ -649,7 +649,7 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
                     Toast.makeText(mContext, nvMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     // 스케쥴 정상등록 여부를 알림
-                    MHDDialogUtil.sAlert(mContext, R.string.alert_networkRequestSuccess, new DialogInterface.OnClickListener() {
+                    MHDDialogUtil.sAlert(mContext, R.string.alert_delete_server, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             setResult(Activity.RESULT_OK);

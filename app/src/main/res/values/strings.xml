@@ -40,6 +40,9 @@
     <string name="alert_empty_post">내용을 작성하셔야 합니다.</string>
     <string name="alert_join_success">정상적으로 가입되었습니다.\n로그인 해주세요.</string>
     <string name="alert_kids_limit">자녀 등록은 최대 6명까지입니다.</string>
+    <string name="alert_regist_server">정상적으로 등록되었습니다.</string>
+    <string name="alert_modify_server">정상적으로 수정되었습니다.</string>
+    <string name="alert_delete_server">정상적으로 삭제되었습니다.</string>
 
     <string name="confirm_exit">종료하시겠습니까?</string>
     <string name="confirm_logout">로그아웃하시겠습니까?</string>
