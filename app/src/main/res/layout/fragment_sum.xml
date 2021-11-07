@@ -29,6 +29,22 @@
             android:textColor="@color/white"
             android:textSize="@dimen/font_18"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_area_sum"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/length_55"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/tv_no_data"
         android:layout_width="match_parent"

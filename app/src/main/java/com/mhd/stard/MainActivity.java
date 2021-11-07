@@ -134,6 +134,8 @@ public class MainActivity extends BaseActivity {
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){ // 학습 완료
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 통계 조회
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f3")).noData(nvApi);
             }else {
                 // 그게 아니라면 Just show nvMsg
                 MHDDialogUtil.sAlert(mContext, nvMsg);
