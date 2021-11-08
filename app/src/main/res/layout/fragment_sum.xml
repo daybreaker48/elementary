@@ -34,34 +34,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_report"
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bottom_border_padding_selected"
             android:text="학습 리포트"
             android:layout_gravity="start"
-            android:padding="2dp"
             android:fontFamily="@font/main_font"
             android:includeFontPadding="false"
             android:textColor="@color/main_theme"
             android:textSize="@dimen/font_16" />
+<!--        <View-->
+<!--            android:layout_width="0.5dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:background="@color/gray"/>-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_todo_end"
             android:layout_width="0dp"
             android:layout_height="42dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bottom_border_padding"
             android:text="완료된 학습"
             android:layout_gravity="end"
             android:fontFamily="@font/main_font"
             android:includeFontPadding="false"
             android:textColor="@color/main_theme"
-            android:padding="2dp"
             android:textSize="@dimen/font_16" />
     </LinearLayout>
 
@@ -75,9 +79,9 @@
         android:orientation="vertical">
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="260dp"/>
     </LinearLayout>
 
     <LinearLayout

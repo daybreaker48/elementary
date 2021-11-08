@@ -65,7 +65,7 @@ public class StartActivity extends BaseActivity {
 
                 checkRunEmul(deploy);
             }
-        },3000);
+        },1500);
 
 
 

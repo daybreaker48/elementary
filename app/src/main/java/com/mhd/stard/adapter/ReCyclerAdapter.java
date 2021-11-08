@@ -155,10 +155,14 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
             this.tvSection.setText(data.getSubject());
             this.tvSection.setVisibility(Integer.parseInt(data.getSection()));
             this.tvDetail.setText(data.getDetail());
-            if(Integer.parseInt(data.getTotal()) > 0)
-                this.tvDaily.setText(data.getDaily() + " page ( "+data.getRest()+" / "+data.getTotal()+" )");
-            else
+            if(Integer.parseInt(data.getTotal()) > 0) {
+                if(Integer.parseInt(data.getRest()) > Integer.parseInt(data.getTotal()))
+                    this.tvDaily.setText(data.getDaily() + " page ( " + data.getTotal() + " / " + data.getTotal() + " )");
+                else
+                    this.tvDaily.setText(data.getDaily() + " page ( " + data.getRest() + " / " + data.getTotal() + " )");
+            }else {
                 this.tvDaily.setText(data.getDaily() + " page");
+            }
             this.tv_todo_title_holder.setText(data.getTitle());
             this.cbTodoComplete.setOnCheckedChangeListener(null);
             // 과거나 현재의의 데이타라면 그 날짜의 로그를 체크한다.

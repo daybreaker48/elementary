@@ -10,16 +10,19 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.mhd.stard.MainActivity;
 import com.mhd.stard.R;
 import com.mhd.stard.common.MHDApplication;
+import com.mhd.stard.common.XYMarkerView;
 import com.mhd.stard.common.vo.KidsVo;
 import com.mhd.stard.common.vo.MenuVo;
 import com.mhd.stard.common.vo.SumVo;
@@ -157,46 +160,10 @@ public class SumFragment extends BaseFragment {
             sumVo = gson.fromJson(result, SumVo.class);
             MHDApplication.getInstance().getMHDSvcManager().setSumVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setSumVo(sumVo);
-        }
 
-        getChartData();
-//        for(int i=0; i<nvCnt; i++){
-//            // 각 List의 값들을 data 객체에 set 해줍니다.
-//            TodoData data = new TodoData();
-//            data.setSubject(todoVo.getMsg().get(i).getSubject());
-//            data.setDetail(todoVo.getMsg().get(i).getDetail());
-//            data.setDaily(todoVo.getMsg().get(i).getOneday());
-//            data.setTotal(todoVo.getMsg().get(i).getTotal());
-//            data.setRest(todoVo.getMsg().get(i).getRest());
-//            data.setGoal(todoVo.getMsg().get(i).getGoal());
-//            data.setSun(todoVo.getMsg().get(i).getSun());
-//            data.setMon(todoVo.getMsg().get(i).getMon());
-//            data.setTue(todoVo.getMsg().get(i).getTue());
-//            data.setWed(todoVo.getMsg().get(i).getWed());
-//            data.setThu(todoVo.getMsg().get(i).getThu());
-//            data.setFri(todoVo.getMsg().get(i).getFri());
-//            data.setSat(todoVo.getMsg().get(i).getSat());
-//            data.setPublisher(todoVo.getMsg().get(i).getPublish());
-//            data.setTitle(todoVo.getMsg().get(i).getTitle());
-//            data.setOption(todoVo.getMsg().get(i).getOption());
-//            data.setSection(todoVo.getMsg().get(i).getSection());
-//            data.setComplete(todoVo.getMsg().get(i).getTdcomplete());
-//            data.setIdx(todoVo.getMsg().get(i).getIdx());
-//            data.setStart(todoVo.getMsg().get(i).getTdstart());
-//            data.setEnd(todoVo.getMsg().get(i).getTdend());
-//            data.setUse(todoVo.getMsg().get(i).getTduse());
-//            data.setTdpc(todoVo.getMsg().get(i).getTdpc());
-//            data.setKid(displayKid);
-//
-//            // 각 값이 들어간 data를 adapter에 추가합니다.
-//            adapter.addItem(data);
-//        }
-//
-//        // adapter의 값이 변경되었다는 것을 알려줍니다.
-//        adapter.notifyDataSetChanged();
-//
-//        // 기준 날짜가 변경된대로 날짜버튼 새로 설정.
-//        setTopWeek();
+            // 차트를 표시한다.
+            getChartData();
+        }
 
         return true;
     }
@@ -208,7 +175,7 @@ public class SumFragment extends BaseFragment {
         barChart.setPinchZoom(false);
         barChart.setDrawBarShadow(false);
         barChart.setDrawGridBackground(false);
-        barChart.setTouchEnabled(false);
+        barChart.setTouchEnabled(true);
         barChart.setDoubleTapToZoomEnabled(false);
         barChart.getLegend().setEnabled(true);
         barChart.getDescription().setEnabled(false);
@@ -221,53 +188,30 @@ public class SumFragment extends BaseFragment {
         barChart.getAxisLeft().setAxisLineColor(R.color.red);
         barChart.getAxisLeft().setTextColor(R.color.black_overlay);
         barChart.getAxisLeft().setSpaceBottom(0);
+        barChart.getAxisLeft().setDrawTopYLabelEntry(true);
 
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getAxisRight().setDrawLabels(false);
+        barChart.getAxisRight().setEnabled(false);
 
         barChart.getXAxis().setEnabled(true);
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         barChart.getXAxis().setTextColor(R.color.black_overlay);
-//
-//        ArrayList NoOfEmp = new ArrayList();
-//        NoOfEmp.add(new BarEntry(945f, 0));
-//        NoOfEmp.add(new BarEntry(1040f, 1));
-//        NoOfEmp.add(new BarEntry(1133f, 2));
-//        NoOfEmp.add(new BarEntry(1240f, 3));
-//        NoOfEmp.add(new BarEntry(1369f, 4));
-//        NoOfEmp.add(new BarEntry(1487f, 5));
-//        NoOfEmp.add(new BarEntry(1501f, 6));
-//        NoOfEmp.add(new BarEntry(1645f, 7));
-//        NoOfEmp.add(new BarEntry(1578f, 8));
-//        NoOfEmp.add(new BarEntry(1695f, 9));
-//        ArrayList year = new ArrayList();
-//        year.add("2008");
-//        year.add("2009");
-//        year.add("2010");
-//        year.add("2011");
-//        year.add("2012");
-//        year.add("2013");
-//        year.add("2014");
-//        year.add("2015");
-//        year.add("2016");
-//        year.add("2017");
-//        BarDataSet bardataset = new BarDataSet(NoOfEmp, "No Of Employee");
-//
-//        BarData data = new BarData(bardataset); // MPAndroidChart v3.X 오류 발생
-//        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-//        data.setBarWidth(50f);
-//        barChart.setData(data);
+
+        barChart.setDrawValueAboveBar(true);
+
     }
 
     public void getChartData(){
+        //// 차트에 표시할 X, Y축 정보를 생성, 저장.
         ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
         final ArrayList<String> xLabels = new ArrayList<String>();
 
         int dCount = sumVo.getCnt();
         float[] yValue = {0, 0, 0, 0, 0, 0, 0};
-        String[] xLabel = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
-        for (int i=0; i<sumVo.getCnt(); i++) { // 받아온 값 중에서...
+        String[] xLabel = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        for (int i=0; i<dCount; i++) { // 받아온 값 중에서...
             if (startDate.equals(sumVo.getMsg().get(i).getThdate())) { // 일요일, 해당 날짜 데이타가 있다면
                 yValue[0] = Float.parseFloat(sumVo.getMsg().get(i).getAver());
             }
@@ -290,9 +234,6 @@ public class SumFragment extends BaseFragment {
                 yValue[6] = Float.parseFloat(sumVo.getMsg().get(i).getAver());
             }
         }
-
-        initChart();
-
         entries.add(new BarEntry(0, yValue[0], xLabel[0]));
         entries.add(new BarEntry(1, yValue[1], xLabel[1]));
         entries.add(new BarEntry(2, yValue[2], xLabel[2]));
@@ -301,14 +242,50 @@ public class SumFragment extends BaseFragment {
         entries.add(new BarEntry(5, yValue[5], xLabel[5]));
         entries.add(new BarEntry(6, yValue[6], xLabel[6]));
 
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(){
+        //// 차트 초기화.
+        initChart();
+
+        ////////////////////
+        //// 차트 custom 셋팅.
+        ////////////////////
+        //// X축 Label 셋팅
+        IndexAxisValueFormatter indexAxisValueFormatter = new IndexAxisValueFormatter(){
             @Override
             public String getFormattedValue(float value) {
                 return xLabel[(int) value];
             }
-        });
+        };
+        barChart.getXAxis().setValueFormatter(indexAxisValueFormatter);
+        barChart.getXAxis().setTextSize(14);
+        //// Y축 Label 셋팅
+        IndexAxisValueFormatter indexAxisValueFormatterY = new IndexAxisValueFormatter(){
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf(Math.round(value)) + "%";
+            }
+        };
+        barChart.getAxisLeft().setValueFormatter(indexAxisValueFormatterY);
+        barChart.getAxisLeft().setTextSize(14);
+        //// 범례
+        barChart.getLegend().setTextSize(15);
+        barChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        //// 100 % 맞추기
+        float max = yValue[0];
+        for(int i=0; i<yValue.length; i++){
+            if(yValue[i] > max){
+                max = yValue[i];
+            }
+        }
+        barChart.getAxisLeft().setSpaceTop((100-max)/max*100); // 최대치 100% 를 만들기 위해.
+        barChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
 
-        BarDataSet dataSet = new BarDataSet(entries, "Todo Report");
+        //// bar 클릭 시 상단에 marker 표시.
+        XYMarkerView mv = new XYMarkerView(mContext, indexAxisValueFormatter);
+        mv.setChartView(barChart); // For bounds control
+        barChart.setMarker(mv); // Set the marker to the chart
+
+        //// bar data 구성
+        BarDataSet dataSet = new BarDataSet(entries, "주간 학습 성취율");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         BarData data = new BarData(dataSet);
         data.setBarWidth(0.7f);

@@ -319,7 +319,8 @@ public class TodoFragment extends BaseFragment {
             params.put("TDWEEKD", String.valueOf(weekd));
             //과거냐 아니냐를 보내는 것이 낫다. 과거라면 완료된 것도 가져온다.checkToday
             params.put("TDPAST", checkToday(displayDays) ? "N" : "Y");
-            MHDLog.d("queryTodo", checkToday(displayDays) ? "N" : "Y");
+            MHDLog.d("dagian", "checkToday(displayDays) >>> " + checkToday(displayDays));
+            MHDLog.d("dagian", "TDWEEKD >>> " + String.valueOf(weekd));
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {
@@ -550,7 +551,7 @@ public class TodoFragment extends BaseFragment {
         } else if (compare < 0) { // 과거
             return false;
         } else {
-            return true;
+            return false;
         }
     }
 }

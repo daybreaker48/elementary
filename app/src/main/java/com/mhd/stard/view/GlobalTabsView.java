@@ -441,9 +441,9 @@ public class GlobalTabsView extends FrameLayout {
 //            selectedMenu = 1 - fractionFromCenter;
 //            previousMenu = fractionFromCenter/3;
 //        }
-        MHDLog.d("dagian", "selectedMenu >>>>>>>>>>>>>> " + selectedMenu + "/" + previousMenu);
-        MHDLog.d("dagian", "isStart >>>>>>>>>>>>>> " + isStart);
-        MHDLog.d("dagian", "wDirection >>>>>>>>>>>>>> " + wDirection);
+//        MHDLog.d("dagian", "selectedMenu >>>>>>>>>>>>>> " + selectedMenu + "/" + previousMenu);
+//        MHDLog.d("dagian", "isStart >>>>>>>>>>>>>> " + isStart);
+//        MHDLog.d("dagian", "wDirection >>>>>>>>>>>>>> " + wDirection);
         if(fractionFromCenter > 0) {
             switch (position) {
                 case 0: // 0↔1
@@ -676,10 +676,10 @@ public class GlobalTabsView extends FrameLayout {
     private ViewPager.OnPageChangeListener mMenuPageChangeListener = new ViewPager.OnPageChangeListener(){
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            MHDLog.i("dagian", "position >>>>>>>>>>>>>> " + position);
-            MHDLog.i("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
-            MHDLog.i("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
-            MHDLog.i("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
+//            MHDLog.i("dagian", "position >>>>>>>>>>>>>> " + position);
+//            MHDLog.i("dagian", "positionOffset >>>>>>>>>>>>>> " + positionOffset);
+//            MHDLog.i("dagian", "positionOffsetPixels >>>>>>>>>>>>>> " + positionOffsetPixels);
+//            MHDLog.i("dagian", "MenuViewPager.getCurrentItem() >>>>>>>>>>>>>> " + menuViewPager.getCurrentItem());
 
             if (position == menuViewPager.getCurrentItem() && isStart) {
                 wDirection = true; // right
