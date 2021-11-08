@@ -277,7 +277,7 @@ public class SumFragment extends BaseFragment {
             }
         }
         barChart.getAxisLeft().setSpaceTop((100-max)/max*100); // 최대치 100% 를 만들기 위해.
-        barChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        barChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
 
         //// bar 클릭 시 상단에 marker 표시.
         XYMarkerView mv = new XYMarkerView(mContext, indexAxisValueFormatter);
