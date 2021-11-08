@@ -30,6 +30,7 @@ import com.mhd.stard.constant.MHDConstants;
 import com.mhd.stard.fragment.ScheduleFragment;
 import com.mhd.stard.fragment.SelfFragment;
 import com.mhd.stard.fragment.SettingFragment;
+import com.mhd.stard.fragment.SumFragment;
 import com.mhd.stard.fragment.TodoFragment;
 import com.mhd.stard.util.MHDDialogUtil;
 import com.mhd.stard.util.MHDLog;
@@ -134,8 +135,8 @@ public class MainActivity extends BaseActivity {
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){ // 학습 완료
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
-            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 통계 조회
-                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f3")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 리포트 조회
+                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).noData(nvApi);
             }else {
                 // 그게 아니라면 Just show nvMsg
                 MHDDialogUtil.sAlert(mContext, nvMsg);
@@ -168,6 +169,10 @@ public class MainActivity extends BaseActivity {
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
 //                callFragmentMethod(0);
 //                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 리포트
+                // SelfFragment 개별 item update.
+//                callFragmentMethod(0);
+                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
             }
 
         }

@@ -37,6 +37,7 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     public static String sectionDivide = "";
     public static int[] detailBack = {R.drawable.detail_background,R.drawable.detail_background_1,R.drawable.detail_background_2,R.drawable.detail_background_3,R.drawable.detail_background_4};
     public static int detailIdx = 0;
+    public static int dataCount = 0;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -55,6 +56,7 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         View holderView = LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_list_holder_view, parent, false);
         RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(holderView);
         context = parent.getContext();
+        dataCount = getItemCount();
 
         return recyclerViewHolder;
     }
@@ -166,7 +168,7 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                     this.cbTodoComplete.setChecked(false);
                     this.tvDaily.setPaintFlags(this.tvDaily.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     this.tv_todo_title_holder.setPaintFlags(this.tv_todo_title_holder.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                } else {
+                } else { // 해당날짜 완료로그가 있다는 것. 이 경우는 체크해제를 못하도록 막아야하지 않을까...?
                     this.cbTodoComplete.setChecked(true);
                     this.tvDaily.setPaintFlags(this.tvDaily.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     this.tv_todo_title_holder.setPaintFlags(this.tv_todo_title_holder.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -213,14 +215,14 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                                 if(toto > 0) { // 총페이지가 입력되어 있을 때. 누적학습량과 총 페이지를 보여준다.
                                     if (rest >= toto) { // 최종 완료. 사용자에게 보여줄 때는 학습량과 총량을 맞춘다.
                                         changeRest(data.getDaily() + " page ( " + toto + " / " + toto + " ) 최종 완료!!");
-                                        updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate);
+                                        updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate, data.getKid(), dataCount);
                                     } else {
                                         changeRest(data.getDaily() + " page ( " + rest + " / " + toto + " )");
-                                        updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate);
+                                        updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
                                     }
                                 } else {
                                     // 총페이지가 업을 때는 누적학습량을 보여줘야 하는가? 계산은 이미 했으니 db에 보내야지.UI는 취소선 처리
-                                    updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate);
+                                    updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
                                 }
                                 return;
                             }
@@ -252,14 +254,14 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                         if(toto > 0) { // 총페이지가 입력되어 있을 때. 누적학습량과 총 페이지를 보여준다.
                             if (rest >= toto) { // 최종 완료. 사용자에게 보여줄 때는 학습량과 총량을 맞춘다.
                                 changeRest(data.getDaily() + " page ( " + toto + " / " + toto + " ) 최종 완료!!");
-                                updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate);
+                                updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate, data.getKid(), dataCount);
                             } else {
                                 changeRest(data.getDaily() + " page ( " + rest + " / " + toto + " )");
-                                updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate);
+                                updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
                             }
                         } else {
                             // 총페이지가 업을 때는 누적학습량을 보여줘야 하는가? 계산은 이미 했으니 db에 보내야지.UI는 취소선 처리
-                            updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate);
+                            updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
                         }
                     }
                 }
@@ -294,7 +296,7 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     /**
      * update self state
      */
-    public static void updateTodoItem(String idx, String tmpChk, int rest, String end, int past, String tdate){
+    public static void updateTodoItem(String idx, String tmpChk, int rest, String end, int past, String tdate, String tkid, int dCount){
         try {
             Map<String, String> params = new HashMap<String, String>();
             //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
@@ -305,6 +307,8 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
             params.put("TDEND", end);
             params.put("TDPAST", String.valueOf(past));
             params.put("TDPASTDAY", tdate);
+            params.put("TDKID", tkid);
+            params.put("TDCOUNT", String.valueOf(dCount));
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(context, R.string.url_restapi_update_todo_check, params, ((MainActivity)context).responseListener);
         } catch (Exception e) {

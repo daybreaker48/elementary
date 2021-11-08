@@ -28,6 +28,7 @@ public class TodoData {
 	private String end;
 	private String use;
 	private String tdpc;
+	private String kid;
 
 	public String getSubject() {
 		return subject;
@@ -167,5 +168,11 @@ public class TodoData {
 	}
 	public void setTdpc(String tdpc) {
 		this.tdpc = tdpc;
+	}
+	public String getKid() {
+		return kid;
+	}
+	public void setKid(String kid) {
+		this.kid = kid;
 	}
 }

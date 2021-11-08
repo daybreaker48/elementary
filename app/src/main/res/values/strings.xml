@@ -69,7 +69,7 @@
     <string name="text_tutorial_two_content" translatable="true">자녀들의 할 일을 리스트로 관리하세요</string>
     <string name="text_tutorial_three_subject" translatable="true">스케쥴</string>
     <string name="text_tutorial_three_content" translatable="true">자녀들의 요일별 스케쥴을 한눈에!</string>
-    <string name="text_tutorial_four_subject" translatable="true">통계</string>
+    <string name="text_tutorial_four_subject" translatable="true">리포트</string>
     <string name="text_tutorial_four_content" translatable="true">학업 성취율을 한눈에!</string>
     <string name="text_tutorial_join_title" translatable="true">손쉬운 가입</string>
     <string name="text_join_email" translatable="true">Email로 회원가입</string>
@@ -106,7 +106,7 @@
     <string name="title_schedule" translatable="true">1주일 스케줄</string>
     <string name="title_selfdo" translatable="true">습관</string>
     <string name="title_kidslist" translatable="true">자녀 정보</string>
-    <string name="title_sum" translatable="true">통계</string>
+    <string name="title_sum" translatable="true">리포트</string>
     <string name="title_setting" translatable="true">설정</string>
     <string name="title_todo_regist" translatable="true">학습 등록</string>
     <string name="title_todo_modify" translatable="true">학습 수정</string>
@@ -176,7 +176,7 @@
     <string name="content_no_todo" translatable="true">등록된 학습이 없습니다.</string>
     <string name="content_no_schedule" translatable="true">등록된 스케줄이 없습니다.</string>
     <string name="content_no_self" translatable="true">등록된 습관이 없습니다.</string>
-    <string name="content_no_sum" translatable="true">통계 정보가 존재하지 않습니다.</string>
+    <string name="content_no_sum" translatable="true">리포트 정보가 존재하지 않습니다.</string>
     <string name="content_time" translatable="true">시간</string>
     <string name="content_sun" translatable="true">일</string>
     <string name="content_mon" translatable="true">월</string>

@@ -24,6 +24,7 @@ import com.mhd.stard.common.vo.PagingBannerVo;
 import com.mhd.stard.common.vo.ScheduleVo;
 import com.mhd.stard.common.vo.SelfVo;
 import com.mhd.stard.common.vo.SubjectVo;
+import com.mhd.stard.common.vo.SumVo;
 import com.mhd.stard.common.vo.TodoVo;
 import com.mhd.stard.common.vo.UserVo;
 import com.mhd.stard.constant.MHDConstants;
@@ -92,6 +93,10 @@ public class MHDSvcManager {
      * 할일 정보 vo
      */
     private TodoVo todoVo;
+	/**
+	 * 리포트 정보 vo
+	 */
+	private SumVo sumVo;
     /**
      * 스케쥴 정보 vo
      */
@@ -470,6 +475,18 @@ public class MHDSvcManager {
 	 */
 	public void setTodoVo(TodoVo todoVo) {
 		this.todoVo = todoVo;
+	}
+	/**
+	 * get sum Info
+	 */
+	public SumVo getSumVo() {
+		return sumVo;
+	}
+	/**
+	 * set sum Info
+	 */
+	public void setSumVo(SumVo sumVo) {
+		this.sumVo = sumVo;
 	}
 	/**
 	 * get new push boolean

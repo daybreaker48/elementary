@@ -102,7 +102,7 @@ public class VerticalViewPager extends ViewPager {
             }
         }else if(this.getCurrentItem() == 1){
             if(MHDApplication.getInstance().getMHDSvcManager().getCurrentStatIndex() == 1) {
-                // 통계화면(좌:수신완료, 우:수신중, 상:Write, 하:Read)
+                // 리포트화면(좌:수신완료, 우:수신중, 상:Write, 하:Read)
                 switch (action) {
                     case MotionEvent.ACTION_DOWN: {
                         mActivePointerId = event.getPointerId(0);

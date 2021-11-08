@@ -382,6 +382,7 @@ public class TodoFragment extends BaseFragment {
             data.setEnd(todoVo.getMsg().get(i).getTdend());
             data.setUse(todoVo.getMsg().get(i).getTduse());
             data.setTdpc(todoVo.getMsg().get(i).getTdpc());
+            data.setKid(displayKid);
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
