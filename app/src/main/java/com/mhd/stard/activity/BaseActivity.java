@@ -101,6 +101,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     public String nvApi = "";
     public int nvCnt = 0;
     public String nvMsg = "";
+    public int nvCnt2 = 0;
+    public String nvMsg2 = "";
 
     /**
      * onCreate
@@ -186,6 +188,13 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             nvMsg = nvJsonDataObject.getString("msg");
             if("S".equals(nvResultCode)){  // Success. data 필드가 있고 그 안에 api, (cnt), msg 필드가 있다.
                 nvCnt = nvJsonDataObject.getInt("cnt");
+
+                //// 두개의 다른 형식의 json을 보낼때 받는 것이다.
+                //// 해당 값이 null인지를 반드시 먼저 체크한다.
+                if(!nvJsonDataObject.isNull("cn2")){
+                    nvCnt2 = nvJsonDataObject.getInt("cn2");
+                    nvMsg2 = nvJsonDataObject.getString("sub");
+                }
             }
             resultFlag = true;
         } catch (Exception e) {

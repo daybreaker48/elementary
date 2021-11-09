@@ -42,12 +42,19 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
     }
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View v, int position);
+    }
     // 리스너 객체 참조를 저장하는 변수
     private static OnItemClickListener mListener = null;
+    private static OnItemLongClickListener mLongListener = null;
 
     // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mListener = listener ;
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.mLongListener = listener ;
     }
 
     @NonNull
@@ -141,6 +148,62 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                             // 여기서 메뉴를 띄워야 하는 듯
                         }
                     }
+                }
+            });
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 리스너 객체의 메서드 호출.
+//                        if (mLongListener != null) {
+//                            mLongListener.onItemLongClick(v, pos) ;
+//                            // 완료메뉴를 띄운다.
+//                        }
+                        MHDDialogUtil.sAlert(mContext, R.string.confirm_end2, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // UI처리
+                                chkBox(isChecked);
+                                // data. 즉 현재의 SelfData 값을 변경시킨다.(동기화)
+                                String tmpChk = isChecked == true ? "Y" : "N";
+                                data.setComplete(tmpChk);
+
+                                if(isChecked) { // 오늘 학습 완료
+                                    // 총페이지가 있건 없건 학습량은 계속 + 해 나간다.
+                                    data.setRest(String.valueOf(Integer.parseInt(data.getRest()) + Integer.parseInt(data.getDaily())));
+                                } else {
+                                    // 총페이지가 있건 없건 학습량은 계속 - 해 나간다. 사용자가 이 정보를 볼 일은 없다.
+                                    data.setRest(String.valueOf(Integer.parseInt(data.getRest()) - Integer.parseInt(data.getDaily())));
+                                }
+                                int rest = Integer.parseInt(data.getRest());
+                                int toto = Integer.parseInt(data.getTotal());
+                                int oned = Integer.parseInt(data.getDaily());
+                                if(toto > 0) { // 총페이지가 입력되어 있을 때. 누적학습량과 총 페이지를 보여준다.
+                                    if (rest >= toto) { // 최종 완료. 사용자에게 보여줄 때는 학습량과 총량을 맞춘다.
+                                        changeRest(data.getDaily() + " page ( " + toto + " / " + toto + " ) 최종 완료!!");
+                                        updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate, data.getKid(), dataCount);
+                                    } else {
+                                        changeRest(data.getDaily() + " page ( " + rest + " / " + toto + " )");
+                                        updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
+                                    }
+                                } else {
+                                    // 총페이지가 업을 때는 누적학습량을 보여줘야 하는가? 계산은 이미 했으니 db에 보내야지.UI는 취소선 처리
+                                    updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
+                                }
+                                return;
+                            }
+                        }, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                tmpYN = "N";
+                                buttonView.setChecked(false);
+                                return;
+                            }
+                        });
+                    }
+
+                    return true;
                 }
             });
         }

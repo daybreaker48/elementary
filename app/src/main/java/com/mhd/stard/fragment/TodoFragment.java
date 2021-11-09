@@ -1,5 +1,6 @@
 package com.mhd.stard.fragment;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -27,6 +28,7 @@ import com.mhd.stard.common.vo.MenuVo;
 import com.mhd.stard.common.vo.TodoData;
 import com.mhd.stard.common.vo.TodoVo;
 import com.mhd.stard.network.MHDNetworkInvoker;
+import com.mhd.stard.util.MHDDialogUtil;
 import com.mhd.stard.util.MHDLog;
 import com.mhd.stard.view.RecyclerDecoration;
 import com.skydoves.powermenu.MenuAnimation;
@@ -235,7 +237,14 @@ public class TodoFragment extends BaseFragment {
                 else
                     Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
-        }) ;
+        });
+//        adapter.setOnItemLongClickListener(new ReCyclerAdapter.OnItemLongClickListener() {
+//            @Override
+//            public void onItemLongClick(View v, int position) {
+//                // 완료 메뉴를 띄운다.
+//
+//            }
+//        });
 
         queryTodo();
     }
@@ -319,8 +328,8 @@ public class TodoFragment extends BaseFragment {
             params.put("TDWEEKD", String.valueOf(weekd));
             //과거냐 아니냐를 보내는 것이 낫다. 과거라면 완료된 것도 가져온다.checkToday
             params.put("TDPAST", checkToday(displayDays) ? "N" : "Y");
-            MHDLog.d("dagian", "checkToday(displayDays) >>> " + checkToday(displayDays));
-            MHDLog.d("dagian", "TDWEEKD >>> " + String.valueOf(weekd));
+//            MHDLog.d("dagian", "checkToday(displayDays) >>> " + checkToday(displayDays));
+//            MHDLog.d("dagian", "TDWEEKD >>> " + String.valueOf(weekd));
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
         } catch (Exception e) {

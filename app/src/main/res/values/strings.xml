@@ -49,6 +49,7 @@
     <string name="confirm_post">작성하신 포스트를 저장하시겠습니까?</string>
     <string name="confirm_delete">삭제하시겠습니까?</string>
     <string name="confirm_end">최종 완료하게 됩니다. 진행하시겠습니까?</string>
+    <string name="confirm_end2">최종 완료처리 하시겠습니까?</string>
 
     <string name="bottom_btn_1">btn</string>
     <string name="bottom_btn_2">btn</string>

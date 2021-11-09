@@ -35,20 +35,20 @@
         android:layout_marginRight="@dimen/length_15"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/vst_right_2_image"
-            android:layout_width="@dimen/length_27"
-            android:layout_height="@dimen/length_27"
-            android:layout_gravity="end|top"
-            android:padding="8dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/kid_select"/>
-        <ImageView
             android:id="@+id/vst_right_image"
             android:layout_width="@dimen/length_26"
             android:layout_height="@dimen/length_26"
             android:layout_gravity="end|top"
             android:padding="8dp"
             android:background="@drawable/regist"/>
+        <ImageView
+            android:id="@+id/vst_right_2_image"
+            android:layout_width="@dimen/length_27"
+            android:layout_height="@dimen/length_27"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="end|top"
+            android:padding="8dp"
+            android:background="@drawable/kid_select"/>
     </LinearLayout>
 
 

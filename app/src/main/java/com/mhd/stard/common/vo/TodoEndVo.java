@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 
 /**
- * Sum Data VO Class
- * Created by MH.D on 2021-11-08.
+ * Todo End Data VO Class
+ * Created by MH.D on 2021-11-09.
  */
-public class SumVo {
+public class TodoEndVo {
 	/**
 	 * api
 	 */
@@ -17,105 +17,126 @@ public class SumVo {
     */
 	public int cnt = 0;
 	/**
-	 * count 2
-	 */
-	public int cn2 = 0;
-	/**
     * data. msg
     */
-	public ArrayList<SumData> msg = new ArrayList<SumData>();
-	/**
-	 * data. msg
-	 */
-	public ArrayList<SumData2> sub = new ArrayList<SumData2>();
+	public ArrayList<TodoEndListData> msg = new ArrayList<TodoEndListData>();
     /**
-     * Data Class
+     * Paging Banner Data Class
      */
-	public class SumData {
-		public String thdate; 		// 리포트 일
-        public String top; 	    	// 완료 카운트
-		public String bottom; 		// 총 카운트
-		public String aver; 	    // 평균값. 리포트에 활용
+	public class TodoEndListData {
+		public String subject; 		// 과목명
+        public String detail; 		// 세부항목
+		public String title; 		// 학습지이름
+		public String oneday; 		// 하루분량
+		public String total; 		// 총분량
+		public String rest; 		// 남은량
+		public String section; 		// 종료일일
+		public String idx;      	// 종료일일
+		public String tdstart;      	// 종료일일
+		public String tddate;      	// 종료일일
+		public String tdenddate;      	// 종료일일
 
-		public String getThdate() {
-			return thdate;
+		public String getSubject() {
+			return subject;
 		}
-		public void setThdate(String thdate) {
-			this.thdate = thdate;
+		public void setSubject(String subject) {
+			this.subject = subject;
 		}
-		public String getTop() {
-			return top;
-		}
-		public void setTop(String top) {
-			this.top = top;
-		}
-		public String getBottom() {
-			return bottom;
-		}
-		public void setBottom(String bottom) {
-			this.bottom = bottom;
-		}
-		public String getAver() {
-			return aver;
-		}
-		public void setAver(String aver) {
-			this.aver = aver;
-		}
-	}
-	public class SumData2 {
-		public String tbsubject; 		// 과목
-		public String tdend; 	    	// 종료여부
-		public String scount; 			// 주간 총 카운트
 
-		public String getTbsubject() {
-			return tbsubject;
+		public String getDetail() {
+			return detail;
 		}
-		public void setTbsubject(String tbsubject) {
-			this.tbsubject = tbsubject;
+		public void setDetail(String detail) {
+			this.detail = detail;
 		}
-		public String getTdend() {
-			return tdend;
+
+		public String getTitle() {
+			return title;
 		}
-		public void setTdend(String tdend) {
-			this.tdend = tdend;
+		public void setTitle(String title) {
+			this.title = title;
 		}
-		public String getScount() {
-			return scount;
-		}
-		public void setScount(String scount) {
-			this.scount = scount;
-		}
+
+        public String getOneday() {
+            return oneday;
+        }
+        public void setOneday(String oneday) {
+            this.oneday = oneday;
+        }
+
+        public String getTotal() {
+            return total;
+        }
+        public void setTotal(String total) {
+            this.total = total;
+        }
+
+        public String getRest() {
+            return rest;
+        }
+        public void setRest(String rest) {
+            this.rest = rest;
+        }
+
+        public String getSection() {
+            return section;
+        }
+        public void setSection(String section) {
+            this.section = section;
+        }
+
+        public String getIdx() {
+            return idx;
+        }
+        public void setIdx(String idx) {
+            this.idx = idx;
+        }
+
+        public String getTdstart() {
+            return tdstart;
+        }
+        public void setTdstart(String tdstart) {
+            this.tdstart = tdstart;
+        }
+
+        public String getTddate() {
+            return tddate;
+        }
+        public void setTddate(String tddate) {
+            this.tddate = tddate;
+        }
+
+        public String getTdenddate() {
+            return tdenddate;
+        }
+        public void setTdenddate(String tdenddate) {
+            this.tdenddate = tdenddate;
+        }
 	}
+
 
 	public String getApi() {
 		return api;
 	}
+
 	public void setApi(String api) {
 		this.api = api;
 	}
+
 	public int getCnt() {
 		return cnt;
 	}
+
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public int getCn2() {
-		return cn2;
-	}
-	public void setCn2(int cn2) {
-		this.cn2 = cn2;
-	}
-	public ArrayList<SumData> getMsg() {
+
+	public ArrayList<TodoEndListData> getMsg() {
 		return msg;
 	}
-	public void setMsg(ArrayList<SumData> msg) {
+
+	public void setMsg(ArrayList<TodoEndListData> msg) {
 		this.msg = msg;
-	}
-	public ArrayList<SumData2> getSub() {
-		return sub;
-	}
-	public void setSub(ArrayList<SumData2> sub) {
-		this.sub = sub;
 	}
 }
 

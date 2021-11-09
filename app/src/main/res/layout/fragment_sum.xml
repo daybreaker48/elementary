@@ -79,9 +79,54 @@
         android:orientation="vertical">
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barChart"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="260dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/pieChartBlank"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/main_font"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/font_16"
+            android:text="주간 학습정보가 존재하지 않습니다."/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_area_end"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/length_55"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recv_endtodo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:scrollbars="vertical">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -109,6 +154,6 @@
             android:textColor="@color/gray"
             android:layout_marginBottom="@dimen/length_100"
             android:textSize="@dimen/font_16"
-            android:text="리포트 정보가 존재하지 않습니다."/>
+            android:text="완료된 학습 정보가 없습니다."/>
     </LinearLayout>
 </LinearLayout>

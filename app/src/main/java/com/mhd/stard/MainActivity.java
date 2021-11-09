@@ -137,6 +137,8 @@ public class MainActivity extends BaseActivity {
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 리포트 조회
                 ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).noData(nvApi);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_end))){ // 완료학습 조회
+                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).noData(nvApi);
             }else {
                 // 그게 아니라면 Just show nvMsg
                 MHDDialogUtil.sAlert(mContext, nvMsg);
@@ -165,14 +167,18 @@ public class MainActivity extends BaseActivity {
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_todo_check))){
                 // TodoFragment 개별 item update.
-                // 최종 완료 아이템이 있다면 재조회해서 빠지게 하는 것이 맞긴하다.
-                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
+                // 최종 완료 아이템이 있다면 재조회해서 빠지게 하기 위해서 처음에는 다시 조회하게 했으나, 안빠지는게 맞는거 같아서 취소
+//                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
 //                callFragmentMethod(0);
 //                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).networkResponseProcess_update(nvMsg, nvCnt, nvJsonDataString);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_sum))){ // 리포트
-                // SelfFragment 개별 item update.
+                // 통계 조회
 //                callFragmentMethod(0);
-                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess(nvMsg, nvCnt, nvJsonDataString);
+                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess(nvMsg, nvCnt, nvMsg2, nvCnt2, nvJsonDataString);
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_end))){
+                // 완료된 학습
+//                callFragmentMethod(0);
+                ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess_end(nvMsg, nvCnt, nvJsonDataString);
             }
 
         }
@@ -330,6 +336,8 @@ public class MainActivity extends BaseActivity {
             ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).showPMenu();
         if(position == 2)
             ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).showPMenu();
+        if(position == 3)
+            ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).showPMenu();
     }
 
 }
