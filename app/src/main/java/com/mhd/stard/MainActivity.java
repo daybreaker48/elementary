@@ -175,10 +175,12 @@ public class MainActivity extends BaseActivity {
                 // 통계 조회
 //                callFragmentMethod(0);
                 ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess(nvMsg, nvCnt, nvMsg2, nvCnt2, nvJsonDataString);
-            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_end))){
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_end))) {
                 // 완료된 학습
 //                callFragmentMethod(0);
                 ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess_end(nvMsg, nvCnt, nvJsonDataString);
+            }else if(nvApi.equals(R.string.restapi_delete_todo)) {
+                ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
             }
 
         }

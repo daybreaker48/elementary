@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mhd.stard.MainActivity;
 import com.mhd.stard.R;
+import com.mhd.stard.activity.ModifyTodoActivity;
 import com.mhd.stard.adapter.ReCyclerAdapter;
 import com.mhd.stard.common.MHDApplication;
 import com.mhd.stard.common.vo.KidsVo;
@@ -47,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TodoFragment extends BaseFragment {
+public class TodoFragment extends BaseFragment implements MenuDialogFragment.MenuDialogListener {
     private RecyclerView recyclerView;
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -70,6 +72,83 @@ public class TodoFragment extends BaseFragment {
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_todo;
+    }
+
+    @Override
+    public void onDialogItemSelected(int which, int position) {
+        // User touched the dialog's positive button
+        switch (which) {
+            case 0: //수정
+                if(checkToday(displayDays))
+                    ((MainActivity)getActivity()).startTodoModify(position);
+                else
+                    Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
+
+                break;
+            case 1: //삭제
+                MHDDialogUtil.sAlert(mContext, R.string.confirm_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        TodoVo todoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
+                        deleteTodo(todoVo.getMsg().get(position).getIdx());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                break;
+            case 2: // 강제 최종완료
+                TodoVo todoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
+
+//                tmpYN = "Y";
+//                // 최종 완료가 되는거라면.
+//                MHDDialogUtil.sAlert(context, R.string.confirm_end, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // UI처리
+//                        chkBox(isChecked);
+//                        // data. 즉 현재의 SelfData 값을 변경시킨다.(동기화)
+//                        String tmpChk = isChecked == true ? "Y" : "N";
+//                        data.setComplete(tmpChk);
+//
+//                        if(isChecked) { // 오늘 학습 완료
+//                            // 총페이지가 있건 없건 학습량은 계속 + 해 나간다.
+//                            data.setRest(String.valueOf(Integer.parseInt(data.getRest()) + Integer.parseInt(data.getDaily())));
+//                        } else {
+//                            // 총페이지가 있건 없건 학습량은 계속 - 해 나간다. 사용자가 이 정보를 볼 일은 없다.
+//                            data.setRest(String.valueOf(Integer.parseInt(data.getRest()) - Integer.parseInt(data.getDaily())));
+//                        }
+//                        int rest = Integer.parseInt(data.getRest());
+//                        int toto = Integer.parseInt(data.getTotal());
+//                        int oned = Integer.parseInt(data.getDaily());
+//                        if(toto > 0) { // 총페이지가 입력되어 있을 때. 누적학습량과 총 페이지를 보여준다.
+//                            if (rest >= toto) { // 최종 완료. 사용자에게 보여줄 때는 학습량과 총량을 맞춘다.
+//                                changeRest(data.getDaily() + " page ( " + toto + " / " + toto + " ) 최종 완료!!");
+//                                updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate, data.getKid(), dataCount);
+//                            } else {
+//                                changeRest(data.getDaily() + " page ( " + rest + " / " + toto + " )");
+//                                updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
+//                            }
+//                        } else {
+//                            // 총페이지가 업을 때는 누적학습량을 보여줘야 하는가? 계산은 이미 했으니 db에 보내야지.UI는 취소선 처리
+//                            updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
+//                        }
+//                        return;
+//                    }
+//                }, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        tmpYN = "N";
+//                        buttonView.setChecked(false);
+//                        return;
+//                    }
+//                });
+
+                break;
+        }
     }
 
     @Override
@@ -238,13 +317,17 @@ public class TodoFragment extends BaseFragment {
                     Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-//        adapter.setOnItemLongClickListener(new ReCyclerAdapter.OnItemLongClickListener() {
-//            @Override
-//            public void onItemLongClick(View v, int position) {
-//                // 완료 메뉴를 띄운다.
-//
-//            }
-//        });
+        adapter.setOnItemLongClickListener(new ReCyclerAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View v, int position) {
+                // 완료 메뉴를 띄운다.
+                Bundle args = new Bundle();
+                args.putInt("position", position);
+                DialogFragment newFragment = new MenuDialogFragment();
+                newFragment.setArguments(args);
+                newFragment.show(getChildFragmentManager(), "Dialog");
+            }
+        });
 
         queryTodo();
     }
@@ -561,6 +644,21 @@ public class TodoFragment extends BaseFragment {
             return false;
         } else {
             return false;
+        }
+    }
+
+
+    private void deleteTodo(String sIndex){
+        // db index 값 받아서 넘기면서 바로 삭제 처리
+        try {
+            Map<String, String> params = new HashMap<String, String>();
+            //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+            params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("IDX", sIndex);
+
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_delete_todo, params, ((MainActivity)getActivity()).responseListener);
+        } catch (Exception e) {
+            MHDLog.printException(e);
         }
     }
 }
