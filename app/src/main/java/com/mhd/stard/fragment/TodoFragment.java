@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class TodoFragment extends BaseFragment implements MenuDialogFragment.MenuDialogListener {
+public class TodoFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private ReCyclerAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -59,6 +59,7 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
     int displayKidPosition = 0;
     int weekd = 1;
     String displayDays = "";
+    public String tmpYN = "";
 
     LinearLayout btn_past_3, btn_past_2, btn_past_1, btn_todoy, btn_next_1, btn_next_2, btn_next_3, ll_area_days, tv_no_data;
     TextView tv_past_3_day, tv_past_2_day, tv_past_1_day, tv_today_day, tv_next_1_day, tv_next_2_day, tv_next_3_day;
@@ -74,12 +75,10 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
         return R.layout.fragment_todo;
     }
 
-    @Override
-    public void onDialogItemSelected(int which, int position) {
-        // User touched the dialog's positive button
+    public void onDialogResult(int which, int position){
         switch (which) {
             case 0: //수정
-                if(checkToday(displayDays))
+                if(!checkPast(displayDays))
                     ((MainActivity)getActivity()).startTodoModify(position);
                 else
                     Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -101,51 +100,32 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
 
                 break;
             case 2: // 강제 최종완료
-                TodoVo todoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
+                if(checkFuture(displayDays)){
+                    Toast.makeText(mContext, "미래의 항목은 완료처리 할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }else {
+                    TodoVo todoVo = MHDApplication.getInstance().getMHDSvcManager().getTodoVo();
 
-//                tmpYN = "Y";
-//                // 최종 완료가 되는거라면.
-//                MHDDialogUtil.sAlert(context, R.string.confirm_end, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // UI처리
-//                        chkBox(isChecked);
-//                        // data. 즉 현재의 SelfData 값을 변경시킨다.(동기화)
-//                        String tmpChk = isChecked == true ? "Y" : "N";
-//                        data.setComplete(tmpChk);
-//
-//                        if(isChecked) { // 오늘 학습 완료
-//                            // 총페이지가 있건 없건 학습량은 계속 + 해 나간다.
-//                            data.setRest(String.valueOf(Integer.parseInt(data.getRest()) + Integer.parseInt(data.getDaily())));
-//                        } else {
-//                            // 총페이지가 있건 없건 학습량은 계속 - 해 나간다. 사용자가 이 정보를 볼 일은 없다.
-//                            data.setRest(String.valueOf(Integer.parseInt(data.getRest()) - Integer.parseInt(data.getDaily())));
-//                        }
-//                        int rest = Integer.parseInt(data.getRest());
-//                        int toto = Integer.parseInt(data.getTotal());
-//                        int oned = Integer.parseInt(data.getDaily());
-//                        if(toto > 0) { // 총페이지가 입력되어 있을 때. 누적학습량과 총 페이지를 보여준다.
-//                            if (rest >= toto) { // 최종 완료. 사용자에게 보여줄 때는 학습량과 총량을 맞춘다.
-//                                changeRest(data.getDaily() + " page ( " + toto + " / " + toto + " ) 최종 완료!!");
-//                                updateTodoItem(tmpIdx, tmpChk, rest, "Y", checkFuture(tdate), tdate, data.getKid(), dataCount);
-//                            } else {
-//                                changeRest(data.getDaily() + " page ( " + rest + " / " + toto + " )");
-//                                updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
-//                            }
-//                        } else {
-//                            // 총페이지가 업을 때는 누적학습량을 보여줘야 하는가? 계산은 이미 했으니 db에 보내야지.UI는 취소선 처리
-//                            updateTodoItem(tmpIdx, tmpChk, rest, "N", checkFuture(tdate), tdate, data.getKid(), dataCount);
-//                        }
-//                        return;
-//                    }
-//                }, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        tmpYN = "N";
-//                        buttonView.setChecked(false);
-//                        return;
-//                    }
-//                });
+                    if ("N".equals(tmpYN)) {
+                        // 이 경우는 최종 완료에서 취소한 경우 밖에 없다. 그런 경우는 다시 리스너로 들어와도 그냥 처리 없이 나가야 한다.
+                        tmpYN = "Y";
+                        return;
+                    }
+                    // 최종 완료가 되는거라면.
+                    MHDDialogUtil.sAlert(mContext, R.string.confirm_end, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            adapter.endTodoItem(position);
+
+                            return;
+                        }
+                    }, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            tmpYN = "N";
+                            return;
+                        }
+                    });
+                }
 
                 break;
         }
@@ -311,7 +291,7 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
                 // 해당 라인의 메뉴를 띄우려 했는데 이건 일단 보류. 안할 수도 있다.
                 // 클릭하면 바로 수정화면으로 넘기고, 거기에 삭제버튼을 만든다.
                 // 지난 데이타는 수정하지 못하게 한다.
-                if(checkToday(displayDays))
+                if(!checkPast(displayDays))
                     ((MainActivity)getActivity()).startTodoModify(position);
                 else
                     Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -409,9 +389,9 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
             params.put("TKNAME", displayKid);
             params.put("TDDATE", displayDays);
             params.put("TDWEEKD", String.valueOf(weekd));
-            //과거냐 아니냐를 보내는 것이 낫다. 과거라면 완료된 것도 가져온다.checkToday
-            params.put("TDPAST", checkToday(displayDays) ? "N" : "Y");
-//            MHDLog.d("dagian", "checkToday(displayDays) >>> " + checkToday(displayDays));
+            //과거냐 아니냐를 보내는 것이 낫다. 현재나 과거라면 완료된 것도 가져온다.checkFuture
+            params.put("TDPAST", checkFuture(displayDays) ? "N" : "Y");
+//            MHDLog.d("dagian", "checkFuture(displayDays) >>> " + checkFuture(displayDays));
 //            MHDLog.d("dagian", "TDWEEKD >>> " + String.valueOf(weekd));
 
             MHDNetworkInvoker.getInstance().sendVolleyRequest(((MainActivity)getActivity()), R.string.url_restapi_query_todo, params, ((MainActivity)getActivity()).responseListener);
@@ -624,7 +604,7 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
         });
     }
 
-    public boolean checkToday(String rdate) {
+    public boolean checkFuture(String rdate) {
         Calendar cal = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String tdate = df.format(cal.getTime());
@@ -642,6 +622,28 @@ public class TodoFragment extends BaseFragment implements MenuDialogFragment.Men
             return true;
         } else if (compare < 0) { // 과거
             return false;
+        } else {
+            return false;
+        }
+    }
+    public boolean checkPast(String rdate) {
+        Calendar cal = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String tdate = df.format(cal.getTime());
+        Date rdate_d = null;
+        Date tdate_d = null;
+        try {
+            rdate_d = df.parse(rdate);
+            tdate_d = df.parse(tdate);
+        } catch(ParseException e) {
+            e.printStackTrace();
+        }
+
+        int compare = rdate_d.compareTo(tdate_d);
+        if (compare > 0) { // 미래
+            return false;
+        } else if (compare < 0) { // 과거
+            return true;
         } else {
             return false;
         }

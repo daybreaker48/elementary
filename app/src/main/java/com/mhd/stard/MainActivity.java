@@ -2,6 +2,7 @@ package com.mhd.stard;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.activity.result.ActivityResult;
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mhd.stard.activity.BaseActivity;
 import com.mhd.stard.activity.ModifyKidsActivity;
@@ -26,7 +28,9 @@ import com.mhd.stard.activity.RegistSelfActivity;
 import com.mhd.stard.activity.RegistTodoActivity;
 import com.mhd.stard.adapter.MenuPagerAdapter;
 import com.mhd.stard.common.MHDApplication;
+import com.mhd.stard.common.vo.TodoVo;
 import com.mhd.stard.constant.MHDConstants;
+import com.mhd.stard.fragment.MenuDialogFragment;
 import com.mhd.stard.fragment.ScheduleFragment;
 import com.mhd.stard.fragment.SelfFragment;
 import com.mhd.stard.fragment.SettingFragment;
@@ -36,11 +40,16 @@ import com.mhd.stard.util.MHDDialogUtil;
 import com.mhd.stard.util.MHDLog;
 import com.mhd.stard.view.GlobalTabsView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MenuDialogFragment.MenuDialogListener {
 
     public ViewPager2 viewPager2;
     public MenuPagerAdapter adapter;
     public static Context context_main;
+
+    @Override
+    public void onDialogItemSelected(int which, int position) {
+        ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).onDialogResult(which, position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +188,7 @@ public class MainActivity extends BaseActivity {
                 // 완료된 학습
 //                callFragmentMethod(0);
                 ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess_end(nvMsg, nvCnt, nvJsonDataString);
-            }else if(nvApi.equals(R.string.restapi_delete_todo)) {
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_delete_todo))) {
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
             }
 

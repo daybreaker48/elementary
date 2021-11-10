@@ -166,7 +166,7 @@ public class SumFragment extends BaseFragment {
             public void onItemClick(View v, int position) {
                 // position을 가지고 라인을 알아낸 다음에
                 // 아이템 클릭 이벤트를 건다. 현재로서는 기능 걸지 않는다.
-//                if(checkToday(displayDays))
+//                if(checkFuture(displayDays))
 //                    ((MainActivity)getActivity()).startTodoModify(position);
 //                else
 //                    Toast.makeText(mContext, "지난 내역은 수정할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -176,7 +176,6 @@ public class SumFragment extends BaseFragment {
 //        initChart();
         Calendar cal = Calendar.getInstance();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        cal.add(Calendar.DATE, -7); // 현재 주 월요일로 셋팅.
         cal.set(Calendar.DAY_OF_WEEK, 1); // 현재 주 일요일로 셋팅. 한 주의 시작.
         startDate = df.format(cal.getTime());
         cal.add(Calendar.DATE, 1); // 현재 주 월요일로 셋팅.
@@ -430,6 +429,7 @@ public class SumFragment extends BaseFragment {
         }
         barChart.getAxisLeft().setSpaceTop((100-max)/max*100); // 최대치 100% 를 만들기 위해.
         barChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        barChart.setExtraBottomOffset(10);
 
         //// bar 클릭 시 상단에 marker 표시.
         XYMarkerView mv = new XYMarkerView(mContext, indexAxisValueFormatter);
@@ -441,10 +441,9 @@ public class SumFragment extends BaseFragment {
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         BarData data = new BarData(dataSet);
         data.setBarWidth(0.7f);
-
-        barChart.invalidate();
         barChart.setData(data);
-        barChart.animateY(800);
+        barChart.animateY(800, Easing.EaseInOutQuad);
+        barChart.invalidate();
     }
 
     private void setupPieChart() {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -121,6 +122,25 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
         return arr_section;
     }
 
+    public void endTodoItem(int position){
+        // UI처리 listData.get(position)
+        String cuEnd = listData.get(position).getEnd(); // 현재 완료 상태인가.
+        if("Y".equals(cuEnd)){
+            Toast.makeText(context, "현재 최종완료된 상태입니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        listData.get(position).setComplete("Y");
+        listData.get(position).setEnd("Y");
+        String cuTotal = listData.get(position).getTotal();
+        if(!"0".equals(cuTotal)){ // 총페이지가 입력되어 있다면 누적량을 맞추고, 입력 안되어 있으면 pass
+            listData.get(position).setRest(listData.get(position).getTotal());
+        }
+
+        updateTodoItem(listData.get(position).getIdx(), "Y", Integer.parseInt(listData.get(position).getRest()), "Y", checkFuture(queryDays), queryDays, listData.get(position).getKid(), dataCount);
+//        notifyDataSetChanged();
+        notifyItemChanged(position);
+    }
+
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder{
         public TextView tvDetail, tvDaily, tvSection;
         public TextView tv_todo_title_holder;
@@ -158,7 +178,7 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                     if (pos != RecyclerView.NO_POSITION) {
                         // 리스너 객체의 메서드 호출.
                         if (mLongListener != null) {
-                            mLongListener.onItemLongClick(v, pos) ;
+                            mLongListener.onItemLongClick(v, pos);
                         }
                     }
 
@@ -178,16 +198,22 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
             this.tvSection.setVisibility(Integer.parseInt(data.getSection()));
             this.tvDetail.setText(data.getDetail());
             if(Integer.parseInt(data.getTotal()) > 0) {
-                if(Integer.parseInt(data.getRest()) > Integer.parseInt(data.getTotal()))
-                    this.tvDaily.setText(data.getDaily() + " page ( " + data.getTotal() + " / " + data.getTotal() + " )");
+                if(Integer.parseInt(data.getRest()) >= Integer.parseInt(data.getTotal()))
+                    this.tvDaily.setText(data.getDaily() + " page ( " + data.getTotal() + " / " + data.getTotal() + " ) 최종 완료!!");
                 else
                     this.tvDaily.setText(data.getDaily() + " page ( " + data.getRest() + " / " + data.getTotal() + " )");
+
+                if("Y".equals(data.getEnd()))
+                    this.tvDaily.setText(data.getDaily() + " page ( " + data.getTotal() + " / " + data.getTotal() + " ) 최종 완료!!");
             }else {
-                this.tvDaily.setText(data.getDaily() + " page");
+                if("Y".equals(data.getEnd()))
+                    this.tvDaily.setText(data.getDaily() + " page 최종 완료!!");
+                else
+                    this.tvDaily.setText(data.getDaily() + " page");
             }
             this.tv_todo_title_holder.setText(data.getTitle());
             this.cbTodoComplete.setOnCheckedChangeListener(null);
-            // 과거나 현재의의 데이타라면 그 날짜의 로그를 체크한다.
+            // 과거나 현재의 데이타라면 그 날짜의 로그를 체크한다.
             if(checkFuture(tdate) < 2) {
                 String tmp = data.getTdpc();
                 if ("0".equals(data.getTdpc())) { // 로그가 없다는 것.
@@ -195,6 +221,14 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
                     this.tvDaily.setPaintFlags(this.tvDaily.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     this.tv_todo_title_holder.setPaintFlags(this.tv_todo_title_holder.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                 } else { // 해당날짜 완료로그가 있다는 것. 이 경우는 체크해제를 못하도록 막아야하지 않을까...?
+                    this.cbTodoComplete.setChecked(true);
+                    this.tvDaily.setPaintFlags(this.tvDaily.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    this.tv_todo_title_holder.setPaintFlags(this.tv_todo_title_holder.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+
+                if("Y".equals(data.getEnd())){
+                    //// 목록에서 롱클릭으로 최종완료처리하는 경우. 이 경우는 즉석에서 UI 갱신해야 하기 때문에
+                    //// getEnd 값에 따라 추가로 처리
                     this.cbTodoComplete.setChecked(true);
                     this.tvDaily.setPaintFlags(this.tvDaily.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     this.tv_todo_title_holder.setPaintFlags(this.tv_todo_title_holder.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
