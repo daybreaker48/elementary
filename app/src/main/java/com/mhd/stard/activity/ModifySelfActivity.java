@@ -86,7 +86,7 @@ public class ModifySelfActivity extends BaseActivity {
         MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
         String displayKid = "";
         for(int k=0; k<menuVo.getMsg().size(); k++){
-            if("TO".equals(menuVo.getMsg().get(k).getMenuname())){
+            if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
                 // 해당메뉴에 설정된 아이정보
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }

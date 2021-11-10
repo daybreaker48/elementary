@@ -49,12 +49,11 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="8.5"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="9"
                 android:layout_gravity="bottom"
                 android:gravity="bottom|center_horizontal"
                 android:fontFamily="@font/main_font_bold"
@@ -65,7 +64,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_weight="9"
                 android:layout_gravity="top"
                 android:gravity="top|center_horizontal"
                 android:fontFamily="@font/main_font"
@@ -74,17 +72,19 @@
                 android:textSize="@dimen/font_15"
                 android:text="@string/content_self_title2"/>
         </LinearLayout>
+
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.5"
             android:fontFamily="@font/main_font"
+            android:gravity="center"
             android:includeFontPadding="false"
-            android:textColor="@color/main_theme"
-            android:textSize="@dimen/font_16"
             android:text="@string/content_self_check"
-            android:layout_marginRight="10dp"/>
+            android:textColor="@color/main_theme"
+            android:textSize="@dimen/font_16" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

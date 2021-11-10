@@ -205,7 +205,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     /**
-     * 외부 라이브러리 초기 체크를 할것인지 여부 default true
+     * 외부 라이브러리 초기 체크를 할것인지 여부 default TRUE
      * 필요없을시 override 해서 false 를 return 할것.
      */
     protected boolean isEssentialCheckNeeded() {

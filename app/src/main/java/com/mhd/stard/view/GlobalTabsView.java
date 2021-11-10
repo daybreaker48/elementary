@@ -364,14 +364,14 @@ public class GlobalTabsView extends FrameLayout {
     private void moveViewsFiveMenu(float fractionFromCenter, int position, int startPosition) {
 //        mIndicator.setAlpha(fractionFromCenter);
 //        mIndicator.setScaleX(fractionFromCenter);
-        MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + fractionFromCenter + "/"+ position+"/"+ startPosition);
+//        MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + fractionFromCenter + "/"+ position+"/"+ startPosition);
         if(currentposition == 99) currentposition = position;
         if(currentposition == position) {
             mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
-            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+//            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
         } else if (fractionFromCenter == 0) {
             mIndicator.setTranslationX((fractionFromCenter + position - 2) * mIndicatorTranslationX);
-            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
+//            MHDLog.d("dagian", "currentposition >>>>>>>>>>>>>> " + position);
         } else {
             currentposition = position;
         }

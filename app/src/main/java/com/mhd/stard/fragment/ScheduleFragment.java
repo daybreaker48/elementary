@@ -515,8 +515,24 @@ public class ScheduleFragment extends BaseFragment {
 //         myLinearLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.bottom_border));
 
          titleText = new TextView(getContext());
-         titleText.setText(scheduleVo.getMsg().get(k).getSubject());
+         String cellString = scheduleVo.getMsg().get(k).getSubject();
+         if(cellString.length() == 4)
+             titleText.setText(cellString.substring(0,2) + "\n" + cellString.substring(2,4));
+         else
+             titleText.setText(scheduleVo.getMsg().get(k).getSubject());
+
          titleText.setTextSize(12);
+         if(cellString.length() >= 4) {
+             titleText.setTextSize(11);
+         }
+         titleText.setLineSpacing(0.2f, 0.8f);
+
+         if(gap <= 2)
+             titleText.setPadding(0, 6, 0, 0);
+         else
+             titleText.setPadding(0, 10, 0, 0);
+
+
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
              Typeface typeface = getResources().getFont(R.font.main_font);
              titleText.setTypeface(typeface);
@@ -526,7 +542,7 @@ public class ScheduleFragment extends BaseFragment {
          }
          titleText.setIncludeFontPadding(false);
          titleText.setTextColor(Color.WHITE);
-         titleText.setGravity(Gravity.CENTER);
+         titleText.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
 //         LayerDrawable bottomBorder = getBorders(Color.parseColor(scheduleVo.getMsg().get(k).getColor()), Color.GRAY, 0, 0, 0, 0);
 //         titleText.setBackground(bottomBorder);
          GradientDrawable shape2 =  new GradientDrawable();

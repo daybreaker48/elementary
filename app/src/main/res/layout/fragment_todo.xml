@@ -70,7 +70,7 @@
                 android:fontFamily="@font/main_font_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
-                android:paddingTop="2dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/past_month"
                 android:text=""
                 android:textSize="16sp" />
@@ -94,6 +94,7 @@
                 android:fontFamily="@font/main_font_bold"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/next_month"
                 android:text=""
                 android:textSize="16sp" />

@@ -18,7 +18,7 @@
             android:id="@+id/tv_self_item_holder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="8.5"
             android:layout_gravity="center_vertical"
             android:paddingLeft="@dimen/length_10"
             android:gravity="left"
@@ -31,9 +31,9 @@
             android:id="@+id/cb_self_complete_holder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp"/>
+            android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

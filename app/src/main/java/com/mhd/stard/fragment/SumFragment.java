@@ -67,7 +67,7 @@ public class SumFragment extends BaseFragment {
     private ReCyclerEndAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title, pieChartBlank;
+    TextView vst_top_title, pieChartBlank, tv_area_week_past, tv_area_week_move, tv_area_week_next, tv_area_thisweek;
     LinearLayout tv_no_data, ll_area_sum, ll_area_end;
     BarChart barChart;
     PieChart pieChart;
@@ -101,6 +101,28 @@ public class SumFragment extends BaseFragment {
         ll_area_end = (LinearLayout) root.findViewById(R.id.ll_area_end);
         pieChartBlank = (TextView) root.findViewById(R.id.pieChartBlank);
         vst_top_title = (TextView) root.findViewById(R.id.vst_top_title);
+        tv_area_thisweek = (TextView) root.findViewById(R.id.tv_area_thisweek);
+        tv_area_thisweek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeek("", 0);
+            }
+        });
+        tv_area_week_past = (TextView) root.findViewById(R.id.tv_area_week_past);
+        tv_area_week_past.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeek(startDate, -7);
+            }
+        });
+        tv_area_week_move = (TextView) root.findViewById(R.id.tv_area_week_move);
+        tv_area_week_next = (TextView) root.findViewById(R.id.tv_area_week_next);
+        tv_area_week_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setWeek(startDate, 7);
+            }
+        });
         barChart = (BarChart) root.findViewById(R.id.barChart);
         pieChart = (PieChart) root.findViewById(R.id.pieChart);
 
@@ -142,7 +164,7 @@ public class SumFragment extends BaseFragment {
             kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
         }
         for(int k=0; k<menuVo.getMsg().size(); k++){
-            if("TO".equals(menuVo.getMsg().get(k).getMenuname())){
+            if("SU".equals(menuVo.getMsg().get(k).getMenuname())){
                 // 해당메뉴에 설정된 아이정보
                 displayKid = menuVo.getMsg().get(k).getKidname();
                 displayKidPosition = 0;
@@ -174,22 +196,53 @@ public class SumFragment extends BaseFragment {
         }) ;
 
 //        initChart();
+        setWeek(startDate, 0);
+    }
+
+    private void setWeek(String sdate, int path) { // sdate는 매번 일요일
         Calendar cal = Calendar.getInstance();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        cal.set(Calendar.DAY_OF_WEEK, 1); // 현재 주 일요일로 셋팅. 한 주의 시작.
-        startDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 월요일로 셋팅.
-        twoDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 화요일로 셋팅.
-        threeDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 수요일로 셋팅.
-        fourDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 목요일로 셋팅.
-        fiveDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 금요일로 셋팅.
-        sixDate = df.format(cal.getTime());
-        cal.add(Calendar.DATE, 1); // 현재 주 토요일로 셋팅. 한 주의 끝.
-        endDate = df.format(cal.getTime());
+        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+
+        if("".equals(sdate)) {
+            cal.set(Calendar.DAY_OF_WEEK, 1); // 현재 주 일요일로 셋팅. 한 주의 시작.
+            startDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 월요일로 셋팅.
+            twoDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 화요일로 셋팅.
+            threeDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 수요일로 셋팅.
+            fourDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 목요일로 셋팅.
+            fiveDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 금요일로 셋팅.
+            sixDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 토요일로 셋팅. 한 주의 끝.
+            endDate = df.format(cal.getTime());
+        }else{
+            cal.set(Calendar.YEAR, Integer.parseInt(sdate.substring(0, 4)));
+            cal.set(Calendar.MONTH, Integer.parseInt(sdate.substring(5, 7))-1);
+            cal.set(Calendar.DATE, Integer.parseInt(sdate.substring(8, 10)));
+            cal.set(Calendar.HOUR, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+
+            cal.add(Calendar.DATE, path);
+            startDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 월요일로 셋팅.
+            twoDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 화요일로 셋팅.
+            threeDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 수요일로 셋팅.
+            fourDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 목요일로 셋팅.
+            fiveDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 금요일로 셋팅.
+            sixDate = df.format(cal.getTime());
+            cal.add(Calendar.DATE, 1); // 현재 주 토요일로 셋팅. 한 주의 끝.
+            endDate = df.format(cal.getTime());
+        }
+
+        tv_area_week_move.setText(startDate + " ~ " + endDate);
 
         querySum(startDate, endDate);
     }
@@ -442,7 +495,7 @@ public class SumFragment extends BaseFragment {
         BarData data = new BarData(dataSet);
         data.setBarWidth(0.7f);
         barChart.setData(data);
-        barChart.animateY(800, Easing.EaseInOutQuad);
+        barChart.animateY(600, Easing.EaseInOutQuad);
         barChart.invalidate();
     }
 
@@ -512,7 +565,7 @@ public class SumFragment extends BaseFragment {
             pieData.setValueTextColor(R.color.black_overlay);
 
             pieChart.setData(pieData);
-            pieChart.animateY(800, Easing.EaseInOutQuad);
+            pieChart.animateY(600, Easing.EaseInOutQuad);
             pieChart.invalidate();
         }
     }
@@ -560,7 +613,7 @@ public class SumFragment extends BaseFragment {
             // MenuVo 정보를 갱신
             MenuVo menuVo = MHDApplication.getInstance().getMHDSvcManager().getMenuVo();
             for(int k=0; k<menuVo.getMsg().size(); k++){
-                if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
+                if("SU".equals(menuVo.getMsg().get(k).getMenuname())){
                     // 해당메뉴에 설정된 아이정보
                     menuVo.getMsg().get(k).setKidname(displayKid);
                     if(ll_area_sum.getVisibility() == View.VISIBLE)

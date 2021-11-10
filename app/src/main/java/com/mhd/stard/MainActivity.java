@@ -135,10 +135,13 @@ public class MainActivity extends BaseActivity implements MenuDialogFragment.Men
             // fragment에서 호출된거라면 우선 데이타가 없다는 것으로 간주.
             // 그런 경우라면 없다고 화면에 띄우기 위해 fragment 내 함수 호출해서 화면 표시
             if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_todo))){ // 학습
+                MHDApplication.getInstance().getMHDSvcManager().setTodoVo(null);
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_schedule))){ // 스케쥴
+                MHDApplication.getInstance().getMHDSvcManager().setScheduleVo(null);
                 ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag("f1")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_query_self))){ // 습관
+                MHDApplication.getInstance().getMHDSvcManager().setSelfVo(null);
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_update_self))){ // 습관 완료
                 ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).noData(nvApi);
