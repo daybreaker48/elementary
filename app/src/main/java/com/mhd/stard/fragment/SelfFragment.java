@@ -33,6 +33,8 @@ import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +46,12 @@ public class SelfFragment extends BaseFragment {
     private ReCyclerSelfAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title;
+    TextView vst_top_title, tv_self_percent;
     LinearLayout tv_no_data;
     String displayKid = "";
     int displayKidPosition = 0;
+    int checkCount = 0;
+    int totalCount = 0;
 
     public static SelfFragment create() {
         return new SelfFragment();
@@ -75,6 +79,7 @@ public class SelfFragment extends BaseFragment {
         for(int k=0; k<kidsVo.getCnt(); k++){
             kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
         }
+        tv_self_percent = (TextView) root.findViewById(R.id.tv_self_percent);
         vst_top_title = (TextView) root.findViewById(R.id.vst_top_title);
         for(int k=0; k<menuVo.getMsg().size(); k++){
             if("SE".equals(menuVo.getMsg().get(k).getMenuname())){
@@ -260,16 +265,24 @@ public class SelfFragment extends BaseFragment {
             MHDApplication.getInstance().getMHDSvcManager().setSelfVo(null);
             MHDApplication.getInstance().getMHDSvcManager().setSelfVo(selfVo);
         }
+
+        int cCount = 0;
         for(int i=0; i<nvCnt; i++){
             // 각 List의 값들을 data 객체에 set 해줍니다.
             SelfData data = new SelfData();
             data.setSelfIdx(selfVo.getMsg().get(i).getIdx());
             data.setSelfItem(selfVo.getMsg().get(i).getTbtitle());
             data.setSelfComplete(selfVo.getMsg().get(i).getSfcomplete());
+            if("Y".equals(selfVo.getMsg().get(i).getSfcomplete())){
+                cCount++;
+            }
 
             // 각 값이 들어간 data를 adapter에 추가합니다.
             adapter.addItem(data);
         }
+        checkCount = cCount;
+        totalCount = nvCnt;
+        calcComplete(cCount, totalCount, false);
 
         // adapter의 값이 변경되었다는 것을 알려줍니다.
         adapter.notifyDataSetChanged();
@@ -277,18 +290,39 @@ public class SelfFragment extends BaseFragment {
         return true;
     }
     public boolean networkResponseProcess_update(String nvMsg, int nvCnt, String result) {
-        if (nvCnt == 0) {
-            // 정보가 없으면 비정상. update 실패.
-            Toast.makeText(mContext, "fail", Toast.LENGTH_SHORT).show();
-        } else {// update 성공.
-            Toast.makeText(mContext, "success", Toast.LENGTH_SHORT).show();
+        String checkValue = "";
+        try{
+            JSONObject nvJsonObject = new JSONObject(result);
+            // 결과코드. 여기로 왔다는 건 M, S(Success) 라는 것.
+            String returnMsg = nvJsonObject.getString("msg");
+            JSONObject nvLastString = new JSONObject(returnMsg);
+            checkValue = nvLastString.getString("complete"); // 체크 여부
+
+        } catch (Exception e) {
+            MHDLog.printException(e);
+        } finally {
+            if("N".equals(checkValue)) { //달성율 -
+                checkCount--;
+                calcComplete(0, totalCount, false);
+            }else if("Y".equals(checkValue)) { //달성율 +
+                checkCount++;
+                calcComplete(0, totalCount, true);
+            }
         }
 
         return true;
     }
+    private void calcComplete(int cCount, int tCount, boolean checked){
+        if(cCount == 0){ // 리스트에서 실시간 업데이트
+            tv_self_percent.setText(Math.round((checkCount*100)/tCount) + "%\n달성");
+        }else{ // 최초 셋팅
+            tv_self_percent.setText(Math.round((cCount*100)/tCount) + "%\n달성");
+        }
+    }
 
     public void noData(String nvApiParam) {
         if(nvApiParam.equals(mContext.getString(R.string.restapi_query_self))) {
+            tv_self_percent.setText("0%\n달성");
             tv_no_data.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         }

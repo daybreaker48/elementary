@@ -27,13 +27,19 @@
             android:textColor="@color/gray"
             android:textSize="@dimen/font_14"
             android:text=""/>
-        <CheckBox
-            android:id="@+id/cb_self_complete_holder"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/cb_self_complete_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

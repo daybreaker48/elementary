@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class ScheduleFragment extends BaseFragment {
@@ -484,6 +485,10 @@ public class ScheduleFragment extends BaseFragment {
         return true;
     }
 
+    public static boolean getType(String word){
+        return Pattern.matches("^[가-힣]*$", word);
+    }
+
      private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout, int ii, int dd) {
          // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
          // 몇칸일지를 보기 위해 종료시간 계산. gap 만큼의 weight를 줄 것.
@@ -516,21 +521,21 @@ public class ScheduleFragment extends BaseFragment {
 
          titleText = new TextView(getContext());
          String cellString = scheduleVo.getMsg().get(k).getSubject();
-         if(cellString.length() == 4)
+         if(getType(cellString) && cellString.length() == 4)
              titleText.setText(cellString.substring(0,2) + "\n" + cellString.substring(2,4));
          else
              titleText.setText(scheduleVo.getMsg().get(k).getSubject());
 
          titleText.setTextSize(12);
-         if(cellString.length() >= 4) {
+         if(getType(cellString) && cellString.length() >= 4) {
              titleText.setTextSize(11);
          }
          titleText.setLineSpacing(0.2f, 0.8f);
 
          if(gap <= 2)
-             titleText.setPadding(0, 6, 0, 0);
+             titleText.setPadding(5, 6, 5, 0);
          else
-             titleText.setPadding(0, 10, 0, 0);
+             titleText.setPadding(5, 10, 5, 0);
 
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

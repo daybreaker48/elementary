@@ -25,6 +25,12 @@ import com.mhd.stard.common.vo.TodoVo;
 import com.mhd.stard.network.MHDNetworkInvoker;
 import com.mhd.stard.util.MHDDialogUtil;
 import com.mhd.stard.util.MHDLog;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.ArrowPositionRules;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.BalloonSizeSpec;
+import com.skydoves.balloon.OnBalloonClickListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,7 +41,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +52,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
     TextView tv_selectday, vst_top_title, tv_todo_subject, tv_todo_subject_detail, tv_todo_subject_2, tv_todo_subject_detail_2;
     TextView tv_rb_daily_progress_2_finishday, tv_startday;
     ImageView vst_right_image;
+    ImageView iv_help_todo;
     private String[] day_array = new String[7];
     String Ptotal, Poneday = "";
 
@@ -52,6 +62,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
     String pStart = "";
     String selectedSubject = "";
     String selectedDetail = "";
+    Balloon balloon = null;
     /* 수정 처리 */
     String dataIndex = "";
     /* 수정 처리 */
@@ -87,6 +98,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
         super.onCreate(savedInstanceState);
         initialize(R.layout.activity_todo_regist);
         mContext = ModifyTodoActivity.this;
+        LifecycleOwner lifecycleOwner = (LifecycleOwner) mContext;
 
         /* 수정 처리 */
         Intent intent = getIntent();
@@ -101,6 +113,7 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
         }
         /* 수정 처리 */
 
+        iv_help_todo = (ImageView) findViewById(R.id.iv_help_todo);
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
         btn_sun = (AppCompatButton) findViewById(R.id.btn_sun);
         btn_mon = (AppCompatButton) findViewById(R.id.btn_mon);
@@ -137,6 +150,43 @@ public class ModifyTodoActivity extends BaseActivity implements TextView.OnEdito
         btn_sat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { selectDay(6); }
+        });
+        OnBalloonClickListener onBalloonClickListener = new OnBalloonClickListener() {
+            @Override
+            public void onBalloonClick(@NonNull View view) {
+                if(balloon != null) balloon.dismiss();
+            }
+        };
+        iv_help_todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // 도움말을 띄워야 한다.
+                balloon = new Balloon.Builder(ModifyTodoActivity.this)
+                        .setArrowSize(10)
+                        .setArrowOrientation(ArrowOrientation.TOP)
+                        .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+                        .setArrowPosition(0.5f)
+                        .setWidth(BalloonSizeSpec.WRAP)
+                        .setHeight(65)
+                        .setTextSize(15f)
+                        .setCornerRadius(4f)
+                        .setAlpha(0.9f)
+                        .setPadding(6)
+                        .setHeight(BalloonSizeSpec.WRAP)
+                        .setText("학습지의 총페이지를 입력하면 예상 학습종료일이 자동으로 계산되어집니다.\n총페이지는 꼭 입력하지 않아도 됩니다.")
+                        .setTextColor(ContextCompat.getColor(ModifyTodoActivity.this, R.color.white))
+                        .setTextIsHtml(true)
+//                        .setIconDrawable(ContextCompat.getDrawable(RegistTodoActivity.this, R.drawable.help))
+                        .setBackgroundColor(ContextCompat.getColor(ModifyTodoActivity.this, R.color.light_blue))
+//                        .setOnBalloonClickListener(onBalloonClickListener)
+                        .setOnBalloonClickListener(onBalloonClickListener)
+                        .setBalloonAnimation(BalloonAnimation.FADE)
+                        .setLifecycleOwner(lifecycleOwner)
+                        .build();
+
+                balloon.showAlignBottom(v);
+            }
         });
 
         bottomSheetDetail = new BottomSheetDialog(this);

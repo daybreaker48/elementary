@@ -25,10 +25,10 @@ import java.util.Map;
 import androidx.appcompat.widget.AppCompatButton;
 
 public class ModifyKidsActivity extends BaseActivity {
-    TextView vst_top_title;
+    TextView vst_top_title, tv_kids_comment;
     EditText et_kids_name_1, et_kids_name_2, et_kids_name_3;
     EditText et_kids_age_1, et_kids_age_2, et_kids_age_3;
-    LinearLayout ll_regist_kids_2, ll_regist_kids_3, ll_kids_comment;
+    LinearLayout ll_regist_kids_2, ll_regist_kids_3;
     ImageView iv_kids_add_button, iv_kids_del_button_1, iv_kids_del_button_2;
     AppCompatButton btn_move_stat_left;
     /* 수정 처리 */
@@ -64,10 +64,10 @@ public class ModifyKidsActivity extends BaseActivity {
         });
         ll_regist_kids_2 = (LinearLayout) findViewById(R.id.ll_regist_kids_2);
         ll_regist_kids_3 = (LinearLayout) findViewById(R.id.ll_regist_kids_3);
-        ll_kids_comment = (LinearLayout) findViewById(R.id.ll_kids_comment);
+        tv_kids_comment = (TextView) findViewById(R.id.tv_kids_comment);
         iv_kids_add_button = (ImageView) findViewById(R.id.iv_kids_add_button);
         /* 수정 처리 */
-        ll_kids_comment.setVisibility(View.GONE);
+        tv_kids_comment.setText(R.string.content_kids_donotname);
         iv_kids_add_button.setVisibility(View.GONE);
         /* 수정 처리 */
         iv_kids_del_button_1 = (ImageView) findViewById(R.id.iv_kids_del_button_1);

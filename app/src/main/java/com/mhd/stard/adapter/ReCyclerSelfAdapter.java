@@ -126,6 +126,8 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
                     String tmpChk = isChecked == true ? "Y" : "N";
                     data.setSelfComplete(tmpChk);
                     updateSelfItem(tmpIdx, tmpChk);
+
+                    // 달성율 표시. 이것은 SelfFragment에서 해야할 일.
                 }
             });
         }
