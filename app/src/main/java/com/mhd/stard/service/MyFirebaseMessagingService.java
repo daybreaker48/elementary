@@ -109,6 +109,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private RemoteViews getCustomDesign(String title, String message) {
+        MHDLog.d(TAG, "dagian getCustomDesign");
         RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(), R.layout.noti);
         remoteViews.setTextViewText(R.id.noti_title, title);
         remoteViews.setTextViewText(R.id.noti_message, message);
@@ -118,6 +119,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     public void showNotification(String title, String message) {
         //팝업 터치시 이동할 액티비티를 지정합니다.
+        MHDLog.d(TAG, "dagian showNotification");
         Intent intent = new Intent(this, StartActivity.class);
         //알림 채널 아이디 : 본인 하고싶으신대로...
         String channel_id = "starD_ID";

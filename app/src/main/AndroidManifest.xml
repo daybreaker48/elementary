@@ -141,11 +141,11 @@
         </activity>
 
 
-        <service android:name="com.mhd.stard.service.FCMService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+<!--        <service android:name="com.mhd.stard.service.FCMService">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+<!--            </intent-filter>-->
+<!--        </service>-->
         <!--<service android:name="com.mhd.elemantary.service.MyFirebaseMessagingService">-->
             <!--<intent-filter>-->
                 <!--<action android:name="com.google.firebase.INSTANT_ID_EVENT"/>-->
