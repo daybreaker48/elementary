@@ -488,6 +488,9 @@ public class ScheduleFragment extends BaseFragment {
     public static boolean getType(String word){
         return Pattern.matches("^[가-힣]*$", word);
     }
+    public static boolean getTypeEng(String word){
+        return Pattern.matches("^[a-zA-Z]*$", word);
+    }
 
      private boolean drawCell(ScheduleVo scheduleVo, int k, LinearLayout mLinearLayout, int ii, int dd) {
          // 각 요일, 현재 index 시간과 vo 시간이 동일하다면 일단 그리는 것.
@@ -521,7 +524,7 @@ public class ScheduleFragment extends BaseFragment {
 
          titleText = new TextView(getContext());
          String cellString = scheduleVo.getMsg().get(k).getSubject();
-         if(getType(cellString) && cellString.length() == 4)
+         if(getType(cellString) && cellString.length() == 4) // 한글일때는 두글자씩 보여준다.
              titleText.setText(cellString.substring(0,2) + "\n" + cellString.substring(2,4));
          else
              titleText.setText(scheduleVo.getMsg().get(k).getSubject());
@@ -532,10 +535,13 @@ public class ScheduleFragment extends BaseFragment {
          }
          titleText.setLineSpacing(0.2f, 0.8f);
 
+         //// cell이 작을때의 처리. 영문일때만 좌우패딩을 준다.
+         int lrPadding = 1;
+         if(getTypeEng(cellString)) lrPadding = 4;
          if(gap <= 2)
-             titleText.setPadding(5, 6, 5, 0);
+             titleText.setPadding(lrPadding, 6, lrPadding, 0);
          else
-             titleText.setPadding(5, 10, 5, 0);
+             titleText.setPadding(lrPadding, 10, lrPadding, 0);
 
 
          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

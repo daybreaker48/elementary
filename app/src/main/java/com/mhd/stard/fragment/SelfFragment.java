@@ -32,6 +32,7 @@ import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
+import com.skydoves.progressview.ProgressView;
 
 import org.json.JSONObject;
 
@@ -46,12 +47,13 @@ public class SelfFragment extends BaseFragment {
     private ReCyclerSelfAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     PowerMenu powerMenu = null;
-    TextView vst_top_title, tv_self_percent;
+    TextView vst_top_title, tv_self_percent, tv_tcount, tv_fcount;
     LinearLayout tv_no_data;
     String displayKid = "";
     int displayKidPosition = 0;
     int checkCount = 0;
     int totalCount = 0;
+    ProgressView progressView;
 
     public static SelfFragment create() {
         return new SelfFragment();
@@ -71,6 +73,7 @@ public class SelfFragment extends BaseFragment {
 //        mTitle.setLayoutParams(mLayoutParams);
         LinearLayout ll_top_self = (LinearLayout) root.findViewById(R.id.ll_top_self);
         tv_no_data = (LinearLayout) root.findViewById(R.id.tv_no_data);
+        progressView = (ProgressView) root.findViewById(R.id.progressView);
 
         // vo에 있는 아이 정보를 메뉴item 으로 삽입.
         KidsVo kidsVo = MHDApplication.getInstance().getMHDSvcManager().getKidsVo();
@@ -79,6 +82,8 @@ public class SelfFragment extends BaseFragment {
         for(int k=0; k<kidsVo.getCnt(); k++){
             kidsList.add(new PowerMenuItem(kidsVo.getMsg().get(k).getName(), k == 0 ? true : false));
         }
+        tv_tcount = (TextView) root.findViewById(R.id.tv_tcount);
+        tv_fcount = (TextView) root.findViewById(R.id.tv_fcount);
         tv_self_percent = (TextView) root.findViewById(R.id.tv_self_percent);
         vst_top_title = (TextView) root.findViewById(R.id.vst_top_title);
         for(int k=0; k<menuVo.getMsg().size(); k++){
@@ -88,7 +93,7 @@ public class SelfFragment extends BaseFragment {
                 displayKidPosition = 0;
             }
         }
-        vst_top_title.setText("[ "+displayKid+" ] 습관");
+        vst_top_title.setText("[ "+displayKid+" ] 오늘습관");
 
         powerMenu = new PowerMenu.Builder(getActivity())
                 .addItemList(kidsList) //
@@ -203,7 +208,7 @@ public class SelfFragment extends BaseFragment {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
             displayKid = item.getTitle().toString();
-            vst_top_title.setText("[ "+displayKid+" ] 습관");
+            vst_top_title.setText("[ "+displayKid+" ] 오늘습관");
             powerMenu.setSelectedPosition(position); // change selected item
             displayKidPosition = position;
             // MenuVo 정보를 갱신
@@ -314,9 +319,17 @@ public class SelfFragment extends BaseFragment {
     }
     private void calcComplete(int cCount, int tCount, boolean checked){
         if(cCount == 0){ // 리스트에서 실시간 업데이트
-            tv_self_percent.setText(Math.round((checkCount*100)/tCount) + "%\n달성");
+            tv_tcount.setText(tCount + "개 중");
+            tv_fcount.setText(checkCount + "개 완료");
+            progressView.setProgress(Math.round((checkCount*100)/tCount));
+            progressView.setLabelText(Math.round((checkCount*100)/tCount) + "%");
+//            tv_self_percent.setText(Math.round((checkCount*100)/tCount) + "%\n달성");
         }else{ // 최초 셋팅
-            tv_self_percent.setText(Math.round((cCount*100)/tCount) + "%\n달성");
+            tv_tcount.setText(tCount + "개 중");
+            tv_fcount.setText(cCount + "개 완료");
+            progressView.setProgress(Math.round((cCount*100)/tCount));
+            progressView.setLabelText(Math.round((cCount*100)/tCount) + "%");
+//            tv_self_percent.setText(Math.round((cCount*100)/tCount) + "%\n달성");
         }
     }
 

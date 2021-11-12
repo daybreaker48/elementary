@@ -242,7 +242,7 @@ public class SumFragment extends BaseFragment {
             endDate = df.format(cal.getTime());
         }
 
-        tv_area_week_move.setText(startDate + " ~ " + endDate);
+        tv_area_week_move.setText(startDate + " ~ " + endDate.substring(5));
 
         querySum(startDate, endDate);
     }

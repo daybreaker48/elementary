@@ -163,8 +163,8 @@
     <string name="content_schedule_duplicate_fri" translatable="true">금요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_sat" translatable="true">토요일에 중복되는 시간이 있습니다.</string>
     <string name="content_schedule_duplicate_sun" translatable="true">일요일에 중복되는 시간이 있습니다.</string>
-    <string name="content_self_title" translatable="true">스스로 해요</string>
-    <string name="content_self_title2" translatable="true">(어릴 적 습관이 인생을 좌우한다)</string>
+    <string name="content_self_title" translatable="true">스스로 해요!</string>
+    <string name="content_self_title2" translatable="true">공부 뿐만 아니라 습관도 중요한\n초등생활! 스스로 이닦기, 일찍 자고 일찍 일어나기, 책가방 혼자 싸기 등등\n무슨 일이든 21일간 지속하면 습관이 된다고 하죠? 오늘부터 시작!</string>
     <string name="content_self_check" translatable="true">체크</string>
     <string name="content_self_limit" translatable="true">한번에 최고 3개까지 등록할 수 있습니다.</string>
     <string name="content_self_hint_1" translatable="true">첫 번째 습관을 등록하세요.</string>

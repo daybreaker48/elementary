@@ -113,14 +113,14 @@
                     android:textSize="16sp" />
                 <TextView
                     android:id="@+id/tv_area_week_move"
-                    android:layout_width="196dp"
+                    android:layout_width="184dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="start|center_vertical"
                     android:gravity="center"
                     android:fontFamily="@font/main_font_bold"
                     android:includeFontPadding="false"
                     android:textColor="@color/black"
-                    android:text="2021.11.01 ~ 2021.11.07"
+                    android:text="2021.11.01 ~ 11.07"
                     android:textSize="14sp" />
                 <TextView
                     android:id="@+id/tv_area_week_next"
@@ -148,7 +148,7 @@
                 android:includeFontPadding="false"
                 android:background="@drawable/btn_today"
                 android:textColor="@color/white"
-                android:text="이번 주"
+                android:text="이번주"
                 android:textSize="14sp" />
         </LinearLayout>
 

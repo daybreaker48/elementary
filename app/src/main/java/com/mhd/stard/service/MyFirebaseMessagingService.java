@@ -83,6 +83,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 //        super.onMessageReceived(remoteMessage);
+        // 앱이 foreground에 있을 때 여기로 들어온다. 데이타를 셋
 
         if (remoteMessage.getData().size() > 0) {
             showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
