@@ -121,7 +121,7 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] "+ getString(R.string.title_schedule_modify));
+        vst_top_title.setText("[ "+displayKid+" ] "+ getString(R.string.title_schedule_modify));
         tv_selectday = (TextView) findViewById(R.id.tv_selectday);
         tv_selectday.setText(getString(R.string.content_dailyprogress));
         tv_schedule_time = (TextView) findViewById(R.id.tv_schedule_time);

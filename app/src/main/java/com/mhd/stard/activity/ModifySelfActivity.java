@@ -54,14 +54,15 @@ public class ModifySelfActivity extends BaseActivity {
 
         ll_self_comment = (LinearLayout) findViewById(R.id.ll_self_comment);
         ll_self_comment.setVisibility(View.GONE);
-        /* 수정 처리 */
 
         et_self_title_1 = (EditText) findViewById(R.id.et_self_title_1);
         et_self_title_1.setText(mSelfVo.getMsg().get(itemPosition).getTbtitle());
+        et_self_title_1.setHint(R.string.content_self_modify);
         et_self_title_2 = (EditText) findViewById(R.id.et_self_title_2);
         et_self_title_2.setVisibility(View.GONE);
         et_self_title_3 = (EditText) findViewById(R.id.et_self_title_3);
         et_self_title_3.setVisibility(View.GONE);
+        /* 수정 처리 */
         btn_move_stat_left = (AppCompatButton) findViewById(R.id.btn_move_stat_left);
 
         AppCompatButton btn_todo_cancel = (AppCompatButton) findViewById(R.id.btn_todo_cancel);
@@ -91,7 +92,7 @@ public class ModifySelfActivity extends BaseActivity {
                 displayKid = menuVo.getMsg().get(k).getKidname();
             }
         }
-        vst_top_title.setText("["+displayKid+"] "+ getString(R.string.title_self_modify));
+        vst_top_title.setText("[ "+displayKid+" ] "+ getString(R.string.title_self_modify));
 
         /* 수정 처리 */
         vst_right_image = (ImageView) findViewById(R.id.vst_right_image);

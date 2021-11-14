@@ -31,12 +31,19 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
     }
-    // 리스너 객체 참조를 저장하는 변수
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View v, int position);
+    }
+    //// 리스너 객체 참조를 저장하는 변수
     private static ReCyclerSelfAdapter.OnItemClickListener mListener = null;
+    private static ReCyclerAdapter.OnItemLongClickListener mLongListener = null;
 
-    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    //// OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnItemClickListener(ReCyclerSelfAdapter.OnItemClickListener listener) {
-        this.mListener = listener ;
+        this.mListener = listener;
+    }
+    public void setOnItemLongClickListener(ReCyclerAdapter.OnItemLongClickListener listener) {
+        this.mLongListener = listener;
     }
 
     @NonNull
@@ -97,6 +104,20 @@ public class ReCyclerSelfAdapter extends RecyclerView.Adapter<ReCyclerSelfAdapte
                             // 여기서 메뉴를 띄워야 하는 듯
                         }
                     }
+                }
+            });
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 리스너 객체의 메서드 호출.
+                        if (mLongListener != null) {
+                            mLongListener.onItemLongClick(v, pos);
+                        }
+                    }
+
+                    return true;
                 }
             });
         }

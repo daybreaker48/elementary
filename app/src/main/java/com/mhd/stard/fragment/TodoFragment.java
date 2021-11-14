@@ -303,6 +303,7 @@ public class TodoFragment extends BaseFragment {
                 // 완료 메뉴를 띄운다.
                 Bundle args = new Bundle();
                 args.putInt("position", position);
+                args.putString("from", "todo");
                 DialogFragment newFragment = new MenuDialogFragment();
                 newFragment.setArguments(args);
                 newFragment.show(getChildFragmentManager(), "Dialog");

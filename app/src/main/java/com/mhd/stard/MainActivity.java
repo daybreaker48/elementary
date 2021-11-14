@@ -50,6 +50,10 @@ public class MainActivity extends BaseActivity implements MenuDialogFragment.Men
     public void onDialogItemSelected(int which, int position) {
         ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).onDialogResult(which, position);
     }
+    @Override
+    public void onSelfDialogItemSelected(int which, int position) {
+        ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).onDialogResult(which, position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,6 +197,8 @@ public class MainActivity extends BaseActivity implements MenuDialogFragment.Men
                 ((SumFragment) getSupportFragmentManager().findFragmentByTag("f3")).networkResponseProcess_end(nvMsg, nvCnt, nvJsonDataString);
             }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_delete_todo))) {
                 ((TodoFragment) getSupportFragmentManager().findFragmentByTag("f0")).queryTodo();
+            }else if(nvApi.equals(getApplicationContext().getString(R.string.restapi_delete_self))) {
+                ((SelfFragment) getSupportFragmentManager().findFragmentByTag("f2")).querySelf();
             }
 
         }

@@ -47,16 +47,16 @@ public class ReCyclerAdapter extends RecyclerView.Adapter<ReCyclerAdapter.Recycl
     public interface OnItemLongClickListener {
         void onItemLongClick(View v, int position);
     }
-    // 리스너 객체 참조를 저장하는 변수
+    //// 리스너 객체 참조를 저장하는 변수
     private static OnItemClickListener mListener = null;
     private static OnItemLongClickListener mLongListener = null;
 
-    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    //// OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mListener = listener ;
     }
     public void setOnItemLongClickListener(OnItemLongClickListener listener) {
-        this.mLongListener = listener ;
+        this.mLongListener = listener;
     }
 
     @NonNull

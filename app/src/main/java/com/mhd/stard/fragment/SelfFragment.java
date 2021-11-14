@@ -1,11 +1,13 @@
 package com.mhd.stard.fragment;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,13 +22,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mhd.stard.MainActivity;
 import com.mhd.stard.R;
+import com.mhd.stard.activity.ModifySelfActivity;
+import com.mhd.stard.adapter.ReCyclerAdapter;
 import com.mhd.stard.adapter.ReCyclerSelfAdapter;
 import com.mhd.stard.common.MHDApplication;
 import com.mhd.stard.common.vo.KidsVo;
 import com.mhd.stard.common.vo.MenuVo;
 import com.mhd.stard.common.vo.SelfData;
 import com.mhd.stard.common.vo.SelfVo;
+import com.mhd.stard.common.vo.TodoVo;
 import com.mhd.stard.network.MHDNetworkInvoker;
+import com.mhd.stard.util.MHDDialogUtil;
 import com.mhd.stard.util.MHDLog;
 import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.OnMenuItemClickListener;
@@ -62,6 +68,30 @@ public class SelfFragment extends BaseFragment {
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_self;
+    }
+
+    public void onDialogResult(int which, int position){
+        switch (which) {
+            case 0: //수정
+                ((MainActivity)getActivity()).startSelfModify(position);
+
+                break;
+            case 1: //삭제
+                MHDDialogUtil.sAlert(mContext, R.string.confirm_delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SelfVo selfVo = MHDApplication.getInstance().getMHDSvcManager().getSelfVo();
+                        deleteSelf(selfVo.getMsg().get(position).getIdx());
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                break;
+        }
     }
 
     @Override
@@ -163,7 +193,18 @@ public class SelfFragment extends BaseFragment {
                     ((MainActivity)getActivity()).startSelfModify(position);
             }
         }) ;
-
+        adapter.setOnItemLongClickListener(new ReCyclerAdapter.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View v, int position) {
+                // 완료 메뉴를 띄운다.
+                Bundle args = new Bundle();
+                args.putInt("position", position);
+                args.putString("from", "self");
+                DialogFragment newFragment = new MenuDialogFragment();
+                newFragment.setArguments(args);
+                newFragment.show(getChildFragmentManager(), "Dialog");
+            }
+        });
 
         querySelf();
     }
@@ -370,5 +411,20 @@ public class SelfFragment extends BaseFragment {
 
         powerMenu.setSelectedPosition(displayKidPosition);
         powerMenu.showAsDropDown(vst_top_title, 600, 0);
+    }
+
+
+    private void deleteSelf(String sIndex){
+        // db index 값 받아서 넘기면서 바로 삭제 처리
+        try {
+            Map<String, String> params = new HashMap<String, String>();
+            //params.put("UUID", MHDApplication.getInstance().getMHDSvcManager().getDeviceNewUuid());
+            params.put("UUMAIL", MHDApplication.getInstance().getMHDSvcManager().getUserVo().getUuMail());
+            params.put("IDX", sIndex);
+
+            MHDNetworkInvoker.getInstance().sendVolleyRequest(mContext, R.string.url_restapi_delete_self, params, ((MainActivity)getActivity()).responseListener);
+        } catch (Exception e) {
+            MHDLog.printException(e);
+        }
     }
 }
