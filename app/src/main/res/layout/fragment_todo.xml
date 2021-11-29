@@ -113,7 +113,7 @@
             android:background="@drawable/btn_today"
             android:textColor="@color/white"
             android:text="Today"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"

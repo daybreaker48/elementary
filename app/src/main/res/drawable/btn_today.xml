@@ -2,9 +2,9 @@
 <shape android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/shong_pink"/>
-    <corners android:topRightRadius="8dp"
-        android:bottomLeftRadius="8dp"
-        android:topLeftRadius="8dp"
-        android:bottomRightRadius="8dp"/>
+    <corners android:topRightRadius="16dp"
+        android:bottomLeftRadius="16dp"
+        android:topLeftRadius="16dp"
+        android:bottomRightRadius="16dp"/>
 </shape>
-<!-- 상단 좌우 모서리에 round 효과를 준 view -->
+<!-- 상단 좌우 모서리에 round 효과를 준 vi`ew -->

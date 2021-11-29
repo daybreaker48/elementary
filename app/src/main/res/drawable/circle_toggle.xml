@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_pressed="true">
-        <!--image대신 직접 selector를 그리겠다고 선언한다. -->
-        <shape android:shape="oval">
-            <!--도형안에 채워질 색을 정의한다.-->
-            <solid android:color="#ffffff" />
-            <size
-                android:width="30dp"
-                android:height="30dp"/>
-        </shape>
-    </item>
-
-    <!--위와 동일하다.
-    -->
-    <item android:state_pressed="false">
-        <!--image대신 직접 selector를 그리겠다고 선언한다. -->
-        <shape android:shape="oval">
-            <!--도형안에 채워질 색을 정의한다.-->
-            <solid android:color="#FF00DD" />
-            <size
-                android:width="30dp"
-                android:height="30dp"/>
-        </shape>
-    </item>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!--도형안에 채워질 색을 정의한다.-->
+    <solid android:color="@color/base_schedule" />
+    <size
+        android:width="30dp"
+        android:height="30dp"/>
+</shape>

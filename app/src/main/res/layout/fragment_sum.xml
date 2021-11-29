@@ -149,7 +149,7 @@
                 android:background="@drawable/btn_today"
                 android:textColor="@color/white"
                 android:text="이번주"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <com.github.mikephil.charting.charts.BarChart

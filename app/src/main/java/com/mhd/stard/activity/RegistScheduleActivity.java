@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -228,7 +229,9 @@ public class RegistScheduleActivity extends BaseActivity implements TimePickerDi
         } else {
             tv_schedule_color.setTextColor(Color.BLACK);
         }
-        tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
+//        tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
+        GradientDrawable d = (GradientDrawable) tv_schedule_color.getBackground();
+        d.setColor(color);
     }
 
 //    public void startAlarmActivity() {

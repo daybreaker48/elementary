@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -229,6 +230,10 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
             @Override
             public void onClick(View v) { startColorPicker(); }
         });
+        tv_schedule_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { startColorPicker(); }
+        });
         ll_schedule_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { startAlarmActivity(); }
@@ -289,7 +294,9 @@ public class ModifyScheduleActivity extends BaseActivity implements TimePickerDi
         } else {
             tv_schedule_color.setTextColor(Color.BLACK);
         }
-        tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
+//        tv_schedule_color.setBackgroundTintList(ColorStateList.valueOf(color));
+        GradientDrawable d = (GradientDrawable) tv_schedule_color.getBackground();
+        d.setColor(color);
     }
 
 //    public void startAlarmActivity() {

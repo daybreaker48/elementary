@@ -212,5 +212,8 @@
     <string name="cell_todo_5" translatable="true">완료</string>
 
     <string name="api_editor_clear" translatable="true">api_editor_clear</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 </resources>
